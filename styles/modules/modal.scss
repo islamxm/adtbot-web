@@ -1,0 +1,35 @@
+.modal {
+
+
+    &__in {
+
+    }
+}
+
+.ant-modal {
+
+    .ant-modal-content {
+        background-color: #fff;
+        border-radius: 12px;
+        padding: 30px 40px;
+
+        .ant-modal-header {
+            margin-bottom: 30px;
+            
+            .ant-modal-title {
+                font-size: 18px;
+                line-height: 22px;
+                letter-spacing: -0.02em;
+            }
+        }
+
+        .ant-modal-body {
+
+        }
+
+        .ant-modal-footer {
+            display: none;
+        }
+    }
+
+}
