@@ -7,13 +7,8 @@ import Sidebar from '@/components/Sidebar/Sidebar';
 import ContentLayout from '@/components/ContentLayout/ContentLayout';
 
 export default function App({ Component, pageProps }: AppProps) {
-
   const {pathname} = useRouter()
 
-
-  useEffect(() => {
-    console.log(pathname)
-  }, [pathname])
 
   return (
     <div className="wrapper">
