@@ -2,22 +2,43 @@ import styles from './SidebarItem.module.scss';
 import { sidebarItemPropsTypes } from '../../types';
 import {FC} from 'react';
 import Link from 'next/link';
-
+import { useState, useEffect, useRef } from 'react';
 
 const SidebarItem:FC<sidebarItemPropsTypes> = ({
-    list,
+    children,
     label,
     link,
     icon,
     isActive,
-    isButton
+    isButton,
+    onClick,
+    menuIsOpen,
+    isSubItem
 }) => {
+    const [height, setHeight] = useState(0);
+    const body = useRef<HTMLDivElement>(null);
+    
+    const clickHandle = () => {
+        if(onClick) {
+            onClick()
+        }
+    }
+
+    useEffect(() => {
+        if(menuIsOpen) {
+            if(body?.current) {
+                setHeight(body.current.scrollHeight)
+            } 
+        } else {
+            setHeight(0)
+        }
+    }, [menuIsOpen, body])
 
     return (
-        <div className={`${styles.wrapper} ${isActive ? styles.active : ''}`}>
+        <div className={`${styles.wrapper} ${isActive ? styles.active : ''} ${menuIsOpen ? styles.open : ''} ${isSubItem ? styles.sub : ''}`}>
             <div className={styles.head}>
                 {
-                    !list && !isButton ? (
+                    !children && !isButton ? (
                         <Link href={link ? link : '/'} className={styles.link}>
                             <div className={styles.icon}>
                                 {icon}
@@ -27,7 +48,7 @@ const SidebarItem:FC<sidebarItemPropsTypes> = ({
                             </div>
                         </Link>
                     ) : (
-                        <div className={styles.link}>
+                        <div onClick={clickHandle} className={styles.link}>
                             <div className={styles.icon}>
                                 {icon}
                             </div>
@@ -39,9 +60,9 @@ const SidebarItem:FC<sidebarItemPropsTypes> = ({
                 }
             </div>
             {
-                list ? (
-                    <div className={styles.body}>
-                        {list}
+                children ? (
+                    <div style={{height}} className={styles.body} ref={body}>
+                        {children}
                     </div>
                 ) : null
             }

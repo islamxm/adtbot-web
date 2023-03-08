@@ -12,6 +12,7 @@ import youtube from '@/public/assets/icons/youtube.svg';
 import Button from '../Button/Button';
 import {AiOutlinePlus} from 'react-icons/ai';
 
+
 // ICONS
 import IconMyBots from '@/icons/IconMyBots';
 import IconStats from '@/icons/IconStats';
@@ -20,17 +21,18 @@ import IconBase from '@/icons/IconBase';
 import IconPartner from '@/icons/IconPartner';
 import IconContacts from '@/icons/IconContacts';
 import IconExit from '@/icons/IconExit';
-import Link from 'next/link';
+import IconSettings from '@/icons/IconSettings';
 
 
 const Sidebar:FC<sidebarPropsTypes> = ({
     isActive
 }) => {
-    const {pathname} = useRouter()
+    const {pathname, replace} = useRouter()
+    const [settingsOpen, setSettingsOpen] = useState<boolean>(false)
 
     return (
         <div className={styles.sidebar}>
-            <div className={`${styles.wrapper} ${isActive ? styles.active : ''}`}>
+            <div className={`${styles.wrapper} ${isActive ? styles.active : ''} custom-scroll`}>
                 <div className={styles.logo}>
                     <Image
                         className={styles.img}
@@ -65,6 +67,44 @@ const Sidebar:FC<sidebarPropsTypes> = ({
                                 label='Статистика'
                                 link={'/console/statistics'}
                                 />
+                            <SidebarItem
+                                menuIsOpen={settingsOpen}
+                                isActive={pathname?.includes('/console/settings/') && !settingsOpen}
+                                icon={
+                                    <IconSettings
+                                        isActive={settingsOpen || (pathname?.includes('/console/settings/') && !settingsOpen)}
+                                        size={20}
+                                        />
+                                }
+                                onClick={() => setSettingsOpen(s => !s)}
+                                isButton
+                                label='Настройки'
+                            >
+                                <SidebarItem
+                                    isSubItem
+                                    label='Аккаунт'
+                                    link={'/console/settings/account'}
+                                    isActive={pathname === '/console/settings/account' || pathname?.includes('/console/settings/account')}
+                                    />
+                                <SidebarItem
+                                    isSubItem
+                                    label='API'
+                                    link={'/console/settings/api'}
+                                    isActive={pathname === '/console/settings/api' || pathname?.includes('/console/settings/api')}
+                                    />
+                                <SidebarItem
+                                    isSubItem
+                                    label='2FA'
+                                    link={'/console/settings/2fa'}
+                                    isActive={pathname === '/console/settings/2fa' || pathname?.includes('/console/settings/2fa')}
+                                    />
+                                <SidebarItem
+                                    isSubItem
+                                    label='Telegram-бот'
+                                    link={'/console/settings/telegram-bot'}
+                                    isActive={pathname === '/console/settings/telegram-bot' || pathname?.includes('/console/settings/telegram-bot')}
+                                    />
+                            </SidebarItem>
                             <SidebarItem
                                 icon={
                                     <IconPricing 
@@ -114,6 +154,7 @@ const Sidebar:FC<sidebarPropsTypes> = ({
                                         />
                                 }
                                 isButton
+                                onClick={() => replace('/auth/login')}
                                 label='Выход'
                                 />
                         </SidebarList>

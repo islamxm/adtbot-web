@@ -9,10 +9,13 @@ export type sidebarListPropsTypes = {
 }
 
 export type sidebarItemPropsTypes = {
-    list?: React.ReactNode,
+    children?: React.ReactNode,
     label?: string,
     link?: Url,
     icon?: React.ReactNode,
     isActive?:boolean,
-    isButton?: boolean
+    isButton?: boolean,
+    onClick?: () => void,
+    menuIsOpen?: boolean,
+    isSubItem?:boolean
 }

@@ -1,0 +1,13 @@
+.custom-scroll {
+    overflow: hidden;
+    overflow-y: scroll !important; 
+
+    &::-webkit-scrollbar {
+        width: 5px;
+        background-color: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: var(--blue);
+        // border-radius: 15px;
+    }
+}
