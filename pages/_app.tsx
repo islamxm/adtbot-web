@@ -5,7 +5,7 @@ import { useRouter, Router } from 'next/router';
 import { useEffect } from 'react';
 import Sidebar from '@/components/Sidebar/Sidebar';
 import ContentLayout from '@/components/ContentLayout/ContentLayout';
-import * as NProgress from 'nprogress';
+import NProgress from 'nprogress';
 import 'nprogress/nprogress.css'; 
 
 
