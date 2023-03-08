@@ -1,0 +1,20 @@
+.wrapper {
+    min-height: 115px;
+    // border: 1px solid blue;
+    display: flex;
+    align-items: center;
+
+    .inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+
+        .head {
+            font-weight: 600;
+            font-size: 28px;
+            line-height: 38px;
+            color: var(--blue);
+        }
+    }
+}

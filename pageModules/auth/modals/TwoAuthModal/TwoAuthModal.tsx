@@ -4,7 +4,7 @@ import {FiUnlock} from 'react-icons/fi';
 import {useState, useEffect} from 'react';
 import AuthCode from 'react-auth-code-input';
 import Button from '@/components/Button/Button';
-
+import Router from 'next/router';
 
 
 const TwoAuthModal: React.FC<ModalProps> = ({
@@ -13,12 +13,21 @@ const TwoAuthModal: React.FC<ModalProps> = ({
     title,
     onCancel,
 }) => {
-    const [error, setError] = useState<boolean>(false)
+    const [status, setStatus] = useState<string>('')
     const [value, setValue] = useState<string>('')
-
+    
 
     useEffect(() => {
-        value === '000000' ? setError(true) : setError(false)
+        if(value?.length === 6 && value !== '000000') {
+            setStatus('success')
+        } 
+        if(value?.length === 6 && value === '000000') {
+            setStatus('error')
+        }
+        if(value?.length < 6) {
+            setStatus('')
+        }
+        
     }, [value])
 
 
@@ -34,7 +43,7 @@ const TwoAuthModal: React.FC<ModalProps> = ({
                 <Row gutter={[30, 30]}>
                     <Col span={24}>
                         <div className={styles.icon}>
-                            <div className={`${styles.icon_el} ${error ? styles.error : ''}`}>
+                            <div className={`${styles.icon_el} ${status === 'error' ? styles.error : ''} ${status === 'success' ? styles.success : ''}`}>
                                 <FiUnlock/>
                             </div>
                         </div>  
@@ -51,13 +60,14 @@ const TwoAuthModal: React.FC<ModalProps> = ({
                     </Col>
                     <Col span={24}>
                         <div className={styles.code}>
-                            <AuthCode containerClassName={`${styles.fields} ${error ? styles.error : ''}`} inputClassName={styles.input} onChange={setValue} allowedCharacters={'numeric'}/>
+                            <AuthCode containerClassName={`${styles.fields} ${status === 'error' ? styles.error : ''} ${status === 'success' ? styles.success : ''}`} inputClassName={styles.input} onChange={setValue} allowedCharacters={'numeric'}/>
                         </div>
                     </Col>
                     <Col span={24}>
                         <Button
                             text='Войти'
                             fill
+                            onClick={() => Router.push('/console/my-bots')}
                             />
                     </Col>
                 </Row>

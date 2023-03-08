@@ -1,9 +1,9 @@
+import { useRouter } from "next/router";
+import Router from "next/router";
+
 const HomePage = () => {
-    return (
-        <div>
-            <h1>Home Page</h1>
-        </div>
-    )
+    Router.push('/console/my-bots')
+    return null;
 }
 
 export default HomePage;

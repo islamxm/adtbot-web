@@ -36,9 +36,6 @@ const LoginPage = () => {
                 width={455}
                 centered
                 />
-
-
-
             <Row gutter={[0, 0]} align={'middle'}>
                 <Col span={12}>
                     <PromoSlider/>

@@ -16,13 +16,17 @@
                 border-radius: 100%;
                 width: 92px;
                 height: 92px;
-                background-color: var(--green);
+                background-color: var(--yellow);
                 color: #fff;
                 transition: all .3s ease;
             }
 
             .icon_el.error {
                 background-color: var(--red);
+            }
+
+            .icon_el.success {
+                background-color: var(--green);
             }
         }
 
@@ -46,6 +50,15 @@
                     }
                 }
             }
+            .fields.success {
+                .input {
+                    border-color: var(--green);
+
+                    &:focus {
+                        box-shadow: 0 0 0 4px rgba(#66AF99, .3);
+                    }
+                }
+            }
             .fields {
                 display: flex;
                 align-items: center;
@@ -58,7 +71,7 @@
                     display: block;
                     width: calc((100% / 6) - 10px);
                     height: 74px;
-                    border: 1px solid var(--green);
+                    border: 1px solid var(--aqua);
                     font-size: 40px;
                     line-height: 40px;
                     border-radius: 10px;
@@ -67,7 +80,7 @@
                     box-shadow: 0 0 0 0 transparent;
 
                     &:focus {
-                        box-shadow: 0 0 0 4px rgba(#66AF99, .3);
+                        box-shadow: 0 0 0 4px rgba(#72B7EF, .3);
 
                     }
                 }
