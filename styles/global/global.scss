@@ -62,3 +62,9 @@ main {
         color: var(--yellow);
     }
 }
+
+#nprogress .bar {
+	background:	 var(--yellow) !important;
+	z-index: 100;
+	height: 4px !important;
+}
