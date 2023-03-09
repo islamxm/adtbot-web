@@ -1,0 +1,12 @@
+.wrapper {
+
+    .list {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        
+        .item {
+            width: calc(100% / 4.1);     
+        }
+    }
+}

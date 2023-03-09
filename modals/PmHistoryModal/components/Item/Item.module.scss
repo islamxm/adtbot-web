@@ -1,0 +1,13 @@
+.wrapper {
+
+    .item {
+        padding: 10px 20px;
+        border-bottom: 1px solid #F4F4F4;
+    }
+
+    &:last-child {
+        .item {
+            border: none
+        }
+    }
+}

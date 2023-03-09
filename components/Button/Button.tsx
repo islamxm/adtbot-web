@@ -26,6 +26,21 @@ const Button:FC<buttonPropsTypes> = ({
         }
     }
 
+    const textMargin = (before: React.ReactNode, after: React.ReactNode) => {
+        if(before && !after) {
+            return styles.ml
+        }
+        if(!before && after) {
+            return styles.mr
+        }
+        if(before && after) {
+            return styles.mm
+        }
+        if(!before && !after) {
+            return ''
+        }
+    }
+
     return (
         <button 
             disabled={disabled}
@@ -45,7 +60,7 @@ const Button:FC<buttonPropsTypes> = ({
             }
             {
                 text ? (
-                    <div className={styles.text}>{text}</div>
+                    <div className={`${styles.text} ${textMargin(beforeIcon, afterIcon)}`}>{text}</div>
                 ) : null
             }
             {

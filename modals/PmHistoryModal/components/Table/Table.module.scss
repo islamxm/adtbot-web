@@ -1,0 +1,31 @@
+.wrapper {
+    border-radius: 12px;
+    border: 1px solid #F4F4F4;
+    max-height: 350px;
+    overflow-y: auto;
+    position: relative;
+    
+    .table {
+        border-collapse: collapse;
+        width: 100%;
+        font-size: 12px;
+        line-height: 16px;
+
+        .head {
+            position: sticky;
+            top: 0;
+            left: 0;
+            width: 100%;     
+            background-color: #fff;
+            box-shadow: 0 3px 10px 3px rgba(#000, .1);
+               
+            .item {
+                padding: 10px 20px;
+                text-align: left;
+                font-weight: 400;
+                border-bottom: 1px solid #F4F4F4;
+            }
+        }
+
+    }
+}
