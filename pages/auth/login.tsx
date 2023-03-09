@@ -75,7 +75,7 @@ const LoginPage = () => {
                             </Col>
                             <Col span={24}>
                                 <div style={{textAlign: 'center'}}>
-                                    У вас нет аккаунта? <Link className="def-link" href={'/auth/signup'}>Создайте аккаунт</Link>
+                                    У вас нет аккаунта? <Link className="def-link" href={'/auth/join'}>Создайте аккаунт</Link>
                                 </div>
                             </Col>
                         </Row>

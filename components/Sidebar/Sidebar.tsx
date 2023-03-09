@@ -49,30 +49,30 @@ const Sidebar:FC<sidebarPropsTypes> = ({
                                 icon={
                                     <IconMyBots 
                                         size={20}
-                                        isActive={pathname === '/console/my-bots' || pathname?.includes('console/my-bots')}
+                                        isActive={pathname === '/account/bots' || pathname?.includes('account/bots')}
                                         />
                                 }
                                 label='Мои боты'
-                                isActive={pathname === '/console/my-bots' || pathname?.includes('console/my-bots')}
-                                link={'/console/my-bots'}
+                                isActive={pathname === '/account/bots' || pathname?.includes('/account/bots')}
+                                link={'/account/bots'}
                                 />
                             <SidebarItem
-                                isActive={pathname === '/console/statistics' || pathname?.includes('/console/statistics')}
+                                isActive={pathname === '/account/stats' || pathname?.includes('/account/stats')}
                                 icon={
                                     <IconStats 
                                         size={20}
-                                        isActive={pathname === '/console/statistics' || pathname?.includes('/console/statistics')}
+                                        isActive={pathname === '/account/stats' || pathname?.includes('/account/stats')}
                                         />
                                 }
                                 label='Статистика'
-                                link={'/console/statistics'}
+                                link={'/account/stats'}
                                 />
                             <SidebarItem
                                 menuIsOpen={settingsOpen}
-                                isActive={pathname?.includes('/console/settings/') && !settingsOpen}
+                                isActive={pathname?.includes('/account/settings/') && !settingsOpen}
                                 icon={
                                     <IconSettings
-                                        isActive={settingsOpen || (pathname?.includes('/console/settings/') && !settingsOpen)}
+                                        isActive={settingsOpen || (pathname?.includes('/account/settings/') && !settingsOpen)}
                                         size={20}
                                         />
                                 }
@@ -83,56 +83,56 @@ const Sidebar:FC<sidebarPropsTypes> = ({
                                 <SidebarItem
                                     isSubItem
                                     label='Аккаунт'
-                                    link={'/console/settings/account'}
-                                    isActive={pathname === '/console/settings/account' || pathname?.includes('/console/settings/account')}
+                                    link={'/account/settings/account'}
+                                    isActive={pathname === '/account/settings/account' || pathname?.includes('/account/settings/account')}
                                     />
                                 <SidebarItem
                                     isSubItem
                                     label='API'
-                                    link={'/console/settings/api'}
-                                    isActive={pathname === '/console/settings/api' || pathname?.includes('/console/settings/api')}
+                                    link={'/account/settings/api'}
+                                    isActive={pathname === '/account/settings/api' || pathname?.includes('/account/settings/api')}
                                     />
                                 <SidebarItem
                                     isSubItem
                                     label='2FA'
-                                    link={'/console/settings/2fa'}
-                                    isActive={pathname === '/console/settings/2fa' || pathname?.includes('/console/settings/2fa')}
+                                    link={'/account/settings/2fa'}
+                                    isActive={pathname === '/account/settings/2fa' || pathname?.includes('/account/settings/2fa')}
                                     />
                                 <SidebarItem
                                     isSubItem
                                     label='Telegram-бот'
-                                    link={'/console/settings/telegram-bot'}
-                                    isActive={pathname === '/console/settings/telegram-bot' || pathname?.includes('/console/settings/telegram-bot')}
+                                    link={'/account/settings/telegram-bot'}
+                                    isActive={pathname === '/account/settings/telegram-bot' || pathname?.includes('/account/settings/telegram-bot')}
                                     />
                             </SidebarItem>
                             <SidebarItem
                                 icon={
                                     <IconPricing 
-                                        isActive={pathname === '/console/balance-pricing' || pathname?.includes('/console/balance-pricing')}
+                                        isActive={pathname === '/account/billing' || pathname?.includes('/account/billing')}
                                         size={20}/>
                                 }
-                                isActive={pathname === '/console/balance-pricing' || pathname?.includes('/console/balance-pricing')}
+                                isActive={pathname === '/account/billing' || pathname?.includes('/account/billing')}
                                 label='Баланс / Тарифы'
-                                link={'/console/balance-pricing'}
+                                link={'/account/billing'}
                                 />
                             <SidebarItem
                                 icon={
                                     <IconBase 
-                                        isActive={pathname === '/console/guide' || pathname?.includes('/console/guide')}
+                                        isActive={pathname === '/account/guide' || pathname?.includes('/account/guide')}
                                         size={20}/>
                                 }
                                 label='База знаний'
-                                isActive={pathname === '/console/guide' || pathname?.includes('/console/guide')}
-                                link={'/console/guide'}
+                                isActive={pathname === '/account/guide' || pathname?.includes('/account/guide')}
+                                link={'/account/guide'}
                                 />
                             <SidebarItem
                                 icon={
                                     <IconPartner 
-                                        isActive={pathname === '/console/partner' || pathname?.includes('/console/partner')}
+                                        isActive={pathname === '/account/affiliate' || pathname?.includes('/account/affiliate')}
                                         size={20}/>
                                 }
-                                link={'/console/partner'}
-                                isActive={pathname === '/console/partner' || pathname?.includes('/console/partner')}
+                                link={'/account/affiliate'}
+                                isActive={pathname === '/account/affiliate' || pathname?.includes('/account/affiliate')}
                                 label='Партнерка'
 
                                 />
@@ -140,12 +140,12 @@ const Sidebar:FC<sidebarPropsTypes> = ({
                                 icon={
                                     <IconContacts 
                                         size={20}
-                                        isActive={pathname === '/console/contacts' || pathname?.includes('/console/contacts')}
+                                        isActive={pathname === '/account/contacts' || pathname?.includes('/account/contacts')}
                                         />
                                 }
-                                isActive={pathname === '/console/contacts' || pathname?.includes('/console/contacts')}
+                                isActive={pathname === '/account/contacts' || pathname?.includes('/account/contacts')}
                                 label='Контакты'
-                                link={'/console/contacts'}
+                                link={'/account/contacts'}
                                 />
                             <SidebarItem
                                 icon={
