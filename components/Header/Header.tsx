@@ -34,7 +34,7 @@ const Header:FC<headerPropsTypes> = ({
                 </h2>
                 <div className={styles.body}>
                     {
-                        pathname === '/account/billing' ? (
+                        pathname === '/profile/billing' ? (
                             <>
                                 <div className={styles.item}>
                                     <Button

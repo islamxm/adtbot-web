@@ -60,14 +60,18 @@ const TwoAuthModal: React.FC<ModalProps> = ({
                     </Col>
                     <Col span={24}>
                         <div className={styles.code}>
-                            <AuthCode containerClassName={`${styles.fields} ${status === 'error' ? styles.error : ''} ${status === 'success' ? styles.success : ''}`} inputClassName={styles.input} onChange={setValue} allowedCharacters={'numeric'}/>
+                            <AuthCode 
+                                containerClassName={`${styles.fields} ${status === 'error' ? styles.error : ''} ${status === 'success' ? styles.success : ''}`} 
+                                inputClassName={styles.input} 
+                                onChange={setValue} 
+                                allowedCharacters={'numeric'}/>
                         </div>
                     </Col>
                     <Col span={24}>
                         <Button
                             text='Войти'
                             fill
-                            onClick={() => Router.push('/console/my-bots')}
+                            onClick={() => Router.push('/profile/bots')}
                             />
                     </Col>
                 </Row>
