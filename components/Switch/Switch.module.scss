@@ -1,0 +1,44 @@
+.wrapper {
+    .input {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        visibility: hidden;
+        pointer-events: none;
+        touch-action: none;
+    }
+
+    .label {
+        width: 36px;
+        height: 20px;
+        border-radius: 70px;
+        padding: 0 2px;
+        position: relative;
+        display: block;
+        transition: all .3s ease;
+        background-color: rgba(#6F91EE, .7);
+        cursor: pointer;
+
+        .el {
+            width: 16px;
+            height: 16px;
+            position: absolute;
+            top: calc(50% - 8px);
+            left: 2px;
+            border-radius: 100%;
+            background-color: #fff;
+            transition: all .3s ease;
+        }
+    }
+
+    .input:checked ~ .label {
+        background-color: var(--blue);
+        
+        .el {
+            transform: translateX(16px);
+        }
+    }
+
+    
+}

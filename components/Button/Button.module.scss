@@ -11,6 +11,10 @@
     cursor: pointer;
     position: relative;
 
+    &:hover {
+        box-shadow: 0 0 10px 5px rgba(#F4C967, .3);
+    }
+
     .loader {
         position: absolute;
         top: 0;
@@ -28,9 +32,7 @@
         opacity: 0;
     }
 
-    &:hover {
-        opacity: .7;
-    }
+    
 
     &:active {
         transform: scale(0.95);
@@ -83,6 +85,10 @@
 
 .button.blue {
     background-color: var(--blue);
+
+    &:hover {
+        box-shadow: 0 0 10px 5px rgba(#6F91EE, .3);
+    }
 }
 
 .button.fill {
