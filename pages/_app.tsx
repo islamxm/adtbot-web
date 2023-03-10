@@ -7,6 +7,8 @@ import Sidebar from '@/components/Sidebar/Sidebar';
 import ContentLayout from '@/components/ContentLayout/ContentLayout';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css'; 
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 
 NProgress.configure({ showSpinner: false })
@@ -22,6 +24,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <div className="wrapper">
+      <ToastContainer/>
       {
         pathname?.includes('/auth') ? (
           null

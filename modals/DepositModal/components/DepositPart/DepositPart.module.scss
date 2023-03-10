@@ -1,0 +1,40 @@
+.wrapper {
+
+    .field {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .input {
+            max-width: calc(100% - 34px - 15px);
+            width: 100%;
+        }
+
+        .action {
+            margin-left: 15px;
+        }
+
+    }
+
+    .action {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .main {
+            display: flex;
+            align-items: center;
+            margin-left: -10px;
+            
+            .item {
+                margin: 0 10px;
+            }
+        }
+
+        .ex {
+            .item {
+                
+            }
+        }
+    }
+}

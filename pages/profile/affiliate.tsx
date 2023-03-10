@@ -1,4 +1,6 @@
 import ContentLayout from "@/components/ContentLayout/ContentLayout";
+import Body from "@/pageModules/affiliate/Body/Body";
+
 
 const PartnerPage = () => {
 
@@ -6,7 +8,7 @@ const PartnerPage = () => {
         <ContentLayout
             head="Партнерка"
             >
-
+            <Body/>
         </ContentLayout>
     )
 }

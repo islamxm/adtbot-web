@@ -18,9 +18,11 @@ const Button:FC<buttonPropsTypes> = ({
     const switchVariant = (variant: buttonVariants | undefined) => {
         switch(variant) {
             case 'default':
-                return ''
+                return styles.default
             case 'blue':
                 return styles.blue
+            case 'simple':
+                return styles.simple
             default:
                 return ''
         }

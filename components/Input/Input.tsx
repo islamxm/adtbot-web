@@ -1,8 +1,11 @@
 import styles from './Input.module.scss';
 import { inputPropsTypes } from './types';
+import { Popover } from 'antd';
+import Hint from '../Hint/Hint';
+import {AiOutlineInfoCircle} from 'react-icons/ai';
 
 const Input = (props: inputPropsTypes) => {
-    const {error, errorText, label, disabled, onClick} = props || {};
+    const {error, errorText, label, disabled, onClick, hint} = props || {};
 
     
 
@@ -11,7 +14,20 @@ const Input = (props: inputPropsTypes) => {
             {
                 label ? (
                     <div className={styles.label}>
-                        {label}
+                        {label} 
+                        {
+                            hint ? (
+                                <Popover
+                                    content={
+                                        <Hint>
+                                            {hint}
+                                        </Hint>
+                                    }
+                                    >
+                                    <span className={styles.hint}><AiOutlineInfoCircle/></span>
+                                </Popover>
+                            ) : null
+                        }
                     </div>
                 ) : null
             }

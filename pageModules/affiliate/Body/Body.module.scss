@@ -1,0 +1,17 @@
+.wrapper {
+    max-width: 665px;
+    width: 100%;
+    .field {
+        display: flex;
+        align-items: center;
+
+        .input {
+            max-width: 455px;
+            width: 100%;
+        }
+
+        .action {
+            margin-left: 15px;
+        }
+    }
+}

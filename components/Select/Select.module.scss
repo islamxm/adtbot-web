@@ -1,0 +1,27 @@
+.wrapper {
+    width: 100%;
+
+    .label {
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        line-height: 19px;
+        margin-bottom: 8px;
+
+        .hint {
+            margin-left: 8px;
+            font-size: 15px;
+            line-height: 15px;
+            color: var(--yellow);
+            transition: all .3s ease;
+
+            &:hover {
+                color: var(--blue);
+            }
+        }
+    }
+
+    .main {
+        
+    }
+}

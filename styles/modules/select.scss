@@ -1,0 +1,29 @@
+.ant-select {
+    width: 100%;
+    font-size: 16px;
+    
+    .ant-select-selector {
+        height: 41px !important;
+        border: 1px solid #E0E0E0 !important;
+        transition: all .3s ease;
+        box-shadow: 0 0 0 0 transparent;
+        background-color: #fff;
+        border-radius: 8px;
+        
+        &:hover {
+            border-color: #E0E0E0 !important;
+        }
+
+        .ant-select-selection-item {
+            display: flex;
+            align-items: center;
+        }
+    }
+}
+
+.ant-select.ant-select-focused {
+    .ant-select-selector {
+        // border: none;
+        box-shadow: 0 0 0 3px rgba(#72B7EF, .3) !important;
+    }
+}

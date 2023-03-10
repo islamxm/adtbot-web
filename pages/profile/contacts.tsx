@@ -1,5 +1,5 @@
 import ContentLayout from "@/components/ContentLayout/ContentLayout";
-
+import Body from "@/pageModules/contacts/Body/Body";
 
 const ContactsPage = () => {
 
@@ -7,7 +7,7 @@ const ContactsPage = () => {
         <ContentLayout
             head="Контакты"
             >
-
+            <Body/>
         </ContentLayout>
     )
 }

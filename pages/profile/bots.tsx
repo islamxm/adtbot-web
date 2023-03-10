@@ -1,5 +1,5 @@
 import ContentLayout from "@/components/ContentLayout/ContentLayout";
-
+import Start from "@/components/Start/Start";
 
 const MyBotsPage = () => {
 
@@ -7,7 +7,7 @@ const MyBotsPage = () => {
         <ContentLayout
             head="Мои боты"
             >
-                
+            <Start/>
 
             {/* content */}
 

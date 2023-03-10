@@ -1,0 +1,14 @@
+.ant-popover { 
+     
+    .ant-popover-arrow {
+        &:after {
+            background-color: var(--blue);
+        }
+    }
+    .ant-popover-content {
+
+        .ant-popover-inner {
+            background-color: var(--blue);
+        }
+    }
+}

@@ -53,6 +53,16 @@ main {
     font-weight: 700;
 }
 
+.heading_4 {
+    font-size: 18px;
+    line-height: 25px;
+    font-weight: 500;
+}
+
+.heading_4.bold {
+    font-weight: 700;
+}
+
 .def-link {
     color: var(--blue);
     transition: all .3s ease;

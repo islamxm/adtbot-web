@@ -11,6 +11,7 @@ import twitter from '@/public/assets/icons/twitter.svg';
 import youtube from '@/public/assets/icons/youtube.svg';
 import Button from '../Button/Button';
 import {AiOutlinePlus} from 'react-icons/ai';
+import AddBotModal from '@/modals/AddBotModal/AddBotModal';
 
 
 // ICONS
@@ -29,9 +30,17 @@ const Sidebar:FC<sidebarPropsTypes> = ({
 }) => {
     const {pathname, replace} = useRouter()
     const [settingsOpen, setSettingsOpen] = useState<boolean>(false)
+    const [addBotModal, setAddBotModal] = useState<boolean>(false)
+
+    const openAddBotModal = () => setAddBotModal(true)
+    const closeAddBotModal = () => setAddBotModal(false)
 
     return (
         <div className={styles.sidebar}>
+            <AddBotModal
+                open={addBotModal}
+                onCancel={closeAddBotModal}
+                />
             <div className={`${styles.wrapper} ${isActive ? styles.active : ''} custom-scroll`}>
                 <div className={styles.logo}>
                     <Image
@@ -191,6 +200,8 @@ const Sidebar:FC<sidebarPropsTypes> = ({
                 </div>
                 <div className={styles.action}>
                     <Button
+                        onClick={openAddBotModal}
+                        style={{minWidth: 45, minHeight: 45}}
                         text='Создать бот'
                         beforeIcon={<AiOutlinePlus/>}
                         variant={'default'}

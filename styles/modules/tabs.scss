@@ -1,0 +1,41 @@
+.ant-tabs {
+
+    .ant-tabs-nav {
+
+        &:before {
+            display: none;
+        }
+        .ant-tabs-nav-wrap {
+
+            .ant-tabs-nav-list {
+                &:before {
+                    position: absolute;
+                    bottom: 0;height: 2px;
+                    left: 0;
+                    width: 100%;
+                    background-color: var(--black);
+                    content: '';
+                }
+                .ant-tabs-tab {
+                    &:hover {
+                        .ant-tabs-tab-btn {
+                            color: var(--yellow);
+                        }
+                    }
+                    .ant-tabs-tab-btn {
+
+                    }
+                }
+                .ant-tabs-tab.ant-tabs-tab-active {
+                    .ant-tabs-tab-btn {
+                        color: var(--yellow);
+                    }
+                }
+
+                .ant-tabs-ink-bar {
+                    background-color: var(--yellow);
+                }
+            }
+        }
+    }
+}

@@ -1,3 +1,10 @@
+.button.default {
+    background-color: var(--yellow);
+    &:hover {
+        box-shadow: 0 0 10px 5px rgba(#F4C967, .3);
+    }
+}
+
 .button {
     display: flex;
     align-items: center;
@@ -7,13 +14,11 @@
     color: #fff;
     min-height: 37px;
     transition: all .3s ease;
-    background-color: var(--yellow);
+    overflow: hidden;
     cursor: pointer;
     position: relative;
 
-    &:hover {
-        box-shadow: 0 0 10px 5px rgba(#F4C967, .3);
-    }
+    
 
     .loader {
         position: absolute;
@@ -62,6 +67,9 @@
         font-size: 14px;
         line-height: 16px;
         transition: all .3s ease;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
     }
 
     .text.ml {
@@ -109,5 +117,18 @@
     }
     .icon {
         opacity: 0;
+    }
+}
+
+.button.simple {
+    background-color: unset !important;
+
+    .text, .icon {
+        color: var(--black);
+    }
+    &:hover {
+        .icon, .text {
+            color: var(--yellow);
+        }
     }
 }

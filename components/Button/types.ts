@@ -1,5 +1,5 @@
 
-export type buttonVariants = 'default' | 'blue'
+export type buttonVariants = 'default' | 'blue' | 'simple'
 
 export type buttonPropsTypes = {
     text?: string,
