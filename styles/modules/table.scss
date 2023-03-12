@@ -1,0 +1,117 @@
+.table {
+    width: 100%;
+    border: 1px solid #F4F4F4;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 19px;
+
+    .table-top {
+        padding: 15px;
+        border-bottom: 1px solid #F4F4F4;
+    }
+
+    .table-main {
+        
+        .table-wrapper {
+            
+            width: 100%;
+
+
+            .table-row {
+                &__item {
+                    padding: 15px;
+                }
+            }
+
+            .table-headrow {
+
+                &__item {
+
+                    &_in {
+                        display: flex;
+                        align-items: center;
+                        // justify-content: center;
+                        text-align: left;
+                        
+                    }
+                    &_label {
+                        font-weight: 400;
+                        color: #9094A6;
+                    }
+                    &_action {
+                        margin-left: 4px;
+                        font-size: 12px;
+                        line-height: 12px;
+
+                        &_btn {
+                            transition: all .3s ease;
+                        }
+                    }
+                }
+            }
+
+            .table-bodyrow {
+
+                &__item {
+
+                    &_in {
+                        display: flex;
+                        align-items: center;
+                    }
+
+                    &_icon {
+                        margin-right: 4px;
+                        width: 16px;
+                        height: 16px;
+                        flex: 0 0 auto;
+
+                        img {
+                            max-width: 16px;
+                            max-height: 16px;
+                            width: 100%;
+                            height: 100%;
+                            object-fit: contain;
+                            display: flex;
+                        }
+                    }
+
+                    &_label {
+
+                    }
+                }
+
+                &__item.profit {
+                    color: var(--green);
+                }
+
+                &__item.loss {
+                    color: var(--red)
+                }
+
+                &__item.activation {
+
+                    .activation-label {
+
+                    }
+                    .activation-label.wait {
+
+                    }
+
+                    .activation-action {
+                        margin-left: 15px;
+
+                        &__item {
+                            font-size: 12px;
+                            line-height: 12px;
+                        }
+                    }
+                }
+            }
+            
+        }
+    }
+
+    .table-bottom {
+
+    }
+}

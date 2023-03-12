@@ -3,6 +3,18 @@ import { billingItemPropsTypes } from '../../types';
 import BillingItem from '../BillingItem/BillingItem';
 import StatusModal from '@/modals/StatusModal/StatusModal';
 import { useState } from 'react';
+import mexc from '@/public/assets/icons/mexc.svg';
+import coinbase from '@/public/assets/icons/coinbase.svg';
+import huobi from '@/public/assets/icons/huobi.svg';
+import kucoin from '@/public/assets/icons/kucoin.svg';
+import okx from '@/public/assets/icons/okx.svg';
+import kraken from '@/public/assets/icons/kraken.svg';
+import bitstamp from '@/public/assets/icons/bitstamp.svg';
+import bitfinex from '@/public/assets/icons/bitfinex.svg';
+import bybit from '@/public/assets/icons/bybit.svg';
+import bithumb from '@/public/assets/icons/bithumb.svg';
+import binance from '@/public/assets/icons/binance.svg';
+import gate from '@/public/assets/icons/gate.svg';
 
 const list: billingItemPropsTypes[] = [
     {
@@ -14,16 +26,16 @@ const list: billingItemPropsTypes[] = [
             {
                 head: 'Мониторинг листингов на 1 бирже:',
                 ul: [
-                    'Binance'
+                    {link: '/', label: 'Binance', icon: binance}
                 ]
             },
             {
                 head: 'Покупка на 4 биржах:',
                 ul: [
-                    'Gate',
-                    'MEXC',
-                    'KuCoin',
-                    'Huobi'
+                    {link: '/', label: 'Gate', icon: gate},
+                    {link: '/', label: 'MEXC', icon: mexc},
+                    {link: '/', label: 'KuCoin', icon: kucoin},
+                    {link: '/', label: 'Huobi', icon: huobi},
                 ]
             }
         ],
@@ -37,18 +49,18 @@ const list: billingItemPropsTypes[] = [
             {
                 head: 'Мониторинг листингов на 3 биржах:',
                 ul: [
-                    'Binance',
-                    'Coinbase',
-                    'Huobi'
+                    {link: '/', label: 'Binance', icon: binance},
+                    {link: '/', label: 'Coinbase', icon: coinbase},
+                    {link: '/', label: 'Huobi', icon: huobi},
                 ]
             },
             {
                 head: 'Покупка на 4 биржах:',
                 ul: [
-                    'Gate',
-                    'MEXC',
-                    'KuCoin',
-                    'Huobi'
+                    {link: '/', label: 'Gate', icon: gate},
+                    {link: '/', label: 'MEXC', icon: mexc},
+                    {link: '/', label: 'KuCoin', icon: kucoin},
+                    {link: '/', label: 'Huobi', icon: huobi},
                 ]
             }
         ]
@@ -62,20 +74,20 @@ const list: billingItemPropsTypes[] = [
             {
                 head: 'Мониторинг листингов на 5 биржах:',
                 ul: [
-                    'Binance',
-                    'Coinbase',
-                    'Huobi',
-                    'KuCoin',
-                    'OKX',
+                    {link: '/', label: 'Binance', icon: binance},
+                    {link: '/', label: 'Coinbase', icon: coinbase},
+                    {link: '/', label: 'Huobi', icon: huobi},
+                    {link: '/', label: 'KuCoin', icon: kucoin},
+                    {link: '/', label: 'OKX', icon: okx},
                 ]
             },
             {
                 head: 'Покупка на 4 биржах:',
                 ul: [
-                    'Gate',
-                    'MEXC',
-                    'KuCoin',
-                    'Huobi'
+                    {link: '/', label: 'Gate', icon: gate},
+                    {link: '/', label: 'MEXC', icon: mexc},
+                    {link: '/', label: 'KuCoin', icon: kucoin},
+                    {link: '/', label: 'Huobi', icon: huobi},
                 ]
             }
         ]
@@ -89,25 +101,25 @@ const list: billingItemPropsTypes[] = [
             {
                 head: 'Мониторинг листингов на 10 биржах:',
                 ul: [
-                    'Binance',
-                    'Coinbase',
-                    'Huobi',
-                    'KuCoin',
-                    'OKX',
-                    'Kraken',
-                    'Bitstamp',
-                    'Bitfinex',
-                    'Bybit',
-                    'Bithumb',
+                    {link: '/', label: 'Binance', icon: binance},
+                    {link: '/', label: 'Coinbase', icon: coinbase},
+                    {link: '/', label: 'Huobi', icon: huobi},
+                    {link: '/', label: 'KuCoin', icon: kucoin},
+                    {link: '/', label: 'OKX', icon: okx},
+                    {link: '/', label: 'Kraken', icon: kraken},
+                    {link: '/', label: 'Bitstamp', icon: bitstamp},
+                    {link: '/', label: 'Bitfinex', icon: bitfinex},
+                    {link: '/', label: 'Bybit', icon: bybit},
+                    {link: '/', label: 'Bithumb', icon: bithumb},
                 ]
             },
             {
                 head: 'Покупка на 4 биржах:',
                 ul: [
-                    'Gate',
-                    'MEXC',
-                    'KuCoin',
-                    'Huobi'
+                    {link: '/', label: 'Gate', icon: gate},
+                    {link: '/', label: 'MEXC', icon: mexc},
+                    {link: '/', label: 'KuCoin', icon: kucoin},
+                    {link: '/', label: 'Huobi', icon: huobi},
                 ]
             }
         ]

@@ -3,6 +3,8 @@ import { billingItemPropsTypes } from '../../types';
 import {FC} from 'react';
 import { Row, Col } from 'antd';
 import Button from '@/components/Button/Button';
+import Link from 'next/link';
+import Image from 'next/image';
 
 const BillingItem:FC<billingItemPropsTypes> = ({
     isTop,
@@ -48,7 +50,17 @@ const BillingItem:FC<billingItemPropsTypes> = ({
                                                     {
                                                         item.ul?.map((i, index) => (
                                                             <li className={styles.item} key={index}>
-                                                                {i}
+                                                                <a href={i.link} target={'_blank'} className={styles.link}>
+                                                                    <div className={styles.icon}>
+                                                                        <Image
+                                                                            width={20}
+                                                                            height={20}
+                                                                            src={i.icon}
+                                                                            alt={''}
+                                                                            />
+                                                                    </div>
+                                                                    <div className={styles.label}>{i.label}</div>
+                                                                </a>
                                                             </li>
                                                         ))
                                                     }

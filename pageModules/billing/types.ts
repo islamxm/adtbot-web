@@ -1,6 +1,9 @@
+import { Url } from "next/dist/shared/lib/router/router"
+import { StaticImageData } from "next/image"
+
 type descrListType = {
     head?:string,
-    ul?: string[]
+    ul?: {link: string, label: string, icon: StaticImageData}[],
 }
 
 export type billingItemPropsTypes = {
@@ -9,5 +12,6 @@ export type billingItemPropsTypes = {
     title?:string,
     list?: descrListType[],
     isCurrent?: boolean,
-    onSelect?: (...args: any[]) => void
+    onSelect?: (...args: any[]) => void,
+    
 }

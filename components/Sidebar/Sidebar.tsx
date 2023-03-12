@@ -12,6 +12,7 @@ import youtube from '@/public/assets/icons/youtube.svg';
 import Button from '../Button/Button';
 import {AiOutlinePlus} from 'react-icons/ai';
 import AddBotModal from '@/modals/AddBotModal/AddBotModal';
+import logoSm from '@/public/assets/logo-sm.svg';
 
 
 // ICONS
