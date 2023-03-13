@@ -88,13 +88,13 @@ const Enable = ({
                                 placeholder={"000 000"}
                                 style={{maxWidth: 85}}
                                 value={code}
-                                onChange={(e) => setCode(e.target.value)}
+                                // onChange={(e) => setCode(e.target.value)}
                                 />
                         </div>
                         <div className={styles.btn}>
                             <Button
                                 onClick={() => setDone(true)}
-                                disabled={code?.length !== 6}
+                                // disabled={code?.length !== 6}
                                 text='Проверить'
                                 style={{paddingLeft: 30, paddingRight: 30}}
                                 />
