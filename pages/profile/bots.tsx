@@ -11,8 +11,6 @@ const MyBotsPage = () => {
             >
             {/* <Start/> */}
             <Body/>
-            {/* content */}
-
         </ContentLayout>
     )
 }

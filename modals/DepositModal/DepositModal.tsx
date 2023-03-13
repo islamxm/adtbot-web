@@ -1,5 +1,4 @@
 import {Modal, ModalFuncProps, Row, Col} from 'antd';
-import styles from './DepositModal.module.scss';
 import {FC} from 'react';
 import {Tabs} from 'antd';
 import { useState } from 'react';
@@ -44,7 +43,7 @@ const DepositModal:FC<ModalFuncProps> = ({
             open={open}
             width={width}
             onCancel={closeHandle}
-            className={`${styles.wrapper} modal`}
+            className={`modal`}
             >
             
             <Tabs

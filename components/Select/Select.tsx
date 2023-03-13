@@ -7,7 +7,7 @@ import {AiOutlineInfoCircle} from 'react-icons/ai';
 
 
 const Select:FC<selectPropsTypes> = (props) => {
-    const {label, hint} = props;
+    const {label, hint, noBorder, beforeLabel} = props;
 
 
     return (
@@ -35,8 +35,14 @@ const Select:FC<selectPropsTypes> = (props) => {
                 ) : null
             }
             <div className={styles.main}>
+                {
+                    beforeLabel ? (
+                        <div className={styles.before}>{beforeLabel}</div>
+                    ) : null
+                }
                 <AntSelect
                     {...props}
+                    className={`${props.className} ${noBorder ? ' noborder ' : ''}`}
                     />
             </div>
         </div>

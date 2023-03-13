@@ -1,0 +1,22 @@
+.pag {
+
+    .ant-pagination-prev {
+        .ant-pagination-item-link {}
+    }
+
+    .ant-pagination-next {
+        .ant-pagination-item-link {}
+    }
+
+    .ant-pagination-item  {
+
+    }
+
+    .ant-pagination-item.ant-pagination-item-active {
+        border-color: var(--yellow);
+        background-color: var(--yellow);
+        a {
+            color: #fff;
+        }
+    }
+}

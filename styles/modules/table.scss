@@ -4,6 +4,9 @@
     border-radius: 8px;
     font-size: 14px;
     line-height: 19px;
+    min-height: calc(100vh - 130px);
+    display: flex;
+    flex-direction: column;
 
     .table-top {
         padding: 15px;
@@ -20,6 +23,7 @@
             .table-row {
                 &__item {
                     padding: 15px;
+                    border-bottom: 1px solid #F4F4F4;
                 }
             }
 
@@ -112,6 +116,9 @@
     }
 
     .table-bottom {
-
+        padding: 15px;
+        flex: 1 0 auto;
+        display: flex;
+        align-items: flex-end;
     }
 }

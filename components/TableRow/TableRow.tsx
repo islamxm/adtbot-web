@@ -2,6 +2,8 @@ import { tableRowPropsTypes } from "./types";
 import {FC} from 'react';
 import Image from "next/image";
 import {HiOutlineStopCircle} from 'react-icons/hi2';
+import IconButton from "../IconButton/IconButton";
+import {BsShare} from 'react-icons/bs';
 
 
 const switchPnl = (value?: string) => {
@@ -29,9 +31,25 @@ const TableRow:FC<tableRowPropsTypes> = ({list}) => {
                                 <div className="table-bodyrow__item_in">
                                     <div className="activation-label">12.03.2022 12:56:13</div>
                                     <div className="activation-action">
-                                        <button className="activation-action_item">
-                                            <HiOutlineStopCircle color="var(--red)"/>
-                                        </button>
+                                        {
+                                            item.running ? (
+                                                <div className="activation-action_item">
+                                                    <IconButton
+                                                        icon={<HiOutlineStopCircle color="var(--red)" size={16}/>}
+                                                        />
+                                                    
+                                                </div>
+                                            ) : null //возможно сюда можно вывести функцию-свитчер для вывода статуса ожидане/остановлен
+                                        }
+                                        {
+                                            item.share ? (
+                                                <div className="activation-action_item">
+                                                    <IconButton
+                                                        icon={<BsShare size={16}/>}
+                                                        />
+                                                </div>
+                                            ) : null
+                                        }
                                     </div>
                                 </div>
                             </td>

@@ -72,70 +72,90 @@ export const  mock = {
                 isLink: true,
                 icon: icon,
                 action: false,
-                pnl: ''
+                pnl: '',
+                share: false,
+                running: false
             },
             {
                 label: 'Coinbase',
                 isLink: true,
                 icon: icon2,
                 action: false,
-                pnl: ''
+                pnl: '',
+                share: false,
+                running: false
             },
             {
                 label: 'BTC/USDT',
                 isLink: false,
                 icon: null,
                 action: false,
-                pnl: ''
+                pnl: '',
+                share: false,
+                running: false
             },
             {
                 label: '150 USDT',
                 isLink: false,
                 icon: null,
                 action: false,
-                pnl: ''
+                pnl: '',
+                share: false,
+                running: false
             },
             {
                 label: '',
                 isLink: false,
                 icon: null,
                 action: false,
-                pnl: ''
+                pnl: '',
+                share: false,
+                running: false
             },
             {
                 label: '30%',
                 isLink: false,
                 icon: null,
                 action: false,
-                pnl: ''
+                pnl: '',
+                share: false,
+                running: false
             },
             {
                 label: '2%',
                 isLink: false,
                 icon: null,
                 action: false,
-                pnl: ''
+                pnl: '',
+                share: false,
+                running: false
             },
             {
                 label: '3%',
                 isLink: false,
                 icon: null,
                 action: false,
-                pnl: ''
+                pnl: '',
+                share: false,
+                running: false
             },
             {
                 label: '',
                 isLink: false,
                 icon: null,
                 action: false,
-                pnl: ''
+                pnl: '',
+                share: false,
+                running: false
             },
             {
                 label: '',
                 isLink: false,
                 icon: null,
                 action: false,
-                pnl: ''
+                pnl: '',
+                share: false,
+                running: false
             },
             {
                 label: '132 USDT (+11,23%)',
@@ -143,13 +163,17 @@ export const  mock = {
                 isLink: false,
                 icon: null,
                 action: false,
+                share: false,
+                running: false
             },
             {
                 label: '',
                 isLink: false,
                 icon: null,
                 action: true,
-                pnl:''
+                pnl:'',
+                share: false,
+                running: true
             },
         ],
         [
@@ -158,84 +182,108 @@ export const  mock = {
                 isLink: true,
                 icon: icon,
                 action: false,
-                pnl: ''
+                pnl: '',
+                share: false,
+                running: false
             },
             {
                 label: 'Coinbase',
                 isLink: true,
                 icon: icon2,
                 action: false,
-                pnl: ''
+                pnl: '',
+                share: false,
+                running: false
             },
             {
                 label: 'BTC/USDT',
                 isLink: false,
                 icon: null,
                 action: false,
-                pnl: ''
+                pnl: '',
+                share: false,
+                running: false
             },
             {
                 label: '150 USDT',
                 isLink: false,
                 icon: null,
                 action: false,
-                pnl: ''
+                pnl: '',
+                share: false,
+                running: false
             },
             {
                 label: '',
                 isLink: false,
                 icon: null,
                 action: false,
-                pnl: ''
+                pnl: '',
+                share: false,
+                running: false
             },
             {
                 label: '30%',
                 isLink: false,
                 icon: null,
                 action: false,
-                pnl: ''
+                pnl: '',
+                share: false,
+                running: false
             },
             {
                 label: '2%',
                 isLink: false,
                 icon: null,
                 action: false,
-                pnl: ''
+                pnl: '',
+                share: false,
+                running: false
             },
             {
                 label: '3%',
                 isLink: false,
                 icon: null,
                 action: false,
-                pnl: ''
+                pnl: '',
+                share: false,
+                running: false
             },
             {
                 label: '',
                 isLink: false,
                 icon: null,
                 action: false,
-                pnl: ''
+                pnl: '',
+                share: false,
+                running: false
             },
             {
                 label: '',
                 isLink: false,
                 icon: null,
                 action: false,
-                pnl: ''
+                pnl: '',
+                share: false,
+                running: false
             },
             {
                 label: '132 USDT (-11,23%)',
                 pnl: '-',
                 isLink: false,
                 icon: null,
-                action: false
+                action: false,
+                share: false,
+                running: false
             },
             {
                 label: '',
                 isLink: false,
                 icon: null,
                 action: true,
-                pnl: ''
+                pnl: '',
+                share: false,
+                running: true
             },
         ]
     ]

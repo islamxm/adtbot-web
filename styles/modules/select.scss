@@ -27,3 +27,21 @@
         box-shadow: 0 0 0 3px rgba(#72B7EF, .3) !important;
     }
 }
+
+.ant-select.noborder {
+    .ant-select-selector {
+        border: none !important;
+    }
+}
+
+.ant-select.ant-select-focused.noborder {
+    .ant-select-selector {
+        box-shadow: none !important;
+    }
+}
+
+
+// dropdown
+.ant-select-dropdown {
+    width: auto !important;
+}

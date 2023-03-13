@@ -9,5 +9,7 @@ export type tableRowItemType = {
     pnl?: string,
     isLink?: boolean,
     icon?: StaticImageData,
-    action?: boolean
+    action?: boolean,
+    running?: boolean,
+    share?: boolean
 }

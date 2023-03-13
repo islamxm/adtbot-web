@@ -1,0 +1,39 @@
+.wrapper {
+
+    .top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .part {
+            display: flex;
+            align-items: center;
+            
+            .item {
+                margin: 0 5px;
+            }
+        }
+    }
+
+    .bottom {
+        .info {
+
+            .head {
+                margin-bottom: 5px;
+                font-size: 16px;
+                line-height: 22px;
+            }   
+            .body {
+                .body_item {
+                    font-size: 14px;
+                    line-height: 19px;
+                    margin-bottom: 5px;
+
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
+                }
+            }
+        }
+    }
+}
