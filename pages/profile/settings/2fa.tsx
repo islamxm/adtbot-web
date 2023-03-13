@@ -1,12 +1,14 @@
 import ContentLayout from "@/components/ContentLayout/ContentLayout";
+import Body from "@/pageModules/settings/2fa/components/Body/Body";
+import Done from "@/pageModules/settings/2fa/components/Done/Done";
 
 
 const TwoFaPage = () => {
     return (
         <ContentLayout
-            head="2FA"
+            head="Двухфакторная аутентификация"
             >
-            
+            <Body/>
         </ContentLayout>
     )
 }

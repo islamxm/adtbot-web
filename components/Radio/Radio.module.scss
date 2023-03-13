@@ -1,6 +1,4 @@
 .wrapper {
-    
-
 
     .input {
         position: absolute;
@@ -29,41 +27,39 @@
             transition: all .3s ease;
         }
 
-        .switch {
-            width: 36px;
-            height: 20px;
-            border-radius: 70px;
-            padding: 0 2px;
+        .radio {
+            width: 12px;
+            height: 12px;
+            border-radius: 100%;
+            border: 1px solid #F4F4F4;
+            transition: all .3s ease;
             position: relative;
             display: block;
-            transition: all .3s ease;
-            background-color: rgba(#6F91EE, .7);
-           
+            flex: 0 0 auto;
 
-            .el {
-                width: 16px;
-                height: 16px;
+            &:after {
                 position: absolute;
-                top: calc(50% - 8px);
-                left: 2px;
-                border-radius: 100%;
+                width: 4px;
+                height: 4px;
+                top: calc(50% - 2px);
+                left: calc(50% - 2px);
                 background-color: #fff;
+                transform: scale(0);
                 transition: all .3s ease;
+                content: '';
+                border-radius: 100%;
             }
         }
-
-        
     }
 
     .input:checked ~ .label {
-        .switch {
+
+        .radio {
             background-color: var(--blue);
-        
-            .el {
-                transform: translateX(16px);
+            border-color: var(--blue);
+            &:after {
+                transform: scale(1);
             }
         }
     }
-
-    
 }

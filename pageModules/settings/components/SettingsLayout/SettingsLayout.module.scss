@@ -1,0 +1,17 @@
+.wrapper {
+    min-height: calc(100vh - 130px);
+    display: flex;
+    flex-direction: column;
+
+    .main {
+
+    }
+
+    .action {
+        padding-top: 30px;
+        flex: 1 0 auto;
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end;
+    }
+}

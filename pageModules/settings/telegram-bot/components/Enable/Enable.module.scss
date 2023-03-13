@@ -1,0 +1,39 @@
+.wrapper {
+    max-width: 690px;
+    width: 100%;
+
+    .head {
+        font-weight: 500;
+        font-size: 22px;
+        line-height: 30px;
+    }
+
+    .body {
+
+        font-size: 16px;
+        line-height: 21px;
+
+        span {
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 25px;
+        }
+    }
+
+    .action {
+        .label {
+            margin-bottom: 15px;
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 25px;
+        }
+        .body {
+            display: flex;
+            align-items: center;
+
+            .input {
+                margin-right: 15px;
+            }
+        }
+    }
+}
