@@ -11,7 +11,7 @@ import DatePicker from '@/components/DatePicker/DatePicker';
 import moment from 'moment';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ru';
-import locale from 'antd/es/date-picker/locale/ru_RU';
+// import locale from 'antd/es/date-picker/locale/ru_RU';
 
 const dateFormat = 'DD/MM/YYYY';
 
@@ -51,7 +51,7 @@ const Body = () => {
                                 <DatePicker
                                     placeholder='Выберите дату'
                                     defaultValue={dayjs(date, dateFormat)}
-                                    locale={locale}
+                                    // locale={locale}
                                     />
 
                                 {/* Date */}
