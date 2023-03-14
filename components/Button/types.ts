@@ -10,5 +10,6 @@ export type buttonPropsTypes = {
     variant?: buttonVariants,
     style?: React.CSSProperties,
     fill?: boolean,
-    load?: boolean
+    load?: boolean,
+    rounded?: boolean
 }

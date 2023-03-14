@@ -11,6 +11,7 @@ import DatePicker from '@/components/DatePicker/DatePicker';
 import moment from 'moment';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ru';
+import {TbExternalLink} from 'react-icons/tb';
 // import locale from 'antd/es/date-picker/locale/ru_RU';
 
 const dateFormat = 'DD/MM/YYYY';
@@ -98,16 +99,28 @@ const Body = () => {
                     <div className={styles.bottom}>
                         <Row gutter={[50, 50]}>
                             <Col span={24}>
-                                <div className={styles.info}>
-                                    <div className={styles.head}>Всего</div>
-                                    <ul className={styles.body}>
-                                        <li className={styles.body_item}>Анонсы Binance - 1</li>
-                                        <li className={styles.body_item}>Анонсы Coinbase - 1</li>
-                                        <li className={styles.body_item}>Анонсы Huobi - 2</li>
-                                        <li className={styles.body_item}>Отработанные боты - 4</li>
-                                        <li className={styles.body_item}>PNL - 726 USDT</li>
-                                    </ul>
-                                </div>
+                                <Row gutter={[10,10]}>
+                                    <Col span={12}>
+                                        <div className={styles.info}>
+                                            <div className={styles.head}>Всего</div>
+                                            <ul className={styles.body}>
+                                                <li className={styles.body_item}>Анонсы Binance - 1</li>
+                                                <li className={styles.body_item}>Анонсы Coinbase - 1</li>
+                                                <li className={styles.body_item}>Анонсы Huobi - 2</li>
+                                                <li className={styles.body_item}>Отработанные боты - 4</li>
+                                                <li className={styles.body_item}>PNL - 726 USDT</li>
+                                            </ul>
+                                        </div>
+                                    </Col>
+                                    <Col span={12}>
+                                        <div className={styles.action}>
+                                            <div className={styles.item}>
+                                                <button className={styles.btn}> <span><TbExternalLink/></span> Экспорт</button>
+                                            </div>
+                                        </div>
+                                    </Col>
+                                </Row>
+                                
                             </Col>
                             <Col span={24}>
                                 <div className={styles.pag}>

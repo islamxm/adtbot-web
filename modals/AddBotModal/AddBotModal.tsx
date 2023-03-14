@@ -54,7 +54,7 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
                             <Row gutter={[20,20]}>
                                 <Col span={24}>
                                     <Select
-                                        hint={'text text'}
+                                        hint={'Биржа, которую будет парсить бот на предмет выхода анонса листинга'}
                                         label={'Анонс'}
                                         options={anonceOpts}
                                         defaultValue={anonceOpts[0]}
@@ -69,14 +69,14 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
                                 </Col>
                                 <Col span={24}>
                                     <Input
-                                        hint={'текст текст'}
+                                        hint={'При увеличении цены на указанный процент, исполнится лимитный ордер на продажу'}
                                         label='TP'
                                         placeholder='2%'
                                         />
                                 </Col>
                                 <Col span={24}>
                                     <Input
-                                        hint={'текст текст'}
+                                        hint={'Количество USDT, на которые будет совершена покупка монет'}
                                         label='Сумма'
                                         placeholder='150 USDT'
                                         />
@@ -87,7 +87,7 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
                             <Row gutter={[20,20]}>
                                 <Col span={24}>
                                     <Select
-                                        hint={'text text'}
+                                        hint={'Биржа, на которой будет осуществлена покупка в момент анонса'}
                                         label={'Покупка'}
                                         options={buyOpts}
                                         defaultValue={buyOpts[0]}
@@ -95,14 +95,14 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
                                 </Col>
                                 <Col span={24}>
                                     <Input
-                                        hint={'текст текст'}
+                                        hint={'Отклонение цены монеты от первой покупки, при котором бот прекращает покупку по маркету, если не выкуплено на всю сумму, указанную в поле “Сумма USDT”. Например, первая маркетная покупка произошла по цене 1, то при выставленном 10% в данном поле, последующие покупки при наличии выделенных средств прекращаются при достижении цены 1.1)'}
                                         label='Slippage'
                                         placeholder='30%'
                                         />
                                 </Col>
                                 <Col span={24}>
                                     <Input
-                                        hint={'текст текст'}
+                                        hint={'При снижении цены на указанный процент, исполнится лимитный ордер на продажу'}
                                         label='SL'
                                         placeholder='3%'
                                         />

@@ -3,6 +3,7 @@ import {FC} from 'react';
 import { Popover } from "antd";
 import Hint from "../Hint/Hint";
 import {AiOutlineInfoCircle} from 'react-icons/ai';
+import SortIcon from "@/icons/SortIcon";
 
 const TableHead:FC<tableHeadPropsTypes> = ({list}) => {
 
@@ -16,7 +17,7 @@ const TableHead:FC<tableHeadPropsTypes> = ({list}) => {
                                 {item.label}
                             </div>
                             {
-                                item?.hint || item?.value ? (
+                                item?.hint || item?.value || item.sort ? (
                                     <div className="table-headrow__item_action">
                                         {
                                             item.hint ? (
@@ -36,6 +37,13 @@ const TableHead:FC<tableHeadPropsTypes> = ({list}) => {
                                         {
                                             item.value ? (
                                                 <div></div>
+                                            ) : null
+                                        }
+                                        {
+                                            item.sort ? (
+                                                <button className="headrow__item_action_btn">
+                                                    <SortIcon color="#9094A6"/> 
+                                                </button>  
                                             ) : null
                                         }
                                     </div>

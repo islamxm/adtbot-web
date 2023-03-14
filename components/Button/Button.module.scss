@@ -5,6 +5,10 @@
     }
 }
 
+.button.rounded {
+    border-radius: 100%;
+}
+
 .button {
     display: flex;
     align-items: center;
@@ -13,7 +17,7 @@
     border-radius: 10px;
     color: #fff;
     min-height: 37px;
-    transition: all .3s ease;
+    transition: color, border-color, background-color, box-shadow, transform .3s ease;
     overflow: hidden;
     cursor: pointer;
     position: relative;

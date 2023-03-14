@@ -17,5 +17,10 @@ export type sidebarItemPropsTypes = {
     isButton?: boolean,
     onClick?: () => void,
     menuIsOpen?: boolean,
-    isSubItem?:boolean
+    isSubItem?:boolean,
+    isParentHidden?: boolean,
+
+    // test
+    sidebarBody?: any,
+    sidebarScrollHeight?: number 
 }

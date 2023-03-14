@@ -4,7 +4,7 @@ import {FC} from 'react';
 
 
 const SidebarList:FC<sidebarListPropsTypes> = ({
-    children
+    children,
 }) => {
 
 

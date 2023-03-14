@@ -19,9 +19,9 @@ const Body = () => {
                             <h4 className='heading_4'>Есть вопросы? Свяжитесь с нами</h4>
                         </Col>
                         <Col span={24}>
-                            <div>Поддержка — <Link href={'#'} className="def-link">@adtbot_support</Link></div>
-                            <div>Новости платформы — <Link href={'#'} className="def-link">@adtbot_announcements</Link></div>
-                            <div>Чат ADTBot — <Link href={'#'} className="def-link">@adtbot_club</Link></div>
+                            <div>Поддержка — <a target={'_blank'} href={'https://t.me/adtbot_support'} className="def-link">@adtbot_support</a></div>
+                            <div>Новости платформы — <a target={'_blank'} href={'https://t.me/adtbot_announcements'} className="def-link">@adtbot_announcements</a></div>
+                            <div>Чат ADTBot — <a target={'_blank'} href={'https://t.me/adtbot_club'} className="def-link">@adtbot_club</a></div>
                         </Col>
                     </Row>
                     

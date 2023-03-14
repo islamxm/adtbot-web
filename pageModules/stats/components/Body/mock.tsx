@@ -7,38 +7,47 @@ export const  mock = {
         {
             label:'Анонс',
             value: '',
+            sort: true
         },
         {
             label:'Покупка',
             value: '',
+            sort: true
         },
         {
             label:'Пара',
             value: '',
+            sort: true
         },
         {
             label:'Сумма',
             value: '',
+            sort: true
         },
         {
             label:'Цена покупки',
             value: '',
+            sort: true
         },
         {
             label:'Цена продажи',
             value: '',
+            sort: true
         },
         {
             label:'PNL',
             value: '',
+            sort: true
         },
         {
             label:'Активация',
             value: '',
+            sort: true
         },
         {
             label:'Остановка',
             value: '',
+            sort: true
         }
     ],
     body: [
