@@ -71,7 +71,7 @@ const Body = () => {
                                     </div>
                                 </div>
                             </Col>
-                            <Col span={24}>
+                            {/* <Col span={24}>
                                 <div className={styles.part}>
                                     <h3 className={styles.head}>Язык</h3>
                                     <div className={styles.body}>
@@ -114,7 +114,7 @@ const Body = () => {
                                             />
                                     </div>
                                 </div>
-                            </Col>
+                            </Col> */}
                         </Row>
                         
                     </div>

@@ -70,7 +70,9 @@ const Sidebar:FC<sidebarPropsTypes> = ({
             <button  
                 onClick={toggleSidebar}
                 className={styles.toggle}>
+                <div className={styles.icon}>
                 <FiChevronLeft/>
+                </div>
             </button>
             <div ref={sidebarBodyRef} className={`${styles.wrapper}  custom-scroll`}>
                 

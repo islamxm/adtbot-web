@@ -3,14 +3,24 @@ import { inputPropsTypes } from './types';
 import { Popover } from 'antd';
 import Hint from '../Hint/Hint';
 import {AiOutlineInfoCircle} from 'react-icons/ai';
+import { IMaskInput } from 'react-imask';
 
 const Input = (props: inputPropsTypes) => {
-    const {error, errorText, label, disabled, onClick, hint} = props || {};
+    const {
+        error, 
+        errorText, 
+        label, 
+        disabled, 
+        onClick, 
+        hint, 
+        mask,
+        onChange
+    } = props || {};
 
     
 
     return (
-        <div className={`${styles.wrapper} ${error ? styles.error : ''} ${disabled ? styles.disabled : ''}`}>
+        <div className={`${styles.wrapper} ${error ? styles.error : ''} ${disabled ? styles.disabled : ''}`} style={props.style}>
             {
                 label ? (
                     <div className={styles.label}>
@@ -31,10 +41,25 @@ const Input = (props: inputPropsTypes) => {
                     </div>
                 ) : null
             }
-            <input
-                className={styles.input} 
-                {...props}            
-                />
+            {
+                mask ? (
+                    <IMaskInput
+                        mask={mask}
+                        value={props.value}
+                        // onAccept={(v,m) => {
+                        //     // console.log(m)
+                            
+                        // }}
+                        {...props}
+                        />
+                ) : (
+                    <input
+                        className={styles.input} 
+                        {...props}            
+                        />
+                )
+            }
+            
             {
                 errorText ? (
                     <div className={styles.error_text}>

@@ -55,7 +55,7 @@
             .label {
                 margin-left: 10px;
                 font-weight: 500;
-                transition: opacity .3s ease;
+                // transition:  .3s ease;
                 white-space: nowrap;
             }
 
@@ -87,6 +87,7 @@
     }
     .link {
         color: var(--blue);
+        
     }
 }
 .wrapper.open > .head {

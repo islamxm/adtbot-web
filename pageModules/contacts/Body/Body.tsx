@@ -19,9 +19,9 @@ const Body = () => {
                             <h4 className='heading_4'>Есть вопросы? Свяжитесь с нами</h4>
                         </Col>
                         <Col span={24}>
-                            <div>Поддержка — <a target={'_blank'} href={'https://t.me/adtbot_support'} className="def-link">@adtbot_support</a></div>
-                            <div>Новости платформы — <a target={'_blank'} href={'https://t.me/adtbot_announcements'} className="def-link">@adtbot_announcements</a></div>
-                            <div>Чат ADTBot — <a target={'_blank'} href={'https://t.me/adtbot_club'} className="def-link">@adtbot_club</a></div>
+                            <div className={styles.link}>Поддержка — <a target={'_blank'} href={'https://t.me/adtbot_support'} className="def-link">@adtbot_support</a></div>
+                            <div className={styles.link}>Новости платформы — <a target={'_blank'} href={'https://t.me/adtbot_announcements'} className="def-link">@adtbot_announcements</a></div>
+                            <div className={styles.link}>Чат ADTBot — <a target={'_blank'} href={'https://t.me/adtbot_club'} className="def-link">@adtbot_club</a></div>
                         </Col>
                     </Row>
                     
@@ -38,6 +38,7 @@ const Body = () => {
                             <Text
                                 label='Введите текст'
                                 height={120}
+                                resize
                                 placeholder="*************************"
                                 />
                         </Col>
@@ -51,30 +52,36 @@ const Body = () => {
                 </Col>
                 <Col span={24}>
                     <div className={styles.action}>
-                        <a href='#' target={'_blank'} className={styles.item}>
-                            <Image
-                                src={telegram}
-                                alt="telegram"
-                                width={30}
-                                height={30}
-                                />
-                        </a>
-                        <a href='#' target={'_blank'} className={styles.item}>
-                            <Image
-                                src={twitter}
-                                alt="twitter"
-                                width={30}
-                                height={30}
-                                />
-                        </a>
-                        <a href='#' target={'_blank'} className={styles.item}>
-                            <Image
-                                src={youtube}
-                                alt="youtube"
-                                width={30}
-                                height={30}
-                                />
-                        </a>
+                        <div className={`${styles.head} heading_4`}>
+                            Подписывайтесь на наши социальные сети
+                        </div>
+                        <div className={styles.list}>
+                            <a href='#' target={'_blank'} className={styles.item}>
+                                <Image
+                                    src={telegram}
+                                    alt="telegram"
+                                    width={30}
+                                    height={30}
+                                    />
+                            </a>
+                            <a href='#' target={'_blank'} className={styles.item}>
+                                <Image
+                                    src={twitter}
+                                    alt="twitter"
+                                    width={30}
+                                    height={30}
+                                    />
+                            </a>
+                            <a href='#' target={'_blank'} className={styles.item}>
+                                <Image
+                                    src={youtube}
+                                    alt="youtube"
+                                    width={30}
+                                    height={30}
+                                    />
+                            </a>
+                        </div>
+                        
                     </div>
                 </Col>
             </Row>

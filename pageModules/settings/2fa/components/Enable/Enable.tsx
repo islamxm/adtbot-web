@@ -20,6 +20,10 @@ const Enable = ({
         setWarnModal(true)
     }, [])
 
+    useEffect(() => {
+        console.log(code)
+    } ,[code])
+
     return (
         <div className={styles.wrapper}>
             <StatusModal
@@ -86,9 +90,10 @@ const Enable = ({
                         <div className={styles.input}>
                             <Input
                                 placeholder={"000 000"}
-                                style={{maxWidth: 85}}
+                                style={{maxWidth: 90}}
                                 value={code}
-                                // onChange={(e) => setCode(e.target.value)}
+                                mask={'*** ***'}
+                                onChange={(e) => setCode(e.target.value)}
                                 />
                         </div>
                         <div className={styles.btn}>

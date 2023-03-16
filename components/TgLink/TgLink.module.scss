@@ -1,0 +1,17 @@
+.wrapper {
+    width: 76px;
+    height: 76px;
+    position: fixed;
+    bottom: 60px;
+    right: 60px;
+    z-index: 10000;
+
+    img {
+        max-width: 76px;
+        max-height: 76px;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: flex;
+    }
+}

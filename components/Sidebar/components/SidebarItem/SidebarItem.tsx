@@ -69,7 +69,7 @@ const SidebarItem:FC<sidebarItemPropsTypes> = ({
             <div className={styles.head}>
                 {
                     !children && !isButton ? (
-                        <Link href={link ? link : '/'} className={styles.link}>
+                        <Link data-link href={link ? link : '/'} className={styles.link}>
                             <div ref={iconRef} className={styles.icon}>
                                 {icon}
                             </div>
@@ -85,7 +85,7 @@ const SidebarItem:FC<sidebarItemPropsTypes> = ({
                             }
                         </Link>
                     ) : (
-                        <div onClick={clickHandle} className={styles.link}>
+                        <div data-link onClick={clickHandle} className={styles.link}>
                             <div ref={iconRef} className={styles.icon}>
                                 {icon}
                             </div>

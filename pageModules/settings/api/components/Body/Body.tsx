@@ -12,22 +12,22 @@ const Body = () => {
         {
             key: '1',
             label: 'Gate.io',
-            children: <TabBody/>
+            children: <TabBody testTitle='Gate.io'/>
         },
         {
             key: '2',
             label: 'KuCoin',
-            children: <TabBody/>
+            children: <TabBody testTitle='KuCoin'/>
         },
         {
             key: '3',
             label: 'MEXC',
-            children: <TabBody/>
+            children: <TabBody testTitle='MEXC'/>
         },
         {
             key: '4',
             label: 'Huobi',
-            children: <TabBody/>
+            children: <TabBody testTitle='Huobi'/>
         }
     ]
 

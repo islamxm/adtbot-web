@@ -9,6 +9,9 @@ import NProgress from 'nprogress';
 import 'nprogress/nprogress.css'; 
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
+import { ConfigProvider } from 'antd';
+import ruRu from 'antd/locale/ru_RU';
+import TgLink from '@/components/TgLink/TgLink';
 
 
 NProgress.configure({ showSpinner: false })
@@ -23,7 +26,8 @@ export default function App({ Component, pageProps }: AppProps) {
 
 
   return (
-    <div className="wrapper">
+    <ConfigProvider locale={ruRu}>
+      <div className="wrapper">
       <ToastContainer/>
       {
         pathname?.includes('/auth') ? (
@@ -32,6 +36,9 @@ export default function App({ Component, pageProps }: AppProps) {
       }
       <Component {...pageProps} />
     </div>
+    <TgLink/>
+    </ConfigProvider>
+    
     
   )
 }

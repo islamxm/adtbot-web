@@ -23,7 +23,8 @@
         line-height: 19px;
 
         &:focus {
-            box-shadow: 0 0 0 3px rgba(#72B7EF, .3);
+            // box-shadow: 0 0 0 3px rgba(#72B7EF, .3);
+            border-color: var(--blue);
         }
 
         &:read-only {
@@ -55,7 +56,8 @@
         border-color: var(--red);
 
         &:focus {
-            box-shadow: 0 0 0 3px rgba(#EF4444, .3);
+            // box-shadow: 0 0 0 3px rgba(#EF4444, .3);
+            border-color: var(--red);
         }
     }
 

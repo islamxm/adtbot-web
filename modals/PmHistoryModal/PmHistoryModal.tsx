@@ -1,6 +1,6 @@
 import styles from './PmHistoryModal.module.scss';
 import {Modal, ModalFuncProps} from 'antd';
-import {FC} from 'react';
+import {FC, useRef} from 'react';
 import Table from './components/Table/Table';
 import { itemPropsTypes } from './types';
 
@@ -78,6 +78,8 @@ const PmHistoryModal:FC<ModalFuncProps> = ({
     width = 650,
     open,
 }) => {
+    
+
 
     const closeHandle = () => {
         if(onCancel) {

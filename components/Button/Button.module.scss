@@ -1,7 +1,8 @@
 .button.default {
     background-color: var(--yellow);
     &:hover {
-        box-shadow: 0 0 10px 5px rgba(#F4C967, .3);
+        // box-shadow: 0 0 10px 5px rgba(#F4C967, .3);
+        box-shadow: 0px 25px 50px -12px rgba(244, 201, 103, 0.5);
     }
 }
 
@@ -17,7 +18,8 @@
     border-radius: 10px;
     color: #fff;
     min-height: 37px;
-    transition: color, border-color, background-color, box-shadow, transform .3s ease;
+    // transition: color, background-color, box-shadow, transform, border .3s ease;
+    transition: all .3s ease;
     overflow: hidden;
     cursor: pointer;
     position: relative;
@@ -99,7 +101,8 @@
     background-color: var(--blue);
 
     &:hover {
-        box-shadow: 0 0 10px 5px rgba(#6F91EE, .3);
+        // box-shadow: 0 0 10px 5px rgba(#6F91EE, .3);
+        box-shadow: 0px 25px 50px -12px rgba(112, 145, 238, 0.25);
     }
 }
 
@@ -126,13 +129,16 @@
 
 .button.simple {
     background-color: unset !important;
+    border: 1px solid transparent;
 
     .text, .icon {
         color: var(--black);
     }
     &:hover {
+        border-color: var(--blue);
         .icon, .text {
-            color: var(--yellow);
+            // color: var(--yellow);
+            color: var(--blue);
         }
     }
 }

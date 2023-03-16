@@ -62,7 +62,7 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
                                 </Col>
                                 <Col span={24}>
                                     <Input
-                                        hint={'текст текст текст текст текст текст'}
+                                        hint={'Суточный объем монеты'}
                                         label='Объем'
                                         placeholder='140 USDT'
                                         />

@@ -12,7 +12,7 @@ import kraken from '@/public/assets/icons/kraken.svg';
 import bitstamp from '@/public/assets/icons/bitstamp.svg';
 import bitfinex from '@/public/assets/icons/bitfinex.svg';
 import bybit from '@/public/assets/icons/bybit.svg';
-import bithumb from '@/public/assets/icons/bithumb.svg';
+import upbit from '@/public/assets/icons/upbit.svg';
 import binance from '@/public/assets/icons/binance.svg';
 import gate from '@/public/assets/icons/gate.svg';
 
@@ -110,7 +110,7 @@ const list: billingItemPropsTypes[] = [
                     {link: '/', label: 'Bitstamp', icon: bitstamp},
                     {link: '/', label: 'Bitfinex', icon: bitfinex},
                     {link: '/', label: 'Bybit', icon: bybit},
-                    {link: '/', label: 'Bithumb', icon: bithumb},
+                    {link: '/', label: 'Upbit', icon: upbit},
                 ]
             },
             {

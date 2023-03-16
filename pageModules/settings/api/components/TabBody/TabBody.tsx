@@ -4,14 +4,16 @@ import Input from '@/components/Input/Input';
 import IpTable from '../IpTable/IpTable';
 import Ex from '../Ex/Ex';
 
-const TabBody = () => {
+const TabBody = ({
+    testTitle
+}: {testTitle?: string}) => {
 
     return (
         <div className={styles.wrapper}>
             <Row gutter={[35,35]}>
 
                 <Col span={24}>
-                    Нет аккаунта на Gate.io? <a className='def-link' href="#" target={'_blank'}>Зарегистрироваться</a>
+                    Нет аккаунта на {testTitle}? <a className='def-link' href="#" target={'_blank'}>Зарегистрироваться</a>
                 </Col>
 
                 

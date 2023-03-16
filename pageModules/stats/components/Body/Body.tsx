@@ -26,9 +26,9 @@ const periods = [
 
 const tableSizes = [
     {value: '1', label: '10 строк'},
-    {value: '2', label: '10 строк'},
-    {value: '3', label: '30 строк'},
-    {value: '4', label: '40 строк'},
+    {value: '2', label: '25 строк'},
+    {value: '3', label: '50 строк'},
+    {value: '4', label: '100 строк'},
 ]
 
 const Body = () => {
