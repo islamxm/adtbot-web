@@ -20,9 +20,6 @@ const Enable = ({
         setWarnModal(true)
     }, [])
 
-    useEffect(() => {
-        console.log(code)
-    } ,[code])
 
     return (
         <div className={styles.wrapper}>
@@ -93,7 +90,8 @@ const Enable = ({
                                 style={{maxWidth: 90}}
                                 value={code}
                                 mask={'*** ***'}
-                                onChange={(e) => setCode(e.target.value)}
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCode(e.target.value)}
+                                //onChangeMask={(e) => setCode(e.target.value)}
                                 />
                         </div>
                         <div className={styles.btn}>

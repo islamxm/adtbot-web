@@ -4,6 +4,7 @@ import { Popover } from 'antd';
 import Hint from '../Hint/Hint';
 import {AiOutlineInfoCircle} from 'react-icons/ai';
 import { IMaskInput } from 'react-imask';
+import InputMask from 'react-input-mask';
 
 const Input = (props: inputPropsTypes) => {
     const {
@@ -14,7 +15,8 @@ const Input = (props: inputPropsTypes) => {
         onClick, 
         hint, 
         mask,
-        onChange
+        onChange,
+        onChangeMask
     } = props || {};
 
     
@@ -43,14 +45,23 @@ const Input = (props: inputPropsTypes) => {
             }
             {
                 mask ? (
-                    <IMaskInput
-                        mask={mask}
+                    // <IMaskInput
+                    //     placeholderChar=''
+                    //     mask={mask}
+                    //     value={props.value}
+                    //     onAccept={(val,mask) => {
+                    //         if(onChangeMask) {
+                    //             onChangeMask(val)
+                    //         }
+                    //     }}
+
+                    //     />
+                    <InputMask
                         value={props.value}
-                        // onAccept={(v,m) => {
-                        //     // console.log(m)
-                            
-                        // }}
-                        {...props}
+                        onChange={onChange}
+                        mask={mask}
+                        placeholder={props.placeholder}
+                        maskChar={null}
                         />
                 ) : (
                     <input
