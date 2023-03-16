@@ -8,6 +8,7 @@ import {useState} from 'react';
 import UsePolicyModal from "@/pageModules/auth/modals/UsePolicyModal/UsePolicyModal";
 import Button from "@/components/Button/Button";
 import Link from "next/link";
+import styles from './style.module.scss';
 
 const SignupPage = () => {
     const [usePolicyModal, setUsePolicyModal] = useState<boolean>(false)
@@ -28,11 +29,18 @@ const SignupPage = () => {
                 width={635}
                 />
 
-            <Row gutter={[0,0]} align={'middle'}>
-                <Col span={12}>
+            <Row 
+                className={styles.wrapper}
+                gutter={[0,0]} align={'middle'}>
+                <Col 
+                    className={styles.promo}
+                    span={24}
+                    md={12}>
                     <PromoSlider/>
                 </Col>
-                <Col span={12}>
+                <Col 
+                    md={12}
+                    span={24}>
                     <AuthForm
                         title="Зарегистрироваться"
                         >

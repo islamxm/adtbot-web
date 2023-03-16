@@ -1,0 +1,25 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 200px);
+    align-items: center;
+    justify-content: center;
+
+    .img {
+        margin-bottom: 25px;
+
+        img {
+            max-width: 180px;
+            max-height: 190px;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: flex;
+        }
+    }
+
+    .label {
+        text-align: center;
+        font-weight: 500;
+    }
+}

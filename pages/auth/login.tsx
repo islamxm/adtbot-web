@@ -9,6 +9,7 @@ import Link from "next/link";
 import PassResetModal from "@/pageModules/auth/modals/PassResetModal/PassResetModal";
 import {useState} from 'react';
 import TwoAuthModal from "@/pageModules/auth/modals/TwoAuthModal/TwoAuthModal";
+import styles from './style.module.scss';
 
 const LoginPage = () => {
     const [passResetModal, setPassResetModal] = useState<boolean>(false)
@@ -36,11 +37,19 @@ const LoginPage = () => {
                 width={455}
                 centered
                 />
-            <Row gutter={[0, 0]} align={'middle'}>
-                <Col span={12}>
+            <Row 
+                className={styles.wrapper}
+                gutter={[0, 0]} align={'middle'}>
+                <Col 
+                    className={styles.promo}
+                    md={12}
+                    span={24}
+                    >
                     <PromoSlider/>
                 </Col>
-                <Col span={12}>
+                <Col 
+                    span={24}
+                    md={12}>
                     <AuthForm
                         title="Вход"
                         >
@@ -53,6 +62,7 @@ const LoginPage = () => {
                             </Col>
                             <Col span={24}>
                                 <Input
+                                    type="password"
                                     label="Пароль"
                                     placeholder="Ваш пароль"
                                     />

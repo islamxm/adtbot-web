@@ -8,6 +8,8 @@ import Pag from '@/components/Pag/Pag';
 import { useState } from 'react';
 import Select from '@/components/Select/Select';
 import HsButton from '@/components/HsButton/HsButton';
+import Empty from '../Empty/Empty';
+
 
 const statusOptions = [
     {value: '1', label: 'Все'},
@@ -69,6 +71,7 @@ const Body = () => {
                         />
                 </div>
             </div>
+            {/* <Empty/> */}
         </div>
     )
 }

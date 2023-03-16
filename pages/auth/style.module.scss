@@ -1,0 +1,18 @@
+.wrapper {
+    height: 100%;
+
+    .promo {
+        display: none;
+    }
+}
+
+
+@media screen and (min-width: 768px) {
+    .wrapper {
+        height: auto;
+        
+        .promo {
+            display: block;
+        }
+    }
+}

@@ -36,7 +36,12 @@ export default function App({ Component, pageProps }: AppProps) {
       }
       <Component {...pageProps} />
     </div>
-    <TgLink/>
+    {
+      !pathname?.includes('/auth') ? (
+        <TgLink/>
+      ) : null
+    }
+   
     </ConfigProvider>
     
     

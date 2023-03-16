@@ -33,3 +33,12 @@
     }
 
 }
+
+@media (max-width: 620px) {
+    .ant-modal {
+
+        .ant-modal-content {
+            padding: 30px 15px;
+        }
+    }
+}
