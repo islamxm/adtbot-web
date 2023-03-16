@@ -14,6 +14,8 @@
     }
 
     .table-main {
+        flex: 1 0 auto;
+        overflow-x: auto;
         
         .table-wrapper {
             
@@ -117,7 +119,7 @@
 
     .table-bottom {
         padding: 15px;
-        flex: 1 0 auto;
+        // flex: 1 0 auto;
         display: flex;
         align-items: flex-end;
     }

@@ -4,27 +4,119 @@
     display: flex;
     align-items: center;
 
+    
+
     .inner {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+       
         width: 100%;
 
-        .head {
-            font-weight: 600;
-            font-size: 28px;
-            line-height: 38px;
-            color: var(--blue);
+        
+        .top {
+            display: none;
         }
-        .body {
+
+        .main {
             display: flex;
             align-items: center;
-            justify-content: flex-end;
-            margin-left: -10px;
-            margin-right: -10px;
-            .item {
-                margin: 0 10px;
+            justify-content: space-between;
+            width: 100%;
+
+            .head {
+                font-weight: 600;
+                font-size: 28px;
+                line-height: 38px;
+                color: var(--blue);
+            }
+            .body {
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                margin-left: -10px;
+                margin-right: -10px;
+                .item {
+                    margin: 0 10px;
+                }
+            }
+        }
+
+        
+    }
+}
+
+@media (max-width: 768px) {
+
+    .wrapper {
+
+        .inner {
+            .top {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding-bottom: 25px;
+
+                .logo {
+
+                    img {
+                        max-width: 122px;
+                        max-height: 30px;
+                        width: 100%;
+                        height: 100%;
+                        object-fit: contain;
+                        display: flex;
+                    }
+                }
+
+                .burger {
+                    width: 22px;
+                    height: 12px;
+                    position: relative;
+                    flex: 0 0 auto;
+
+                    span {
+                        position: absolute;
+                        background-color: var(--black);
+                        border-radius: 4px;
+                        display: block;
+                        height: 2px;
+                        width: 100%;
+                        transition: all .3s ease;
+
+                        &:nth-child(1) {
+                            top: 0;
+                            left: 0;
+                        }
+                        &:nth-child(2) {
+                            top: calc(50% - 1px);
+                            left: 0;
+                        }
+                        &:nth-child(3) {
+                            bottom: 0;
+                            left: 0;
+                        }
+                    }
+                }
+
+                .burger.active {
+
+                    span {
+                        &:nth-child(1) {
+                            transform: translateY(5px) rotate(45deg);
+                        }
+                        &:nth-child(2) {
+                            opacity: 0;
+                        }
+                        &:nth-child(3) {
+                            transform: translateY(-5px) rotate(-45deg);
+                        }
+                    }
+                }
+            }
+
+            .main {
+
             }
         }
     }
 }
+
+

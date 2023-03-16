@@ -9,7 +9,7 @@ import { useState } from 'react';
 import Select from '@/components/Select/Select';
 import HsButton from '@/components/HsButton/HsButton';
 import Empty from '../Empty/Empty';
-
+import WarnPanel from '@/components/WarnPanel/WarnPanel';
 
 const statusOptions = [
     {value: '1', label: 'Все'},
@@ -49,7 +49,7 @@ const Body = () => {
                         </div>
                     </div>
                 </div>
-                <div className="table-main">
+                <div className="table-main custom-scroll-horizontal">
                     <table className="table-wrapper">
                         <TableHead list={mock?.head}/>
                         <tbody>
@@ -72,6 +72,7 @@ const Body = () => {
                 </div>
             </div>
             {/* <Empty/> */}
+            {/* <WarnPanel/> */}
         </div>
     )
 }

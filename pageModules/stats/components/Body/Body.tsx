@@ -83,7 +83,7 @@ const Body = () => {
                         </div>
                     </div>
                 </div>
-                <div className="table-main">
+                <div className="table-main custom-scroll-horizontal">
                     <table className="table-wrapper">
                         <TableHead list={mock?.head}/>
                         <tbody>

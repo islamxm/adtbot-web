@@ -11,3 +11,17 @@
         // border-radius: 15px;
     }
 }
+
+.custom-scroll-horizontal {
+    overflow: hidden;
+    overflow-x: auto;
+
+    &::-webkit-scrollbar {
+        height: 4px;
+        background-color: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: var(--blue);
+        // border-radius: 15px;
+    }
+}

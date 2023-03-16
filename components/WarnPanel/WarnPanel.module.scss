@@ -1,0 +1,23 @@
+.wrapper {
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #F8D7DA;
+    border-radius: 8px;
+
+    .body {
+        color: #721C24;
+        font-size: 16px;
+        letter-spacing: -0.02em;
+        font-weight: 500;
+    }
+
+    .action {
+        display: flex;
+        align-items: center;
+        max-width: 170px;
+        margin-left: 20px;
+        width: 100%;    
+    }
+}

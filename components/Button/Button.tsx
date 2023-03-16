@@ -24,6 +24,8 @@ const Button:FC<buttonPropsTypes> = ({
                 return styles.blue
             case 'simple':
                 return styles.simple
+            case 'danger':
+                return styles.danger
             default:
                 return ''
         }
