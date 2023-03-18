@@ -32,7 +32,7 @@ const Table = ({list}: {list: itemPropsTypes[]}) => {
     }, [bodyRef])
 
     return (
-        <div ref={bodyRef} className={`${styles.wrapper} custom-scroll ${scrolled ? styles.scrolled : ''}`}>
+        <div ref={bodyRef} className={`${styles.wrapper} custom-scroll custom-scroll-horizontal ${scrolled ? styles.scrolled : '' }`}>
             <table className={styles.table}>
                 <tr className={styles.head}>
                     <th className={styles.item}>Дата и время</th>

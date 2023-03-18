@@ -1,7 +1,7 @@
 import ContentLayout from "@/components/ContentLayout/ContentLayout";
 import Start from "@/components/Start/Start";
 import Body from "@/pageModules/bots/components/Body/Body";
-
+import Empty from "@/pageModules/bots/components/Empty/Empty";
 
 const MyBotsPage = () => {
 
@@ -10,7 +10,8 @@ const MyBotsPage = () => {
             head="Мои боты"
             >
             {/* <Start/> */}
-            <Body/>
+            {/* <Body/> */}
+            <Empty/>
         </ContentLayout>
     )
 }

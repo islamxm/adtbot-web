@@ -11,12 +11,16 @@ import Image from 'next/image';
 import logo from '@/public/assets/logo.svg';
 import IconButton from '../IconButton/IconButton';
 import Sidebar from '../Sidebar/Sidebar';
+import { toggleMenu } from '@/store/actions';
+import { useAppDispatch, useAppSelector } from '@/hooks/useTypesRedux';
 
 
 const Header:FC<headerPropsTypes> = ({
     head
 }) => {
     const {pathname} = useRouter()
+    const {isMenuOpen} = useAppSelector(s => s)
+    const dispatch = useAppDispatch();
     const [historyModal, setHistoryModal] = useState(false)
     const [depositModal, setDepositModal] = useState(false)
 
@@ -47,7 +51,9 @@ const Header:FC<headerPropsTypes> = ({
                             height={30}
                             />
                     </Link>
-                    <button className={`${styles.burger}`}>
+                    <button 
+                        onClick={() => dispatch(toggleMenu(true))}
+                        className={`${styles.burger}`}>
                         <span></span>
                         <span></span>
                         <span></span>
@@ -80,8 +86,8 @@ const Header:FC<headerPropsTypes> = ({
                                 </>
                             ) : null
                         }
-                        <div className={styles.item}>
-                            <Balance/>
+                        <div className={`${styles.item} ${styles.balance}`}>
+                            <Balance warning={true}/>
                         </div>
                     </div>
                 </div>

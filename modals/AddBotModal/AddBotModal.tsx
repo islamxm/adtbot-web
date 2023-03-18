@@ -23,7 +23,9 @@ const anonceOpts = [
 
 const buyOpts = [
     {value: '1', label: 'Gate.io'},
-    {value: '2', label: 'Some option'},
+    {value: '2', label: 'MEXC'},
+    {value: '3', label: 'KuCoin'},
+    {value: '4', label: 'Huobi'},
 ]
 
 

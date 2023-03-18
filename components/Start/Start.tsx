@@ -37,7 +37,7 @@ const Start = () => {
 
     return (
         <div className={styles.wrapper}>
-            <Row gutter={[100,100]}>
+            <Row gutter={[50,50]}>
                 <Col span={24}>
                     <div className={styles.main}>
                         <Row gutter={[20,20]}>
@@ -74,7 +74,10 @@ const Start = () => {
                         <Row gutter={[40,40]}>
                             {
                                 list?.map((item, index) => (
-                                    <Col span={12} key={index}>
+                                    <Col 
+                                        md={12}
+                                        span={24} 
+                                        key={index}>
                                         <div className={styles.item}>
                                             <div className={styles.head}>
                                                 <div className={styles.icon}>

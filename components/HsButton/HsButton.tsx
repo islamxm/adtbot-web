@@ -1,6 +1,7 @@
 import styles from './HsButton.module.scss';
 import {RiEyeLine, RiEyeCloseLine} from 'react-icons/ri';
 import {motion} from 'framer-motion';
+import {AiOutlineEyeInvisible, AiOutlineEye} from 'react-icons/ai';
 
 const HsButton = ({
     isActive, 
@@ -33,7 +34,7 @@ const HsButton = ({
                 )
             } */}
             {
-                isActive ? <RiEyeLine size={size}/> : <RiEyeCloseLine size={size}/>
+                isActive ? <AiOutlineEye size={size}/> : <AiOutlineEyeInvisible size={size}/>
             }
         </button>   
     )

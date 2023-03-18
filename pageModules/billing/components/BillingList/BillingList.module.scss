@@ -3,10 +3,30 @@
     .list {
         display: flex;
         align-items: flex-start;
-        justify-content: space-between;
+        // justify-content: space-between;
+        overflow-x: auto;
+        padding: 20px 0;
+        margin-left: -15px;
+        margin-right: -15px;
         
         .item {
-            width: calc(100% / 4.1);     
+            // width: calc(100% / 4.1);    
+            margin: 0 15px; 
+        }
+    }
+}
+
+@media (max-width: 620px) {
+    .list {
+        margin-left: 0;
+        margin-right: 0;
+        flex-wrap: wrap;
+
+        .item {
+            width: 100%;
+            margin-bottom: 20px;
+
+            
         }
     }
 }

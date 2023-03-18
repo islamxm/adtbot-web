@@ -49,12 +49,40 @@
                     }
                 }
                 .label {
-
+                    font-size: 22px;
+                    line-height: 32px;
                 }
             }
 
             .text {
 
+            }
+        }
+    }
+}
+
+@media (max-width: 620px) {
+    .wrapper {
+
+        .main {
+            .title {
+                font-size: 24px;
+                line-height: 33px;
+            }
+        }
+
+        .body {
+
+            .item {
+                .head {
+                    .icon {
+                        margin-right: 15px;
+                    }
+                    .label {
+                        font-size: 18px;
+                        line-height: 32px;
+                    }
+                }
             }
         }
     }

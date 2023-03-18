@@ -61,9 +61,9 @@ const Enable = ({
                                         color={'#6F91EE'}
                                         value='https://console.adtbot.com/'/>
                                 </Col>
-                                <Col>
+                                {/* <Col>
                                     <p>Код из приложения</p>
-                                </Col>
+                                </Col> */}
                             </Row>
                         </div>
                         <div className={styles.descr}>
@@ -83,7 +83,11 @@ const Enable = ({
                     </div>
                 </Col>
                 <Col span={24}>
+                    <div className={styles.label}>
+                        Код из приложения
+                    </div>
                     <div className={styles.check}>
+                        
                         <div className={styles.input}>
                             <Input
                                 placeholder={"000 000"}

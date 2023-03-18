@@ -3,6 +3,7 @@
     // border: 1px solid blue;
     display: flex;
     align-items: center;
+    
 
     
 
@@ -48,11 +49,15 @@
     .wrapper {
 
         .inner {
+            padding-bottom: 30px;
             .top {
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
                 padding-bottom: 25px;
+                padding-top: 25px;
+                // position: relative;
+                // z-index: 100000;
 
                 .logo {
 
@@ -114,6 +119,23 @@
 
             .main {
 
+                .balance {
+                    display: none;
+                }
+            }   
+        }
+    }
+}
+
+@media (max-width: 620px) {
+    .wrapper {
+        .inner {
+
+            .main {
+                .head {
+                    font-size: 24px;
+                    line-height: 33px;
+                }
             }
         }
     }

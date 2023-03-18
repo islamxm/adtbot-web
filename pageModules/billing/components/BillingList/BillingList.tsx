@@ -142,7 +142,7 @@ const BillingList = () => {
                 open={buyModal}
                 onCancel={closeBuyModal}
                 />
-            <div className={styles.list}>
+            <div className={`${styles.list} custom-scroll-horizontal`}>
                 {
                     list?.map((item,index) => (
                         <div className={styles.item} key={index}>

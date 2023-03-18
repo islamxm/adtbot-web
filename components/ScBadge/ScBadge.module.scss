@@ -24,3 +24,20 @@
         margin-left: 30px;
     }
 }
+
+@media (max-width: 768px) {
+
+    .wrapper {
+        flex-wrap: wrap;
+
+        .label {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        .btn {
+            width: 100%;
+            margin-left: 0;
+            text-align: left;
+        }
+    }
+}

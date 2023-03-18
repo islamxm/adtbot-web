@@ -1,12 +1,24 @@
 import styles from './Balance.module.scss';
-import {IoWalletOutline} from 'react-icons/io5';
+import {IoWalletOutline, IoWarningOutline} from 'react-icons/io5';
 import Link from 'next/link';
-const Balance = () => {
+
+const Balance = ({
+    warning
+}: {
+    warning?: boolean
+}) => {
 
     return (
-        <Link href={'/profile/billing'} className={styles.wrapper}>
+        <Link href={'/profile/billing'} className={`${styles.wrapper} ${warning ? styles.error : ''}`}>
             <div className={styles.icon}>
-                <IoWalletOutline/>
+                {
+                    warning ? (
+                        <IoWarningOutline/>
+                    ) : (
+                        <IoWalletOutline/>
+                    )
+                }
+                
             </div>
             <div className={styles.body}>
                 <div className={styles.value}>8.22 / 26 дней</div>

@@ -15,6 +15,14 @@ import AddBotModal from '@/modals/AddBotModal/AddBotModal';
 import logoSm from '@/public/assets/logo-sm.svg';
 import {FiChevronLeft} from 'react-icons/fi';
 import {useRef} from 'react';
+import { useAppDispatch, useAppSelector } from '@/hooks/useTypesRedux';
+import { toggleMenu } from '@/store/actions';
+import {GrClose} from 'react-icons/gr';
+import { Row, Col } from 'antd';
+import Balance from '../Balance/Balance';
+import DepositModal from '@/modals/DepositModal/DepositModal';
+import PmHistoryModal from '@/modals/PmHistoryModal/PmHistoryModal';
+
 
 // ICONS
 import IconMyBots from '@/icons/IconMyBots';
@@ -31,10 +39,21 @@ const Sidebar:FC<sidebarPropsTypes> = ({
     isActive
 }) => {
     const {pathname, replace} = useRouter()
+    const {isMenuOpen} = useAppSelector(s => s)
+    const dispatch = useAppDispatch();
     const sidebarBodyRef = useRef<HTMLDivElement>(null)
     const [settingsOpen, setSettingsOpen] = useState<boolean>(false)
     const [addBotModal, setAddBotModal] = useState<boolean>(false)
     const [isHidden, setIsHidden] = useState<boolean>(false)
+    const [depositModal, setDepositModal] = useState<boolean>(false)
+    const [histModal, setHistModal] = useState<boolean>(false)
+
+    const openHistModal = () => setHistModal(true)
+    const closeHistModal = () => setHistModal(false)
+
+    const openDepositModal = () => setDepositModal(true)
+    const closeDepositModal = () => setDepositModal(false)
+
 
     const openAddBotModal = () => setAddBotModal(true)
     const closeAddBotModal = () => setAddBotModal(false)
@@ -55,14 +74,22 @@ const Sidebar:FC<sidebarPropsTypes> = ({
         }
     }, [isHidden])
 
-    // useEffect(() => {
-    //     if(settingsOpen) {
-    //         console.log(sidebarBodyRef?.current?.scrollHeight)
-    //     }
-    // }, [sidebarBodyRef?.current?.scrollHeight, settingsOpen])
+    useEffect(() => {
+        if(dispatch) {
+            dispatch(toggleMenu(false))
+        }
+    }, [pathname, dispatch])
 
     return (
-        <div className={`${styles.sidebar} ${isHidden ? styles.hidden : ''}`}>
+        <div className={`${styles.sidebar} ${isHidden ? styles.hidden : ''} ${isMenuOpen ? styles.open : ''}`}>
+            <PmHistoryModal
+                open={histModal}
+                onCancel={closeHistModal}
+                />
+            <DepositModal
+                open={depositModal}
+                onCancel={closeDepositModal}
+                />
             <AddBotModal
                 open={addBotModal}
                 onCancel={closeAddBotModal}
@@ -75,7 +102,11 @@ const Sidebar:FC<sidebarPropsTypes> = ({
                 </div>
             </button>
             <div ref={sidebarBodyRef} className={`${styles.wrapper}  custom-scroll`}>
-                
+                <button 
+                    onClick={() => dispatch(toggleMenu(false))}
+                    className={styles.close}>
+                    <GrClose/>
+                </button>
                 <div className={styles.logo}>
                     {
                         isHidden ? (
@@ -258,15 +289,53 @@ const Sidebar:FC<sidebarPropsTypes> = ({
                     </div>
                 </div>
                 <div className={styles.action}>
-                    <Button
-                        onClick={openAddBotModal}
-                        style={{minWidth: 45, minHeight: 45}}
-                        rounded={isHidden}
-                        text={isHidden ? '' : 'Создать бот'}
-                        beforeIcon={<AiOutlinePlus/>}
-                        variant={'default'}
-                        fill={!isHidden}
-                        />
+                    <Col span={24}>
+                    <Row gutter={[15,15]}>
+                        <Col span={24} className={styles.balance}>
+                            <div className={styles.action_item}>
+                                <Balance/>
+                            </div>
+                        </Col>
+                        <Col span={24} className={styles.addbot}>
+                            <div className={styles.action_item}>
+                                <Button
+                                    onClick={openAddBotModal}
+                                    style={{minWidth: 45, minHeight: 45}}
+                                    rounded={isHidden}
+                                    text={isHidden ? '' : 'Создать бот'}
+                                    beforeIcon={<AiOutlinePlus/>}
+                                    variant={'default'}
+                                    fill={!isHidden}
+                                    />
+                            </div>
+                        </Col>
+                        <Col span={24} className={styles.deposit}>
+                            <div className={styles.action_item}>
+                                <Button
+                                    style={{minWidth: 45, minHeight: 45}}
+                                    text={'Пополнить'}
+                                    variant={'blue'}
+                                    fill
+                                    onClick={openDepositModal}
+                                    />
+                            </div>
+                        </Col>
+                        <Col span={24} className={styles.history}>
+                            <div className={styles.action_item}>
+                                <Button
+                                    onClick={openHistModal}
+                                    style={{minWidth: 45, minHeight: 45}}
+                                    text={'История'}
+                                    variant={'default'}
+                                    fill
+                                    />
+                            </div>
+                        </Col>
+                    </Row>
+                    </Col>
+                    
+                    
+                    
                 </div>
             </div>
         </div>

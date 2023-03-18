@@ -4,6 +4,7 @@
     padding: 20px;
     border-radius: 26px;
     transition: all .3s ease;
+    width: 292px;
 
     &:hover {
         background-color: rgba(#6F91EE, .1);
@@ -118,4 +119,24 @@
     // background-size: contain;
 
     
+}
+
+@media (max-width: 620px) {
+    .wrapper {
+        width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+        &:hover {
+            background-color: #fff;
+            transform: translate(0);
+        }
+    }
+
+    .wrapper.top {
+        padding-left: 30px;
+        padding-right: 30px;
+        &:hover {
+            background-color: var(--blue);
+        }
+    }
 }

@@ -16,19 +16,44 @@
         }
         .descr {
             padding-left: 35px;
+            overflow: hidden;
 
             span {
                 font-weight: 700;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                // width: 100%;
+                display: block;
             }
         }
+    }
+    .label {
+        margin-bottom: 15px;
     }
 
     .check {
         display: flex;
         align-items: center;
 
+        
+
         .input {
             margin-right: 10px;
         }
+    }
+}
+
+@media (max-width: 768px) {
+
+    .wrapper {
+        .main {
+            display: block;
+            .descr {
+                padding-left: 0;
+            }
+        }
+
+       
     }
 }

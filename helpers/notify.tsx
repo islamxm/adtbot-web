@@ -43,6 +43,7 @@ const notify = (text: string | React.ReactNode | number, type: notificationType 
         draggable: true,
         theme: "dark",
         closeButton: false,
+        className: 'notify',
         progressStyle: {
             backgroundColor: switchType(type).themeColor
         } ,

@@ -1,0 +1,1 @@
+export const toggleMenu = (bool: boolean) => ({type: 'TOGGLE_MENU', bool: bool})
