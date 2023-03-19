@@ -64,7 +64,7 @@ const Header:FC<headerPropsTypes> = ({
                         {head}
                     </h2>
                     <div className={styles.body}>
-                        {
+                        {/* {
                             pathname === '/profile/billing' ? (
                                 <>
                                     <div className={styles.item}>
@@ -85,7 +85,7 @@ const Header:FC<headerPropsTypes> = ({
                                     </div>
                                 </>
                             ) : null
-                        }
+                        } */}
                         <div className={`${styles.item} ${styles.balance}`}>
                             <Balance warning={true}/>
                         </div>

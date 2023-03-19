@@ -23,6 +23,7 @@
 
 
             .table-row {
+
                 &__item {
                     padding: 15px;
                     border-bottom: 1px solid #F4F4F4;
@@ -48,9 +49,15 @@
                         margin-left: 4px;
                         font-size: 12px;
                         line-height: 12px;
-
+                        display: flex;
+                        align-items: center;
+                        
                         &_btn {
                             transition: all .3s ease;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            line-height: 100%;
                         }
                     }
                 }
@@ -84,6 +91,10 @@
                     &_label {
 
                     }
+
+                    &_toggle {
+                        margin-right: 20px;
+                    }
                 }
 
                 &__item.profit {
@@ -111,6 +122,35 @@
                             line-height: 12px;
                         }
                     }
+                }
+            }
+
+            .table-dropdown {
+
+                &__body {
+                    // border: 1px solid red;
+                    // display: block;
+
+                    &_in {
+                        transition: all .3s ease;
+                        overflow: hidden;
+                    }
+
+                    &_table {
+                        padding: 15px;
+
+                        &_item {
+
+                            &_label {
+
+                            }
+
+                            &_value {
+                                
+                            }
+                        }
+                    }
+
                 }
             }
             

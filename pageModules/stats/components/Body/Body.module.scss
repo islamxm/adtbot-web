@@ -67,3 +67,19 @@
         }
     }
 }
+
+@media (max-width: 620px) {
+    .wrapper {
+
+        .top {
+            flex-wrap: wrap;
+            .part {
+                width: 100%;
+
+                // &:first-child {
+                //     order: 2;
+                // }
+            }
+        }
+    }
+}

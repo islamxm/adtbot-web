@@ -169,19 +169,26 @@
 
         .action_item {
             width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .balance {
+            display: none;
         }
 
         .addbot {
 
         }
 
-        .deposit {
-            display: none;
-        }
+        // .deposit {
+        //     display: none;
+        // }
 
-        .history {
-            display: none;
-        }
+        // .history {
+        //     display: none;
+        // }
     }
 }
 
@@ -203,7 +210,7 @@
             width: 100%;
             height: 100%;
             border: none;
-            padding-bottom: 100px;
+            padding-bottom: 130px;
             .logo {
                 display: none;
             }
@@ -226,15 +233,18 @@
             justify-content:unset;
 
 
-            .addbot {
-                display: none;
+            .balance {
+                display: flex;
+                justify-content: flex-start;
+                width: 100%;
+
+                .action_item {
+                    justify-content: flex-start;
+                }
             }
 
-            .deposit {
-                display: block;
-            }
-            .history {
-                display: block;
+            .addbot {
+                display: none;
             }
         }
 

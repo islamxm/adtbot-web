@@ -10,8 +10,8 @@ const MyBotsPage = () => {
             head="Мои боты"
             >
             {/* <Start/> */}
-            {/* <Body/> */}
-            <Empty/>
+            <Body/>
+            {/* <Empty/> */}
         </ContentLayout>
     )
 }

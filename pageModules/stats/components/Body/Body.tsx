@@ -50,22 +50,22 @@ const Body = () => {
                                 {/* Date */}
                                 
                                 <DatePicker
-                                    placeholder='Выберите дату'
-                                    defaultValue={dayjs(date, dateFormat)}
+                                    placeholder={['Дата начала', 'Дата конца']}
+                                    defaultValue={[dayjs(date, dateFormat), dayjs(date, dateFormat)]}
                                     // locale={locale}
                                     />
 
                                 {/* Date */}
 
                             </div>
-                            <div className={styles.item}>
+                            {/* <div className={styles.item}>
                                 <Select
                                     options={periods}
                                     value={period}
                                     onChange={setPeriod}
                                     noBorder
                                     />
-                            </div>
+                            </div> */}
                         </div>
                         <div className={styles.part}>
                             <div className={styles.item}>

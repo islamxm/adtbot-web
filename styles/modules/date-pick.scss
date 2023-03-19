@@ -20,6 +20,7 @@
 
                     .ant-picker-body {
                         .ant-picker-content {
+
                             
                             .ant-picker-cell {
                                
@@ -52,6 +53,19 @@
                                     border-color: var(--blue);
                                 }
                             }
+
+                            .ant-picker-cell.ant-picker-cell-range-start {
+                                .ant-picker-cell-inner {
+                                    background-color: var(--blue);
+                                    color: #fff;
+                                }
+                            }
+                            .ant-picker-cell.ant-picker-cell-range-end {
+                                .ant-picker-cell-inner {
+                                    background-color: var(--blue);
+                                    color: #fff;
+                                }
+                            }
                         }
                     }
                 }
@@ -60,5 +74,16 @@
     }
     .ant-picker-footer {
         display: none;
+    }
+}
+
+@media (max-width: 620px) {
+    .ant-picker {
+        // .ant-picker-input  {
+        //     display: none;
+        // }
+        // .ant-picker-range-separator {
+        //     display: none;
+        // }
     }
 }

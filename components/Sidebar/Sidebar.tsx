@@ -22,6 +22,8 @@ import { Row, Col } from 'antd';
 import Balance from '../Balance/Balance';
 import DepositModal from '@/modals/DepositModal/DepositModal';
 import PmHistoryModal from '@/modals/PmHistoryModal/PmHistoryModal';
+import {AiOutlineHistory} from 'react-icons/ai';
+import {HiOutlineCash} from 'react-icons/hi';
 
 
 // ICONS
@@ -291,11 +293,42 @@ const Sidebar:FC<sidebarPropsTypes> = ({
                 <div className={styles.action}>
                     <Col span={24}>
                     <Row gutter={[15,15]}>
-                        <Col span={24} className={styles.balance}>
+                        {
+                            !isHidden ? (
+                                <Col span={24} className={styles.balance}>
+                                    <div className={styles.action_item}>
+                                        <Balance/>
+                                    </div>
+                                </Col>
+                            ) : null
+                        }
+                        
+                        <Col span={24} className={styles.deposit}>
                             <div className={styles.action_item}>
-                                <Balance/>
+                                <Button
+                                    style={{minWidth: 45, minHeight: 45}}
+                                    beforeIcon={<HiOutlineCash/>}
+                                    text={isHidden ? '' : 'Пополнить'}
+                                    variant={'blue'}
+                                    fill={!isHidden}
+                                    onClick={openDepositModal}
+                                    rounded={isHidden}
+                                    />
                             </div>
                         </Col>
+                        {/* <Col span={24} className={styles.history}>
+                            <div className={styles.action_item}>
+                                <Button
+                                    beforeIcon={<AiOutlineHistory/>}
+                                    onClick={openHistModal}
+                                    style={{minWidth: 45, minHeight: 45}}
+                                    text={isHidden ? '' : 'История'}
+                                    variant={'default'}
+                                    fill={!isHidden}
+                                    rounded={isHidden}
+                                    />
+                            </div>
+                        </Col> */}
                         <Col span={24} className={styles.addbot}>
                             <div className={styles.action_item}>
                                 <Button
@@ -306,28 +339,6 @@ const Sidebar:FC<sidebarPropsTypes> = ({
                                     beforeIcon={<AiOutlinePlus/>}
                                     variant={'default'}
                                     fill={!isHidden}
-                                    />
-                            </div>
-                        </Col>
-                        <Col span={24} className={styles.deposit}>
-                            <div className={styles.action_item}>
-                                <Button
-                                    style={{minWidth: 45, minHeight: 45}}
-                                    text={'Пополнить'}
-                                    variant={'blue'}
-                                    fill
-                                    onClick={openDepositModal}
-                                    />
-                            </div>
-                        </Col>
-                        <Col span={24} className={styles.history}>
-                            <div className={styles.action_item}>
-                                <Button
-                                    onClick={openHistModal}
-                                    style={{minWidth: 45, minHeight: 45}}
-                                    text={'История'}
-                                    variant={'default'}
-                                    fill
                                     />
                             </div>
                         </Col>

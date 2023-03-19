@@ -17,7 +17,12 @@ const statusOptions = [
     {value: '3', label: 'В режиме ожидания'},
     {value: '4', label: 'Остановлен'},
 ]
-
+const tableSizes = [
+    {value: '1', label: '10 строк'},
+    {value: '2', label: '25 строк'},
+    {value: '3', label: '50 строк'},
+    {value: '4', label: '100 строк'},
+]
  
 
 
@@ -25,6 +30,7 @@ const Body = () => {
     const [currentPage, setCurrentPage] = useState<number>(1)
     const [status, setStatus] = useState<string>('1');
     const [hidden, setHidden] = useState(false)
+    const [tableSize, setTableSize] = useState('1')
 
     return (
         <div className={styles.wrapper}>
@@ -33,20 +39,37 @@ const Body = () => {
             <div className='table'>
                 <div className="table-top">
                     <div className={styles.top}>
-                        <div className={styles.item}>
-                            <Select 
-                                noBorder
-                                value={status}
-                                options={statusOptions}
-                                onChange={setStatus}
-                                />
+                        <div className={styles.part}>
+                            <div className={styles.item}>
+                                <Select 
+                                    noBorder
+                                    value={status}
+                                    options={statusOptions}
+                                    onChange={setStatus}
+                                    />
+                            </div>
+
                         </div>
-                        <div className={styles.item}>
-                            <HsButton
-                                onClick={setHidden}
-                                isActive={hidden}
-                                />
+                        <div className={styles.part}>
+                            <div className={styles.item}>
+                                <div className={styles.item}>
+                                    <Select
+                                        beforeLabel="Показывать"
+                                        options={tableSizes}
+                                        value={tableSize}
+                                        onChange={setTableSize}
+                                        noBorder
+                                        />
+                                </div>  
+                            </div>
+                            <div className={styles.item}>
+                                <HsButton
+                                    onClick={setHidden}
+                                    isActive={hidden}
+                                    />
+                            </div>
                         </div>
+                        
                     </div>
                 </div>
                 <div className="table-main custom-scroll-horizontal">

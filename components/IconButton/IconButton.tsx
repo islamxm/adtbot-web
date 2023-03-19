@@ -5,10 +5,14 @@ const IconButton = ({
     icon,
     onClick,
     load,
+    round,
+    bg
 }: {
     icon: React.ReactNode,
     onClick?: (...args: any[]) => any,
-    load?: boolean
+    load?: boolean,
+    round?:boolean,
+    bg?: string
 }) => {
 
     return (
@@ -16,7 +20,7 @@ const IconButton = ({
             onClick={() => {
                 if(onClick) onClick()
             }}
-            className={styles.wrapper}>
+            className={`${styles.wrapper} ${round ? styles.round : ''}`} style={{backgroundColor: bg}}>
             {icon}
         </button>
     )

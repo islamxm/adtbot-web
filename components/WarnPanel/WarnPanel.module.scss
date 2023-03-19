@@ -5,6 +5,10 @@
     justify-content: space-between;
     background-color: #F8D7DA;
     border-radius: 8px;
+    position: absolute;
+    width: 100%;
+    z-index: 10;
+    
 
     .body {
         color: #721C24;
@@ -19,5 +23,21 @@
         max-width: 170px;
         margin-left: 20px;
         width: 100%;    
+    }
+}
+
+@media (max-width: 620px) {
+    .wrapper {
+        flex-wrap: wrap;
+        .body {
+            width: 100%;
+            margin-bottom: 10px;
+            font-size: 14px;
+            line-height: 19px;
+        }
+        .action {
+            width: 100%;
+            margin: 0;
+        }
     }
 }

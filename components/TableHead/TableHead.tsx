@@ -28,7 +28,7 @@ const TableHead:FC<tableHeadPropsTypes> = ({list}) => {
                                                         </Hint>
                                                     }
                                                     >
-                                                    <button className="headrow__item_action_btn">
+                                                    <button className="table-headrow__item_action_btn">
                                                         <AiOutlineInfoCircle color="var(--yellow)"/> 
                                                     </button>  
                                                 </Popover>
@@ -41,7 +41,7 @@ const TableHead:FC<tableHeadPropsTypes> = ({list}) => {
                                         }
                                         {
                                             item.sort ? (
-                                                <button className="headrow__item_action_btn">
+                                                <button className="table-headrow__item_action_btn">
                                                     <SortIcon color="#9094A6"/> 
                                                 </button>  
                                             ) : null
