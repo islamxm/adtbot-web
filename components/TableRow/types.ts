@@ -2,7 +2,7 @@ import { StaticImageData } from "next/image"
 
 export type tableRowPropsTypes = {
     list?: tableRowItemType[],
-    head?: tableHeadRowItemType[]
+    head: tableHeadRowItemType[]
 }
 
 export type tableRowItemType = {
@@ -21,5 +21,6 @@ export type tableHeadRowItemType = {
     label?: string,
     hint?: string,
     value?: string,
-    sort?: boolean
+    sort?: boolean,
+    main?: boolean
 }

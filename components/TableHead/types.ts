@@ -7,5 +7,7 @@ export type tableHeadItemType = {
     hint?: string,
     value?: string,
     onChange?: (...args: any[]) => any,
-    sort?: boolean
+    sort?: boolean,
+
+    main?:boolean
 }

@@ -89,7 +89,7 @@ const Body = () => {
                         <tbody>
                             {
                                 mock?.body?.map((list, index) => (
-                                    <TableRow list={list} key={index}/>
+                                    <TableRow head={mock.head} list={list} key={index}/>
                                 ))
                             }
                         </tbody>

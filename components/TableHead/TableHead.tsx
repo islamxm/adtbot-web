@@ -11,7 +11,7 @@ const TableHead:FC<tableHeadPropsTypes> = ({list}) => {
         <tr className='table-row table-headrow'>
             {
                 list?.map((item, index) => (
-                    <th className='table-row__item table-headrow__item' key={index}>
+                    <th className={`table-row__item table-headrow__item ${!item?.main ? 'table-headrow__item--nonmain' : ''}`} key={index}>
                         <div className="table-headrow__item_in">
                             <div className="table-headrow__item_label">
                                 {item.label}

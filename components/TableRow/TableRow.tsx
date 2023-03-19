@@ -46,7 +46,7 @@ const TableRow:FC<tableRowPropsTypes> = ({list, head}) => {
                     list?.map((item, index) => {
                         if(item?.action) {
                             return (
-                                <td className={`table-row__item table-bodyrow__item activation ${switchPnl(item?.pnl)}`} key={index}>
+                                <td className={`table-row__item table-bodyrow__item activation ${switchPnl(item?.pnl)} ${!item?.main ? 'table-bodyrow__item--nonmain' : ''}`} key={index}>
                                     <div className="table-bodyrow__item_in">
                                         <div className="activation-label">12.03.2022 12:56:13</div>
                                         <div className="activation-action">
@@ -75,7 +75,7 @@ const TableRow:FC<tableRowPropsTypes> = ({list, head}) => {
                             )
                         } else {
                             return (
-                                <td className={`table-row__item table-bodyrow__item ${switchPnl(item?.pnl)}`} key={index}>
+                                <td className={`table-row__item table-bodyrow__item ${switchPnl(item?.pnl)} ${!item?.main ? 'table-bodyrow__item--nonmain' : ''}`} key={index}>
                                     <div className="table-bodyrow__item_in">
                                         {
                                             index === 0 ? (
@@ -111,21 +111,27 @@ const TableRow:FC<tableRowPropsTypes> = ({list, head}) => {
             </tr>
 
             <tr  className='table-row table-dropdown'>
-                <td colSpan={list?.length} className={'table-dropdown__body'}>
+                <td colSpan={list?.filter(i => i.main).length} className={'table-dropdown__body'}>
                     <div style={{height}} ref={bodyRef} className="table-dropdown__body_in">
                         <div className="table-dropdown__body_table">
-                            {/* {
-                                list?.filter(i => !i.main).map((item, index) => (
-                                    <div className="table-dropdown__body_table_item" key={index}>
-                                        <div className="table-dropdown__body_table_item_name">
-                                            {item?.label}
-                                        </div>
-                                        <div className="table-dropdown__body_table_item_value">
-                                            {item?.}
-                                        </div>
-                                    </div>
-                                ))
-                            } */}
+                            {
+                                list?.map((item,index) => {
+                                    if(!item?.main) {
+                                        return (
+                                            <div className="table-dropdown__body_table_item" key={index}>
+                                                <div className="table-dropdown__body_table_item_name">
+                                                    {head[index].label}
+                                                </div>
+                                                <div className="table-dropdown__body_table_item_value">
+                                                    {item?.label}
+                                                </div>
+                                            </div>
+                                        )
+                                    } else {
+                                        return null
+                                    }
+                                })
+                            }
                         </div>
                     </div>
                 </td>
