@@ -94,7 +94,7 @@
                     }
 
                     &_toggle {
-                        margin-right: 20px;
+                        margin-right: 10px;
                         display: none;
                     }
                 }
@@ -193,6 +193,9 @@
                             .activation-label {
                                 display: none;
                             }
+                            .activation-action {
+                                margin: 0;
+                            }
                         }
                     }
                 }
@@ -212,3 +215,4 @@
         
     }
 }
+

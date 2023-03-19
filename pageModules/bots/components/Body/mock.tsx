@@ -8,73 +8,85 @@ export const  mock = {
             label:'Анонс',
             hint: 'Биржа, на которой будет парситься анонс листинга',
             value: '',
-            sort: true
+            sort: true,
+            main: true
         },
         {
             label:'Покупка',
             hint: 'Биржа, на которой будет осуществлена покупка в момент анонса',
             value: '',
-            sort: true
+            sort: true,
+            main: false
         },
         {
             label:'Пара',
             hint: 'Название купленной монеты к USDT',
             value: '',
-            sort: true
+            sort: true,
+            main: false
         },
         {
             label:'Сумма',
             hint: 'Количество USDT, на которые будет совершена покупка анонсируемых монет',
             value: '',
-            sort: true
+            sort: true,
+            main: false
         },
         {
             label:'Объем',
             hint: 'Суточный объем монеты',
             value: '',
-            sort: true
+            sort: true,
+            main: false
         },
         {
             label:'Slippage',
             hint: 'Или “Проскальзывание”. Максимальное изменение цены монеты, при котором прекращается покупка (выставление лимитных ордеров)',
             value: '',
-            sort: true
+            sort: true,
+            main: false
         },
         {
             label:'TP',
             hint: 'Take Profit. При каком увеличении цены в процентах выставляется лимитный ордер на продажу',
             value: '',
-            sort: true
+            sort: true,
+            main: false
         },
         {
             label:'SL',
             hint: 'Stop Loss. При каком уменьшении цены в процентах выставляется лимитный ордер на продажу',
             value: '',
-            sort: true
+            sort: true,
+            main: false
         },
         {
             label:'Buy',
             hint: 'Цена покупки',
             value: '',
-            sort: true
+            sort: true,
+            main: false
         },
         {
             label:'Sell',
             hint: 'Цена продажи',
             value: '',
-            sort: true
+            sort: true,
+            main: false
         },
         {
             label:'PNL',
             hint: 'Profits and Losts. Заработок (или убыток) бота в USDT и процентах от суммы сделки',
             value: '',
-            sort: true
+            sort: true,
+            main: true
         },
         {
             label:'Активация',
             hint: 'Статус бота. Для отработанного бота указывается дата и время активации, для созданного бота — В ожидании, для черновика — Остановлен',
             value: '',
-            sort: true
+            sort: true,
+            main: false
         },
     ],
     body: [
@@ -86,7 +98,8 @@ export const  mock = {
                 action: false,
                 pnl: '',
                 share: false,
-                running: false
+                running: false,
+                main: true
             },
             {
                 label: 'Coinbase',
@@ -95,7 +108,8 @@ export const  mock = {
                 action: false,
                 pnl: '',
                 share: false,
-                running: false
+                running: false,
+                main: false
             },
             {
                 label: 'BTC/USDT',
@@ -104,7 +118,8 @@ export const  mock = {
                 action: false,
                 pnl: '',
                 share: false,
-                running: false
+                running: false,
+                main: false
             },
             {
                 label: '150 USDT',
@@ -113,7 +128,8 @@ export const  mock = {
                 action: false,
                 pnl: '',
                 share: false,
-                running: false
+                running: false,
+                main: false
             },
             {
                 label: '',
@@ -122,7 +138,8 @@ export const  mock = {
                 action: false,
                 pnl: '',
                 share: false,
-                running: false
+                running: false,
+                main: false
             },
             {
                 label: '30%',
@@ -131,7 +148,8 @@ export const  mock = {
                 action: false,
                 pnl: '',
                 share: false,
-                running: false
+                running: false,
+                main: false
             },
             {
                 label: '2%',
@@ -140,7 +158,8 @@ export const  mock = {
                 action: false,
                 pnl: '',
                 share: false,
-                running: false
+                running: false,
+                main: false
             },
             {
                 label: '3%',
@@ -149,7 +168,8 @@ export const  mock = {
                 action: false,
                 pnl: '',
                 share: false,
-                running: false
+                running: false,
+                main: false
             },
             {
                 label: '',
@@ -158,7 +178,8 @@ export const  mock = {
                 action: false,
                 pnl: '',
                 share: false,
-                running: false
+                running: false,
+                main: false
             },
             {
                 label: '',
@@ -167,7 +188,8 @@ export const  mock = {
                 action: false,
                 pnl: '',
                 share: false,
-                running: false
+                running: false,
+                main: false
             },
             {
                 label: '132 USDT (+11,23%)',
@@ -176,7 +198,8 @@ export const  mock = {
                 icon: null,
                 action: false,
                 share: false,
-                running: false
+                running: false,
+                main: true
             },
             {
                 label: '',
@@ -185,7 +208,8 @@ export const  mock = {
                 action: true,
                 pnl:'',
                 share: false,
-                running: true
+                running: true,
+                main: true
             },
         ],
         [
@@ -196,7 +220,8 @@ export const  mock = {
                 action: false,
                 pnl: '',
                 share: false,
-                running: false
+                running: false,
+                main: true
             },
             {
                 label: 'Coinbase',
@@ -205,7 +230,8 @@ export const  mock = {
                 action: false,
                 pnl: '',
                 share: false,
-                running: false
+                running: false,
+                main: false
             },
             {
                 label: 'BTC/USDT',
@@ -214,7 +240,8 @@ export const  mock = {
                 action: false,
                 pnl: '',
                 share: false,
-                running: false
+                running: false,
+                main: false
             },
             {
                 label: '150 USDT',
@@ -223,7 +250,8 @@ export const  mock = {
                 action: false,
                 pnl: '',
                 share: false,
-                running: false
+                running: false,
+                main: false
             },
             {
                 label: '',
@@ -232,7 +260,8 @@ export const  mock = {
                 action: false,
                 pnl: '',
                 share: false,
-                running: false
+                running: false,
+                main: false
             },
             {
                 label: '30%',
@@ -241,7 +270,8 @@ export const  mock = {
                 action: false,
                 pnl: '',
                 share: false,
-                running: false
+                running: false,
+                main: false
             },
             {
                 label: '2%',
@@ -250,7 +280,8 @@ export const  mock = {
                 action: false,
                 pnl: '',
                 share: false,
-                running: false
+                running: false,
+                main: false
             },
             {
                 label: '3%',
@@ -259,7 +290,8 @@ export const  mock = {
                 action: false,
                 pnl: '',
                 share: false,
-                running: false
+                running: false,
+                main: false
             },
             {
                 label: '',
@@ -268,7 +300,8 @@ export const  mock = {
                 action: false,
                 pnl: '',
                 share: false,
-                running: false
+                running: false,
+                main: true
             },
             {
                 label: '',
@@ -277,7 +310,8 @@ export const  mock = {
                 action: false,
                 pnl: '',
                 share: false,
-                running: false
+                running: false,
+                main: false
             },
             {
                 label: '132 USDT (-11,23%)',
@@ -286,7 +320,8 @@ export const  mock = {
                 icon: null,
                 action: false,
                 share: false,
-                running: false
+                running: false,
+                main: false
             },
             {
                 label: '',
@@ -295,7 +330,8 @@ export const  mock = {
                 action: true,
                 pnl: '',
                 share: false,
-                running: true
+                running: true,
+                main: true
             },
         ]
     ]
