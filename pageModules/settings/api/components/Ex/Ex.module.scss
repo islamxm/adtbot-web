@@ -47,7 +47,9 @@
     .body {
         transition: all .3s ease;
         overflow: hidden;
-        
+        div {
+            font-size: 16px;
+        }
         .in {
             padding: 18px 0;
 
@@ -58,6 +60,19 @@
                 height: 100%;
                 object-fit: contain;
                 display: flex;
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+
+    .wrapper {
+
+        .body {
+
+            div {
+                font-size: 14px;
             }
         }
     }

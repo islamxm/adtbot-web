@@ -1,6 +1,10 @@
 .wrapper {
     max-width: 665px;
     width: 100%;
+    div {
+        font-size: 16px;
+
+    }
     .field {
         display: flex;
         align-items: center;
@@ -12,6 +16,15 @@
 
         .action {
             margin-left: 15px;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+
+    .wrapper {
+        div {
+            font-size: 14px;
         }
     }
 }
