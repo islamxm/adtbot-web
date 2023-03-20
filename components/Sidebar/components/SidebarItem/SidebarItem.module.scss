@@ -131,7 +131,7 @@
             // }
             .label {
                 position: fixed;
-                z-index: 1000;
+                z-index: -1;
                 opacity: 0;
                 background-color: #fff;
                 left: 55px;
@@ -147,6 +147,7 @@
             .link {
                 .label {
                     opacity: 1;
+                    z-index: 1000;
                 }
             }
         }

@@ -25,3 +25,10 @@
         // border-radius: 15px;
     }
 }
+
+.custom-scroll.custom-scroll-lg {
+    &::-webkit-scrollbar {
+        width: 4px;
+       
+    }
+}

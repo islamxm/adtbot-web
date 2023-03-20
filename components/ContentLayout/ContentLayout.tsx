@@ -11,7 +11,7 @@ const ContentLayout:FC<contentLayoutPropsTypes> = ({
 }) => {
 
     return (
-        <div className={styles.wrapper}>
+        <div className={`${styles.wrapper} custom-scroll custom-scroll-lg`}>
             <div className={styles.main}>
                 <div className={styles.head}>
                     <Header

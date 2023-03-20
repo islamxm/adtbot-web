@@ -86,9 +86,9 @@ const Header:FC<headerPropsTypes> = ({
                                 </>
                             ) : null
                         } */}
-                        <div className={`${styles.item} ${styles.balance}`}>
+                        {/* <div className={`${styles.item} ${styles.balance}`}>
                             <Balance warning={true}/>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
                 

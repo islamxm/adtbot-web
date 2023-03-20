@@ -54,6 +54,8 @@
     flex: 0 0 auto;
     position: relative;
     transition: all .3s ease;
+    height: 100vh;
+
 
     .toggle {
         position: absolute;
@@ -174,9 +176,9 @@
             justify-content: center;
         }
 
-        .balance {
-            display: none;
-        }
+        // .balance {
+        //     display: none;
+        // }
 
         .addbot {
 

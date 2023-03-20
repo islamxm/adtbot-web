@@ -16,7 +16,8 @@ const Input = (props: inputPropsTypes) => {
         hint, 
         mask,
         onChange,
-        onChangeMask
+        onChangeMask,
+        nodeLabel
     } = props || {};
 
     
@@ -40,6 +41,26 @@ const Input = (props: inputPropsTypes) => {
                                 </Popover>
                             ) : null
                         }
+                    </div>
+                ) : null
+            }
+            {
+                nodeLabel ? (
+                    <div className={styles.label}>
+                        {nodeLabel} 
+                        {/* {
+                            hint ? (
+                                <Popover
+                                    content={
+                                        <Hint>
+                                            {hint}
+                                        </Hint>
+                                    }
+                                    >
+                                    <span className={styles.hint}><AiOutlineInfoCircle/></span>
+                                </Popover>
+                            ) : null
+                        } */}
                     </div>
                 ) : null
             }

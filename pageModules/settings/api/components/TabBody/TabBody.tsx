@@ -25,14 +25,24 @@ const TabBody = ({
                         </Col>
                         <Col span={24}>
                             <Input
-                                label='Публичный ключ'
+                                // label='Публичный ключ'
+                                nodeLabel={
+                                    <div className={styles.pb}>
+                                        Публичный ключ  
+                                    </div>
+                                }
                                 style={{maxWidth: 455}}
                                 placeholder={'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'}
                                 />
                         </Col>
                         <Col span={24}>
                             <Input
-                                label='Приватный ключ'
+                                // label='Приватный ключ'
+                                nodeLabel={
+                                    <div className={styles.pb}>
+                                        Приватный ключ
+                                    </div>
+                                }
                                 style={{maxWidth: 455}}
                                 placeholder={'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'}
                                 />

@@ -4,7 +4,7 @@ import Image from "next/image";
 import {HiOutlineStopCircle} from 'react-icons/hi2';
 import IconButton from "../IconButton/IconButton";
 import {BsShare} from 'react-icons/bs';
-import {AiOutlinePlus} from 'react-icons/ai';
+import {AiOutlinePlus, AiOutlineMinus} from 'react-icons/ai';
 
 
 const switchPnl = (value?: string) => {
@@ -82,7 +82,7 @@ const TableRow:FC<tableRowPropsTypes> = ({list, head}) => {
                                                 <div className={'table-bodyrow__item_toggle'}>
                                                     <IconButton
                                                         onClick={toggleBody}
-                                                        icon={<AiOutlinePlus size={10} color="#fff"/>}
+                                                        icon={isOpen ? <AiOutlineMinus size={10} color="#fff"/> : <AiOutlinePlus size={10} color="#fff"/>}
                                                         bg={'var(--blue'}
                                                         round
                                                         />

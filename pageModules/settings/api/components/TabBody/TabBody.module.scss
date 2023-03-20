@@ -12,13 +12,19 @@
             font-weight: 700;
         }
     }
-}
 
-@media (max-width: 768px) {
-    .wrapper {
-        
-        div {
-            font-size: 14px;
-        }
+    .pb {
+        font-size: 18px;
+        line-height: 25px;
     }
 }
+
+// @media (max-width: 768px) {
+//     .wrapper {
+        
+//         div {
+//             font-size: 14px;
+//         }
+//     }
+// }
+

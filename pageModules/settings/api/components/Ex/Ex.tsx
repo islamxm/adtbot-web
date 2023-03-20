@@ -7,7 +7,7 @@ import { Row, Col } from 'antd';
 
 const Ex = () => {
     const bodyRef = useRef<HTMLDivElement>(null)
-    const [isOpen, setIsOpen] = useState(false)
+    const [isOpen, setIsOpen] = useState(true)
     const [height, setHeight] = useState(0)
 
     const toggleContent = () => setIsOpen(s => !s)
@@ -24,7 +24,7 @@ const Ex = () => {
             <div className={styles.head}>
                 <div className={styles.main}>
                     <h3 className={styles.title}>
-                        Подзаголовком
+                        Инструкция
                     </h3>
                     <a className={styles.link} href="#" target={'_blank'}>
                         <TbExternalLink/>

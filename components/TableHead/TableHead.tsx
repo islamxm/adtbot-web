@@ -19,6 +19,19 @@ const TableHead:FC<tableHeadPropsTypes> = ({list}) => {
                             {
                                 item?.hint || item?.value || item.sort ? (
                                     <div className="table-headrow__item_action">
+                                        
+                                        {
+                                            item.value ? (
+                                                <div></div>
+                                            ) : null
+                                        }
+                                        {
+                                            item.sort ? (
+                                                <button className="table-headrow__item_action_btn">
+                                                    <SortIcon color="#9094A6"/> 
+                                                </button>  
+                                            ) : null
+                                        }
                                         {
                                             item.hint ? (
                                                 <Popover
@@ -32,18 +45,6 @@ const TableHead:FC<tableHeadPropsTypes> = ({list}) => {
                                                         <AiOutlineInfoCircle color="var(--yellow)"/> 
                                                     </button>  
                                                 </Popover>
-                                            ) : null
-                                        }
-                                        {
-                                            item.value ? (
-                                                <div></div>
-                                            ) : null
-                                        }
-                                        {
-                                            item.sort ? (
-                                                <button className="table-headrow__item_action_btn">
-                                                    <SortIcon color="#9094A6"/> 
-                                                </button>  
                                             ) : null
                                         }
                                     </div>
