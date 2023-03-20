@@ -148,9 +148,19 @@
                             justify-content: space-between;
                             padding: 5px 0;
 
-                            &_label {
+                            &_name {
                                 width: 48%;
                                 color: #9094A6;
+                                display: flex;
+                                align-items: center;
+
+                                &_hint {
+                                    margin-left: 5px;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    line-height: 100%;
+                                }
                             }
 
                             &_value {

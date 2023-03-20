@@ -5,6 +5,9 @@ import {HiOutlineStopCircle} from 'react-icons/hi2';
 import IconButton from "../IconButton/IconButton";
 import {BsShare} from 'react-icons/bs';
 import {AiOutlinePlus, AiOutlineMinus} from 'react-icons/ai';
+import Hint from "../Hint/Hint";
+import { Popover } from "antd";
+import {AiOutlineInfoCircle} from 'react-icons/ai';
 
 
 const switchPnl = (value?: string) => {
@@ -121,6 +124,21 @@ const TableRow:FC<tableRowPropsTypes> = ({list, head}) => {
                                             <div className="table-dropdown__body_table_item" key={index}>
                                                 <div className="table-dropdown__body_table_item_name">
                                                     {head[index].label}
+                                                    {
+                                                        head[index]?.hint ? (
+                                                            <Popover
+                                                                content={
+                                                                    <Hint>
+                                                                        {head[index].hint}
+                                                                    </Hint>
+                                                                }
+                                                                >
+                                                                <button className="table-dropdown__body_table_item_name_hint">
+                                                                    <AiOutlineInfoCircle color="var(--yellow)"/> 
+                                                                </button>  
+                                                            </Popover>
+                                                        ) : null
+                                                    }
                                                 </div>
                                                 <div className="table-dropdown__body_table_item_value">
                                                     {item?.label}
