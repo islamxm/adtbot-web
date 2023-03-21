@@ -9,7 +9,7 @@ const Balance = ({
 }) => {
 
     return (
-        <Link href={'/profile/billing'} className={`${styles.wrapper} ${warning ? styles.error : ''}`}>
+        <Link href={'/account/billing'} className={`${styles.wrapper} ${warning ? styles.error : ''}`}>
             <div className={styles.icon}>
                 {
                     warning ? (

@@ -139,32 +139,32 @@ const Sidebar:FC<sidebarPropsTypes> = ({
                                 icon={
                                     <IconMyBots 
                                         size={20}
-                                        isActive={pathname === '/profile/bots' || pathname?.includes('profile/bots')}
+                                        isActive={pathname === '/account/bots' || pathname?.includes('account/bots')}
                                         />
                                 }
                                 label='Мои боты'
-                                isActive={pathname === '/profile/bots' || pathname?.includes('/profile/bots')}
-                                link={'/profile/bots'}
+                                isActive={pathname === '/account/bots' || pathname?.includes('/account/bots')}
+                                link={'/account/bots'}
                                 />
                             <SidebarItem
                                 isParentHidden={isHidden}
-                                isActive={pathname === '/profile/stats' || pathname?.includes('/profile/stats')}
+                                isActive={pathname === '/account/stats' || pathname?.includes('/account/stats')}
                                 icon={
                                     <IconStats 
                                         size={20}
-                                        isActive={pathname === '/profile/stats' || pathname?.includes('/profile/stats')}
+                                        isActive={pathname === '/account/stats' || pathname?.includes('/account/stats')}
                                         />
                                 }
                                 label='Статистика'
-                                link={'/profile/stats'}
+                                link={'/account/stats'}
                                 />
                             <SidebarItem
                                 isParentHidden={isHidden}
                                 menuIsOpen={settingsOpen}
-                                isActive={pathname?.includes('/profile/settings/') && !settingsOpen}
+                                isActive={pathname?.includes('/account/settings/') && !settingsOpen}
                                 icon={
                                     <IconSettings
-                                        isActive={settingsOpen || (pathname?.includes('/profile/settings/') && !settingsOpen)}
+                                        isActive={settingsOpen || (pathname?.includes('/account/settings/') && !settingsOpen)}
                                         size={20}
                                         />
                                 }
@@ -176,62 +176,62 @@ const Sidebar:FC<sidebarPropsTypes> = ({
                                     isParentHidden={isHidden}
                                     isSubItem
                                     label='Аккаунт'
-                                    link={'/profile/settings/account'}
-                                    isActive={pathname === '/profile/settings/account' || pathname?.includes('/profile/settings/account')}
+                                    link={'/account/settings/account'}
+                                    isActive={pathname === '/account/settings/account' || pathname?.includes('/account/settings/account')}
                                     />
                                 <SidebarItem
                                     isParentHidden={isHidden}
                                     isSubItem
                                     label='API'
-                                    link={'/profile/settings/api'}
-                                    isActive={pathname === '/profile/settings/api' || pathname?.includes('/profile/settings/api')}
+                                    link={'/account/settings/api'}
+                                    isActive={pathname === '/account/settings/api' || pathname?.includes('/account/settings/api')}
                                     />
                                 <SidebarItem
                                     isParentHidden={isHidden}
                                     isSubItem
                                     label='2FA'
-                                    link={'/profile/settings/2fa'}
-                                    isActive={pathname === '/profile/settings/2fa' || pathname?.includes('/profile/settings/2fa')}
+                                    link={'/account/settings/2fa'}
+                                    isActive={pathname === '/account/settings/2fa' || pathname?.includes('/account/settings/2fa')}
                                     />
                                 <SidebarItem
                                     isParentHidden={isHidden}
                                     isSubItem
                                     label='Telegram-бот'
-                                    link={'/profile/settings/telegram-bot'}
-                                    isActive={pathname === '/profile/settings/telegram-bot' || pathname?.includes('/profile/settings/telegram-bot')}
+                                    link={'/account/settings/telegram-bot'}
+                                    isActive={pathname === '/account/settings/telegram-bot' || pathname?.includes('/account/settings/telegram-bot')}
                                     />
                             </SidebarItem>
                             <SidebarItem
                                 isParentHidden={isHidden}
                                 icon={
                                     <IconPricing 
-                                        isActive={pathname === '/profile/billing' || pathname?.includes('/profile/billing')}
+                                        isActive={pathname === '/account/billing' || pathname?.includes('/account/billing')}
                                         size={20}/>
                                 }
-                                isActive={pathname === '/profile/billing' || pathname?.includes('/profile/billing')}
+                                isActive={pathname === '/account/billing' || pathname?.includes('/account/billing')}
                                 label='Баланс / Тарифы'
-                                link={'/profile/billing'}
+                                link={'/account/billing'}
                                 />
                             <SidebarItem
                                 isParentHidden={isHidden}
                                 icon={
                                     <IconBase 
-                                        isActive={pathname === '/profile/guide' || pathname?.includes('/profile/guide')}
+                                        isActive={pathname === '/account/guide' || pathname?.includes('/account/guide')}
                                         size={20}/>
                                 }
                                 label='База знаний'
-                                isActive={pathname === '/profile/guide' || pathname?.includes('/profile/guide')}
-                                link={'/profile/guide'}
+                                isActive={pathname === '/account/guide' || pathname?.includes('/account/guide')}
+                                link={'/account/guide'}
                                 />
                             <SidebarItem  
                                 isParentHidden={isHidden}
                                 icon={
                                     <IconPartner 
-                                        isActive={pathname === '/profile/affiliate' || pathname?.includes('/profile/affiliate')}
+                                        isActive={pathname === '/account/affiliate' || pathname?.includes('/account/affiliate')}
                                         size={20}/>
                                 }
-                                link={'/profile/affiliate'}
-                                isActive={pathname === '/profile/affiliate' || pathname?.includes('/profile/affiliate')}
+                                link={'/account/affiliate'}
+                                isActive={pathname === '/account/affiliate' || pathname?.includes('/account/affiliate')}
                                 label='Партнерка'
 
                                 />
@@ -240,12 +240,12 @@ const Sidebar:FC<sidebarPropsTypes> = ({
                                 icon={
                                     <IconContacts 
                                         size={20}
-                                        isActive={pathname === '/profile/contacts' || pathname?.includes('/profile/contacts')}
+                                        isActive={pathname === '/account/contacts' || pathname?.includes('/account/contacts')}
                                         />
                                 }
-                                isActive={pathname === '/profile/contacts' || pathname?.includes('/profile/contacts')}
+                                isActive={pathname === '/account/contacts' || pathname?.includes('/account/contacts')}
                                 label='Контакты'
-                                link={'/profile/contacts'}
+                                link={'/account/contacts'}
                                 />
                             <SidebarItem
                                 isParentHidden={isHidden}
