@@ -26,7 +26,7 @@
 
                 &__item {
                     padding: 15px;
-                    border-bottom: 1px solid #F4F4F4;
+                    // border-bottom: 1px solid #F4F4F4;
                 }
             }
 
@@ -65,9 +65,15 @@
             }
 
             .table-bodyrow {
-
+                
+                // &:last-child {
+                //     .table-bodyrow__item {
+                //         border-bottom: 1px solid #F4F4F4;   
+                //     }
+                // }
                 &__item {
-
+                    border-top: 1px solid #F4F4F4;
+                    border-bottom: 1px solid #F4F4F4;   
                     &_in {
                         display: flex;
                         align-items: center;
@@ -165,6 +171,7 @@
 
                             &_value {
                                 width: 48%;
+                                text-align: right;
                             }
                         }
                     }
