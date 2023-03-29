@@ -5,6 +5,7 @@ import Hint from '../Hint/Hint';
 import {AiOutlineInfoCircle} from 'react-icons/ai';
 import { IMaskInput } from 'react-imask';
 import InputMask from 'react-input-mask';
+import { useEffect } from 'react';
 
 const Input = (props: inputPropsTypes) => {
     const {
@@ -93,7 +94,7 @@ const Input = (props: inputPropsTypes) => {
             }
             
             {
-                errorText ? (
+                errorText && error ? (
                     <div className={styles.error_text}>
                         {errorText}
                     </div>
