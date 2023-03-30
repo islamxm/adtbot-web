@@ -1,6 +1,7 @@
 .wrapper {
     display: flex;
-
+    user-select: none;
+    
     .input {
         position: absolute;
         top: 0;
