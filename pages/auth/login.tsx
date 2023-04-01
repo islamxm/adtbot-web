@@ -15,6 +15,8 @@ const LoginPage = () => {
     const [passResetModal, setPassResetModal] = useState<boolean>(false)
     const [twoAuthModal, setTwoAuthModal] = useState<boolean>(false)
 
+    
+
     const openPassResetModal = () => setPassResetModal(true)
     const closePassResetModal = () => setPassResetModal(false)
     const openTwoAuthModal = () => setTwoAuthModal(true)
@@ -78,7 +80,7 @@ const LoginPage = () => {
                             </Col>
                             <Col span={24}>
                                 <Button
-                                    onClick={openTwoAuthModal}
+                                    // onClick={openTwoAuthModal}
                                     text="Войти"
                                     fill
                                     />

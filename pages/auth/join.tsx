@@ -4,13 +4,14 @@ import PromoSlider from "@/pageModules/auth/components/PromoSlider/PromoSlider";
 import Input from "@/components/Input/Input";
 import AuthForm from "@/pageModules/auth/components/AuthForm/AuthForm";
 import Checkbox from "@/components/Checkbox/Checkbox";
-import {useState, useCallback} from 'react';
+import {useState, useCallback, useRef, useEffect} from 'react';
 import UsePolicyModal from "@/pageModules/auth/modals/UsePolicyModal/UsePolicyModal";
 import Button from "@/components/Button/Button";
 import Link from "next/link";
 import styles from './style.module.scss';
 import ApiService from "@/service/apiService";
-
+import ReCAPTCHA from "react-google-recaptcha";
+import React from "react";
 
 const service = new ApiService;
 
@@ -25,7 +26,10 @@ const SignupPage = () => {
     const [password, setPassword] = useState('')
     const [repeatPassword, setRepeatPassword] = useState('')
     const [username, setUsername] = useState('')
+    const [captcha_token, setcaptcha_token] = useState('')
     const [agree, setAgree] = useState(false)
+
+    const recapRef = React.createRef<any>()
 
 
     const onSubmit = useCallback(() => {
@@ -34,15 +38,17 @@ const SignupPage = () => {
             email,
             password,
             username,
-            is_superuser: false
-        }).then(res => {
+            is_superuser: false,
+        }, captcha_token).then(res => {
             console.log(res)
         }).finally(() => {
             setLoad(false)
         })
-    }, [service, username, password, repeatPassword, email, agree])
+    }, [service, username, password, repeatPassword, email, agree, captcha_token])
 
 
+
+   
 
 
     return (
@@ -123,7 +129,7 @@ const SignupPage = () => {
                             <Col span={24}>
                                 <Button
                                     load={load}
-                                    disabled={username && email && password && (repeatPassword && (repeatPassword === password)) && agree ? false : true}
+                                    disabled={username && email && captcha_token && password && (repeatPassword && (repeatPassword === password)) && agree ? false : true}
                                     text="Зарегистрироваться"
                                     fill
                                     onClick={onSubmit}
@@ -133,6 +139,20 @@ const SignupPage = () => {
                                 <div style={{textAlign: 'center'}}>
                                     У вас уже есть аккаунт? <Link className="def-link" href={'/auth/login'}>Авторизоваться</Link>
                                 </div>
+                            </Col>
+                            <Col span={24}>
+                                <ReCAPTCHA
+                                    sitekey={'6Ld4-E4lAAAAANg8LEy8oig45CXsovYV9z5Wbxx6'}
+                                    size={'normal'}
+                                    className="custom-recap"
+                                    ref={recapRef}
+                                    onChange={e => {
+                                        if(e) {
+                                            console.log(e)
+                                            setcaptcha_token(e)
+                                        }
+                                    }}
+                                    />
                             </Col>
                         </Row>   
                     </AuthForm>

@@ -1,6 +1,6 @@
 import endpoints from "./endpoints";
-import axios from "axios";
 import checkAuth from "./checkAuth";
+
 const headers = {
     'Content-type': 'application/json',
     'Accept': 'application/json',
@@ -12,14 +12,14 @@ class ApiService {
         email: string,
         username: string,
         password: string,
-        is_superuser: false
-    }) => {
+        is_superuser: false,
+    }, captcha_token: string) => {
         try {
-            let res = await fetch(endpoints.register, {
+            let res = await fetch(endpoints.register + `?captcha_token=${captcha_token}`, {
                 method: 'POST',
                 body: JSON.stringify(body),
                 headers,
-                mode: 'no-cors'
+                // mode: 'no-cors'
             })
             return await checkAuth(res)
         } catch(err) {
