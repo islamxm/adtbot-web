@@ -12,6 +12,7 @@ import styles from './style.module.scss';
 import ApiService from "@/service/apiService";
 import ReCAPTCHA from "react-google-recaptcha";
 import React from "react";
+import notify from "@/helpers/notify";
 
 const service = new ApiService;
 
@@ -52,6 +53,9 @@ const SignupPage = () => {
             is_superuser: false,
         }, captcha_token).then(res => {
             console.log(res)
+            if(res) {
+                notify('Регистрация прошла успешно, проверьте пожалуйста свою почту', 'SUCCESS')
+            }
         }).finally(() => {
             setLoad(false)
         })
