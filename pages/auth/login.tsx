@@ -15,12 +15,12 @@ const LoginPage = () => {
     const [passResetModal, setPassResetModal] = useState<boolean>(false)
     const [twoAuthModal, setTwoAuthModal] = useState<boolean>(false)
 
-    
-
     const openPassResetModal = () => setPassResetModal(true)
     const closePassResetModal = () => setPassResetModal(false)
     const openTwoAuthModal = () => setTwoAuthModal(true)
     const closeTwoAuthModal = () => setTwoAuthModal(false)
+
+    
 
     return (
         <PageLayout>

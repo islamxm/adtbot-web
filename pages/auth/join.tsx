@@ -28,8 +28,19 @@ const SignupPage = () => {
     const [username, setUsername] = useState('')
     const [captcha_token, setcaptcha_token] = useState('')
     const [agree, setAgree] = useState(false)
-
     const recapRef = React.createRef<any>()
+
+
+    // useEffect(() => {
+    //     if(recapRef) {
+    //         recapRef?.current?.getValue() ? setcaptcha_token(recapRef?.current?.getValue()) : recapRef?.current?.reset()
+    //     }
+
+
+    //     return () => {
+    //         recapRef?.current?.reset()
+    //     }
+    // }, [recapRef])
 
 
     const onSubmit = useCallback(() => {
@@ -127,20 +138,6 @@ const SignupPage = () => {
                                     />
                             </Col>
                             <Col span={24}>
-                                <Button
-                                    load={load}
-                                    disabled={username && email && captcha_token && password && (repeatPassword && (repeatPassword === password)) && agree ? false : true}
-                                    text="Зарегистрироваться"
-                                    fill
-                                    onClick={onSubmit}
-                                    />
-                            </Col>
-                            <Col span={24}>
-                                <div style={{textAlign: 'center'}}>
-                                    У вас уже есть аккаунт? <Link className="def-link" href={'/auth/login'}>Авторизоваться</Link>
-                                </div>
-                            </Col>
-                            <Col span={24}>
                                 <ReCAPTCHA
                                     sitekey={'6Ld4-E4lAAAAANg8LEy8oig45CXsovYV9z5Wbxx6'}
                                     size={'normal'}
@@ -154,6 +151,21 @@ const SignupPage = () => {
                                     }}
                                     />
                             </Col>
+                            <Col span={24}>
+                                <Button
+                                    load={load}
+                                    disabled={username && email && captcha_token && password && (repeatPassword && (repeatPassword === password)) && agree ? false : true}
+                                    text="Зарегистрироваться"
+                                    fill
+                                    onClick={onSubmit}
+                                    />
+                            </Col>
+                            <Col span={24}>
+                                <div style={{textAlign: 'center'}}>
+                                    У вас уже есть аккаунт? <Link className="def-link" href={'/auth/login'}>Авторизоваться</Link>
+                                </div>
+                            </Col>
+                           
                         </Row>   
                     </AuthForm>
                 </Col>
