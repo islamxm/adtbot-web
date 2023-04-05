@@ -13,12 +13,18 @@ import styles from './style.module.scss';
 import ApiService from "@/service/apiService";
 import ReCAPTCHA from "react-google-recaptcha";
 import React from 'react';
+import { Cookies } from "typescript-cookie";
+import { useAppDispatch } from "@/hooks/useTypesRedux";
+import { updateTokens } from "@/store/actions";
+import Router from "next/router";
+import notify from "@/helpers/notify";
 
 
 const service = new ApiService();
 
 const LoginPage = () => {
     const recapRef = React.createRef<any>()
+    const dispatch = useAppDispatch();
     const [passResetModal, setPassResetModal] = useState<boolean>(false)
     const [twoAuthModal, setTwoAuthModal] = useState<boolean>(false)
 
@@ -41,22 +47,31 @@ const LoginPage = () => {
 
     const onSubmit = useCallback(() => {
         setLoad(true)
-        // service.getOAuth2Token({
-        //     grant_type,
-        //     username,
-        //     password,
-        //     totp_code,
-        //     scope
-        // }, captcha_token).then(res => {
-        //     if(saveMe) {
-        //         //save user in cookies
-        //     }
-        //     console.log(res)
-        // }).finally(() => {
-        //     setLoad(false)
-        // })
+        service.getOAuth2Token({
+            grant_type,
+            username,
+            password,
+            totp_code,
+            scope
+        }, captcha_token).then(res => {
+            if(res?.access_token) {
+                if(saveMe) {
+                    Cookies.set('adtbot-console-access-token', '') //access_token
+                    Cookies.set('adtbot-console-refresh-token', '') //refresh_token
+                } else {
+                    Cookies.remove('adtbot-console-access-token') //access_token
+                    Cookies.remove('adtbot-console-refresh-token') //refresh_token
+                }
+                dispatch(updateTokens({access: res?.access_token, refresh: res?.refresh_token}))
+                Router.push('/')
+            } else {
+                notify('Произошла ошибка', 'ERROR')
+            }
+            console.log(res)
+        }).finally(() => {
+            setLoad(false)
+        })
     }, [username, password, scope, totp_code, grant_type, captcha_token, saveMe])
-
 
 
     return (
