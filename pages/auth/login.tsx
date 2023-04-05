@@ -31,7 +31,7 @@ const LoginPage = () => {
     const [load, setLoad] = useState(false);
 
     const [captcha_token, setcaptcha_token] = useState('')
-    const [grant_type, setGrant_type] = useState('')
+    const [grant_type, setGrant_type] = useState('password')
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [scope, setScope] = useState('')
@@ -47,17 +47,19 @@ const LoginPage = () => {
 
     const onSubmit = useCallback(() => {
         setLoad(true)
-        service.getOAuth2Token({
-            grant_type,
-            username,
-            password,
-            totp_code,
-            scope
-        }, captcha_token).then(res => {
+        const body = new FormData();
+        body.append('username', username)
+        body.append('password', password)
+        body.append('scope', '')
+        body.append('totp_code', totp_code)
+        body.append('grant_type', grant_type)
+
+        service.getOAuth2Token(body, captcha_token).then(res => {
+            // console.log(res)
             if(res?.access_token) {
                 if(saveMe) {
-                    Cookies.set('adtbot-console-access-token', '') //access_token
-                    Cookies.set('adtbot-console-refresh-token', '') //refresh_token
+                    Cookies.set('adtbot-console-access-token', res?.access_token) //access_token
+                    Cookies.set('adtbot-console-refresh-token', res?.refresh_token) //refresh_token
                 } else {
                     Cookies.remove('adtbot-console-access-token') //access_token
                     Cookies.remove('adtbot-console-refresh-token') //refresh_token
@@ -67,7 +69,7 @@ const LoginPage = () => {
             } else {
                 notify('Произошла ошибка', 'ERROR')
             }
-            console.log(res)
+
         }).finally(() => {
             setLoad(false)
         })
@@ -112,8 +114,9 @@ const LoginPage = () => {
                                 <Input
                                     value={username}
                                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
-                                    placeholder="Username"
-                                    label="Username"
+                                    placeholder="example@mail.com"
+                                    label="Email"
+                                    type="email"
                                     />
                             </Col>
                             <Col span={24}>
@@ -152,7 +155,8 @@ const LoginPage = () => {
                             </Col>
                             <Col span={24}>
                                 <Button
-                                    disabled={username && captcha_token && password && totp_code && scope ? false : true}
+                                    load={load}
+                                    disabled={username && captcha_token && password ? false : true}
                                     text="Войти"
                                     fill
                                     onClick={onSubmit}

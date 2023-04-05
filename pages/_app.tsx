@@ -29,19 +29,20 @@ export default function App({ Component, pageProps }: AppProps) {
     <Provider store={store}>
       <ConfigProvider locale={ruRu}>
         <div className="wrapper">
-        <ToastContainer/>
-        {
-          pathname?.includes('/auth') ? (
-            null
-          ) : <Sidebar/>
-        }
-        <Component {...pageProps} />
-      </div>
-      {
-        !pathname?.includes('/auth') ? (
-          <FixedAction/>
-        ) : null
-      }
+            <ToastContainer/>
+            {
+              pathname?.includes('/auth') ? (
+                null
+              ) : <Sidebar/>
+            }
+            <Component {...pageProps} />
+          </div>
+          {
+            !pathname?.includes('/auth') ? (
+              <FixedAction/>
+            ) : null
+          }
+        
     
       </ConfigProvider>
     </Provider>

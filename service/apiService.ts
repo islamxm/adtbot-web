@@ -27,19 +27,23 @@ class ApiService {
         }
     }
 
-    getOAuth2Token = async (body: {
-        grant_type?: string,
-        username?: string,
-        password?: string,
-        scope?: string,
-        totp_code?: string,
-    }, captcha_token: string) => {
+    getOAuth2Token = async (body: any
+    //     {
+    //     grant_type?: string,
+    //     username?: string,
+    //     password?: string,
+    //     scope?: string,
+    //     totp_code?: string,
+    // }
+    , captcha_token: string) => {
         try {
             let res = await fetch(endpoints.getOAuth2Token + `?captcha_token=${captcha_token}`, {
                 method: 'POST',
-                headers,
-                body: JSON.stringify(body),
-                mode: 'no-cors'
+                // headers: {
+                //     'Content-type': 'multipart/form-data'
+                // },
+                body: body,
+                // mode: 'no-cors'
             })
             return await checkAuth(res)
         } catch(err) {

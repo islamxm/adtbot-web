@@ -3,8 +3,8 @@ import {Cookies} from 'typescript-cookie';
 const globalState = {
     isMenuOpen: false,
     tokens: {
-        access: Cookies.get('adtbot-console-access-token') ? Cookies.get('adtbot-console-access-token') : null,
-        refresh: Cookies.get('adtbot-console-refresh-token') ? Cookies.get('adtbot-console-refresh-token') : null
+        access: process?.browser && Cookies.get('adtbot-console-access-token') ? Cookies.get('adtbot-console-access-token') : null,
+        refresh: process?.browser &&  Cookies.get('adtbot-console-refresh-token') ? Cookies.get('adtbot-console-refresh-token') : null
     }
 }
 
