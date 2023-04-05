@@ -27,6 +27,26 @@ class ApiService {
         }
     }
 
+    getOAuth2Token = async (body: {
+        grant_type?: string,
+        username?: string,
+        password?: string,
+        scope?: string,
+        totp_code?: string,
+    }, captcha_token: string) => {
+        try {
+            let res = await fetch(endpoints.getOAuth2Token + `?captcha_token=${captcha_token}`, {
+                method: 'POST',
+                headers,
+                body: JSON.stringify(body),
+                mode: 'no-cors'
+            })
+            return await checkAuth(res)
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
     verifyUser = async (verify_code: string) => {
         try {
             let res = await fetch(endpoints.verifyUser + `?verify_code=${verify_code}`, {
@@ -99,25 +119,7 @@ class ApiService {
         }
     }
 
-    getOAuth2Token = async (body: {
-        grant_type?: string,
-        username?: string,
-        password?: string,
-        scope?: string,
-        totp_code?: string,
-    }) => {
-        try {
-            let res = await fetch(endpoints.getOAuth2Token, {
-                method: 'POST',
-                headers,
-                body: JSON.stringify(body),
-                mode: 'no-cors'
-            })
-            return await checkAuth(res)
-        } catch(err) {
-            console.log(err)
-        }
-    }
+    
 
     setTgKey = async (text: string) => {
         try {
