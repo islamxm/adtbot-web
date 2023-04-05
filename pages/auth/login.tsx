@@ -41,20 +41,20 @@ const LoginPage = () => {
 
     const onSubmit = useCallback(() => {
         setLoad(true)
-        service.getOAuth2Token({
-            grant_type,
-            username,
-            password,
-            totp_code,
-            scope
-        }, captcha_token).then(res => {
-            if(saveMe) {
-                //save user in cookies
-            }
-            console.log(res)
-        }).finally(() => {
-            setLoad(false)
-        })
+        // service.getOAuth2Token({
+        //     grant_type,
+        //     username,
+        //     password,
+        //     totp_code,
+        //     scope
+        // }, captcha_token).then(res => {
+        //     if(saveMe) {
+        //         //save user in cookies
+        //     }
+        //     console.log(res)
+        // }).finally(() => {
+        //     setLoad(false)
+        // })
     }, [username, password, scope, totp_code, grant_type, captcha_token, saveMe])
 
 
