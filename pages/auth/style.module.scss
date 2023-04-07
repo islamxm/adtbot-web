@@ -4,6 +4,26 @@
     .promo {
         display: none;
     }
+
+    .success {
+        text-align: center;
+        padding: 0 50px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 100%;
+            background-color: var(--green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            margin-bottom: 30px;
+        }
+    }
 }
 
 

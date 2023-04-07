@@ -15,14 +15,11 @@ const CheckAuth = ({
 
 
     if(!token) {
-        if(Router) {
-            Router?.push('/auth/login')
-        }
+        process?.browser && window.location.replace('/auth/login')
         return null
+    } else {
+        return <>{children}</>
     }
-
-    return <>{children}</>
-
 }
 
 

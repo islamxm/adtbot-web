@@ -5,9 +5,17 @@ import Hint from '../Hint/Hint';
 import {AiOutlineInfoCircle} from 'react-icons/ai';
 import { IMaskInput } from 'react-imask';
 import InputMask from 'react-input-mask';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import IconButton from '../IconButton/IconButton';
+import {AiOutlineEye} from 'react-icons/ai';
+import {AiOutlineEyeInvisible} from 'react-icons/ai';
+
+
 
 const Input = (props: inputPropsTypes) => {
+
+    const [visible, setVisible] = useState(false)
+
     const {
         error, 
         errorText, 
@@ -65,33 +73,64 @@ const Input = (props: inputPropsTypes) => {
                     </div>
                 ) : null
             }
-            {
-                mask ? (
-                    // <IMaskInput
-                    //     placeholderChar=''
-                    //     mask={mask}
-                    //     value={props.value}
-                    //     onAccept={(val,mask) => {
-                    //         if(onChangeMask) {
-                    //             onChangeMask(val)
-                    //         }
-                    //     }}
+            <div className={styles.main}>
+                {
+                    mask ? (
+                        // <IMaskInput
+                        //     placeholderChar=''
+                        //     mask={mask}
+                        //     value={props.value}
+                        //     onAccept={(val,mask) => {
+                        //         if(onChangeMask) {
+                        //             onChangeMask(val)
+                        //         }
+                        //     }}
 
-                    //     />
-                    <InputMask
-                        value={props.value}
-                        onChange={onChange}
-                        mask={mask}
-                        placeholder={props.placeholder}
-                        maskChar={null}
-                        />
-                ) : (
-                    <input
-                        className={styles.input} 
-                        {...props}            
-                        />
-                )
-            }
+                        //     />
+                        <>
+                            <InputMask
+                                value={props.value}
+                                onChange={onChange}
+                                mask={mask}
+                                placeholder={props.placeholder}
+                                maskChar={null}
+                                type={props?.type !== 'password' ? props?.type : (visible ? 'text' : 'password')}
+                                className={`${styles.input} ${props?.type === 'password' ? styles.password : ''}`}
+                                />
+                            {
+                                props?.type === 'password' ? (
+                                    <div className={styles.visible}>
+                                        <IconButton
+                                            
+                                            icon={visible ? <AiOutlineEyeInvisible size={18}/> : <AiOutlineEye size={18}/>}
+                                            />
+                                    </div>
+                                ) : null
+                            }
+                        </>
+                    ) : (
+                        <>
+                            <input
+                                className={`${styles.input} ${props?.type === 'password' ? styles.password : ''}`}
+                                {...props}            
+                                type={props?.type !== 'password' ? props?.type : (visible ? 'text' : 'password')}
+                                />
+                            {
+                                props?.type === 'password' ? (
+                                    <div className={styles.visible}>
+                                        <IconButton
+                                            onClick={() => setVisible(s => !s)}
+                                            icon={visible ? <AiOutlineEyeInvisible size={18}/> : <AiOutlineEye size={18}/>}
+                                            />
+                                    </div>
+                                ) : null
+                            }
+                        </>
+                    )
+                }
+                
+            </div>
+            
             
             {
                 errorText && error ? (

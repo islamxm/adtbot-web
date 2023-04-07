@@ -12,6 +12,7 @@ import styles from './style.module.scss';
 import ApiService from "@/service/apiService";
 import ReCAPTCHA from "react-google-recaptcha";
 import React from "react";
+import {BsCheckLg} from 'react-icons/bs';
 import notify from "@/helpers/notify";
 
 const service = new ApiService;
@@ -29,6 +30,7 @@ const SignupPage = () => {
     const [username, setUsername] = useState('')
     const [captcha_token, setcaptcha_token] = useState('')
     const [agree, setAgree] = useState(false)
+    const [success, setSuccess] = useState(false)
     const recapRef = React.createRef<any>()
 
 
@@ -54,7 +56,9 @@ const SignupPage = () => {
         }, captcha_token).then(res => {
             console.log(res)
             if(res) {
-                notify('Регистрация прошла успешно, проверьте пожалуйста свою почту', 'SUCCESS')
+
+                // notify('Регистрация прошла успешно, проверьте пожалуйста свою почту', 'SUCCESS')
+                setSuccess(true)
             }
         }).finally(() => {
             setLoad(false)
@@ -89,89 +93,100 @@ const SignupPage = () => {
                 <Col 
                     md={12}
                     span={24}>
-                    <AuthForm
-                        title="Зарегистрироваться"
-                        >
-                        <Row gutter={[15,15]}>
-                            <Col span={24}>
-                                <Input
-                                    placeholder="Bessie Cooper"
-                                    label="Имя"
-                                    value={username}
-                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
-                                    />
-                            </Col>
-                            <Col span={24}>
-                                <Input
-                                    placeholder="debra.holt@example.com"
-                                    label="Email"
-                                    value={email}
-                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
-                                    />
-                            </Col>
-                            <Col span={24}>
-                                <Input
-                                    label="Пароль"
-                                    placeholder="Ваш пароль"
-                                    type={'password'}
-                                    value={password}
-                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
-                                    />
-                            </Col>
-                            <Col span={24}>
-                                <Input
-                                    label="Повторить пароль"
-                                    placeholder="Ваш пароль"
-                                    type={"password"}
-                                    errorText={'Пароли не совпадают'}
-                                    error={repeatPassword && (repeatPassword !== password) ? true : false}
-                                    value={repeatPassword}
-                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setRepeatPassword(e.target.value)}
-                                    />
-                            </Col>
-                            <Col span={24}>
-                                <Checkbox
-                                    checked={agree}
-                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAgree(e.target.checked)}
-                                    id="accept-policy"
-                                    text={
-                                        <>
-                                            Я принимаю <span onClick={openUsePolicyModal} style={{color: 'var(--blue)'}}>Условия использования</span>
-                                        </>
-                                    }
-                                    />
-                            </Col>
-                            <Col span={24}>
-                                <ReCAPTCHA
-                                    sitekey={'6Ld4-E4lAAAAANg8LEy8oig45CXsovYV9z5Wbxx6'}
-                                    size={'normal'}
-                                    className="custom-recap"
-                                    ref={recapRef}
-                                    onChange={e => {
-                                        if(e) {
-                                            console.log(e)
-                                            setcaptcha_token(e)
-                                        }
-                                    }}
-                                    />
-                            </Col>
-                            <Col span={24}>
-                                <Button
-                                    load={load}
-                                    disabled={username && email && captcha_token && password && (repeatPassword && (repeatPassword === password)) && agree ? false : true}
-                                    text="Зарегистрироваться"
-                                    fill
-                                    onClick={onSubmit}
-                                    />
-                            </Col>
-                            <Col span={24}>
-                                <div style={{textAlign: 'center'}}>
-                                    У вас уже есть аккаунт? <Link className="def-link" href={'/auth/login'}>Авторизоваться</Link>
+                    {
+                        !success ? (
+                            <div className={`${styles.success}`}>
+                                <div className={styles.icon}>
+                                    <BsCheckLg size={40}/>
                                 </div>
-                            </Col>
-                           
-                        </Row>   
-                    </AuthForm>
+                                <h4 className={'heading_4'}>Регистрация прошла успешно, проверьте пожалуйста свою почту</h4>
+                            </div>
+                        ) : (
+                            <AuthForm
+                                title="Зарегистрироваться"
+                                >
+                                <Row gutter={[15,15]}>
+                                    <Col span={24}>
+                                        <Input
+                                            placeholder="Bessie Cooper"
+                                            label="Имя"
+                                            value={username}
+                                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
+                                            />
+                                    </Col>
+                                    <Col span={24}>
+                                        <Input
+                                            placeholder="debra.holt@example.com"
+                                            label="Email"
+                                            value={email}
+                                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+                                            />
+                                    </Col>
+                                    <Col span={24}>
+                                        <Input
+                                            label="Пароль"
+                                            placeholder="Ваш пароль"
+                                            type={'password'}
+                                            value={password}
+                                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
+                                            />
+                                    </Col>
+                                    <Col span={24}>
+                                        <Input
+                                            label="Повторить пароль"
+                                            placeholder="Ваш пароль"
+                                            type={"password"}
+                                            errorText={'Пароли не совпадают'}
+                                            error={repeatPassword && (repeatPassword !== password) ? true : false}
+                                            value={repeatPassword}
+                                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setRepeatPassword(e.target.value)}
+                                            />
+                                    </Col>
+                                    <Col span={24}>
+                                        <Checkbox
+                                            checked={agree}
+                                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAgree(e.target.checked)}
+                                            id="accept-policy"
+                                            text={
+                                                <>
+                                                    Я принимаю <span onClick={openUsePolicyModal} style={{color: 'var(--blue)'}}>Условия использования</span>
+                                                </>
+                                            }
+                                            />
+                                    </Col>
+                                    <Col span={24}>
+                                        <ReCAPTCHA
+                                            sitekey={'6Ld4-E4lAAAAANg8LEy8oig45CXsovYV9z5Wbxx6'}
+                                            size={'normal'}
+                                            className="custom-recap"
+                                            ref={recapRef}
+                                            onChange={e => {
+                                                if(e) {
+                                                    console.log(e)
+                                                    setcaptcha_token(e)
+                                                }
+                                            }}
+                                            />
+                                    </Col>
+                                    <Col span={24}>
+                                        <Button
+                                            load={load}
+                                            disabled={username && email && captcha_token && password && (repeatPassword && (repeatPassword === password)) && agree ? false : true}
+                                            text="Зарегистрироваться"
+                                            fill
+                                            onClick={onSubmit}
+                                            />
+                                    </Col>
+                                    <Col span={24}>
+                                        <div style={{textAlign: 'center'}}>
+                                            У вас уже есть аккаунт? <Link className="def-link" href={'/auth/login'}>Авторизоваться</Link>
+                                        </div>
+                                    </Col>
+                                
+                                </Row>   
+                            </AuthForm>
+                        )
+                    }
                 </Col>
             </Row>
         </PageLayout>

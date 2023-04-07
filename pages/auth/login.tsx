@@ -55,7 +55,7 @@ const LoginPage = () => {
         body.append('grant_type', grant_type)
 
         service.getOAuth2Token(body, captcha_token).then(res => {
-            // console.log(res)
+            console.log(res)
             if(res?.access_token) {
                 if(saveMe) {
                     Cookies.set('adtbot-console-access-token', res?.access_token) //access_token
