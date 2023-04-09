@@ -37,13 +37,13 @@ const Enable = ({
                     Двухфакторная аутентификация (2FA) значительно повышает безопасность вашей учетной записи и защищает ее от доступа посторонних лиц.
                     <br/>
                     <br/>
-                    Реализация двухфакторной аутентификации обеспечивается посредством мобильного приложения Google Authenticator, доступного для устройств на базе Android и IOS.
+                    Реализация двухфакторной аутентификации обеспечивается посредством мобильного приложения <a href="https://support.google.com/accounts/answer/1066447" target={'_blank'}>Google Authenticator</a>, доступного для устройств на базе <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2" target={'_blank'}>Android</a> и <a href="https://apps.apple.com/ru/app/google-authenticator/id388497605" target={'_blank'}>IOS</a>.
                     <br/>
                     <br/>
                     После включения 2FA для доступа к учетной записи, кроме логина и пароля, вам понадобится динамический шестизначный код, генерируемый в приложении.
                     <br/>
                     <br/>
-                    Перед включением 2FA установите Google Authenticator на устройство.
+                    Перед включением 2FA установите <a href="https://support.google.com/accounts/answer/1066447" target={'_blank'}>Google Authenticator</a> на устройство.
                     </p>
                 </Col>
                 <Col span={24}>
@@ -74,7 +74,7 @@ const Enable = ({
                             В случае утери секретного ключа, получение доступа к учетной записи или отключение 2FA станет невозможен без обращения в техническую поддержку. Процесс может занять до 30 дней.
                             <br/>
                             <br/>
-                            Для активации 2FA отсканируйте QR-код или введите секретный ключ в Google Authenticator.
+                            Для активации 2FA отсканируйте QR-код или введите секретный ключ в <a href="https://support.google.com/accounts/answer/1066447" target={'_blank'}>Google Authenticator</a>.
                             <br/>
                             <br/>
                             Секретный ключ: <span>kdgslgs8sdf40nd934mx3s89fugsd5gwrjwrw</span>

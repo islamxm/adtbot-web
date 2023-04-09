@@ -182,7 +182,7 @@ const Sidebar:FC<sidebarPropsTypes> = ({
                                 <SidebarItem
                                     isParentHidden={isHidden}
                                     isSubItem
-                                    label='API'
+                                    label='Ключи API'
                                     link={'/account/settings/api'}
                                     isActive={pathname === '/account/settings/api' || pathname?.includes('/account/settings/api')}
                                     />
@@ -260,7 +260,7 @@ const Sidebar:FC<sidebarPropsTypes> = ({
                                 />
                         </SidebarList>
                     </div>
-                    <div className={styles.soc}>
+                    {/* <div className={styles.soc}>
                         <a href='#' target={'_blank'} className={styles.item}>
                             <Image
                                 alt='telegram'
@@ -288,7 +288,7 @@ const Sidebar:FC<sidebarPropsTypes> = ({
                                 height={15}
                                 />
                         </a>
-                    </div>
+                    </div> */}
                 </div>
                 <div className={styles.action}>
                     <Col span={24}>

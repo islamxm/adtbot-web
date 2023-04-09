@@ -14,6 +14,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 import React from "react";
 import {BsCheckLg} from 'react-icons/bs';
 import notify from "@/helpers/notify";
+import Head from "next/head";
 
 const service = new ApiService;
 
@@ -59,6 +60,8 @@ const SignupPage = () => {
 
                 // notify('Регистрация прошла успешно, проверьте пожалуйста свою почту', 'SUCCESS')
                 setSuccess(true)
+            } else {
+                setSuccess(false)
             }
         }).finally(() => {
             setLoad(false)
@@ -72,6 +75,11 @@ const SignupPage = () => {
 
     return (
         <PageLayout>
+
+            <Head>
+                <title>Регистрация | ADTBot</title>
+            </Head>
+
 
             {/* MODALS */}
             <UsePolicyModal
@@ -94,7 +102,7 @@ const SignupPage = () => {
                     md={12}
                     span={24}>
                     {
-                        !success ? (
+                        success ? (
                             <div className={`${styles.success}`}>
                                 <div className={styles.icon}>
                                     <BsCheckLg size={40}/>

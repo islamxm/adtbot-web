@@ -6,6 +6,10 @@ const headers = {
     'Accept': 'application/json',
 }
 
+type TokenType = string | {[property: string]: string;}
+
+// "Authorization": `Bearer ${token}`
+
 class ApiService {
 
     register = async (body: {
@@ -82,7 +86,7 @@ class ApiService {
         username: string,
         password: string,
         old_password: string
-    }) => {
+    }, token: TokenType) => {
         try {
             let res = await fetch(endpoints.editUserData, {
                 method: 'POST',
@@ -152,12 +156,15 @@ class ApiService {
     }
 
 
-    addFeedback = async (text: string) => {
+    addFeedback = async (text: string, token: TokenType) => {
         try {
-            let res = await fetch(endpoints.addFeedback + `?text=${text}`, {
+            let res = await fetch(endpoints.addFeedback, {
                 method: 'POST',
-                headers,
-                mode: 'no-cors'
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({text})
             })
             return await checkAuth(res)
         } catch(err) {
@@ -165,18 +172,18 @@ class ApiService {
         }
     }
 
-    getFeedbacks = async (limit: number, offset: string) => {
-        try {
-            let res = await fetch(endpoints.getFeedbacks + `?limit=${limit}&offset=${offset}`, {
-                method: 'POST',
-                headers,
-                mode: 'no-cors'
-            })
-            return await checkAuth(res)
-        } catch(err) {
-            console.log(err)
-        }
-    }
+    // getFeedbacks = async (limit: number, offset: string) => {
+    //     try {
+    //         let res = await fetch(endpoints.getFeedbacks + `?limit=${limit}&offset=${offset}`, {
+    //             method: 'POST',
+    //             headers,
+    //             mode: 'no-cors'
+    //         })
+    //         return await checkAuth(res)
+    //     } catch(err) {
+    //         console.log(err)
+    //     }
+    // }
 
     setTgNot = async (status: boolean) => {
         try {
@@ -309,8 +316,9 @@ class ApiService {
         budget_usdt: number,
         take_profit: number,
         stop_loss: number,
-        stop_buy: number
-    }) => {
+        stop_buy: number,
+        enabled: boolean
+    }, token: TokenType) => {
         try {
             let res = await fetch(endpoints.createBot, {
                 method: 'POST',
@@ -325,12 +333,32 @@ class ApiService {
     }
 
 
-    getBots = async () => {
+    enableBot = async (bot_id: number, token: TokenType) => {
+        try {
+            let res = await fetch(endpoints.enableBot + `?bot_id=${bot_id}`, {
+                method: 'POST',
+                headers: {
+                    ...headers,
+                    "Authorization": `Bearer ${token}`
+                }
+            })
+
+            return await checkAuth(res)
+        } catch(err) {
+            console.log(err)
+        }
+    }
+    
+
+    getBots = async (token?: TokenType) => {
         try {
             let res = await fetch(endpoints.getBots, {
                 method: 'POST',
-                headers,
-                mode: 'no-cors'
+                headers: {
+                    ...headers,
+                    "Authorization": `Bearer ${token}`
+                },
+                //mode: 'no-cors'
             })
             return await checkAuth(res)
         } catch(err) {

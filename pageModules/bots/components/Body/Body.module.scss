@@ -1,6 +1,8 @@
 .wrapper {
     position: relative;
-    
+    .action {
+        margin-bottom: 30px;
+    }
     .top {
         display: flex;
         align-items: center;

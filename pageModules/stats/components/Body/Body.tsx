@@ -104,11 +104,11 @@ const Body = () => {
                                         <div className={styles.info}>
                                             <div className={styles.head}>Всего</div>
                                             <ul className={styles.body}>
-                                                <li className={styles.body_item}>Анонсы Binance - 1</li>
-                                                <li className={styles.body_item}>Анонсы Coinbase - 1</li>
-                                                <li className={styles.body_item}>Анонсы Huobi - 2</li>
-                                                <li className={styles.body_item}>Отработанные боты - 4</li>
-                                                <li className={styles.body_item}>PNL - 726 USDT</li>
+                                                <li className={styles.body_item}>Анонсы Binance: 1</li>
+                                                <li className={styles.body_item}>Анонсы Coinbase: 1</li>
+                                                <li className={styles.body_item}>Анонсы Huobi: 2</li>
+                                                <li className={styles.body_item}>Отработанные боты: 4</li>
+                                                <li className={styles.body_item}>PNL: 726 USDT</li>
                                             </ul>
                                         </div>
                                     </Col>

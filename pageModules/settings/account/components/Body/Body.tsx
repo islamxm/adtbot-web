@@ -4,7 +4,31 @@ import Input from '@/components/Input/Input';
 import Switch from '@/components/Switch/Switch';
 import Radio from '@/components/Radio/Radio';
 import ThemeSwitch from '@/components/ThemeSwitch/ThemeSwitch';
-const Body = () => {
+import {useState, useEffect, useCallback} from 'react';
+import ApiService from '@/service/apiService';
+import { useAppSelector } from '@/hooks/useTypesRedux';
+
+
+const service = new ApiService()
+
+
+const Body = (props: {
+    username?: string,
+    email?: string,
+    password?: string,
+    old_password?: string,
+    rep?: string,
+    setEmail: (...args: any[]) => any,
+    setUsername: (...args: any[]) => any
+    setPassword: (...args: any[]) => any
+    setOld_password: (...args: any[]) => any
+    setRep: (...args: any[]) => any
+}) => {
+    const {email, username, password, old_password, rep, setEmail, setPassword, setOld_password, setRep, setUsername} = props
+
+
+    
+
 
     return (
         <div className={styles.wrapper}>
@@ -16,12 +40,16 @@ const Body = () => {
                                 type='email'
                                 label='Email'
                                 placeholder='debra.holt@example.com'
+                                value={email}
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
                                 />
                         </Col>
                         <Col span={24}>
                             <Input
                                 label='Имя'
                                 placeholder='Bessie Cooper'
+                                value={username}
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
                                 />
                         </Col>
                         <Col span={24}>
@@ -29,6 +57,8 @@ const Body = () => {
                                 label='Текущий пароль'
                                 type='password'
                                 placeholder='*************************'
+                                value={old_password}
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setOld_password(e.target.value)}
                                 />
                         </Col>
                         <Col span={24}>
@@ -36,6 +66,8 @@ const Body = () => {
                                 label='Новый пароль'
                                 type='password'
                                 placeholder='*************************'
+                                value={password}
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
                                 />
                         </Col>
                         <Col span={24}>
@@ -43,6 +75,10 @@ const Body = () => {
                                 label='Повторить новый пароль'
                                 type='password'
                                 placeholder='*************************'
+                                value={rep}
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setRep(e.target.value)}
+                                error={rep && rep !== password ? true : false}
+                                errorText='Пароли не совпадают'
                                 />
                         </Col>
                     </Row>

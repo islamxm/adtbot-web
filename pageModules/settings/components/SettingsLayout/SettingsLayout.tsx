@@ -4,10 +4,14 @@ import styles from './SettingsLayout.module.scss';
 
 const SettingsLayout = ({
     children,
-    onSave
+    onSave,
+    load = false,
+    disabled = false
 }: {
     children?: React.ReactNode,
-    onSave?: (...args: any[]) => any
+    onSave?: (...args: any[]) => any,
+    load?: boolean,
+    disabled?: boolean
 }) => {
 
     return (
@@ -19,6 +23,8 @@ const SettingsLayout = ({
                 onSave ? (
                     <div className={styles.action}>
                         <Button
+                            disabled={disabled}
+                            load={load}
                             onClick={onSave}
                             text='Сохранить'
                             style={{paddingLeft: 50, paddingRight: 50}}

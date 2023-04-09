@@ -6,5 +6,19 @@
         overflow-y: auto;
         font-size: 14px;
         line-height: 21px;
+
+        p {
+            ul {
+                padding-left: 15px;
+                li {
+                    list-style: disc !important;
+                    margin-bottom: 10px;
+
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
+                }
+            }
+        }
     }
 }

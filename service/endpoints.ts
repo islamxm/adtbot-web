@@ -17,7 +17,7 @@ const endpoints = {
 
     //feedback
     addFeedback: `${PATH}give_feedback/`,
-    getFeedbacks: `${PATH}get_feedbacks/`,
+    // getFeedbacks: `${PATH}get_feedbacks/`,
 
     //notifications
     setTgNot: `${PATH}set_tg_notification/`,
@@ -33,8 +33,12 @@ const endpoints = {
 
     //bots
     createBot: `${PATH}create_bot/`,
+    enableBot: `${PATH}enable_bot/`,
     getBots: `${PATH}get_bots/`,
-    announceStats: `${PATH}announce_stats/`
+    announceStats: `${PATH}announce_stats/`,
+    disableBot: `${PATH}disable_bot/`,
+    deleteBot: `${PATH}delete_bot/`,
+
 }
 
 export default endpoints;

@@ -6,24 +6,28 @@ export const  mock = {
     head: [
         {
             label:'Анонс',
+            hint: 'Биржа, на которой будет парситься анонс листинга',
             value: '',
             sort: true,
             main: true
         },
         {
             label:'Покупка',
+            hint: 'Биржа, на которой будет осуществлена покупка в момент анонса',
             value: '',
             sort: true,
             main: false
         },
         {
             label:'Пара',
+            hint: 'Название купленной монеты к USDT',
             value: '',
             sort: true,
             main: false
         },
         {
             label:'Сумма',
+            hint: 'Количество USDT, на которые будет совершена покупка анонсируемых монет',
             value: '',
             sort: true,
             main: false
@@ -40,14 +44,10 @@ export const  mock = {
             sort: true,
             main: false
         },
+        
         {
-            label:'PNL',
-            value: '',
-            sort: true,
-            main: true
-        },
-        {
-            label:'Активация',
+            label:'Статус бота',
+            hint: 'Статус бота. Для отработанного бота указывается дата и время активации, для созданного бота — В ожидании, для черновика — Остановлен',
             value: '',
             sort: true,
             main: false
@@ -57,7 +57,14 @@ export const  mock = {
             value: '',
             sort: true,
             main: false
-        }
+        },
+        {
+            label:'PNL',
+            hint: 'Profits and Losts. Заработок (или убыток) бота в USDT и процентах от суммы сделки',
+            value: '',
+            sort: true,
+            main: true
+        },
     ],
     body: [
         [
@@ -121,16 +128,7 @@ export const  mock = {
                 running: false,
                 main: false
             },
-            {
-                label: '132 USDT (+11,23%)',
-                isLink: false,
-                icon: null,
-                action: false,
-                pnl: '+',
-                share: false,
-                running: false,
-                main: true
-            },
+            
             {
                 label: '',
                 isLink: false,
@@ -147,7 +145,17 @@ export const  mock = {
                 icon: null,
                 action: true,
                 pnl: '',
-                share: true,
+                share: false,
+                running: false,
+                main: true
+            },
+            {
+                label: '132 USDT (+11,23%)',
+                isLink: false,
+                icon: null,
+                action: false,
+                pnl: '+',
+                share: false,
                 running: false,
                 main: true
             },

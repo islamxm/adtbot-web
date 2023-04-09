@@ -18,6 +18,7 @@ import { useAppDispatch } from "@/hooks/useTypesRedux";
 import { updateTokens } from "@/store/actions";
 import Router from "next/router";
 import notify from "@/helpers/notify";
+import Head from "next/head";
 
 
 const service = new ApiService();
@@ -60,13 +61,16 @@ const LoginPage = () => {
                 if(saveMe) {
                     Cookies.set('adtbot-console-access-token', res?.access_token) //access_token
                     Cookies.set('adtbot-console-refresh-token', res?.refresh_token) //refresh_token
+                    dispatch(updateTokens({access: res?.access_token, refresh: res?.refresh_token}))
                 } else {
                     Cookies.remove('adtbot-console-access-token') //access_token
                     Cookies.remove('adtbot-console-refresh-token') //refresh_token
+                    dispatch(updateTokens({access: res?.access_token, refresh: res?.refresh_token}))
                 }
-                dispatch(updateTokens({access: res?.access_token, refresh: res?.refresh_token}))
+                
                 Router.push('/')
             } else {
+                recapRef?.current?.reset()
                 notify('Произошла ошибка', 'ERROR')
             }
 
@@ -78,6 +82,7 @@ const LoginPage = () => {
 
     return (
         <PageLayout>
+            <Head><title>Вход | ADTBot</title></Head>
 
             {/* MODALS */}
             <PassResetModal

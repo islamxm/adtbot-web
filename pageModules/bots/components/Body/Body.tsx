@@ -5,17 +5,28 @@ import TableRow from '@/components/TableRow/TableRow';
 import StopBotModal from '../../modals/StopBotModal/StopBotModal';
 import DeleteBotModal from '../../modals/DeleteBotModal/DeleteBotModal';
 import Pag from '@/components/Pag/Pag';
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Select from '@/components/Select/Select';
 import HsButton from '@/components/HsButton/HsButton';
 import Empty from '../Empty/Empty';
 import WarnPanel from '@/components/WarnPanel/WarnPanel';
+import ApiService from '@/service/apiService';
+import { useAppSelector } from '@/hooks/useTypesRedux';
+import { getCookie } from 'typescript-cookie';
+import Button from '@/components/Button/Button';
+import {AiOutlinePlus} from 'react-icons/ai';
+import AddBotModal from '@/modals/AddBotModal/AddBotModal';
+
+
+const service = new ApiService();
+
 
 const statusOptions = [
     {value: '1', label: 'Все'},
     {value: '2', label: 'Активный'},
     {value: '3', label: 'В режиме ожидания'},
     {value: '4', label: 'Остановлен'},
+    {value: '5', label: 'Отработан'},
 ]
 const tableSizes = [
     {value: '1', label: '10 строк'},
@@ -27,15 +38,47 @@ const tableSizes = [
 
 
 const Body = () => {
+    const {tokens: {access}} = useAppSelector(s => s)
     const [currentPage, setCurrentPage] = useState<number>(1)
     const [status, setStatus] = useState<string>('1');
     const [hidden, setHidden] = useState(false)
     const [tableSize, setTableSize] = useState('1')
+    const [addBotModal, setAddBotModal] = useState(false)
+
+    const openAddBotModal = () => setAddBotModal(true)
+    const closeAddBotModal = () => setAddBotModal(false)
+
+    const [list, setList] = useState<any[]>([])
+
+
+    const getList = useCallback(() => {
+        if(access) {
+            service.getBots(access).then(res => {
+                console.log(res)
+                setList(res)
+            })
+        }
+    }, [access])
+
+    useEffect(() => {
+        getList() 
+    }, [access])
 
     return (
         <div className={styles.wrapper}>
+            <AddBotModal
+                open={addBotModal}
+                onCancel={closeAddBotModal}
+                />
             <StopBotModal/>
             <DeleteBotModal/>
+            <div className={styles.action}>
+                <Button
+                    onClick={openAddBotModal} 
+                    beforeIcon={<AiOutlinePlus/>} 
+                    style={{paddingLeft: 30, paddingRight: 30}} 
+                    text='Создать бот'/>
+            </div>
             <div className='table'>
                 <div className="table-top">
                     <div className={styles.top}>
@@ -48,7 +91,6 @@ const Body = () => {
                                     onChange={setStatus}
                                     />
                             </div>
-
                         </div>
                         <div className={styles.part}>
                             <div className={styles.item}>

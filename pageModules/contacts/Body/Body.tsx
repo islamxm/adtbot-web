@@ -7,8 +7,37 @@ import Image from 'next/image';
 import telegram from '@/public/assets/icons/telegram-fill.svg';
 import twitter from '@/public/assets/icons/twitter-fill.svg';
 import youtube from '@/public/assets/icons/youtube-fill.svg';
+import { useAppSelector } from '@/hooks/useTypesRedux';
+import ApiService from '@/service/apiService';
+import {useState, useEffect, useCallback} from 'react';
+import notify from '@/helpers/notify';
+
+const service = new ApiService();
 
 const Body = () => {
+    const {tokens: {access}} = useAppSelector(s => s)
+    const [text, setText] = useState('')
+    const [load, setLoad] = useState(false)
+
+    const addFeedback = useCallback(() => {
+        if(access) {
+            
+            service.addFeedback(text, access).then(res => {
+                console.log(res)
+                if(!res?.detail) {
+                    notify('Фидбэк отправлен', 'SUCCESS')
+                } else {
+                    notify('Произошла ошибка', 'ERROR')
+                }
+            }).catch(() => {
+                notify('Произошла ошибка', 'ERROR')
+            }).finally(() => {{
+                setLoad(false)
+            }})
+        }
+    }, [access])
+
+
 
     return (
         <div className={styles.wrapper}>
@@ -19,9 +48,9 @@ const Body = () => {
                             <h4 className='heading_4'>Есть вопросы? Свяжитесь с нами</h4>
                         </Col>
                         <Col span={24}>
-                            <div className={styles.link}>Поддержка — <a target={'_blank'} href={'https://t.me/adtbot_support'} className="def-link">@adtbot_support</a></div>
-                            <div className={styles.link}>Новости платформы — <a target={'_blank'} href={'https://t.me/adtbot_announcements'} className="def-link">@adtbot_announcements</a></div>
-                            <div className={styles.link}>Чат ADTBot — <a target={'_blank'} href={'https://t.me/adtbot_club'} className="def-link">@adtbot_club</a></div>
+                            <div className={styles.link}>Поддержка: <a target={'_blank'} href={'https://t.me/adtbot_support'} className="def-link">@adtbot_support</a></div>
+                            <div className={styles.link}>Новости платформы: <a target={'_blank'} href={'https://t.me/adtbot_announcements'} className="def-link">@adtbot_announcements</a></div>
+                            <div className={styles.link}>Чат ADTBot: <a target={'_blank'} href={'https://t.me/adtbot_club'} className="def-link">@adtbot_club</a></div>
                         </Col>
                     </Row>
                     
@@ -39,18 +68,23 @@ const Body = () => {
                                 label='Введите текст'
                                 height={120}
                                 resize
-                                placeholder="*************************"
+                                // placeholder="*************************"
+                                value={text}
+                                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setText(e.target.value)}
                                 />
                         </Col>
                         <Col span={24}>
                             <Button
                                 text='Отправить'
                                 fill
+                                disabled={!text}
+                                onClick={addFeedback}
+                                load={load}
                                 />
                         </Col>
                     </Row>
                 </Col>
-                <Col span={24}>
+                {/* <Col span={24}>
                     <div className={styles.action}>
                         <div className={`${styles.head} heading_4`}>
                             Подписывайтесь на наши социальные сети
@@ -83,7 +117,7 @@ const Body = () => {
                         </div>
                         
                     </div>
-                </Col>
+                </Col> */}
             </Row>
         </div>
     )

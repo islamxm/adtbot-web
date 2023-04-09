@@ -7,7 +7,7 @@ import { Row, Col } from 'antd';
 
 const Ex = () => {
     const bodyRef = useRef<HTMLDivElement>(null)
-    const [isOpen, setIsOpen] = useState(true)
+    const [isOpen, setIsOpen] = useState(false)
     const [height, setHeight] = useState(0)
 
     const toggleContent = () => setIsOpen(s => !s)

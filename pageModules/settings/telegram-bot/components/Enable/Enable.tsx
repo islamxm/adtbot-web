@@ -25,13 +25,10 @@ const Enable = ({
                             Перейдите по ссылке <a href="#" target={'_blank'} className="def-link">xxxxxxxxxxxxxxxxxxxxxxxxxx</a>,
                             <br/>
                             <br/>
-                            либо найдите бот с именем "@adtbot" любым другим способом в Telegram.
+                            либо найдите бот с именем &quot;@adtbot&quot; любым другим способом в Telegram.
                             <br/>
                             <br/>
-                            (в случае блокировки сайта Telegram на территории вашей страны вы можете установить десктопное приложение Telegram, либо воспользоваться браузером Opera с включенной функцией VPN)
-                            <br/>
-                            <br/>
-                            В нажмите кнопку "START", либо введите сообщение "/start"
+                            В нажмите кнопку &quot;START&quot;, либо введите сообщение &quot;/start&quot;
                         </p>
                     </div>
                 </Col>

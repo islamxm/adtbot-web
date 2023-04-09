@@ -2,6 +2,7 @@ import styles from './BillingList.module.scss';
 import { billingItemPropsTypes } from '../../types';
 import BillingItem from '../BillingItem/BillingItem';
 import StatusModal from '@/modals/StatusModal/StatusModal';
+import {HiOutlineCash} from 'react-icons/hi';
 import { useState } from 'react';
 import mexc from '@/public/assets/icons/mexc.svg';
 import coinbase from '@/public/assets/icons/coinbase.svg';
@@ -15,6 +16,10 @@ import bybit from '@/public/assets/icons/bybit.svg';
 import upbit from '@/public/assets/icons/upbit.svg';
 import binance from '@/public/assets/icons/binance.svg';
 import gate from '@/public/assets/icons/gate.svg';
+import Button from '@/components/Button/Button';
+import DepositModal from '@/modals/DepositModal/DepositModal';
+
+
 
 const list: billingItemPropsTypes[] = [
     {
@@ -24,7 +29,7 @@ const list: billingItemPropsTypes[] = [
         price: 0,
         list: [
             {
-                head: 'Мониторинг листингов на 1 бирже:',
+                head: 'Мониторинг анонсов листингов на 1 бирже:',
                 ul: [
                     {link: '/', label: 'Binance', icon: binance}
                 ]
@@ -47,7 +52,7 @@ const list: billingItemPropsTypes[] = [
         price: 10,
         list: [
             {
-                head: 'Мониторинг листингов на 3 биржах:',
+                head: 'Мониторинг анонсов листингов на 3 биржах:',
                 ul: [
                     {link: '/', label: 'Binance', icon: binance},
                     {link: '/', label: 'Coinbase', icon: coinbase},
@@ -72,7 +77,7 @@ const list: billingItemPropsTypes[] = [
         price: 20,
         list: [
             {
-                head: 'Мониторинг листингов на 5 биржах:',
+                head: 'Мониторинг анонсов листингов на 5 биржах:',
                 ul: [
                     {link: '/', label: 'Binance', icon: binance},
                     {link: '/', label: 'Coinbase', icon: coinbase},
@@ -99,7 +104,7 @@ const list: billingItemPropsTypes[] = [
         price: 30,
         list: [
             {
-                head: 'Мониторинг листингов на 10 биржах:',
+                head: 'Мониторинг анонсов листингов на 10 биржах:',
                 ul: [
                     {link: '/', label: 'Binance', icon: binance},
                     {link: '/', label: 'Coinbase', icon: coinbase},
@@ -129,19 +134,34 @@ const list: billingItemPropsTypes[] = [
 
 const BillingList = () => {
     const [buyModal, setBuyModal] = useState<boolean>(false)
+    const [depositModal, setDepositModal] = useState(false)
 
     const openBuyModal = () => setBuyModal(true)
     const closeBuyModal = () => setBuyModal(false)
 
+    const openDepositModal = () => setDepositModal(true)
+    const closeDepositModal = () => setDepositModal(false)
 
     return (
         <div className={styles.wrapper}>
+            <DepositModal
+                open={depositModal}
+                onCancel={closeDepositModal}
+                />
             <StatusModal
                 title='Тариф изменен'
                 status={'success'}
                 open={buyModal}
                 onCancel={closeBuyModal}
                 />
+            <div className={styles.action}>
+                <Button
+                    onClick={openDepositModal} 
+                    text='Пополнить' 
+                    variant={'blue'} 
+                    style={{paddingLeft: 30, paddingRight: 30}} 
+                    beforeIcon={<HiOutlineCash/>}/>
+            </div>
             <div className={`${styles.list} custom-scroll-horizontal`}>
                 {
                     list?.map((item,index) => (
