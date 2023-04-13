@@ -23,7 +23,6 @@ class ApiService {
                 method: 'POST',
                 body: JSON.stringify(body),
                 headers,
-                // mode: 'no-cors'
             })
             return await checkAuth(res)
         } catch(err) {
@@ -43,9 +42,7 @@ class ApiService {
         try {
             let res = await fetch(endpoints.getOAuth2Token + `?captcha_token=${captcha_token}`, {
                 method: 'POST',
-                // headers: {
-                //     'Content-type': 'multipart/form-data'
-                // },
+                headers,
                 body: body,
                 // mode: 'no-cors'
             })
@@ -92,7 +89,6 @@ class ApiService {
                 method: 'POST',
                 headers,
                 body: JSON.stringify(body),
-                mode: 'no-cors'
             })
             return await checkAuth(res)
         } catch(err) {
@@ -100,13 +96,24 @@ class ApiService {
         }
     }
 
-    forgotPassword = async (body: {email: string}) => {
+    getUserData = async (token: TokenType) => {
         try {
-            let res = await fetch(endpoints.forgotPassword, {
+            let res = await fetch(endpoints.getUserData, {
+                method: 'POST',
+                headers,
+            })
+            return await checkAuth(res)
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+    forgotPassword = async (body: {email: string}, captcha_token: string) => {
+        try {
+            let res = await fetch(endpoints.forgotPassword + `?captcha_token=${captcha_token}`, {
                 method: 'POST',
                 headers,
                 body: JSON.stringify(body),
-                mode: 'no-cors'
             })
             return await checkAuth(res)
         } catch(err) {
@@ -119,7 +126,6 @@ class ApiService {
             let res = await fetch(endpoints.resetPassword + `?code=${code}&password=${password}`, {
                 method: 'POST',
                 headers,
-                mode: 'no-cors'
             })
             return await checkAuth(res)
         } catch(err) {

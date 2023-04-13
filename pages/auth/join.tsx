@@ -15,10 +15,13 @@ import React from "react";
 import {BsCheckLg} from 'react-icons/bs';
 import notify from "@/helpers/notify";
 import Head from "next/head";
+import { useAppSelector, useAppDispatch } from "@/hooks/useTypesRedux";
+import { updateCaptcha } from "@/store/actions";
 
 const service = new ApiService;
 
 const SignupPage = () => {
+    const dispatch = useAppDispatch()
     const [usePolicyModal, setUsePolicyModal] = useState<boolean>(false)
 
     const closeUsePolicyModal = () => setUsePolicyModal(false)
@@ -35,6 +38,7 @@ const SignupPage = () => {
     const recapRef = React.createRef<any>()
 
 
+  
     // useEffect(() => {
     //     if(recapRef) {
     //         recapRef?.current?.getValue() ? setcaptcha_token(recapRef?.current?.getValue()) : recapRef?.current?.reset()
@@ -47,8 +51,14 @@ const SignupPage = () => {
     // }, [recapRef])
 
 
-    const onSubmit = useCallback(() => {
+    const onSubmit =  useCallback(() => {
         setLoad(true)
+        // const body = new FormData();
+        // body.append('email', email)
+        // body.append('password', password)
+        // body.append('username', username)
+        // body.append('is_superuser', false)
+
         service && service.register({
             email,
             password,
@@ -56,13 +66,13 @@ const SignupPage = () => {
             is_superuser: false,
         }, captcha_token).then(res => {
             console.log(res)
-            if(res) {
 
-                // notify('Регистрация прошла успешно, проверьте пожалуйста свою почту', 'SUCCESS')
-                setSuccess(true)
-            } else {
-                setSuccess(false)
-            }
+            // if(res) {
+            //     // notify('Регистрация прошла успешно, проверьте пожалуйста свою почту', 'SUCCESS')
+            //     setSuccess(true)
+            // } else {
+            //     setSuccess(false)
+            // }
         }).finally(() => {
             setLoad(false)
         })
@@ -170,7 +180,7 @@ const SignupPage = () => {
                                             ref={recapRef}
                                             onChange={e => {
                                                 if(e) {
-                                                    console.log(e)
+                                                    dispatch(updateCaptcha(e))
                                                     setcaptcha_token(e)
                                                 }
                                             }}

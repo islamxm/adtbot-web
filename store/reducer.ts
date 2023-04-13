@@ -5,7 +5,8 @@ const globalState = {
     tokens: {
         access: process?.browser && Cookies.get('adtbot-console-access-token') ? Cookies.get('adtbot-console-access-token') : null,
         refresh: process?.browser &&  Cookies.get('adtbot-console-refresh-token') ? Cookies.get('adtbot-console-refresh-token') : null
-    }
+    },
+    captcha: ''
 }
 
 const reducer = (state = globalState, action: any) => {
@@ -19,6 +20,11 @@ const reducer = (state = globalState, action: any) => {
             return {
                 ...globalState,
                 tokens: action.tokens
+            }
+        case 'UPDATE_CAPTCHA':
+            return {
+                ...globalState,
+                captcha: action.captcha
             }
         default:
             return state;

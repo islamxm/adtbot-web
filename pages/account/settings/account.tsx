@@ -22,7 +22,16 @@ const AccountPage = () => {
 
     const getData = useCallback(() => {
         if(access) {
-            //get init data
+            service.getUserData(access).then(res => {
+                console.log(res)
+            })
+        }
+    }, [access])
+
+
+    useEffect(() => {
+        if(access) {
+            getData()
         }
     }, [access])
 

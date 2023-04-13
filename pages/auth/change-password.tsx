@@ -9,15 +9,25 @@ import Link from "next/link";
 import PassResetModal from "@/pageModules/auth/modals/PassResetModal/PassResetModal";
 import {useState} from 'react';
 import Head from "next/head";
+import { useAppSelector, useAppDispatch } from "@/hooks/useTypesRedux";
+import ApiService from "@/service/apiService";
+
+const service = new ApiService()
+
 
 const ResetPage = () => {
+
+    const [code, setCode] = useState('')
+    const [password, setPassword] = useState('')
+    
+
+
     return (
         <>
             <Head>
                 <title>Изменить пароль | ADTBot</title>
             </Head>
             <PageLayout>
-
                 <Row gutter={[0,0]} align={'middle'}>
                     <Col span={12}>
                         <PromoSlider/>

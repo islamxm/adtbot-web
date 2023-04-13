@@ -10,6 +10,7 @@ const endpoints = {
     forgotPassword: `${PATH}forgot_password/`,
     resetPassword: `${PATH}reset_password/`,
     getOAuth2Token: `${PATH}token/`,
+    getUserData: `${PATH}get_personal_data/`,
 
     //telegram_bot
     setTgKey: `${PATH}set_tg_key/`,
