@@ -15,6 +15,10 @@ import TgLink from '@/components/TgLink/TgLink';
 import FixedAction from '@/components/FixedAction/FixedAction';
 import { Provider } from 'react-redux';
 import store from '@/store/store';
+import PrivateRoute from '@/hoc/CheckAuth';
+import MainWrapper from '@/components/MainWrapper/MainWrapper';
+
+
 NProgress.configure({ showSpinner: false })
 Router.events.on('routeChangeStart', () => NProgress.start()); 
 Router.events.on('routeChangeComplete', () => NProgress.done()); 
@@ -28,20 +32,26 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
       <ConfigProvider locale={ruRu}>
-        <div className="wrapper">
-            <ToastContainer/>
+        <PrivateRoute>
+          <MainWrapper>
+            <div className="wrapper">
+              <ToastContainer/>
+              {
+                pathname?.includes('/auth') ? (
+                  null
+                ) : <Sidebar/>
+              }
+              <Component {...pageProps} />
+            </div>
             {
-              pathname?.includes('/auth') ? (
-                null
-              ) : <Sidebar/>
+              !pathname?.includes('/auth') ? (
+                <FixedAction/>
+              ) : null
             }
-            <Component {...pageProps} />
-          </div>
-          {
-            !pathname?.includes('/auth') ? (
-              <FixedAction/>
-            ) : null
-          }
+          </MainWrapper>
+          
+        </PrivateRoute>
+        
         
     
       </ConfigProvider>
