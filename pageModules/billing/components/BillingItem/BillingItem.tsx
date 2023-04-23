@@ -12,7 +12,9 @@ const BillingItem:FC<billingItemPropsTypes> = ({
     title,
     list,
     isCurrent,
-    onSelect
+    onSelect,
+    id,
+    load
 }) => {
 
     return (
@@ -74,8 +76,9 @@ const BillingItem:FC<billingItemPropsTypes> = ({
                     </Col>
                     <Col span={24}>
                         <Button
-                            onClick={onSelect}
+                            onClick={() => onSelect && onSelect(id)}
                             disabled={isCurrent}
+                            load={load}
                             text={isCurrent ? 'Текущий тариф' : 'Выбрать тариф'}
                             variant={isTop ? 'default' : 'blue'}
                             fill

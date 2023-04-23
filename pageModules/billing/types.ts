@@ -12,6 +12,7 @@ export type billingItemPropsTypes = {
     title?:string,
     list?: descrListType[],
     isCurrent?: boolean,
-    onSelect?: (...args: any[]) => void,
-    
+    onSelect?: (id: number) => void,
+    id: number
+    load?: boolean
 }

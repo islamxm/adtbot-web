@@ -5,12 +5,14 @@ import {useState, useEffect, useCallback} from 'react';
 import ApiService from '@/service/apiService';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import Head from "next/head";
-
-
+import { useAppDispatch } from "@/hooks/useTypesRedux";
+import { updateUserData } from "@/store/actions";
+import notify from "@/helpers/notify";
 const service = new ApiService()
 
 const AccountPage = () => {
-    const {tokens: {access}} = useAppSelector(s => s)
+    const dispatch = useAppDispatch()
+    const {tokens: {access}, userData} = useAppSelector(s => s)
     const [load, setLoad] = useState(false)
 
     const [username, setUsername] = useState('')
@@ -18,38 +20,91 @@ const AccountPage = () => {
     const [password, setPassword] = useState('')
     const [old_password, setOld_password] = useState('')
     const [rep, setRep] = useState('')
-
-
-    const getData = useCallback(() => {
-        if(access) {
-            service.getUserData(access).then(res => {
-                console.log(res)
-            })
-        }
-    }, [access])
-
+    const [tg_notifications_enabled, settg_notifications_enabled] = useState(false)
+    const [email_notifications_enabled, setemail_notifications_enabled] = useState(false)
+    
 
     useEffect(() => {
-        if(access) {
-            getData()
+        if(userData) {
+            setUsername(userData?.username)
+            setEmail(userData?.email)
+            setemail_notifications_enabled(userData?.email_notifications_enabled)
+            settg_notifications_enabled(userData?.tg_notifications_enabled)
         }
-    }, [access])
+    }, [userData])
 
 
-    const editData = useCallback(() => {
+
+    const changeData = () => {
         if(access) {
-            service.editUserData({
-                username,
-                email,
-                password,
-                old_password
-            }, access).then(res => {
-                console.log(res)
-            }).finally(() => {
-                setLoad(false)
+            setLoad(true)
+            const body: {
+                username?: string,
+                password?: string,
+                old_password?: string
+                email?: string
+            } = {}
+            if(username) {
+                body.username = username
+            }
+            if(email) {
+                body.email = email
+            }
+            if(old_password) {
+                body.old_password = old_password
+            }
+            if(password) {
+                body.password = password
+            }
+
+            service.editUserData(body, access).then(res => {
+                if(res?.detail) {
+                    notify('Произошла ошибка', 'ERROR')
+                    if(userData) {
+                        setUsername(userData?.username)
+                        setEmail(userData?.email)
+                    }
+                }
+            }).finally(() => setLoad(false))
+
+            
+        }
+    }
+
+
+
+    const editEmailStatus = (status: boolean) => {
+        if(access) {
+            service.setEmailNot(status, access).then(res => {
+            
+                if(res === true) {
+                    notify('Статус уведомлений на почту изменен', 'SUCCESS')
+                    setemail_notifications_enabled(status)
+                } else {
+                    notify('Произошла ошибка при изменении статуса уведомлений на почту', 'ERROR')
+                    setemail_notifications_enabled(!status)
+                }
             })
         }
-    }, [access, rep, username, password, old_password, email])
+        
+    }
+
+    const editTgStatus = (status: boolean) => {
+        if(access) {
+
+            service.setTgNot(status, access).then(res => {
+               
+                if(res === true) {
+                    notify('Статус уведомлений на телеграм изменен', 'SUCCESS')  
+                    settg_notifications_enabled(status)
+                } else {
+                    settg_notifications_enabled(!status)
+                    notify('Произошла ошибка при изменении статуса уведомлений на телеграм', 'ERROR')
+                }
+            })
+        }
+    }
+ 
 
 
     return (
@@ -58,11 +113,17 @@ const AccountPage = () => {
             >
             <Head><title>Аккаунт | ADTBot</title></Head>
             <SettingsLayout
-                onSave={editData}
+                onSave={changeData}
                 load={load}
                 // disabled={}
                 >
                 <Body
+                    submitEmailNot={editEmailStatus}
+                    submitTgNot={editTgStatus}
+                    tg_notifications_enabled={tg_notifications_enabled}
+                    email_notifications_enabled={email_notifications_enabled}
+                    setemail_notifications_enabled={setemail_notifications_enabled}
+                    settg_notifications_enabled={settg_notifications_enabled}
                     username={username}
                     email={email}
                     password={password}

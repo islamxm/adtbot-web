@@ -30,9 +30,8 @@ const ResetPage = () => {
 
     const onSubmit = () => {
         if(email && captcha_token) {
-            service.forgotPassword({email}, captcha_token).then(res => {
+            service.forgotPassword({email, captcha_token}).then(res => {
                 console.log(res)
-                
             }).finally(() => {
                 setLoad(false)
             })

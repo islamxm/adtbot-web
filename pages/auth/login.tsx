@@ -54,16 +54,37 @@ const LoginPage = () => {
 
     const onSubmit = useCallback(() => {
         setLoad(true)
-        const body = new FormData();
-        body.append('username', username)
-        body.append('password', password)
-        body.append('scope', '')
-        body.append('totp_code', totp_code)
-        body.append('grant_type', grant_type)
+        const body = {
+            captcha_token,
+            grant_type,
+            username,
+            password,
+            scope,
+            totp_code,
+        }
 
 
-        service.getOAuth2Token(body, captcha_token).then(res => {
+        service.getOAuth2Token(body).then(res => {
             console.log(res)
+
+            if(res?.access_token) {
+                if(saveMe) {
+                    Cookies.set('adtbot-console-access-token', res?.access_token) //access_token
+                    Cookies.set('adtbot-console-refresh-token', res?.refresh_token) //refresh_token
+                    dispatch(updateTokens({access: res?.access_token, refresh: res?.refresh_token}))
+                } else {
+                    Cookies.remove('adtbot-console-access-token') //access_token
+                    Cookies.remove('adtbot-console-refresh-token') //refresh_token
+                    dispatch(updateTokens({access: res?.access_token, refresh: res?.refresh_token}))
+                }
+
+                if(res?.is_first_login) {
+                    Router.push('/')
+                } else {
+                    Router.push('/account/bots')
+                }
+            }
+            
             // if(res?.access_token) {
             //     if(saveMe) {
             //         Cookies.set('adtbot-console-access-token', res?.access_token) //access_token

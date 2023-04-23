@@ -40,6 +40,18 @@ const endpoints = {
     disableBot: `${PATH}disable_bot/`,
     deleteBot: `${PATH}delete_bot/`,
 
+
+    // tarif
+    changeTarif: `${PATH}change_tariff/`,
+
+
+    //payment
+    deposit: `${PATH}pay_usdt_trc20/`,
+
+
+    // referal
+    getReferalUsers: `${PATH}get_referal_users/`
+
 }
 
 export default endpoints;

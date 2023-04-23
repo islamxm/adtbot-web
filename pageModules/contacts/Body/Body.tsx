@@ -20,13 +20,14 @@ const Body = () => {
     const [load, setLoad] = useState(false)
 
     const addFeedback = useCallback(() => {
-        if(access) {
-            
+        if(access) {    
+            console.log(text)
             service.addFeedback(text, access).then(res => {
                 console.log(res)
                 if(!res?.detail) {
                     notify('Фидбэк отправлен', 'SUCCESS')
-                } else {
+                }
+                if(res === true) {
                     notify('Произошла ошибка', 'ERROR')
                 }
             }).catch(() => {
@@ -35,7 +36,7 @@ const Body = () => {
                 setLoad(false)
             }})
         }
-    }, [access])
+    }, [access, text])
 
 
 

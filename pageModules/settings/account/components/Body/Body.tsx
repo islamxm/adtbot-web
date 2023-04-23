@@ -18,13 +18,36 @@ const Body = (props: {
     password?: string,
     old_password?: string,
     rep?: string,
+    email_notifications_enabled: boolean,
+    tg_notifications_enabled: boolean,
+    setemail_notifications_enabled: (...args: any[]) => any,
+    settg_notifications_enabled: (...args: any[]) => any,
+    submitEmailNot: (status: boolean) => any,
+    submitTgNot: (status: boolean) => any,
     setEmail: (...args: any[]) => any,
     setUsername: (...args: any[]) => any
     setPassword: (...args: any[]) => any
     setOld_password: (...args: any[]) => any
     setRep: (...args: any[]) => any
 }) => {
-    const {email, username, password, old_password, rep, setEmail, setPassword, setOld_password, setRep, setUsername} = props
+    const {
+        email, 
+        username, 
+        password, 
+        old_password, 
+        rep,
+        email_notifications_enabled,
+        tg_notifications_enabled, 
+        submitEmailNot,
+        submitTgNot,
+        setemail_notifications_enabled,
+        settg_notifications_enabled,
+        setEmail, 
+        setPassword, 
+        setOld_password, 
+        setRep, 
+        setUsername
+    } = props
 
 
     
@@ -93,12 +116,22 @@ const Body = (props: {
                                         <Row gutter={[15,15]}>
                                             <Col span={24}>
                                                 <Switch
+                                                    checked={email_notifications_enabled}
+                                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                                        setemail_notifications_enabled(e.target.checked)
+                                                        submitEmailNot(e.target.checked)
+                                                    }}
                                                     id='mail'
                                                     labelText='Почта'
                                                     />
                                             </Col>
                                             <Col span={24}>
                                                 <Switch
+                                                    checked={tg_notifications_enabled}
+                                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                                        settg_notifications_enabled(e.target.checked)
+                                                        submitTgNot(e.target.checked)
+                                                    }}
                                                     id='telegram'
                                                     labelText='Телеграм'
                                                     />

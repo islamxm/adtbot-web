@@ -51,6 +51,7 @@ const SignupPage = () => {
     // }, [recapRef])
 
 
+
     const onSubmit =  useCallback(() => {
         setLoad(true)
         // const body = new FormData();
@@ -59,14 +60,22 @@ const SignupPage = () => {
         // body.append('username', username)
         // body.append('is_superuser', false)
 
-        service && service.register({
-            email,
-            password,
-            username,
-            is_superuser: false,
-        }, captcha_token).then(res => {
-            console.log(res)
 
+        const body = {
+            username,
+            password,
+            email,
+            is_superuser: false,
+            captcha_token,
+            referal_code: ''
+        }
+        service && service.register(body).then(res => {
+            console.log(res)
+            // if(res?.access) {
+
+            // } else {
+
+            // }
             // if(res) {
             //     // notify('Регистрация прошла успешно, проверьте пожалуйста свою почту', 'SUCCESS')
             //     setSuccess(true)

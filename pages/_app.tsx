@@ -17,7 +17,7 @@ import { Provider } from 'react-redux';
 import store from '@/store/store';
 import PrivateRoute from '@/hoc/CheckAuth';
 import MainWrapper from '@/components/MainWrapper/MainWrapper';
-
+import Head from 'next/head';
 
 NProgress.configure({ showSpinner: false })
 Router.events.on('routeChangeStart', () => NProgress.start()); 
@@ -32,6 +32,9 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
       <ConfigProvider locale={ruRu}>
+        <Head>
+          <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"/>
+        </Head>
         <PrivateRoute>
           <MainWrapper>
             <div className="wrapper">

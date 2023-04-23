@@ -47,6 +47,11 @@ const reducer = (state = globalState, action: any) => {
                 ...state,
                 captcha: action.captcha
             }
+        case 'UPDATE_USER_DATA':
+            return {
+                ...state,
+                userData: action.data
+            }
         default:
             return state;
     }

@@ -8,8 +8,7 @@ import Head from "next/head";
 
 const HomePage = () => {
     const {tokens} = useAppSelector(s => s)
-    // Router.push('/console/my-bots')
-    // return null;
+    
     return (
         <>
             <Head>

@@ -7,6 +7,8 @@ import img2 from '@/public/assets/icons/start-2.svg';
 import img3 from '@/public/assets/icons/start-3.svg';
 import img4 from '@/public/assets/icons/start-4.svg';
 import Image from 'next/image';
+import {useEffect} from 'react';
+import { useAppSelector } from '@/hooks/useTypesRedux';
 
 const list = [
     {
@@ -34,6 +36,9 @@ const list = [
 
 
 const Start = () => {
+    const {userData} = useAppSelector(s => s)
+
+
 
     return (
         <div className={styles.wrapper}>
@@ -42,7 +47,7 @@ const Start = () => {
                     <div className={styles.main}>
                         <Row gutter={[20,20]}>
                             <Col span={24}>
-                                <h1 className={styles.title}>Дмитрий, готовы начать?</h1>
+                                <h1 className={styles.title}>{userData?.username}, готовы начать?</h1>
                             </Col>
                             <Col span={24}>
                                 <div className={styles.text}>

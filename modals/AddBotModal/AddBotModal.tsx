@@ -50,12 +50,13 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
     const [stop_loss, setStop_loss] = useState(0)
     const [stop_buy, setStop_buy] = useState(0)
     const [enabled, setEnabled] = useState(true)
+    const [daily_volume, setDaily_volume] = useState(1)
 
     
 
     const createBot = useCallback(() => {
-        
         if(access) {
+            console.log(access)
             setSecondLoad(true)
             service.createBot({
                 monitor,
@@ -64,7 +65,8 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
                 take_profit,
                 stop_loss,
                 stop_buy,
-                enabled
+                enabled,
+                daily_volume
             }, access).then(res => {
                 console.log(res)
             }).finally(() => {
@@ -83,7 +85,8 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
                 take_profit,
                 stop_loss,
                 stop_buy,
-                enabled
+                enabled,
+                daily_volume
             }, access).then(res => {
                 console.log(res)
 
@@ -206,7 +209,7 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
                                 load={firstLoad}
                                 text='Создать и запустить'
                                 onClick={createAndEnableBot}
-                                disabled
+                                // disabled
                                 />
                         </div>
                         <div className={styles.item}>
@@ -215,7 +218,7 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
                                 load={secondLoad}
                                 text='Создать'
                                 variant={'simple'}
-                                disabled
+                                // disabled
                                 />
                         </div>
                     </div>

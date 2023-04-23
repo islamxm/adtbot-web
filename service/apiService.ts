@@ -16,10 +16,12 @@ class ApiService {
         email: string,
         username: string,
         password: string,
-        is_superuser: false,
-    }, captcha_token: string) => {
+        is_superuser: boolean,
+        captcha_token?: string,
+        referal_code?: string
+    }) => {
         try {
-            let res = await fetch(endpoints.register + `?captcha_token=${captcha_token}`, {
+            let res = await fetch(endpoints.register, {
                 method: 'POST',
                 body: JSON.stringify(body),
                 headers,
@@ -30,20 +32,20 @@ class ApiService {
         }
     }
 
-    getOAuth2Token = async (body: any
-    //     {
-    //     grant_type?: string,
-    //     username?: string,
-    //     password?: string,
-    //     scope?: string,
-    //     totp_code?: string,
-    // }
-    , captcha_token: string) => {
+    getOAuth2Token = async (body: 
+    {
+        grant_type?: string,
+        username?: string,
+        password?: string,
+        scope?: string,
+        totp_code?: string,
+        captcha_token?: string
+    }) => {
         try {
-            let res = await fetch(endpoints.getOAuth2Token + `?captcha_token=${captcha_token}`, {
+            let res = await fetch(endpoints.getOAuth2Token, {
                 method: 'POST',
                 headers,
-                body: body,
+                body: JSON.stringify(body),
                 // mode: 'no-cors'
             })
             return await checkAuth(res)
@@ -79,15 +81,18 @@ class ApiService {
     }
 
     editUserData = async (body: {
-        email: string,
-        username: string,
-        password: string,
-        old_password: string
+        email?: string,
+        username?: string,
+        password?: string,
+        old_password?: string
     }, token: TokenType) => {
         try {
             let res = await fetch(endpoints.editUserData, {
                 method: 'POST',
-                headers,
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                },
                 body: JSON.stringify(body),
             })
             return await checkAuth(res)
@@ -100,7 +105,10 @@ class ApiService {
         try {
             let res = await fetch(endpoints.getUserData, {
                 method: 'POST',
-                headers,
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                },
             })
             return await checkAuth(res)
         } catch(err) {
@@ -108,9 +116,9 @@ class ApiService {
         }
     }
 
-    forgotPassword = async (body: {email: string}, captcha_token: string) => {
+    forgotPassword = async (body: {email: string, captcha_token: string}) => {
         try {
-            let res = await fetch(endpoints.forgotPassword + `?captcha_token=${captcha_token}`, {
+            let res = await fetch(endpoints.forgotPassword, {
                 method: 'POST',
                 headers,
                 body: JSON.stringify(body),
@@ -121,11 +129,12 @@ class ApiService {
         }
     }
 
-    resetPassword = async (code: string, password: string) => {
+    resetPassword = async (body: {code: string, password: string}) => {
         try {
-            let res = await fetch(endpoints.resetPassword + `?code=${code}&password=${password}`, {
+            let res = await fetch(endpoints.resetPassword, {
                 method: 'POST',
                 headers,
+                body: JSON.stringify(body)
             })
             return await checkAuth(res)
         } catch(err) {
@@ -170,7 +179,7 @@ class ApiService {
                     ...headers,
                     'Authorization': `Bearer ${token}`
                 },
-                body: JSON.stringify({text})
+                body: JSON.stringify(text)
             })
             return await checkAuth(res)
         } catch(err) {
@@ -191,12 +200,16 @@ class ApiService {
     //     }
     // }
 
-    setTgNot = async (status: boolean) => {
+    setTgNot = async (status: boolean, token: TokenType) => {
         try {
             let res = await fetch(endpoints.setTgNot + `?status=${status}`, {
                 method: 'POST',
-                headers,
-                mode: 'no-cors'
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(status)
+                
             })
             return await checkAuth(res)
         } catch(err) {
@@ -204,12 +217,15 @@ class ApiService {
         }
     }
 
-    setEmailNot = async (status: boolean) => {
+    setEmailNot = async (status: boolean, token: TokenType) => {
         try {
             let res = await fetch(endpoints.setEmailNot + `?status=${status}`, {
                 method: 'POST',
-                headers,
-                mode: 'no-cors'
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(status)
             })
             return await checkAuth(res)
         } catch(err) {
@@ -323,14 +339,18 @@ class ApiService {
         take_profit: number,
         stop_loss: number,
         stop_buy: number,
-        enabled: boolean
+        enabled: boolean,
+        daily_volume: number
     }, token: TokenType) => {
         try {
             let res = await fetch(endpoints.createBot, {
                 method: 'POST',
-                headers,
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                },
                 body: JSON.stringify(body),
-                mode: 'no-cors'
+                
             })
             return await checkAuth(res)
         } catch(err) {
@@ -356,7 +376,12 @@ class ApiService {
     }
     
 
-    getBots = async (token?: TokenType) => {
+    getBots = async (body: {
+        bot_filter: 1 | 2 | 3 | 4,
+        offset: number,
+        limit: number,
+        ordering: any[]
+    },token?: TokenType) => {
         try {
             let res = await fetch(endpoints.getBots, {
                 method: 'POST',
@@ -364,6 +389,7 @@ class ApiService {
                     ...headers,
                     "Authorization": `Bearer ${token}`
                 },
+                body: JSON.stringify(body)
                 //mode: 'no-cors'
             })
             return await checkAuth(res)
@@ -378,6 +404,58 @@ class ApiService {
                 method: 'POST',
                 headers,
                 mode: 'no-cors'
+            })
+            return await checkAuth(res)
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+
+    changeTarif = async (id: number, token: TokenType) => {
+        try {
+            let res = await fetch(endpoints.changeTarif, {
+                method: 'POST',
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(id)
+            })
+            return await checkAuth(res)
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+    deposit = async (body: {    
+        txid: string,
+        wallet: string,
+        payment_method: 1 | 2
+    }, token: TokenType) => {
+        try {
+            let res = await fetch(endpoints.deposit, {
+                method: "POST",
+                body: JSON.stringify(body),
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            return await checkAuth(res)
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+    getReferalUsers = async (token: TokenType) => {
+        try {
+            let res = await fetch(endpoints.getReferalUsers, {
+                method: 'POST',
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                }
             })
             return await checkAuth(res)
         } catch(err) {

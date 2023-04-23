@@ -3,7 +3,7 @@ import { billingItemPropsTypes } from '../../types';
 import BillingItem from '../BillingItem/BillingItem';
 import StatusModal from '@/modals/StatusModal/StatusModal';
 import {HiOutlineCash} from 'react-icons/hi';
-import { useState } from 'react';
+import { useState, FC } from 'react';
 import mexc from '@/public/assets/icons/mexc.svg';
 import coinbase from '@/public/assets/icons/coinbase.svg';
 import huobi from '@/public/assets/icons/huobi.svg';
@@ -23,6 +23,7 @@ import DepositModal from '@/modals/DepositModal/DepositModal';
 
 const list: billingItemPropsTypes[] = [
     {
+        id: 1,
         isTop: false,
         title: 'Free',
         isCurrent: true,
@@ -46,6 +47,7 @@ const list: billingItemPropsTypes[] = [
         ],
     },
     {
+        id: 2,
         isTop: false,
         title: 'Standart',
         isCurrent: false,
@@ -71,6 +73,7 @@ const list: billingItemPropsTypes[] = [
         ]
     },
     {
+        id: 3,
         isTop: true,
         title: 'Pro',
         isCurrent: false,
@@ -98,6 +101,7 @@ const list: billingItemPropsTypes[] = [
         ]
     },
     {
+        id: 4,
         isTop: false,
         title: 'Premium',
         isCurrent: false,
@@ -132,12 +136,16 @@ const list: billingItemPropsTypes[] = [
 ]
 
 
-const BillingList = () => {
-    const [buyModal, setBuyModal] = useState<boolean>(false)
+const BillingList:FC<{
+    active?: number,
+    onChange?: (id: number) => any,
+    load?: boolean
+}> = ({
+    active,
+    onChange,
+    load
+}) => {
     const [depositModal, setDepositModal] = useState(false)
-
-    const openBuyModal = () => setBuyModal(true)
-    const closeBuyModal = () => setBuyModal(false)
 
     const openDepositModal = () => setDepositModal(true)
     const closeDepositModal = () => setDepositModal(false)
@@ -147,12 +155,6 @@ const BillingList = () => {
             <DepositModal
                 open={depositModal}
                 onCancel={closeDepositModal}
-                />
-            <StatusModal
-                title='Тариф изменен'
-                status={'success'}
-                open={buyModal}
-                onCancel={closeBuyModal}
                 />
             <div className={styles.action}>
                 <Button
@@ -168,7 +170,9 @@ const BillingList = () => {
                         <div className={styles.item} key={index}>
                             <BillingItem
                                 {...item}
-                                onSelect={openBuyModal}
+                                load={load}
+                                isCurrent={active === item.id}
+                                onSelect={(id) => onChange && onChange(id)}
                                 />
                         </div>
                     ))

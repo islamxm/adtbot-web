@@ -23,10 +23,9 @@ const service = new ApiService();
 
 const statusOptions = [
     {value: '1', label: 'Все'},
-    {value: '2', label: 'Активный'},
+    {value: '2', label: 'Активные'},
     {value: '3', label: 'В режиме ожидания'},
     {value: '4', label: 'Остановлен'},
-    {value: '5', label: 'Отработан'},
 ]
 const tableSizes = [
     {value: '1', label: '10 строк'},
@@ -40,7 +39,6 @@ const tableSizes = [
 const Body = () => {
     const {tokens: {access}} = useAppSelector(s => s)
     const [currentPage, setCurrentPage] = useState<number>(1)
-    const [status, setStatus] = useState<string>('1');
     const [hidden, setHidden] = useState(false)
     const [tableSize, setTableSize] = useState('1')
     const [addBotModal, setAddBotModal] = useState(false)
@@ -51,18 +49,36 @@ const Body = () => {
     const [list, setList] = useState<any[]>([])
 
 
-    const getList = useCallback(() => {
+    // filter
+    const [bot_filter, setBot_filter] = useState<1 | 2 | 3 | 4>(1) //ALL = 1 ACTIVE = 2 WAITING = 3 STOPPED = 4
+    const [limit, setLimit] = useState(10)
+    const [offset, setOffset] = useState(0)
+    const [ordering, setOrdering] = useState([])
+
+
+
+    const updateList = useCallback(() => {
+        
         if(access) {
-            service.getBots(access).then(res => {
+
+
+            service.getBots({
+                bot_filter,
+                limit,
+                offset,
+                ordering
+            }, access).then(res => {
                 console.log(res)
-                setList(res)
             })
+
         }
-    }, [access])
+
+
+    }, [bot_filter, limit, offset, ordering, access])
 
     useEffect(() => {
-        getList() 
-    }, [access])
+        updateList && updateList()
+    }, [bot_filter, limit, offset, ordering, access])
 
     return (
         <div className={styles.wrapper}>
@@ -72,6 +88,9 @@ const Body = () => {
                 />
             <StopBotModal/>
             <DeleteBotModal/>
+
+
+
             <div className={styles.action}>
                 <Button
                     onClick={openAddBotModal} 
@@ -79,6 +98,8 @@ const Body = () => {
                     style={{paddingLeft: 30, paddingRight: 30}} 
                     text='Создать бот'/>
             </div>
+
+
             <div className='table'>
                 <div className="table-top">
                     <div className={styles.top}>
@@ -86,9 +107,10 @@ const Body = () => {
                             <div className={styles.item}>
                                 <Select 
                                     noBorder
-                                    value={status}
+                                    defaultValue={bot_filter.toString()}
                                     options={statusOptions}
-                                    onChange={setStatus}
+                                    onChange={(e, v) => setBot_filter(e)}
+                                    
                                     />
                             </div>
                         </div>

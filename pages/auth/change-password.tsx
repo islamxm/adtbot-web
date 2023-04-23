@@ -16,10 +16,24 @@ const service = new ApiService()
 
 
 const ResetPage = () => {
-
+    const [load, setLoad] = useState(false)
     const [code, setCode] = useState('')
     const [password, setPassword] = useState('')
     
+
+    const onSubmit = () => {
+        if(password) {
+            setLoad(true)
+            const body = {
+                code: 'eyjhbgcioijiuzi1niisinr5cci6ikpxvcj9.eyjyzxnldf91c2vyijoimtailcjlehaioje2odiwnzaxmtz9.6oxgxccsz5cqb36jkenfollhckbn2gkab4k4nt_un9g',
+                password
+            }
+            service.resetPassword(body).then(res => {
+                console.log(res)
+            }).finally(() => setLoad(false))
+        }
+
+    }
 
 
     return (
@@ -39,6 +53,8 @@ const ResetPage = () => {
                             <Row gutter={[15,15]}>
                                 <Col span={24}>
                                     <Input
+                                        value={password}
+                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
                                         type="password"
                                         placeholder="Новый пароль"
                                         label="Новый пароль"
@@ -53,6 +69,8 @@ const ResetPage = () => {
                                 </Col>
                                 <Col span={24}>
                                     <Button
+                                        load={load}
+                                        onClick={onSubmit}
                                         text="Сохранить"
                                         fill
                                         />
