@@ -4,6 +4,10 @@ import Input from '@/components/Input/Input';
 import Button from '@/components/Button/Button';
 import { useEffect, useState } from 'react';
 import StatusModal from '@/modals/StatusModal/StatusModal';
+import ApiService from '@/service/apiService';
+import { useAppSelector } from '@/hooks/useTypesRedux';
+
+const service = new ApiService()
 
 
 const Enable = ({
@@ -11,6 +15,9 @@ const Enable = ({
 }: {
     setDone: (arg: any) => any
 }) => {
+    const {tokens: {access}} = useAppSelector(s => s)
+    const [secret, setSecret] = useState('')
+    const [qr, setQr] = useState('')
     const [code, setCode] = useState('');
     const [warnModal, setWarnModal] = useState(false)
 
@@ -19,6 +26,17 @@ const Enable = ({
     useEffect(() => {
         setWarnModal(true)
     }, [])
+
+    useEffect(() => {
+        if(access) {
+            service.get2FData(access).then(res => {
+                setSecret(res?.secret)
+                setQr(res?.qrcode_url)
+            })
+        }
+    },[access])
+
+
 
 
     return (
@@ -59,7 +77,8 @@ const Enable = ({
                                     <QRCode 
                                         size={260}
                                         color={'#6F91EE'}
-                                        value='https://console.adtbot.com/'/>
+                                        status={!qr ? 'loading' : 'active'}
+                                        value={qr}/>
                                 </Col>
                                 {/* <Col>
                                     <p>Код из приложения</p>
@@ -77,7 +96,7 @@ const Enable = ({
                             Для активации 2FA отсканируйте QR-код или введите секретный ключ в <a href="https://support.google.com/accounts/answer/1066447" target={'_blank'}>Google Authenticator</a>.
                             <br/>
                             <br/>
-                            Секретный ключ: <span>kdgslgs8sdf40nd934mx3s89fugsd5gwrjwrw</span>
+                            Секретный ключ: <span>{secret}</span>
                             </p>
                         </div>
                     </div>
@@ -101,7 +120,7 @@ const Enable = ({
                         <div className={styles.btn}>
                             <Button
                                 onClick={() => setDone(true)}
-                                // disabled={code?.length !== 6}
+                                disabled={code?.length !== 7}
                                 text='Проверить'
                                 style={{paddingLeft: 30, paddingRight: 30}}
                                 />

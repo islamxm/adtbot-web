@@ -67,7 +67,7 @@ const SignupPage = () => {
             email,
             is_superuser: false,
             captcha_token,
-            referal_code: ''
+            // referal_code: ''
         }
         service && service.register(body).then(res => {
             console.log(res)

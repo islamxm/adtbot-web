@@ -1,4 +1,4 @@
-export const BASE_DOMAIN = `https://adtbot.com`;
+export const BASE_DOMAIN = ` http://194.87.79.172:8000`;
 export const PATH = `${BASE_DOMAIN}/api/v1/`
 
 const endpoints = {
@@ -11,6 +11,9 @@ const endpoints = {
     resetPassword: `${PATH}reset_password/`,
     getOAuth2Token: `${PATH}token/`,
     getUserData: `${PATH}get_personal_data/`,
+
+    get2FData: `${PATH}get_totp_data/`,
+    set2FStatus: `${PATH}set_totp_enabled`,
 
     //telegram_bot
     setTgKey: `${PATH}set_tg_key/`,

@@ -3,10 +3,21 @@ import {Row, Col} from 'antd';
 import Input from '@/components/Input/Input';
 import IpTable from '../IpTable/IpTable';
 import Ex from '../Ex/Ex';
+import { IKey } from '@/pages/account/settings/api';
+import {FC} from 'react';
 
-const TabBody = ({
-    testTitle
-}: {testTitle?: string}) => {
+interface I {
+    testTitle?: string,
+    values: IKey,
+    setValues: (...args: any[]) => any
+}
+
+
+const TabBody:FC<I> = ({
+    testTitle,
+    values,
+    setValues   
+}) => {
 
     return (
         <div className={styles.wrapper}>
@@ -26,6 +37,8 @@ const TabBody = ({
                         <Col span={24}>
                             <Input
                                 // label='Публичный ключ'
+                                value={values?.public}
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setValues((s: any) => ({...s, public: e.target.value}))}
                                 nodeLabel={
                                     <div className={styles.pb}>
                                         Публичный ключ  
@@ -37,7 +50,8 @@ const TabBody = ({
                         </Col>
                         <Col span={24}>
                             <Input
-                                // label='Приватный ключ'
+                                value={values?.private}
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setValues((s: any) => ({...s, private: e.target.value}))}
                                 nodeLabel={
                                     <div className={styles.pb}>
                                         Приватный ключ

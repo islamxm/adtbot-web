@@ -37,36 +37,50 @@ const AccountPage = () => {
 
     const changeData = () => {
         if(access) {
-            setLoad(true)
-            const body: {
-                username?: string,
-                password?: string,
-                old_password?: string
-                email?: string
-            } = {}
-            if(username) {
-                body.username = username
-            }
-            if(email) {
-                body.email = email
-            }
-            if(old_password) {
-                body.old_password = old_password
-            }
-            if(password) {
-                body.password = password
-            }
-
-            service.editUserData(body, access).then(res => {
-                if(res?.detail) {
-                    notify('Произошла ошибка', 'ERROR')
-                    if(userData) {
-                        setUsername(userData?.username)
-                        setEmail(userData?.email)
-                    }
+            if(!old_password) {
+                notify('Для изменения данных нужно ввести текущий пароль от вашего аккаунта', 'ERROR')
+            } else {
+                setLoad(true)
+                const body: {
+                    username?: string,
+                    password?: string,
+                    old_password?: string
+                    email?: string
+                } = {}
+                if(username) {
+                    body.username = username
                 }
-            }).finally(() => setLoad(false))
+                if(email) {
+                    body.email = email
+                }
+                if(old_password) {
+                    body.old_password = old_password
+                }
+                if(password) {
+                    body.password = password
+                }
 
+                service.editUserData(body, access).then(res => {
+                    if(res?.detail) {
+                        notify('Произошла ошибка', 'ERROR')
+                        if(userData) {
+                            setUsername(userData?.username)
+                            setEmail(userData?.email)
+                        }
+                    }
+                    if(res === true) {
+                        service.getUserData(access).then(res => {
+                            if(res?.email) {
+                                notify('Данные успешно изменены', 'SUCCESS')
+                                dispatch(updateUserData(res))
+                                setOld_password('')
+                            }
+                        })
+                    }
+                }).finally(() => setLoad(false))
+
+            }
+            
             
         }
     }

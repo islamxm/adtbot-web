@@ -18,7 +18,7 @@ class ApiService {
         password: string,
         is_superuser: boolean,
         captcha_token?: string,
-        referal_code?: string
+        // referal_code?: string
     }) => {
         try {
             let res = await fetch(endpoints.register, {
@@ -79,6 +79,38 @@ class ApiService {
             console.log(err)
         }
     }
+
+    get2FData = async (token: TokenType) => {
+        try {
+            let res = await fetch(endpoints.get2FData, {
+                method: "POST",
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            return await checkAuth(res)
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+
+    set2FStatus = async (token: TokenType) => {
+        try {
+            let res = await fetch(endpoints.set2FStatus, {
+                method: 'POST',
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                }
+            }) 
+            return await checkAuth(res)
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
 
     editUserData = async (body: {
         email?: string,

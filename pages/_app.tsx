@@ -46,11 +46,11 @@ export default function App({ Component, pageProps }: AppProps) {
               }
               <Component {...pageProps} />
             </div>
-            {
+            {/* {
               !pathname?.includes('/auth') ? (
                 <FixedAction/>
               ) : null
-            }
+            } */}
           </MainWrapper>
           
         </PrivateRoute>

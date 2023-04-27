@@ -65,8 +65,8 @@ const LoginPage = () => {
 
 
         service.getOAuth2Token(body).then(res => {
-            console.log(res)
-
+            
+            
             if(res?.access_token) {
                 if(saveMe) {
                     Cookies.set('adtbot-console-access-token', res?.access_token) //access_token
@@ -83,24 +83,9 @@ const LoginPage = () => {
                 } else {
                     Router.push('/account/bots')
                 }
+            } else {
+                console.log(res)
             }
-            
-            // if(res?.access_token) {
-            //     if(saveMe) {
-            //         Cookies.set('adtbot-console-access-token', res?.access_token) //access_token
-            //         Cookies.set('adtbot-console-refresh-token', res?.refresh_token) //refresh_token
-            //         dispatch(updateTokens({access: res?.access_token, refresh: res?.refresh_token}))
-            //     } else {
-            //         Cookies.remove('adtbot-console-access-token') //access_token
-            //         Cookies.remove('adtbot-console-refresh-token') //refresh_token
-            //         dispatch(updateTokens({access: res?.access_token, refresh: res?.refresh_token}))
-            //     }
-                
-            //     Router.push('/')
-            // } else {
-            //     recapRef?.current?.reset()
-            //     notify('Произошла ошибка', 'ERROR')
-            // }
         }).finally(() => {
             setLoad(false)
         })
@@ -150,7 +135,7 @@ const LoginPage = () => {
                                     value={username}
                                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
                                     placeholder="example@mail.com"
-                                    label="Email"
+                                    label="E-mail"
                                     type="email"
                                     />
                             </Col>
