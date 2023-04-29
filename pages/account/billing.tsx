@@ -4,21 +4,22 @@ import BillingEx from "@/pageModules/billing/components/BillingEx/BillingEx"
 import Head from "next/head"
 import { useEffect, useState } from "react"
 import ApiService from "@/service/apiService"
-import { useAppSelector } from "@/hooks/useTypesRedux"
+import { useAppSelector, useAppDispatch } from "@/hooks/useTypesRedux"
 import StatusModal from "@/modals/StatusModal/StatusModal"
 import { statusTypes } from "@/modals/StatusModal/types"
-
+import { updateUserData } from "@/store/actions"
 const service = new ApiService()
 
 
 const PricingPage = () => {
+    const dispatch = useAppDispatch()
     const {tokens: {access}, userData} = useAppSelector(s => s)
     const [load, setLoad] = useState(false)
     const [status, setStatus] = useState<{status: statusTypes, title: string} >({status: 'error', title: ''})
     const [statusModal, setStatusModal] = useState(false)
 
     const onChangeTarif = (id: number) => {
-        console.log('change', id)
+
         if(access) {
             setLoad(true)
             service.changeTarif(id, access).then(res => {
@@ -28,6 +29,9 @@ const PricingPage = () => {
                         title: res?.detail
                     })
                     setStatusModal(true)
+                    service.getUserData(access).then(res => {
+                        dispatch(updateUserData(res))
+                    })
                 }
                 if(res === true) {
                     setStatus({

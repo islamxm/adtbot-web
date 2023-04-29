@@ -469,7 +469,6 @@ class ApiService {
 
     deposit = async (body: {    
         txid: string,
-        wallet: string,
         payment_method: 1 | 2
     }, token: TokenType) => {
         try {

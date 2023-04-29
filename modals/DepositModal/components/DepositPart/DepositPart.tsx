@@ -6,16 +6,52 @@ import {Row, Col} from 'antd';
 import {TbCopy} from 'react-icons/tb';
 import Link from 'next/link';
 import copyValue from '@/helpers/copyValue';
+import { useAppSelector, useAppDispatch } from '@/hooks/useTypesRedux';
+import ApiService from '@/service/apiService';
+import notify from '@/helpers/notify';
+import { updateUserData } from '@/store/actions';
 
+const service = new ApiService()
 
 const DepositPart = ({
     closeModal,
-    target
+    target,
+    type
 }:{
     closeModal?: (...args: any[]) => any,
-    target?: string
+    target?: string,
+    type: 1 | 2
 }) => {
+    const dispatch = useAppDispatch()
+    const {tokens: {access}} = useAppSelector(s => s)
+    const [load, setLoad] = useState(false)
     const [value, setValue] = useState<string>('')
+
+    const onSave = () => {
+        if(value && access && target) {
+            setLoad(true)
+            service.deposit({
+                txid: value,
+                payment_method: type
+            }, access).then(res => {
+                console.log(res)
+                if(res === true) {
+                    notify('Баланс успешно пополнен', 'SUCCESS')
+                    service.getUserData(access).then(res => {
+                        if(res?.email) {
+                            dispatch(updateUserData(res))
+                        }
+                    }).finally(() => {
+                        setLoad(false)
+                        setValue('')
+                    })
+                } else {
+                    notify('Произошла ошибка', 'ERROR')
+                    setLoad(false)
+                }
+            })
+        }
+    }
 
 
     return (
@@ -60,6 +96,8 @@ const DepositPart = ({
                             <div className={styles.field}>
                                 <div className={styles.input}>
                                     <Input
+                                        value={value}
+                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value)}
                                         placeholder='xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
                                         />
                                 </div>
@@ -78,6 +116,9 @@ const DepositPart = ({
                         <div className={styles.main}>
                             <div className={styles.item}>
                                 <Button
+                                    load={load}
+                                    disabled={!value}
+                                    onClick={onSave}
                                     text='Подтвердить'
                                     />
                             </div>

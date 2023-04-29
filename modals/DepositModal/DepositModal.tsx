@@ -27,12 +27,12 @@ const DepositModal:FC<ModalFuncProps> = ({
         {
             label: 'USDT (TRC20)', 
             key: '1',
-            children: <DepositPart target='TJofsFoQdRjJ86EBp5U4DXEmTjwQpRkc9G' closeModal={onCancel}/>
+            children: <DepositPart type={1} target='TJofsFoQdRjJ86EBp5U4DXEmTjwQpRkc9G' closeModal={onCancel}/>
         },
         {
             label: 'USDT (ERC20)', 
             key: '2',
-            children: <DepositPart target='0x524c1480eAB39F7441626879933f89Fed92309F2' closeModal={onCancel}/>
+            children: <DepositPart type={2} target='0x524c1480eAB39F7441626879933f89Fed92309F2' closeModal={onCancel}/>
         },
     ]
 
