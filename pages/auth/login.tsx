@@ -52,44 +52,46 @@ const LoginPage = () => {
 
 
 
-    const onSubmit = useCallback(() => {
+    const onSubmit = () => {
         setLoad(true)
-        const body = {
+        service.getOAuth2Token({
             captcha_token,
             grant_type,
             username,
             password,
             scope,
             totp_code,
-        }
-
-
-        service.getOAuth2Token(body).then(res => {
+        }).then(res => {
+            console.log(res)
             
-            
-            if(res?.access_token) {
-                if(saveMe) {
-                    Cookies.set('adtbot-console-access-token', res?.access_token) //access_token
-                    Cookies.set('adtbot-console-refresh-token', res?.refresh_token) //refresh_token
-                    dispatch(updateTokens({access: res?.access_token, refresh: res?.refresh_token}))
-                } else {
-                    Cookies.remove('adtbot-console-access-token') //access_token
-                    Cookies.remove('adtbot-console-refresh-token') //refresh_token
-                    dispatch(updateTokens({access: res?.access_token, refresh: res?.refresh_token}))
-                }
-
-                if(res?.is_first_login) {
-                    Router.push('/')
-                } else {
-                    Router.push('/account/bots')
-                }
+            if(res?.status === 200) {
+                res?.json().then(data => {
+                    console.log(data)
+                    if(saveMe) {
+                        Cookies.set('adtbot-console-access-token', data?.access_token) //access_token
+                        Cookies.set('adtbot-console-refresh-token', data?.refresh_token) //refresh_token
+                        dispatch(updateTokens({access: data?.access_token, refresh: data?.refresh_token}))
+                    } else {
+                        Cookies.remove('adtbot-console-access-token') //access_token
+                        Cookies.remove('adtbot-console-refresh-token') //refresh_token
+                        dispatch(updateTokens({access: data?.access_token, refresh: data?.refresh_token}))
+                    }
+                    if(data?.is_first_login) {
+                        Router.push('/')
+                    } else {
+                        Router.push('/account/bots')
+                    }
+                })
             } else {
-                console.log(res)
+                notify('Произошла ошибка, проверьте пожалуйста данные', 'ERROR')
+                res?.json().then(data => {
+                    console.log(data)
+                })
             }
         }).finally(() => {
             setLoad(false)
         })
-    }, [username, password, scope, totp_code, grant_type, captcha_token, saveMe])
+    }
 
 
    

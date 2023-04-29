@@ -26,7 +26,7 @@ class ApiService {
                 body: JSON.stringify(body),
                 headers,
             })
-            return await checkAuth(res)
+            return await res
         } catch(err) {
             console.log(err)
         }
@@ -48,7 +48,7 @@ class ApiService {
                 body: JSON.stringify(body),
                 // mode: 'no-cors'
             })
-            return await checkAuth(res)
+            return await res;
         } catch(err) {
             console.log(err)
         }

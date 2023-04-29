@@ -52,15 +52,8 @@ const SignupPage = () => {
 
 
 
-    const onSubmit =  useCallback(() => {
+    const onSubmit =  () => {
         setLoad(true)
-        // const body = new FormData();
-        // body.append('email', email)
-        // body.append('password', password)
-        // body.append('username', username)
-        // body.append('is_superuser', false)
-
-
         const body = {
             username,
             password,
@@ -71,21 +64,12 @@ const SignupPage = () => {
         }
         service && service.register(body).then(res => {
             console.log(res)
-            // if(res?.access) {
-
-            // } else {
-
-            // }
-            // if(res) {
-            //     // notify('Регистрация прошла успешно, проверьте пожалуйста свою почту', 'SUCCESS')
-            //     setSuccess(true)
-            // } else {
-            //     setSuccess(false)
-            // }
+            res?.status === 400 && notify('Произошла ошибка, проверьте пожалуйста данные', 'ERROR')
+            res?.status === 200 && setSuccess(true)
         }).finally(() => {
             setLoad(false)
         })
-    }, [service, username, password, repeatPassword, email, agree, captcha_token])
+    }
 
 
 
@@ -98,7 +82,6 @@ const SignupPage = () => {
             <Head>
                 <title>Регистрация | ADTBot</title>
             </Head>
-
 
             {/* MODALS */}
             <UsePolicyModal
