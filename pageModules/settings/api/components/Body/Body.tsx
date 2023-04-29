@@ -6,6 +6,15 @@ import { IKey } from '@/pages/account/settings/api';
 import {FC} from 'react'
 
 interface I {
+    balance?: {
+        BuyingIP: string[],
+        GateBalance: any,
+        HuobiBalance: any,
+        KuCoinBalance: any,
+        MEXCBalance: any
+    },
+
+
     gate: IKey,
     ku: IKey,
     mexc: IKey,
@@ -19,6 +28,8 @@ interface I {
 
 
 const Body:FC<I> = ({
+    balance,
+
     gate,
     ku,
     mexc,
@@ -35,22 +46,22 @@ const Body:FC<I> = ({
         {
             key: '1',
             label: 'Gate.io',
-            children: <TabBody values={gate} setValues={setGate} testTitle='Gate.io'/>
+            children: <TabBody ips={balance?.BuyingIP} balance={balance?.GateBalance} values={gate} setValues={setGate} testTitle='Gate.io'/>
         },
         {
             key: '2',
             label: 'KuCoin',
-            children: <TabBody values={ku} setValues={setKu} testTitle='KuCoin'/>
+            children: <TabBody ips={balance?.BuyingIP} balance={balance?.KuCoinBalance} values={ku} setValues={setKu} testTitle='KuCoin'/>
         },
         {
             key: '3',
             label: 'MEXC',
-            children: <TabBody values={mexc} setValues={setMexc} testTitle='MEXC'/>
+            children: <TabBody ips={balance?.BuyingIP} balance={balance?.MEXCBalance} values={mexc} setValues={setMexc} testTitle='MEXC'/>
         },
         {
             key: '4',
             label: 'Huobi',
-            children: <TabBody values={huobi} setValues={setHuobi} testTitle='Huobi'/>
+            children: <TabBody ips={balance?.BuyingIP} balance={balance?.HuobiBalance} values={huobi} setValues={setHuobi} testTitle='Huobi'/>
         }
     ]
 

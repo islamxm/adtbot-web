@@ -14,7 +14,13 @@ type IState = {
         is_first_login: boolean,
         two_factor_enabled: boolean,
         tg_notifications_enabled: boolean,
-        email_notifications_enabled: boolean
+        email_notifications_enabled: boolean,
+        is_superuser: boolean,
+        money: number,
+        reg_datetime: string,
+        tariff_ends: any,
+        user_login_count: number,
+        user_own_referal: any
     },
     captcha: string
 }  

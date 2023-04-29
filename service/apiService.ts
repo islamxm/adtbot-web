@@ -46,7 +46,6 @@ class ApiService {
                 method: 'POST',
                 headers,
                 body: JSON.stringify(body),
-                // mode: 'no-cors'
             })
             return await res;
         } catch(err) {
@@ -59,7 +58,6 @@ class ApiService {
             let res = await fetch(endpoints.verifyUser + `?verify_code=${verify_code}`, {
                 method: 'POST',
                 headers,
-                mode: 'no-cors'
             })
             return await checkAuth(res)
         } catch(err) {
@@ -72,7 +70,6 @@ class ApiService {
             let res = await fetch(endpoints.verifyIp + `?code=${code}`, {
                 method: 'POST',
                 headers,
-                mode: 'no-cors'
             })
             return await checkAuth(res)
         } catch(err) {
@@ -270,7 +267,7 @@ class ApiService {
             let res = await fetch(endpoints.getNotStatus, {
                 method: 'POST',
                 headers,
-                mode: 'no-cors'
+           
             })
             return await checkAuth(res)
         } catch(err) {
@@ -282,16 +279,18 @@ class ApiService {
     setGateAuthData = async (body: {
         apiKey: string,
         secret: string,
-        password: string
-    }) => {
+        // password: string
+    }, token: TokenType) => {
         try {
             let res = await fetch(endpoints.setGateAuthData, {
                 method: 'POST',
-                headers,
-                body: JSON.stringify(body),
-                mode: 'no-cors'
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({...body, password: null}),
             })
-            return await checkAuth(res)
+            return await res;
         } catch(err) {
             console.log(err)
         }
@@ -300,16 +299,18 @@ class ApiService {
     setKucoinAuthData = async (body: {
         apiKey: string,
         secret: string,
-        password: string
-    }) => {
+
+    }, token: TokenType) => {
         try {
             let res = await fetch(endpoints.setKucoinAuthData, {
                 method: 'POST',
-                headers,
-                body: JSON.stringify(body),
-                mode: 'no-cors'
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({...body, password: null}),
             })
-            return await checkAuth(res)
+            return await res
         } catch(err) {
             console.log(err)
         }
@@ -318,16 +319,18 @@ class ApiService {
     setMexcAuthData = async (body: {
         apiKey: string,
         secret: string,
-        password: string
-    }) => {
+
+    }, token: TokenType) => {
         try {
             let res = await fetch(endpoints.setMexcAuthData, {
                 method: 'POST',
-                headers,
-                body: JSON.stringify(body),
-                mode: 'no-cors'
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({...body, password: null}),
             })
-            return await checkAuth(res)
+            return await res
         } catch(err) {
             console.log(err)
         }
@@ -336,27 +339,31 @@ class ApiService {
     setHuobiAuthData = async (body: {
         apiKey: string,
         secret: string,
-        password: string
-    }) => {
+   
+    }, token: TokenType) => {
         try {
             let res = await fetch(endpoints.setHuobiAuthData, {
                 method: 'POST',
-                headers,
-                body: JSON.stringify(body),
-                mode: 'no-cors'
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({...body, password: null}),
             })
-            return await checkAuth(res)
+            return await res
         } catch(err) {
             console.log(err)
         }
     }
 
-    getExchangeBalances = async () => {
+    getExchangeBalances = async (token: TokenType) => {
         try {
             let res = await fetch(endpoints.getExchangeBalances, {
                 method: 'POST',
-                headers,
-                mode: 'no-cors'
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                },
             })
             return await checkAuth(res)
         } catch(err) {

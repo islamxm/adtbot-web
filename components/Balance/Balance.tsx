@@ -3,8 +3,10 @@ import {IoWalletOutline, IoWarningOutline} from 'react-icons/io5';
 import Link from 'next/link';
 
 const Balance = ({
-    warning
+    warning,
+    value
 }: {
+    value?: number
     warning?: boolean
 }) => {
 
@@ -21,7 +23,7 @@ const Balance = ({
                 
             </div>
             <div className={styles.body}>
-                <div className={styles.value}>8.22 / 26 дней</div>
+                <div className={styles.value}>{value} дней</div>
                 <div className={styles.label}>Ваш баланс</div>
             </div>
         </Link>

@@ -5,31 +5,31 @@ import copyValue from '@/helpers/copyValue';
 import { TbCopy } from 'react-icons/tb';
 
 const IpTable = ({
-
-}) => {
+    values
+}: {values?: string[]}) => {
 
 
 
     return (
         <div className={styles.wrapper}>
             <div className={styles.body}>
-                <div className={styles.item}>15344439055</div>
-                <div className={styles.item}>15344439055</div>
-                <div className={styles.item}>15344439055</div>
-                <div className={styles.item}>15344439055</div>
-                <div className={styles.item}>15344439055</div>
-                <div className={styles.item}>15344439055</div>
-                <div className={styles.item}>15344439055</div>
-                <div className={styles.item}>15344439055</div>
-                <div className={styles.item}>15344439055</div>
-                <div className={styles.item}>15344439055</div>
+                {
+                    values?.map((item,index) => (
+                        <div className={styles.item} key={index}>{item}</div>
+                    ))
+                }
             </div>
-            <div className={styles.action}>
-                <Button
-                    onClick={() => copyValue({value: 'уточнить как нужно копировать таблицу с ip-адресами', notifyLabel:'Адресы скопированы'})}
-                    beforeIcon={<TbCopy/>}
-                    />
-            </div>
+            {
+                values && values?.length > 0 ? (
+                    <div className={styles.action}>
+                        <Button
+                            onClick={() => copyValue({value: values?.join(','), notifyLabel:'Адресы скопированы'})}
+                            beforeIcon={<TbCopy/>}
+                            />
+                    </div>
+                ) : null
+            }
+          
         </div>
     )
 }

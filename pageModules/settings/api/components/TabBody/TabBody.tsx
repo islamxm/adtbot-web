@@ -9,14 +9,18 @@ import {FC} from 'react';
 interface I {
     testTitle?: string,
     values: IKey,
-    setValues: (...args: any[]) => any
+    setValues: (...args: any[]) => any,
+    ips?: string[],
+    balance?: any
 }
 
 
 const TabBody:FC<I> = ({
     testTitle,
     values,
-    setValues   
+    setValues,
+    balance,
+    ips
 }) => {
 
     return (
@@ -67,16 +71,21 @@ const TabBody:FC<I> = ({
                                 ВНИМАНИЕ! В целях безопасности, в настройках API ключа на Gate.io ограничьте доступ по IP адресам и разрешите использовать только следующие адреса:
                                 </Col>
                                 <Col span={24}>
-                                    <IpTable/>
+                                    <IpTable values={ips}/>
                                 </Col>
                             </Row>
                         </Col>
-                        <Col span={24}>
-                            <div className={styles.balance}>
-                                Баланс на Gate.io  <span style={{color: 'var(--green)'}}>125 USDT</span>
-                            </div>
-                            
-                        </Col>
+                        {
+                            balance ? (
+                                <Col span={24}>
+                                    <div className={styles.balance}>
+                                        Баланс на {testTitle}  <span style={{color: 'var(--green)'}}>{balance} USDT</span>
+                                    </div>
+                                    
+                                </Col>
+                            ) : null
+                        }
+                       
                     </Row>
                 </Col>
 

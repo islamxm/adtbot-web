@@ -10,8 +10,10 @@ import copyValue from '@/helpers/copyValue';
 
 const DepositPart = ({
     closeModal,
+    target
 }:{
-    closeModal?: (...args: any[]) => any
+    closeModal?: (...args: any[]) => any,
+    target?: string
 }) => {
     const [value, setValue] = useState<string>('')
 
@@ -31,7 +33,7 @@ const DepositPart = ({
                                     <Input
                                         readOnly
                                         placeholder='xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
-                                        value={'0x513ba2bFe3Bb352283E1BabA2E742E838ba63958'}
+                                        value={target}
                                       
                                         />
                                 </div>

@@ -44,7 +44,7 @@ const Sidebar:FC<sidebarPropsTypes> = ({
     isActive
 }) => {
     const {pathname, replace} = useRouter()
-    const {isMenuOpen} = useAppSelector(s => s)
+    const {isMenuOpen, userData} = useAppSelector(s => s)
     const dispatch = useAppDispatch();
     const sidebarBodyRef = useRef<HTMLDivElement>(null)
     const [settingsOpen, setSettingsOpen] = useState<boolean>(false)
@@ -94,7 +94,12 @@ const Sidebar:FC<sidebarPropsTypes> = ({
         }
         dispatch(updateUserData(null))
         dispatch(updateTokens({access: null, refresh: null}))
+        replace('/auth/login')
     }
+
+    useEffect(() => {
+        console.log(userData)
+    }, [userData])
 
     return (
         <div className={`${styles.sidebar} ${isHidden ? styles.hidden : ''} ${isMenuOpen ? styles.open : ''}`}>
@@ -317,7 +322,9 @@ const Sidebar:FC<sidebarPropsTypes> = ({
                             !isHidden ? (
                                 <Col span={24} className={styles.balance}>
                                     <div className={styles.action_item}>
-                                        <Balance/>
+                                        <Balance
+                                            value={userData?.money}
+                                            />
                                     </div>
                                 </Col>
                             ) : null
