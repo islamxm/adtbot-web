@@ -16,7 +16,7 @@ import logoSm from '@/public/assets/logo-sm.svg';
 import {FiChevronLeft} from 'react-icons/fi';
 import {useRef} from 'react';
 import { useAppDispatch, useAppSelector } from '@/hooks/useTypesRedux';
-import { toggleMenu } from '@/store/actions';
+import { toggleMenu, updateTokens, updateUserData } from '@/store/actions';
 import {GrClose} from 'react-icons/gr';
 import { Row, Col } from 'antd';
 import Balance from '../Balance/Balance';
@@ -35,6 +35,9 @@ import IconPartner from '@/icons/IconPartner';
 import IconContacts from '@/icons/IconContacts';
 import IconExit from '@/icons/IconExit';
 import IconSettings from '@/icons/IconSettings';
+import StatusModal from '@/modals/StatusModal/StatusModal';
+import ConfirmModal from '@/modals/ConfirmModal/ConfirmModal';
+import { Cookies } from 'typescript-cookie';
 
 
 const Sidebar:FC<sidebarPropsTypes> = ({
@@ -49,6 +52,7 @@ const Sidebar:FC<sidebarPropsTypes> = ({
     const [isHidden, setIsHidden] = useState<boolean>(false)
     const [depositModal, setDepositModal] = useState<boolean>(false)
     const [histModal, setHistModal] = useState<boolean>(false)
+    const [logoutModal, setLogoutModal] = useState(false)
 
     const openHistModal = () => setHistModal(true)
     const closeHistModal = () => setHistModal(false)
@@ -82,6 +86,16 @@ const Sidebar:FC<sidebarPropsTypes> = ({
         }
     }, [pathname, dispatch])
 
+
+    const onLogout = () => {
+        if(process?.browser) {
+            Cookies.remove('adtbot-console-access-token')
+            Cookies.remove('adtbot-console-refresh-token')
+        }
+        dispatch(updateUserData(null))
+        dispatch(updateTokens({access: null, refresh: null}))
+    }
+
     return (
         <div className={`${styles.sidebar} ${isHidden ? styles.hidden : ''} ${isMenuOpen ? styles.open : ''}`}>
             <PmHistoryModal
@@ -95,6 +109,12 @@ const Sidebar:FC<sidebarPropsTypes> = ({
             <AddBotModal
                 open={addBotModal}
                 onCancel={closeAddBotModal}
+                />
+            <ConfirmModal
+                open={logoutModal}
+                text='Вы уверены что хотите выйти?'
+                onConfirm={onLogout}
+                onCancel={() => setLogoutModal(false)}
                 />
             <button  
                 onClick={toggleSidebar}
@@ -255,7 +275,7 @@ const Sidebar:FC<sidebarPropsTypes> = ({
                                         />
                                 }
                                 isButton
-                                onClick={() => replace('/auth/login')}
+                                onClick={() => setLogoutModal(true)}
                                 label='Выход'
                                 />
                         </SidebarList>

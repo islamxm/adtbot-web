@@ -26,6 +26,8 @@ const StatusModal:FC<statusModalPropsTypes> = ({
         }
     }
 
+    
+
     const switchStatus = (status: statusTypes) => {
         switch(status) {
             case 'error':
