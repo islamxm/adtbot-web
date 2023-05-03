@@ -20,7 +20,7 @@ const DepositPart = ({
 }:{
     closeModal?: (...args: any[]) => any,
     target?: string,
-    type: 1 | 2
+    type: 1 | 2 | 3
 }) => {
     const dispatch = useAppDispatch()
     const {tokens: {access}} = useAppSelector(s => s)

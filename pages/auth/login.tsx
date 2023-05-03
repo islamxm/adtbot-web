@@ -159,7 +159,7 @@ const LoginPage = () => {
                                     />
                             </Col>
                             <Col span={24}>
-                                <span onClick={openPassResetModal} className="def-link">Забыли пароль?</span>
+                                <Link href={'/auth/forgot-password'} className="def-link">Забыли пароль?</Link>
                             </Col>
                             <Col span={24}>
                                 <ReCAPTCHA

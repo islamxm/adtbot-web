@@ -469,7 +469,7 @@ class ApiService {
 
     deposit = async (body: {    
         txid: string,
-        payment_method: 1 | 2
+        payment_method: 1 | 2 | 3
     }, token: TokenType) => {
         try {
             let res = await fetch(endpoints.deposit, {
