@@ -17,10 +17,12 @@ import notify from "@/helpers/notify";
 import Head from "next/head";
 import { useAppSelector, useAppDispatch } from "@/hooks/useTypesRedux";
 import { updateCaptcha } from "@/store/actions";
+import { useRouter } from "next/router";
 
 const service = new ApiService;
 
 const SignupPage = () => {
+    const router = useRouter()
     const dispatch = useAppDispatch()
     const [usePolicyModal, setUsePolicyModal] = useState<boolean>(false)
 
@@ -51,24 +53,32 @@ const SignupPage = () => {
     // }, [recapRef])
 
 
+    useEffect(() => {
+        console.log(router)
+        process?.browser && console.log()
+    }, [router])
 
     const onSubmit =  () => {
-        setLoad(true)
-        const body = {
-            username,
-            password,
-            email,
-            is_superuser: false,
-            captcha_token,
-            // referal_code: ''
+        if(process?.browser) {
+            setLoad(true)
+            const body = {
+                username,
+                password,
+                email,
+                is_superuser: false,
+                captcha_token,
+                redirect_url: window.location.origin + '/auth/login'
+                // referal_code: ''
+            }
+            service && service.register(body).then(res => {
+                console.log(res)
+                res?.status === 400 && notify('Произошла ошибка, проверьте пожалуйста данные', 'ERROR')
+                res?.status === 200 && setSuccess(true)
+            }).finally(() => {
+                setLoad(false)
+            })
         }
-        service && service.register(body).then(res => {
-            console.log(res)
-            res?.status === 400 && notify('Произошла ошибка, проверьте пожалуйста данные', 'ERROR')
-            res?.status === 200 && setSuccess(true)
-        }).finally(() => {
-            setLoad(false)
-        })
+        
     }
 
 

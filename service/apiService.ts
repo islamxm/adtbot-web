@@ -18,6 +18,7 @@ class ApiService {
         password: string,
         is_superuser: boolean,
         captcha_token?: string,
+        redirect_url: string
         // referal_code?: string
     }) => {
         try {
