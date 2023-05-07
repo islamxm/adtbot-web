@@ -31,12 +31,12 @@ const PassResetModal:React.FC<ModalProps> = ({
 
     const onSubmit = useCallback(() => {
         if(email && captcha_token) {
-            setLoad(true)
-            service.forgotPassword({email}, captcha_token).then(res => {
-                console.log(res)
-            }).finally(() => {
-                setLoad(false)
-            })
+            // setLoad(true)
+            // service.forgotPassword({email}, captcha_token).then(res => {
+            //     console.log(res)
+            // }).finally(() => {
+            //     setLoad(false)
+            // })
         }
     }, [email, captcha_token])
 
