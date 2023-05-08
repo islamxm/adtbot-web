@@ -133,10 +133,10 @@ const TableRow:FC<tableRowPropsTypes> = ({bot, head}) => {
                 <td className={`table-row__item table-bodyrow__item`}>
                     <div className="table-bodyrow__item_in">
                         <div className="table-bodyrow__item_icon">
-                            <Image width={16} height={16} src={exchangeMonitorList.find(i => i.value === bot?.exchange?.toString())?.icon} alt={''}/>
+                            <Image width={16} height={16} src={exchangeBuyList.find(i => i.value === bot?.exchange?.toString())?.icon} alt={''}/>
                         </div>
                         <div className="table-bodyrow__item_label">
-                            {exchangeMonitorList.find(i => i.value === bot?.exchange?.toString())?.label}
+                            {exchangeBuyList.find(i => i.value === bot?.exchange?.toString())?.label}
                         </div>
                     </div>
                 </td>

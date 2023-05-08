@@ -168,19 +168,23 @@ const Body = () => {
                         
                     </div>
                 </div>
-                <div className="table-main custom-scroll-horizontal">
-                    <table className="table-wrapper">
-                        <TableHead list={mock?.head}/>
-                        <tbody>
-                            {
-                                list?.map((item, index) => (
-                                    <TableRow head={mock?.head} bot={item} key={index}/>
-                                ))
-                            }
-                            
-                        </tbody>
-                    </table>
-                </div>
+                {
+                    list?.length > 0 ? (
+                        <div className="table-main custom-scroll-horizontal">
+                            <table className="table-wrapper">
+                                <TableHead list={mock?.head}/>
+                                <tbody>
+                                    {   
+                                        list?.map((item, index) => (
+                                            <TableRow head={mock?.head} bot={item} key={index}/>
+                                        ))
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    ) : <Empty/>
+                }
+                
                 {
                     totalCount > limit ? (
                         <div className="table-bottom">
