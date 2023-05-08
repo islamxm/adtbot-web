@@ -9,6 +9,7 @@ import Select from '@/components/Select/Select';
 
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import ApiService from '@/service/apiService';
+import notify from '@/helpers/notify';
 
 
 const service = new ApiService();
@@ -52,67 +53,83 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
     const [enabled, setEnabled] = useState(true)
     const [daily_volume, setDaily_volume] = useState(1)
 
-    
-
-    const createBot = useCallback(() => {
-        if(access) {
-            console.log(access)
-            setSecondLoad(true)
-            service.createBot({
-                monitor,
-                exchange,
-                budget_usdt,
-                take_profit,
-                stop_loss,
-                stop_buy,
-                enabled,
-                daily_volume
-            }, access).then(res => {
-                console.log(res)
-            }).finally(() => {
-                setSecondLoad(false)
-            })
-        }
-    }, [access, monitor, exchange, budget_usdt, take_profit, stop_loss, stop_buy, 
-    enabled])
-
-    const createAndEnableBot = useCallback(() => {
-        if(access) {
-            service.createBot({
-                monitor,
-                exchange,
-                budget_usdt,
-                take_profit,
-                stop_loss,
-                stop_buy,
-                enabled,
-                daily_volume
-            }, access).then(res => {
-                console.log(res)
-
-                if(res) {
-                    //enable func
-                    service.enableBot(1, access).then(res => {
-                        console.log(res)
-                    })
-                } else {
-
-                }
-            })
-        }
-    }, [access, monitor, exchange, budget_usdt, take_profit, stop_loss, stop_buy, 
-        enabled])
+    const [code, setCode] = useState('')
 
 
     const closeHandle = () => {
         if(onCancel) {
             onCancel()
+
+            setMonitor(1)
+            setExchange(1)
+            setBudget_usdt(0)
+            setTake_profit(0)
+            setStop_loss(0)
+            setStop_buy(0)
+            setEnabled(true)
+            setDaily_volume(1)
+            setCode('')
+        }
+    }
+    
+
+    const createBot = () => {
+        if(access) {
+            console.log(access)
+            setSecondLoad(true)
+            service.createBot({
+                bot_info: {
+                    monitor,
+                    exchange,
+                    budget_usdt,
+                    take_profit,
+                    stop_loss,
+                    stop_buy,
+                    enabled,
+                    daily_volume
+                },
+                bot_code: ''
+            }, access).then(res => {
+                console.log(res)
+                if(res?.id) {
+                    notify('Бот создан', 'SUCCESS')
+                    closeHandle()
+                }
+            }).finally(() => {
+                setSecondLoad(false)
+            })
         }
     }
 
-    useEffect(() => {
-        console.log(monitor)
-    }, [monitor])
+    const createAndEnableBot = () => {
+        // if(access) {
+        //     service.createBot({
+        //         monitor,
+        //         exchange,
+        //         budget_usdt,
+        //         take_profit,
+        //         stop_loss,
+        //         stop_buy,
+        //         enabled,
+        //         daily_volume
+        //     }, access).then(res => {
+        //         console.log(res)
+
+        //         if(res) {
+        //             //enable func
+        //             service.enableBot(1, access).then(res => {
+        //                 console.log(res)
+        //             })
+        //         } else {
+
+        //         }
+        //     })
+        // }
+    }
+
+
+    
+
 
     return (
         <Modal
@@ -195,6 +212,16 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
                                         type='number'
                                         value={stop_loss}
                                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setStop_loss(Number(e.target.value))}
+                                        />
+                                </Col>
+                                <Col span={24}>
+                                    <Input
+                                        // hint={'Код бота'}
+                                        label='Код бота'
+                                        placeholder=''
+                                        // type='number'
+                                        value={code}
+                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCode(e.target.value)}
                                         />
                                 </Col>
                             </Row>

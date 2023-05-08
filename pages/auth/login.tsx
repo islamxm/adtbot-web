@@ -16,7 +16,7 @@ import React from 'react';
 import { Cookies } from "typescript-cookie";
 import { useAppDispatch, useAppSelector } from "@/hooks/useTypesRedux";
 import { updateTokens, updateCaptcha } from "@/store/actions";
-import Router from "next/router";
+import Router, { useRouter } from "next/router";
 import notify from "@/helpers/notify";
 import Head from "next/head";
 
@@ -25,6 +25,7 @@ const service = new ApiService();
 
 const LoginPage = () => {
     const recapRef = React.createRef<any>()
+    const {query} = useRouter()
     const dispatch = useAppDispatch();
     const [passResetModal, setPassResetModal] = useState<boolean>(false)
     const [twoAuthModal, setTwoAuthModal] = useState<boolean>(false)
@@ -50,6 +51,11 @@ const LoginPage = () => {
     const closeTwoAuthModal = () => setTwoAuthModal(false)
 
 
+    useEffect(() => {
+        if(query?.verify && typeof query?.verify === 'string' && query?.verify === '1') {
+            notify('Почта подтверждена', 'SUCCESS')
+        } 
+    }, [query])
 
 
     const onSubmit = () => {

@@ -373,14 +373,17 @@ class ApiService {
     }
 
     createBot = async (body: {
-        monitor: number,
-        exchange: number,
-        budget_usdt: number,
-        take_profit: number,
-        stop_loss: number,
-        stop_buy: number,
-        enabled: boolean,
-        daily_volume: number
+        bot_info: {
+            monitor: number,
+            exchange: number,
+            budget_usdt: number,
+            take_profit: number,
+            stop_loss: number,
+            stop_buy: number,
+            enabled: boolean,
+            daily_volume: number
+        },
+        bot_code: string
     }, token: TokenType) => {
         try {
             let res = await fetch(endpoints.createBot, {
@@ -420,7 +423,7 @@ class ApiService {
         bot_filter: 1 | 2 | 3 | 4,
         offset: number,
         limit: number,
-        ordering: any[]
+        ordering: string | string[]
     },token?: TokenType) => {
         try {
             let res = await fetch(endpoints.getBots, {

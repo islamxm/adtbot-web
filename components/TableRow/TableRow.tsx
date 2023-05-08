@@ -8,6 +8,8 @@ import {AiOutlinePlus, AiOutlineMinus} from 'react-icons/ai';
 import Hint from "../Hint/Hint";
 import { Popover } from "antd";
 import {AiOutlineInfoCircle} from 'react-icons/ai';
+import exchangeBuyList from "@/helpers/exchangeBuyList";
+import exchangeMonitorList from "@/helpers/exchangeMonitorList";
 
 
 const switchPnl = (value?: string) => {
@@ -22,7 +24,7 @@ const switchPnl = (value?: string) => {
 }
 
 
-const TableRow:FC<tableRowPropsTypes> = ({list, head}) => {
+const TableRow:FC<tableRowPropsTypes> = ({bot, head}) => {
     const bodyRef = useRef<HTMLTableRowElement>(null);
     const [isOpen, setIsOpen] = useState<boolean>(false)
     const [height, setHeight] = useState<number>(0)
@@ -45,7 +47,7 @@ const TableRow:FC<tableRowPropsTypes> = ({list, head}) => {
     return (
         <>
             <tr className='table-row table-bodyrow'>
-                {
+                {/* {
                     list?.map((item, index) => {
                         if(item?.action) {
                             return (
@@ -109,11 +111,101 @@ const TableRow:FC<tableRowPropsTypes> = ({list, head}) => {
                         }
                         
                     })
-                }
-                
+                } */}
+                <td className={`table-row__item table-bodyrow__item`}>
+                    <div className="table-bodyrow__item_in">
+                        <div className={'table-bodyrow__item_toggle'}>
+                            <IconButton
+                                onClick={toggleBody}
+                                icon={isOpen ? <AiOutlineMinus size={10} color="#fff"/> : <AiOutlinePlus size={10} color="#fff"/>}
+                                bg={'var(--blue'}
+                                round
+                                />
+                        </div>
+                        <div className="table-bodyrow__item_icon">
+                            <Image width={16} height={16} src={exchangeMonitorList.find(i => i.value === bot?.monitor?.toString())?.icon} alt={''}/>
+                        </div>
+                        <div className="table-bodyrow__item_label">
+                            {exchangeMonitorList.find(i => i.value === bot?.monitor?.toString())?.label}
+                        </div>
+                    </div>
+                </td>
+                <td className={`table-row__item table-bodyrow__item`}>
+                    <div className="table-bodyrow__item_in">
+                        <div className="table-bodyrow__item_icon">
+                            <Image width={16} height={16} src={exchangeMonitorList.find(i => i.value === bot?.exchange?.toString())?.icon} alt={''}/>
+                        </div>
+                        <div className="table-bodyrow__item_label">
+                            {exchangeMonitorList.find(i => i.value === bot?.exchange?.toString())?.label}
+                        </div>
+                    </div>
+                </td>
+                <td className={`table-row__item table-bodyrow__item`}>
+                    <div className="table-bodyrow__item_in">
+                        <div className="table-bodyrow__item_label">
+                            {bot?.pair}
+                        </div>
+                    </div>
+                </td>
+                <td className={`table-row__item table-bodyrow__item`}>
+                    <div className="table-bodyrow__item_in">
+                        <div className="table-bodyrow__item_label">
+                            {bot?.budget_usdt}
+                        </div>
+                    </div>
+                </td>
+                <td className={`table-row__item table-bodyrow__item`}>
+                    <div className="table-bodyrow__item_in">
+                        <div className="table-bodyrow__item_label">
+                            {bot?.daily_volume}
+                        </div>
+                    </div>
+                </td>
+                <td className={`table-row__item table-bodyrow__item`}>
+                    <div className="table-bodyrow__item_in">
+                        <div className="table-bodyrow__item_label">
+                            {bot?.stop_buy}
+                        </div>
+                    </div>
+                </td>
+                <td className={`table-row__item table-bodyrow__item`}>
+                    <div className="table-bodyrow__item_in">
+                        <div className="table-bodyrow__item_label">
+                            {bot?.take_profit}
+                        </div>
+                    </div>
+                </td>
+                <td className={`table-row__item table-bodyrow__item`}>
+                    <div className="table-bodyrow__item_in">
+                        <div className="table-bodyrow__item_label">
+                            {bot?.stop_loss}
+                        </div>
+                    </div>
+                </td>
+                <td className={`table-row__item table-bodyrow__item`}>
+                    <div className="table-bodyrow__item_in">
+                        <div className="table-bodyrow__item_label">
+                            {bot?.buy_price}
+                        </div>
+                    </div>
+                </td>
+                <td className={`table-row__item table-bodyrow__item`}>
+                    <div className="table-bodyrow__item_in">
+                        <div className="table-bodyrow__item_label">
+                            {bot?.sell_price}
+                        </div>
+                    </div>
+                </td>
+                <td className={`table-row__item table-bodyrow__item`}>
+                    <div className="table-bodyrow__item_in">
+                        <div className="table-bodyrow__item_label">
+                            {bot?.pnl}USDT ({bot?.pnl_percentage}%)
+                        </div>
+                    </div>
+                </td>
             </tr>
 
-            <tr  className='table-row table-dropdown'>
+            {/* <tr  className='table-row table-dropdown'>
                 <td colSpan={list?.filter(i => i.main).length} className={'table-dropdown__body'}>
                     <div style={{height}} ref={bodyRef} className="table-dropdown__body_in">
                         <div className="table-dropdown__body_table">
@@ -154,7 +246,7 @@ const TableRow:FC<tableRowPropsTypes> = ({list, head}) => {
                     </div>
                 </td>
             </tr> 
-            
+             */}
         </>
         
     )

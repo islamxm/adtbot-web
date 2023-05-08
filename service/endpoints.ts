@@ -1,4 +1,4 @@
-export const BASE_DOMAIN = ` http://194.87.79.172:8000`;
+export const BASE_DOMAIN = `https://developmentserver.space`;
 export const PATH = `${BASE_DOMAIN}/api/v1/`
 
 const endpoints = {

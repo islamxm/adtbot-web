@@ -1,7 +1,9 @@
 import { StaticImageData } from "next/image"
+import { IBot } from "@/models/IBot"
+
 
 export type tableRowPropsTypes = {
-    list?: tableRowItemType[],
+    bot?: IBot,
     head: tableHeadRowItemType[]
 }
 
@@ -13,7 +15,6 @@ export type tableRowItemType = {
     action?: boolean,
     running?: boolean,
     share?: boolean,
-
     main?: boolean
 }
 

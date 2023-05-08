@@ -35,6 +35,22 @@ const tableSizes = [
 ]
  
 
+const switchTableSize = (value: any) => {
+    if(value === '1') {
+        return 10
+    }
+    if(value === '2') {
+        return 25
+    }
+    if(value === '3') {
+        return 50
+    }
+    if(value === '4') {
+        return 100
+    }
+    return 10
+}
+
 
 const Body = () => {
     const {tokens: {access}} = useAppSelector(s => s)
@@ -48,37 +64,54 @@ const Body = () => {
 
     const [list, setList] = useState<any[]>([])
 
+    const [totalCount, setTotalCount] = useState(0)
 
     // filter
     const [bot_filter, setBot_filter] = useState<1 | 2 | 3 | 4>(1) //ALL = 1 ACTIVE = 2 WAITING = 3 STOPPED = 4
-    const [limit, setLimit] = useState(10)
+    const [limit, setLimit] = useState(0)
     const [offset, setOffset] = useState(0)
-    const [ordering, setOrdering] = useState([])
+    const [ordering, setOrdering] = useState(['monitor', 'exchange', 'budget_usdt', 'daily_volume', 'take_profit', 'stop_loss', 'stop_buy'])
+
+    const [page, setPage] = useState(1)
 
 
+    useEffect(() => {
+        if(tableSize) {
+            setPage(1)
+            setLimit(switchTableSize(tableSize))
+        }
+    }, [tableSize])
+
+    useEffect(() => {
+        setPage(1)
+    }, [bot_filter])
 
     const updateList = useCallback(() => {
         
         if(access) {
 
-
             service.getBots({
                 bot_filter,
                 limit,
-                offset,
-                ordering
+                offset: page === 1 ? offset : limit * (page - 1),
+                ordering: ordering
             }, access).then(res => {
                 console.log(res)
+                console.log(res?.bots_info)
+                setTotalCount(res?.bots_count)
+                setList(res?.bots_info)
             })
 
         }
 
 
-    }, [bot_filter, limit, offset, ordering, access])
+    }, [bot_filter, limit, offset, ordering, access, page])
+
+    
 
     useEffect(() => {
         updateList && updateList()
-    }, [bot_filter, limit, offset, ordering, access])
+    }, [bot_filter, limit, offset, ordering, access, page])
 
     return (
         <div className={styles.wrapper}>
@@ -110,7 +143,6 @@ const Body = () => {
                                     defaultValue={bot_filter.toString()}
                                     options={statusOptions}
                                     onChange={(e, v) => setBot_filter(e)}
-                                    
                                     />
                             </div>
                         </div>
@@ -141,22 +173,26 @@ const Body = () => {
                         <TableHead list={mock?.head}/>
                         <tbody>
                             {
-                                mock?.body?.map((list, index) => (
-                                    <TableRow head={mock?.head} list={list} key={index}/>
+                                list?.map((item, index) => (
+                                    <TableRow head={mock?.head} bot={item} key={index}/>
                                 ))
                             }
                             
                         </tbody>
                     </table>
                 </div>
-                <div className="table-bottom">
-                    <Pag
-                        pageSize={1}
-                        total={10}
-                        current={currentPage}
-                        onChange={setCurrentPage}
-                        />
-                </div>
+                {
+                    totalCount > limit ? (
+                        <div className="table-bottom">
+                            <Pag
+                                pageSize={1}
+                                total={Math.ceil(totalCount / limit)}
+                                current={page}
+                                onChange={setPage}
+                                />
+                        </div>
+                    ) : null
+                }
             </div>
             {/* <Empty/> */}
             {/* <WarnPanel/> */}

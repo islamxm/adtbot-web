@@ -67,7 +67,7 @@ const SignupPage = () => {
                 email,
                 is_superuser: false,
                 captcha_token,
-                redirect_url: window.location.origin + '/auth/login'
+                redirect_url: window.location.origin + '/auth/login?verify=1'
                 // referal_code: ''
             }
             service && service.register(body).then(res => {
