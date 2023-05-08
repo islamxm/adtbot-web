@@ -87,11 +87,11 @@ const Body = () => {
                     <table className="table-wrapper">
                         <TableHead list={mock?.head}/>
                         <tbody>
-                            {
+                            {/* {
                                 mock?.body?.map((list, index) => (
                                     <TableRow head={mock.head} list={list} key={index}/>
                                 ))
-                            }
+                            } */}
                         </tbody>
                     </table>
                 </div>
