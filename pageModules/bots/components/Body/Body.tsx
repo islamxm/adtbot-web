@@ -21,6 +21,95 @@ import AddBotModal from '@/modals/AddBotModal/AddBotModal';
 const service = new ApiService();
 
 
+
+const tableHead = [
+    {
+        label:'Анонс',
+        hint: 'Биржа, на которой будет парситься анонс листинга',
+        value: 'monitor',
+        sort: true,
+        main: true
+    },
+    {
+        label:'Покупка',
+        hint: 'Биржа, на которой будет осуществлена покупка в момент анонса',
+        value: 'exchange',
+        sort: true,
+        main: false
+    },
+    {
+        label:'Пара',
+        hint: 'Название купленной монеты к USDT',
+        value: '',
+        sort: false,
+        main: false
+    },
+    {
+        label:'Сумма',
+        hint: 'Количество USDT, на которые будет совершена покупка анонсируемых монет',
+        value: 'budget_usdt',
+        sort: true,
+        main: false
+    },
+    {
+        label:'Объем',
+        hint: 'Суточный объем монеты',
+        value: 'daily_volume',
+        sort: true,
+        main: false
+    },
+    {
+        label:'Slippage',
+        hint: 'Проскальзывание. Максимальное изменение цены монеты, при котором прекращается покупка',
+        value: '',
+        sort: false,
+        main: false
+    },
+    {
+        label:'TP',
+        hint: 'Take Profit. При каком увеличении цены в процентах выставляется лимитный ордер на продажу',
+        value: 'take_profit',
+        sort: true,
+        main: false
+    },
+    {
+        label:'SL',
+        hint: 'Stop Loss. При каком уменьшении цены в процентах выставляется лимитный ордер на продажу',
+        value: 'stop_loss',
+        sort: true,
+        main: false
+    },
+    {
+        label:'Buy',
+        hint: 'Цена покупки',
+        value: '',
+        sort: true,
+        main: false
+    },
+    {
+        label:'Sell',
+        hint: 'Цена продажи',
+        value: '',
+        sort: false,
+        main: false
+    },
+    {
+        label:'PNL',
+        hint: 'Profits and Losts. Заработок (или убыток) бота в USDT и процентах от суммы сделки',
+        value: '',
+        sort: false,
+        main: true
+    },
+    {
+        label:'Статус бота',
+        hint: 'Статус бота. Для отработанного бота указывается дата и время активации, для созданного бота — В ожидании, для черновика — Остановлен',
+        value: '',
+        sort: false,
+        main: false
+    },
+]
+
+
 const statusOptions = [
     {value: '1', label: 'Все'},
     {value: '2', label: 'Активные'},
@@ -113,6 +202,31 @@ const Body = () => {
         updateList && updateList()
     }, [bot_filter, limit, offset, ordering, access, page])
 
+
+    const onTableSort = (item: string) => {
+        console.log(item)
+        const find = ordering?.find(i => i === item)
+        console.log(find)
+        if(find) {
+            setOrdering(s => {
+                const m = s;
+                const rm = m.splice(m.findIndex(i => i === find), 1, `-${item}`)
+                return [...m]
+            })
+        } else {    
+            const tr = `-${item}`;
+            setOrdering(s => {
+                const m = s;
+                const rm = m.splice(m.findIndex(i => i === tr), 1, item)
+                return [...m]
+            })          
+        }
+    }
+
+    useEffect(() => {
+        console.log(ordering)
+    }, [ordering])
+
     return (
         <div className={styles.wrapper}>
             <AddBotModal
@@ -172,7 +286,7 @@ const Body = () => {
                     list?.length > 0 ? (
                         <div className="table-main custom-scroll-horizontal">
                             <table className="table-wrapper">
-                                <TableHead list={mock?.head}/>
+                                <TableHead onSort={onTableSort} list={tableHead}/>
                                 <tbody>
                                     {   
                                         list?.map((item, index) => (

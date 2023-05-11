@@ -1,5 +1,6 @@
 export type tableHeadPropsTypes = {
-    list?: tableHeadItemType[]   
+    list?: tableHeadItemType[],
+    onSort?: (...args: any[]) => any
 }
 
 export type tableHeadItemType = {
