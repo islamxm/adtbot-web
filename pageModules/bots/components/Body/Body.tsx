@@ -175,10 +175,8 @@ const Body = () => {
         setPage(1)
     }, [bot_filter])
 
-    const updateList = useCallback(() => {
-        
+    const updateList = () => {
         if(access) {
-
             service.getBots({
                 bot_filter,
                 limit,
@@ -192,9 +190,7 @@ const Body = () => {
             })
 
         }
-
-
-    }, [bot_filter, limit, offset, ordering, access, page])
+    }
 
     
 
@@ -223,13 +219,11 @@ const Body = () => {
         }
     }
 
-    useEffect(() => {
-        console.log(ordering)
-    }, [ordering])
 
     return (
         <div className={styles.wrapper}>
             <AddBotModal
+                updateList={updateList}
                 open={addBotModal}
                 onCancel={closeAddBotModal}
                 />

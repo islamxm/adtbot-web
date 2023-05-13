@@ -37,21 +37,22 @@ const buyOpts = [
 
 const AddBotModal:FC<addBotModalPropsTypes> = ({
     open,
-    onCancel
+    onCancel,
+    updateList
 }) => {
     const {tokens: {access}} = useAppSelector(s => s)
     const [firstLoad, setFirstLoad] = useState(false)
     const [secondLoad, setSecondLoad] = useState(false)
 
 
-    const [monitor, setMonitor] = useState(1)
-    const [exchange, setExchange] = useState(1)
-    const [budget_usdt, setBudget_usdt] = useState(0)
-    const [take_profit, setTake_profit] = useState(0)
-    const [stop_loss, setStop_loss] = useState(0)
-    const [stop_buy, setStop_buy] = useState(0)
+    const [monitor, setMonitor] = useState<number>(1)
+    const [exchange, setExchange] = useState<number>(1)
+    const [budget_usdt, setBudget_usdt] = useState<any>()
+    const [take_profit, setTake_profit] = useState<any>()
+    const [stop_loss, setStop_loss] = useState<any>()
+    const [stop_buy, setStop_buy] = useState<any>()
     const [enabled, setEnabled] = useState(true)
-    const [daily_volume, setDaily_volume] = useState(1)
+    const [daily_volume, setDaily_volume] = useState<any>()
 
     const [code, setCode] = useState('')
 
@@ -62,12 +63,12 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
 
             setMonitor(1)
             setExchange(1)
-            setBudget_usdt(0)
-            setTake_profit(0)
-            setStop_loss(0)
-            setStop_buy(0)
+            setBudget_usdt('')
+            setTake_profit('')
+            setStop_loss('')
+            setStop_buy('')
             setEnabled(true)
-            setDaily_volume(1)
+            setDaily_volume('')
             setCode('')
         }
     }
@@ -75,7 +76,6 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
 
     const createBot = () => {
         if(access) {
-            console.log(access)
             setSecondLoad(true)
             service.createBot({
                 bot_info: {
@@ -85,15 +85,18 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
                     take_profit,
                     stop_loss,
                     stop_buy,
-                    enabled,
+                    enabled: false,
                     daily_volume
                 },
                 bot_code: ''
             }, access).then(res => {
-                console.log(res)
                 if(res?.id) {
                     notify('Бот создан', 'SUCCESS')
                     closeHandle()
+                    updateList && updateList()
+                } 
+                if(res?.detail === 'Bad user tariff!') {
+                    notify('Ваш тариф не позволяет выполнить данное действие', 'ERROR')
                 }
             }).finally(() => {
                 setSecondLoad(false)
@@ -102,29 +105,31 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
     }
 
     const createAndEnableBot = () => {
-        // if(access) {
-        //     service.createBot({
-        //         monitor,
-        //         exchange,
-        //         budget_usdt,
-        //         take_profit,
-        //         stop_loss,
-        //         stop_buy,
-        //         enabled,
-        //         daily_volume
-        //     }, access).then(res => {
-        //         console.log(res)
-
-        //         if(res) {
-        //             //enable func
-        //             service.enableBot(1, access).then(res => {
-        //                 console.log(res)
-        //             })
-        //         } else {
-
-        //         }
-        //     })
-        // }
+        if(access) {
+            setFirstLoad(true)
+            service.createBot({
+                bot_info: {
+                    monitor,
+                    exchange,
+                    budget_usdt,
+                    take_profit,
+                    stop_loss,
+                    stop_buy,
+                    enabled: true,
+                    daily_volume
+                },
+                bot_code: ''
+            }, access).then(res => {
+                if(res?.id) {
+                    notify('Бот создан и запущен', 'SUCCESS')
+                    closeHandle()
+                    updateList && updateList()
+                }
+                if(res?.detail === 'Bad user tariff!') {
+                    notify('Ваш тариф не позволяет выполнить данное действие', 'ERROR')
+                }
+            }).finally(() => setFirstLoad(false))
+        }
     }
 
 
@@ -157,28 +162,31 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
                                 <Col span={24}>
                                     <Input
                                         hint={'Суточный объем монеты'}
-                                        label='Объем'
+                                        label='Объем (млн. USDT)'
                                         placeholder='140 USDT'
+                                        type={'number'}
+                                        value={daily_volume}
+                                        onChange={(e:React.ChangeEvent<HTMLInputElement>) => setDaily_volume(e.target.value)}
                                         />
                                 </Col>
                                 <Col span={24}>
                                     <Input
                                         hint={'При увеличении цены на указанный процент, исполнится лимитный ордер на продажу'}
-                                        label='TP'
+                                        label='TP (%)'
                                         placeholder='2%'
                                         value={take_profit}
                                         type={'number'}
-                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTake_profit(Number(e.target.value))}
+                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTake_profit(e.target.value)}
                                         />
                                 </Col>
                                 <Col span={24}>
                                     <Input
                                         hint={'Количество USDT, на которые будет совершена покупка монет'}
-                                        label='Сумма'
+                                        label='Обьем (USDT)'
                                         placeholder='150 USDT'
                                         type='number'
                                         value={budget_usdt}
-                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setBudget_usdt(Number(e.target.value))}
+                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setBudget_usdt(e.target.value)}
                                         />
                                 </Col>
                             </Row>
@@ -201,7 +209,7 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
                                         placeholder='30%'
                                         type='number'
                                         value={stop_buy}
-                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setStop_buy(Number(e.target.value))}
+                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setStop_buy(e.target.value)}
                                         />
                                 </Col>
                                 <Col span={24}>
@@ -211,17 +219,7 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
                                         placeholder='3%'
                                         type='number'
                                         value={stop_loss}
-                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setStop_loss(Number(e.target.value))}
-                                        />
-                                </Col>
-                                <Col span={24}>
-                                    <Input
-                                        // hint={'Код бота'}
-                                        label='Код бота'
-                                        placeholder=''
-                                        // type='number'
-                                        value={code}
-                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCode(e.target.value)}
+                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setStop_loss(e.target.value)}
                                         />
                                 </Col>
                             </Row>

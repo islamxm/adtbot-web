@@ -11,7 +11,6 @@ import {AiOutlineEye} from 'react-icons/ai';
 import {AiOutlineEyeInvisible} from 'react-icons/ai';
 
 
-
 const Input = (props: inputPropsTypes) => {
 
     const [visible, setVisible] = useState(false)

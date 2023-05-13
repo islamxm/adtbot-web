@@ -404,12 +404,13 @@ class ApiService {
 
     enableBot = async (bot_id: number, token: TokenType) => {
         try {
-            let res = await fetch(endpoints.enableBot + `?bot_id=${bot_id}`, {
+            let res = await fetch(endpoints.enableBot, {
                 method: 'POST',
                 headers: {
                     ...headers,
                     "Authorization": `Bearer ${token}`
-                }
+                },
+                body: JSON.stringify(bot_id)
             })
 
             return await checkAuth(res)
