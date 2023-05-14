@@ -39,7 +39,7 @@ const LoginPage = () => {
     const [scope, setScope] = useState('')
     const [totp_code, setTotp_code] = useState('')
 
-    const [saveMe, setSaveMe] = useState(false);
+    const [saveMe, setSaveMe] = useState(true);
 
 
 

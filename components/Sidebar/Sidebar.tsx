@@ -16,7 +16,7 @@ import logoSm from '@/public/assets/logo-sm.svg';
 import {FiChevronLeft} from 'react-icons/fi';
 import {useRef} from 'react';
 import { useAppDispatch, useAppSelector } from '@/hooks/useTypesRedux';
-import { toggleMenu, updateTokens, updateUserData } from '@/store/actions';
+import { toggleMenu, updateTokens, updateUserData, lastCreatedBot } from '@/store/actions';
 import {GrClose} from 'react-icons/gr';
 import { Row, Col } from 'antd';
 import Balance from '../Balance/Balance';

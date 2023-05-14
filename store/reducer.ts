@@ -22,7 +22,8 @@ type IState = {
         user_login_count: number,
         user_own_referal: any
     },
-    captcha: string
+    captcha: string,
+    lastCreatedBot: null | any
 }  
 
 
@@ -33,7 +34,8 @@ const globalState: IState = {
         refresh: process?.browser &&  Cookies.get('adtbot-console-refresh-token') ? Cookies.get('adtbot-console-refresh-token') : null
     },
     captcha: '',
-    userData: null
+    userData: null,
+    lastCreatedBot: null
 }
 
 const reducer = (state = globalState, action: any) => {
@@ -57,6 +59,11 @@ const reducer = (state = globalState, action: any) => {
             return {
                 ...state,
                 userData: action.data
+            }
+        case 'CREATED_BOT':
+            return {
+                ...state,
+                lastCreatedBot: action.data
             }
         default:
             return state;

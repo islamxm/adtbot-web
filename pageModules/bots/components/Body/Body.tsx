@@ -142,7 +142,7 @@ const switchTableSize = (value: any) => {
 
 
 const Body = () => {
-    const {tokens: {access}} = useAppSelector(s => s)
+    const {tokens: {access}, lastCreatedBot} = useAppSelector(s => s)
     const [currentPage, setCurrentPage] = useState<number>(1)
     const [hidden, setHidden] = useState(false)
     const [tableSize, setTableSize] = useState('1')
@@ -163,6 +163,12 @@ const Body = () => {
 
     const [page, setPage] = useState(1)
 
+
+    useEffect(() => {
+        if(lastCreatedBot && access) {
+            updateList()
+        }
+    }, [lastCreatedBot, access])
 
     useEffect(() => {
         if(tableSize) {

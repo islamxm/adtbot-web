@@ -6,8 +6,8 @@ import {Row, Col} from 'antd';
 import Input from '@/components/Input/Input';
 import Button from '@/components/Button/Button';
 import Select from '@/components/Select/Select';
-
-import { useAppSelector } from '@/hooks/useTypesRedux';
+import { lastCreatedBot } from '@/store/actions';
+import { useAppSelector, useAppDispatch } from '@/hooks/useTypesRedux';
 import ApiService from '@/service/apiService';
 import notify from '@/helpers/notify';
 
@@ -40,6 +40,7 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
     onCancel,
     updateList
 }) => {
+    const dispatch = useAppDispatch()
     const {tokens: {access}} = useAppSelector(s => s)
     const [firstLoad, setFirstLoad] = useState(false)
     const [secondLoad, setSecondLoad] = useState(false)
@@ -93,7 +94,8 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
                 if(res?.id) {
                     notify('Бот создан', 'SUCCESS')
                     closeHandle()
-                    updateList && updateList()
+                    dispatch(lastCreatedBot(res))
+                    // updateList && updateList()
                 } 
                 if(res?.detail === 'Bad user tariff!') {
                     notify('Ваш тариф не позволяет выполнить данное действие', 'ERROR')
@@ -123,7 +125,7 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
                 if(res?.id) {
                     notify('Бот создан и запущен', 'SUCCESS')
                     closeHandle()
-                    updateList && updateList()
+                    dispatch(lastCreatedBot(res))
                 }
                 if(res?.detail === 'Bad user tariff!') {
                     notify('Ваш тариф не позволяет выполнить данное действие', 'ERROR')

@@ -10,6 +10,8 @@ import { Popover } from "antd";
 import {AiOutlineInfoCircle} from 'react-icons/ai';
 import exchangeBuyList from "@/helpers/exchangeBuyList";
 import exchangeMonitorList from "@/helpers/exchangeMonitorList";
+import switchBotStatus from "@/helpers/switchBotStatus";
+
 
 
 const switchPnl = (value?: string) => {
@@ -42,6 +44,42 @@ const TableRow:FC<tableRowPropsTypes> = ({bot, head}) => {
             }
         }
     }, [isOpen, bodyRef])
+
+    const switchStatusAction = (status: number) => {
+        switch(status) {
+            case 1:
+                return (
+                    <td className={`table-row__item table-bodyrow__item activation table-bodyrow__item--nonmain`}>
+                        <div className="table-bodyrow__item_in">
+                            {/* <div className="activation-label">12.03.2022 12:56:13</div> */}
+                            <div className="activation-action">
+                                <div className="activation-action_item">
+                                    <IconButton
+                                        icon={<HiOutlineStopCircle color="var(--red)" size={16}/>}
+                                        />
+                                    
+                                </div>
+                                {/* {
+                                    item.share ? (
+                                        <div className="activation-action_item">
+                                            <IconButton
+                                                icon={<BsShare size={16}/>}
+                                                />
+                                        </div>
+                                    ) : null
+                                } */}
+                            </div>
+                        </div>
+                    </td>
+                )
+            default:
+                return (
+                    <td className={`table-row__item table-bodyrow__item activation table-bodyrow__item--nonmain`}>
+                        sss
+                    </td>
+                )
+        }
+    }
 
 
     return (
@@ -200,6 +238,20 @@ const TableRow:FC<tableRowPropsTypes> = ({bot, head}) => {
                     <div className="table-bodyrow__item_in">
                         <div className="table-bodyrow__item_label">
                             {bot?.pnl}USDT ({bot?.pnl_percentage}%)
+                        </div>
+                    </div>
+                </td>
+                {
+                    switchStatusAction(switchBotStatus({
+                        enabled: bot?.enabled,
+                        stop_datetime: bot?.stop_datetime,
+                        activation_datetime: bot?.activation_datetime
+                    }))
+                }
+                <td className={`table-row__item table-bodyrow__item`}>
+                    <div className="table-bodyrow__item_in">
+                        <div className="table-bodyrow__item_label">
+                            
                         </div>
                     </div>
                 </td>
