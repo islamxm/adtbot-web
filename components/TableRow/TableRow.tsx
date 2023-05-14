@@ -72,6 +72,31 @@ const TableRow:FC<tableRowPropsTypes> = ({bot, head}) => {
                         </div>
                     </td>
                 )
+            case 2:
+                return (
+                    <td className={`table-row__item table-bodyrow__item activation table-bodyrow__item--nonmain`}>
+                        <div className="table-bodyrow__item_in">
+                            {/* <div className="activation-label">12.03.2022 12:56:13</div> */}
+                            <div className="activation-action">
+                                <div className="activation-action_item">
+                                    <IconButton
+                                        icon={<HiOutlineStopCircle color="var(--red)" size={16}/>}
+                                        />
+                                    
+                                </div>
+                                {/* {
+                                    item.share ? (
+                                        <div className="activation-action_item">
+                                            <IconButton
+                                                icon={<BsShare size={16}/>}
+                                                />
+                                        </div>
+                                    ) : null
+                                } */}
+                            </div>
+                        </div>
+                    </td>
+                )
             default:
                 return (
                     <td className={`table-row__item table-bodyrow__item activation table-bodyrow__item--nonmain`}>
