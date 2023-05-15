@@ -12,6 +12,7 @@ import Head from "next/head";
 import ApiService from "@/service/apiService";
 import ReCAPTCHA from "react-google-recaptcha";
 import Router from "next/router";
+import notify from "@/helpers/notify";
 
 const service = new ApiService()
 
@@ -31,7 +32,12 @@ const ResetPage = () => {
     const onSubmit = () => {
         if(email && captcha_token) {
             service.forgotPassword({email, captcha_token}).then(res => {
-                console.log(res)
+                if(res === true) {
+                    Router.push('/auth/change-password')
+                    notify('Код восстановления отправлен на вашу почту', 'INFO')
+                } else {
+                    
+                }
             }).finally(() => {
                 setLoad(false)
             })

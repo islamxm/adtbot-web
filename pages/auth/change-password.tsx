@@ -11,6 +11,8 @@ import {useState} from 'react';
 import Head from "next/head";
 import { useAppSelector, useAppDispatch } from "@/hooks/useTypesRedux";
 import ApiService from "@/service/apiService";
+import Router from "next/router";
+import notify from "@/helpers/notify";
 
 const service = new ApiService()
 
@@ -19,17 +21,23 @@ const ResetPage = () => {
     const [load, setLoad] = useState(false)
     const [code, setCode] = useState('')
     const [password, setPassword] = useState('')
+    const [repeatPassword, setRepeatPassword] = useState('')
     
 
     const onSubmit = () => {
         if(password) {
             setLoad(true)
             const body = {
-                code: 'eyjhbgcioijiuzi1niisinr5cci6ikpxvcj9.eyjyzxnldf91c2vyijoimtailcjlehaioje2odiwnzaxmtz9.6oxgxccsz5cqb36jkenfollhckbn2gkab4k4nt_un9g',
+                code,
                 password
             }
             service.resetPassword(body).then(res => {
-                console.log(res)
+                if(res === true) {
+                    Router.push('/auth/login')
+                    notify('Код изменен', 'SUCCESS')
+                } else {
+                    notify('Произошла ошибка', 'ERROR')
+                }
             }).finally(() => setLoad(false))
         }
 
@@ -53,6 +61,14 @@ const ResetPage = () => {
                             <Row gutter={[15,15]}>
                                 <Col span={24}>
                                     <Input
+                                        value={code}
+                                        onChange={(e:React.ChangeEvent<HTMLInputElement>) => setCode(e.target.value)}
+                                        placeholder="Код восстановления"
+                                        label="Код восстановления"
+                                        />
+                                </Col>
+                                <Col span={24}>
+                                    <Input
                                         value={password}
                                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
                                         type="password"
@@ -62,6 +78,8 @@ const ResetPage = () => {
                                 </Col>
                                 <Col span={24}>
                                     <Input
+                                        value={repeatPassword}
+                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setRepeatPassword(e.target.value)}
                                         type="password"
                                         placeholder="Повторите пароль"
                                         label="Повторите пароль"
@@ -69,6 +87,7 @@ const ResetPage = () => {
                                 </Col>
                                 <Col span={24}>
                                     <Button
+                                        disabled={(code && password && (password === repeatPassword)) ? false : true}
                                         load={load}
                                         onClick={onSubmit}
                                         text="Сохранить"
