@@ -125,10 +125,15 @@
 
                     .activation-action {
                         margin-left: 15px;
+                        display: flex;
+                        align-items: center;
 
                         &__item {
                             font-size: 12px;
                             line-height: 12px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
                         }
                     }
                 }

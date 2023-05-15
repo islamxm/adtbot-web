@@ -4,7 +4,8 @@ import { IBot } from "@/models/IBot"
 
 export type tableRowPropsTypes = {
     bot?: IBot,
-    head: tableHeadRowItemType[]
+    head: tableHeadRowItemType[],
+    updateList?: (...args: any[]) => any
 }
 
 export type tableRowItemType = {

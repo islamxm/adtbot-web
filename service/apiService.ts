@@ -447,7 +447,6 @@ class ApiService {
             let res = await fetch(endpoints.announceStats + `?first_date${first_date}&second_date=${second_date}`, {
                 method: 'POST',
                 headers,
-                mode: 'no-cors'
             })
             return await checkAuth(res)
         } catch(err) {
@@ -455,6 +454,37 @@ class ApiService {
         }
     }
 
+    deleteBot = async (bot_id: number, token: TokenType) => {
+        try {
+            let res = await fetch(endpoints.deleteBot, {
+                method: 'POST',
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(bot_id)
+            })
+            return await checkAuth(res)
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+    disableBot = async (bot_id: number, token: TokenType) => {
+        try {
+            let res = await fetch(endpoints.disableBot, {
+                method: 'POST',
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(bot_id)
+            })
+            return await checkAuth(res)
+        } catch(err) {
+            console.log(err)
+        }
+    }
 
     changeTarif = async (id: number, token: TokenType) => {
         try {

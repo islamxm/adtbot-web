@@ -2,6 +2,7 @@ import { tableRowPropsTypes } from "./types";
 import {FC, useEffect, useRef, useState} from 'react';
 import Image from "next/image";
 import {HiOutlineStopCircle} from 'react-icons/hi2';
+import {HiOutlinePlay} from 'react-icons/hi';
 import IconButton from "../IconButton/IconButton";
 import {BsShare} from 'react-icons/bs';
 import {AiOutlinePlus, AiOutlineMinus} from 'react-icons/ai';
@@ -11,7 +12,13 @@ import {AiOutlineInfoCircle} from 'react-icons/ai';
 import exchangeBuyList from "@/helpers/exchangeBuyList";
 import exchangeMonitorList from "@/helpers/exchangeMonitorList";
 import switchBotStatus from "@/helpers/switchBotStatus";
+import { useAppSelector } from "@/hooks/useTypesRedux";
+import ApiService from "@/service/apiService";
+import {BiTrash} from 'react-icons/bi';
+import notify from "@/helpers/notify";
 
+
+const service = new ApiService()
 
 
 const switchPnl = (value?: string) => {
@@ -26,11 +33,17 @@ const switchPnl = (value?: string) => {
 }
 
 
-const TableRow:FC<tableRowPropsTypes> = ({bot, head}) => {
+const TableRow:FC<tableRowPropsTypes> = ({bot, head, updateList}) => {
+    const {tokens: {access}} = useAppSelector(s => s)
     const bodyRef = useRef<HTMLTableRowElement>(null);
     const [isOpen, setIsOpen] = useState<boolean>(false)
     const [height, setHeight] = useState<number>(0)
 
+    const [enableLoad, setEnableLoad] = useState(false)
+    const [deleteLoad, setDeleteLoad] = useState(false)
+    const [disableLoad, setDisableLoad] = useState(false)
+
+    const {id} = bot || {}
 
     const toggleBody = () => setIsOpen(s => !s)
 
@@ -45,29 +58,73 @@ const TableRow:FC<tableRowPropsTypes> = ({bot, head}) => {
         }
     }, [isOpen, bodyRef])
 
+
+    const enableBot = () => {
+        if(access && id) {
+            setEnableLoad(true)
+            service.enableBot(id, access).then(res => {
+                if(res) {
+                    updateList && updateList()
+                    notify('Бот запущен', 'SUCCESS')
+                } else {
+                    notify('Произоша ошибка', 'ERROR')
+                }
+            }).finally(() => setEnableLoad(false))
+        }
+    }
+
+
+    const disableBot = () => {
+        if(access && id) {
+            setDisableLoad(true)
+            service.disableBot(id, access).then(res => {
+                if(res) {
+                    updateList && updateList()
+                    notify('Бот остановлен', 'SUCCESS')
+                } else {
+                    notify('Произоша ошибка', 'ERROR')
+                }
+            }).finally(() => setDisableLoad(false))
+        }
+    }
+
+    const editBot = () => {
+
+    }
+
+    const deleteBot = () => {
+        if(access && id) {
+            setDeleteLoad(true)
+            service.deleteBot(id, access).then(res => {
+                console.log(res)
+                if(res) {
+                    updateList && updateList()
+                    notify('Бот удален', 'SUCCESS')
+                } else {
+                    notify('Произошла ошибка', 'SUCCESS')
+                }
+            }).finally(() => setDeleteLoad(false))
+        }
+    }
+
+
+
     const switchStatusAction = (status: number) => {
         switch(status) {
             case 1:
                 return (
                     <td className={`table-row__item table-bodyrow__item activation table-bodyrow__item--nonmain`}>
                         <div className="table-bodyrow__item_in">
-                            {/* <div className="activation-label">12.03.2022 12:56:13</div> */}
+                            <div className={'activation-label'}>Активен</div>
                             <div className="activation-action">
                                 <div className="activation-action_item">
                                     <IconButton
+                                        onClick={disableBot}
+                                        load={disableLoad}
                                         icon={<HiOutlineStopCircle color="var(--red)" size={16}/>}
                                         />
                                     
                                 </div>
-                                {/* {
-                                    item.share ? (
-                                        <div className="activation-action_item">
-                                            <IconButton
-                                                icon={<BsShare size={16}/>}
-                                                />
-                                        </div>
-                                    ) : null
-                                } */}
                             </div>
                         </div>
                     </td>
@@ -76,11 +133,44 @@ const TableRow:FC<tableRowPropsTypes> = ({bot, head}) => {
                 return (
                     <td className={`table-row__item table-bodyrow__item activation table-bodyrow__item--nonmain`}>
                         <div className="table-bodyrow__item_in">
-                            {/* <div className="activation-label">12.03.2022 12:56:13</div> */}
+                        <div className={'activation-label'}>В ожидании</div>
                             <div className="activation-action">
                                 <div className="activation-action_item">
                                     <IconButton
                                         icon={<HiOutlineStopCircle color="var(--red)" size={16}/>}
+                                        />
+                                </div>
+                                <div className="activation-action_item">
+                                    <IconButton
+                                        load={deleteLoad}
+                                        onClick={deleteBot}
+                                        icon={<BiTrash color="var(--red)" size={16}/>}
+                                        />
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                )
+            case 3:
+                return (
+                    <td className={`table-row__item table-bodyrow__item activation table-bodyrow__item--nonmain`}>
+                        <div className="table-bodyrow__item_in">
+                        <div className={'activation-label'}>Остановлен</div>
+                            <div className="activation-action">
+                                <div className="activation-action_item">
+                                    <IconButton
+                                        onClick={enableBot}
+                                        load={enableLoad}
+                                        icon={<HiOutlinePlay color="var(--green)" size={16}/>}
+                                        />
+                                    
+                                </div>
+                                <div className="activation-action_item">
+                                    <IconButton
+                                        load={deleteLoad}
+                                        onClick={deleteBot}
+                                        icon={<BiTrash color="var(--red)" size={16}/>}
                                         />
                                     
                                 </div>
@@ -95,12 +185,14 @@ const TableRow:FC<tableRowPropsTypes> = ({bot, head}) => {
                                 } */}
                             </div>
                         </div>
-                    </td>
+                    </td>   
                 )
             default:
                 return (
                     <td className={`table-row__item table-bodyrow__item activation table-bodyrow__item--nonmain`}>
-                        sss
+                        <div className="table-bodyrow__item_in">
+                            <div className={'activation-label'}>Не известно</div>
+                        </div>
                     </td>
                 )
         }

@@ -290,7 +290,11 @@ const Body = () => {
                                 <tbody>
                                     {   
                                         list?.map((item, index) => (
-                                            <TableRow head={mock?.head} bot={item} key={index}/>
+                                            <TableRow
+                                                updateList={updateList} 
+                                                head={mock?.head} 
+                                                bot={item} 
+                                                key={index}/>
                                         ))
                                     }
                                 </tbody>
