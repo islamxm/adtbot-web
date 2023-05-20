@@ -13,7 +13,7 @@ const PrivateRoute = ({
 
     const router = useRouter()
     const [auth, setAuth] = useState(false)
-    const {tokens: {access}} = useAppSelector(s => s)
+    const {tokens: {access}, userData} = useAppSelector(s => s)
 
     const dispatch = useAppDispatch()
 
@@ -21,11 +21,9 @@ const PrivateRoute = ({
         if(router) {
             if(!access || (typeof router?.query?.unauthorized === 'string' &&  router?.query?.unauthorized === '1') || (!access || (typeof router?.query?.unauthorized === 'string' &&  router?.query?.unauthorized === '1'))) {
 
-
                 Cookies.remove('adtbot-console-access-token')
                 Cookies.remove('adtbot-console-refresh-token')
                 dispatch(updateTokens({access: null, refresh: null}))
-                
                 
 
                 if(!router?.pathname?.includes('/auth')) {
@@ -34,19 +32,22 @@ const PrivateRoute = ({
                     return;
                 }
 
-
             } else {
-                console.log(access)
                 setAuth(true)
                 if(router?.pathname?.includes('/auth')) {
-                    router?.push('/account/bots')
+                    if(userData?.is_first_login === false) {
+                        router?.push('/account/bots')
+                    }
+                    if(userData?.is_first_login === true) {
+                        router?.push('/')
+                    }
                 } else {
                     return;
                 }
             }
         }
         
-    }, [access, router, dispatch])
+    }, [access, router, dispatch, userData])
 
 
     return auth ? (
