@@ -1,6 +1,6 @@
 import styles from './Body.module.scss';
 import Pag from '@/components/Pag/Pag';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Select from '@/components/Select/Select';
 import HsButton from '@/components/HsButton/HsButton';
 import { mock } from './mock';
@@ -12,8 +12,12 @@ import moment from 'moment';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ru';
 import {TbExternalLink} from 'react-icons/tb';
+import { useAppSelector } from '@/hooks/useTypesRedux';
+import ApiService from '@/service/apiService';
 // import locale from 'antd/es/date-picker/locale/ru_RU';
 
+
+const service = new ApiService()
 const dateFormat = 'DD/MM/YYYY';
 
 const periods = [
@@ -31,12 +35,71 @@ const tableSizes = [
     {value: '4', label: '100 строк'},
 ]
 
+const switchTableSize = (value: any) => {
+    if(value === '1') {
+        return 10
+    }
+    if(value === '2') {
+        return 25
+    }
+    if(value === '3') {
+        return 50
+    }
+    if(value === '4') {
+        return 100
+    }
+    return 10
+}
+
 const Body = () => {
-    const [currentPage, setCurrentPage] = useState<number>(1);
+    const {tokens: {access}} = useAppSelector(s => s)
     const [hidden, setHidden] = useState<boolean>(false);
-    const [period, setPeriod] = useState('2')
     const [tableSize, setTableSize] = useState('1')
-    const [date, setDate] = useState(moment(Date.now()).format('DD/MM/YYYY'))
+
+    const [date, setDate] = useState<any>([dayjs(moment(Date.now()).format('DD/MM/YYYY'), dateFormat), dayjs(moment(Date.now()).format('DD/MM/YYYY'), dateFormat)])
+
+
+    const [list, setList] = useState<any[]>([])
+    const [limit, setLimit] = useState(0)
+    const [totalCount, setTotalCount] = useState(0)
+    const [offset, setOffset] = useState(0)
+    const [ordering, setOrdering] = useState(['id', 'monitor', 'exchange', 'bot_budget_usdt', 'activation_datetime', 'pair', 'announce_datetime', 'buy_price', 'sell_price', 'pnl', 'pnl_percentage', 'stop_datetime'])
+
+    const [page, setPage] = useState(1)
+
+
+    // useEffect(() => {
+    //     updateList()
+    // }, [access])
+
+    useEffect(() => {
+        if(tableSize) {
+            setPage(1)
+            setLimit(switchTableSize(tableSize))
+        }
+    }, [tableSize])
+  
+
+    const updateList = () => {
+        if(access) {
+            service.announceStats({
+                first_date: date[0]?.format('YYYY-MM-DD'),
+                second_date: date[1]?.format('YYYY-MM-DD'),
+                ordering,
+                limit: 10,
+                offset,
+                announce_source: 1
+            }, access).then(res => {
+                console.log(res)
+            })
+
+        }
+    }
+
+    useEffect(() => {
+        updateList && updateList()
+    }, [limit, offset, ordering, access, page])
+
 
 
     return (
@@ -51,7 +114,8 @@ const Body = () => {
                                 
                                 <DatePicker
                                     placeholder={['Дата начала', 'Дата конца']}
-                                    defaultValue={[dayjs(date, dateFormat), dayjs(date, dateFormat)]}
+                                    defaultValue={date}
+                                    onChange={setDate}
                                     // locale={locale}
                                     />
 
@@ -123,14 +187,18 @@ const Body = () => {
                                 
                             </Col>
                             <Col span={24}>
-                                <div className={styles.pag}>
-                                    <Pag
-                                        pageSize={1}
-                                        total={10}
-                                        current={currentPage}
-                                        onChange={setCurrentPage}
-                                        />
-                                </div>
+                            {
+                                totalCount > limit ? (
+                                    <div className="table-bottom">
+                                        <Pag
+                                            pageSize={1}
+                                            total={Math.ceil(totalCount / limit)}
+                                            current={page}
+                                            onChange={setPage}
+                                            />
+                                    </div>
+                                ) : null
+                            }
                             </Col>
                         </Row>
                     </div>

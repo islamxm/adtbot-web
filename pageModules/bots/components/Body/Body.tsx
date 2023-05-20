@@ -143,7 +143,7 @@ const switchTableSize = (value: any) => {
 
 const Body = () => {
     const {tokens: {access}, lastCreatedBot} = useAppSelector(s => s)
-    const [currentPage, setCurrentPage] = useState<number>(1)
+
     const [hidden, setHidden] = useState(false)
     const [tableSize, setTableSize] = useState('1')
     const [addBotModal, setAddBotModal] = useState(false)

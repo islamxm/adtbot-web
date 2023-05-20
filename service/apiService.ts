@@ -442,11 +442,22 @@ class ApiService {
         }
     }
 
-    announceStats = async (first_date: Date, second_date: Date) => {
+    announceStats = async (body: {
+        first_date: Date, 
+        second_date: Date,
+        limit: number,
+        offset: number,
+        announce_source: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10,
+        ordering: string | string[]
+    }, token: TokenType) => {
         try {
-            let res = await fetch(endpoints.announceStats + `?first_date${first_date}&second_date=${second_date}`, {
+            let res = await fetch(endpoints.announceStats, {
                 method: 'POST',
-                headers,
+                headers: {
+                    ...headers,
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify(body)
             })
             return await checkAuth(res)
         } catch(err) {
