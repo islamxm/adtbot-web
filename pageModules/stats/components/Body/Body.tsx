@@ -5,7 +5,7 @@ import Select from '@/components/Select/Select';
 import HsButton from '@/components/HsButton/HsButton';
 import { mock } from './mock';
 import TableHead from '@/components/TableHead/TableHead';
-import TableRow from '@/components/TableRow/TableRow';
+import TableRow from '../TableRow/TableRow';
 import {Row, Col} from 'antd';
 import DatePicker from '@/components/DatePicker/DatePicker';
 import moment from 'moment';
@@ -15,6 +15,75 @@ import {TbExternalLink} from 'react-icons/tb';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import ApiService from '@/service/apiService';
 // import locale from 'antd/es/date-picker/locale/ru_RU';
+
+
+const tableHead = [
+    {
+        label:'Анонс',
+        hint: 'Биржа, на которой будет парситься анонс листинга',
+        value: 'monitor',
+        sort: true,
+        main: true
+    },
+    {
+        label:'Покупка',
+        hint: 'Биржа, на которой будет осуществлена покупка в момент анонса',
+        value: 'exchange',
+        sort: true,
+        main: false
+    },
+    {
+        label:'Пара',
+        hint: 'Название купленной монеты к USDT',
+        value: '',
+        sort: true,
+        main: false
+    },
+    {
+        label:'Сумма',
+        hint: 'Количество USDT, на которые будет совершена покупка анонсируемых монет',
+        value: 'budget_usdt',
+        sort: true,
+        main: false
+    },
+
+    
+    {
+        label:'Цена покупки',
+        hint: 'Цена покупки',
+        value: 'buy_price',
+        sort: true,
+        main: false
+    },
+    {
+        label:'Цена продажи',
+        hint: 'Цена продажи',
+        value: 'sell_price',
+        sort: true,
+        main: false
+    },
+    {
+        label:'PNL',
+        hint: 'Profits and Losts. Заработок (или убыток) бота в USDT и процентах от суммы сделки',
+        value: 'pnl',
+        sort: false,
+        main: true
+    },
+    {
+        label:'Активация',
+        // hint: 'Статус бота. Для отработанного бота указывается дата и время активации, для созданного бота — В ожидании, для черновика — Остановлен',
+        value: '',
+        sort: true,
+        main: false
+    },
+    {
+        label:'Остановка',
+        // hint: 'Статус бота. Для отработанного бота указывается дата и время активации, для созданного бота — В ожидании, для черновика — Остановлен',
+        value: '',
+        sort: true,
+        main: false
+    },
+]
 
 
 const service = new ApiService()
@@ -60,7 +129,7 @@ const Body = () => {
 
 
     const [list, setList] = useState<any[]>([])
-    const [limit, setLimit] = useState(0)
+    const [limit, setLimit] = useState(10)
     const [totalCount, setTotalCount] = useState(0)
     const [offset, setOffset] = useState(0)
     const [ordering, setOrdering] = useState(['id', 'monitor', 'exchange', 'bot_budget_usdt', 'activation_datetime', 'pair', 'announce_datetime', 'buy_price', 'sell_price', 'pnl', 'pnl_percentage', 'stop_datetime'])
@@ -87,10 +156,12 @@ const Body = () => {
                 second_date: date[1]?.format('YYYY-MM-DD'),
                 ordering,
                 limit: 10,
-                offset,
+                offset:  page === 1 ? offset : limit * (page - 1),
                 announce_source: 1
             }, access).then(res => {
                 console.log(res)
+                setList(res?.announces)
+                setTotalCount(res?.announces_count)
             })
 
         }
@@ -98,8 +169,32 @@ const Body = () => {
 
     useEffect(() => {
         updateList && updateList()
-    }, [limit, offset, ordering, access, page])
+    }, [limit, offset, ordering, access, page, date])
 
+    const onTableSort = (item: string) => {
+        console.log(item)
+        const find = ordering?.find(i => i === item)
+        console.log(find)
+        if(find) {
+            setOrdering(s => {
+                const m = s;
+                const rm = m.splice(m.findIndex(i => i === find), 1, `-${item}`)
+                return [...m]
+            })
+        } else {    
+            const tr = `-${item}`;
+            setOrdering(s => {
+                const m = s;
+                const rm = m.splice(m.findIndex(i => i === tr), 1, item)
+                return [...m]
+            })          
+        }
+    }
+
+
+    useEffect(() => {
+        console.log(Math.ceil(totalCount / limit))
+    }, [limit, totalCount])
 
 
     return (
@@ -109,18 +204,11 @@ const Body = () => {
                     <div className={styles.top}>
                         <div className={styles.part}>
                             <div className={styles.item}>
-                                
-                                {/* Date */}
-                                
                                 <DatePicker
                                     placeholder={['Дата начала', 'Дата конца']}
                                     defaultValue={date}
                                     onChange={setDate}
-                                    // locale={locale}
                                     />
-
-                                {/* Date */}
-
                             </div>
                             {/* <div className={styles.item}>
                                 <Select
@@ -149,13 +237,16 @@ const Body = () => {
                 </div>
                 <div className="table-main custom-scroll-horizontal">
                     <table className="table-wrapper">
-                        <TableHead list={mock?.head}/>
+                        <TableHead list={tableHead}/>
                         <tbody>
-                            {/* {
-                                mock?.body?.map((list, index) => (
-                                    <TableRow head={mock.head} list={list} key={index}/>
+                            {
+                                list?.map((item, index) => (
+                                    <TableRow 
+                                        head={tableHead} 
+                                        bot={item} 
+                                        key={index}/>
                                 ))
-                            } */}
+                            }
                         </tbody>
                     </table>
                 </div>
@@ -186,7 +277,6 @@ const Body = () => {
                                 </Row>
                                 
                             </Col>
-                            <Col span={24}>
                             {
                                 totalCount > limit ? (
                                     <div className="table-bottom">
@@ -199,7 +289,6 @@ const Body = () => {
                                     </div>
                                 ) : null
                             }
-                            </Col>
                         </Row>
                     </div>
                     

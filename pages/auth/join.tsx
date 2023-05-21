@@ -35,7 +35,7 @@ const SignupPage = () => {
     const [repeatPassword, setRepeatPassword] = useState('')
     const [username, setUsername] = useState('')
     const [captcha_token, setcaptcha_token] = useState('')
-    const [agree, setAgree] = useState(false)
+    const [agree, setAgree] = useState(true)
     const [success, setSuccess] = useState(false)
     const recapRef = React.createRef<any>()
 

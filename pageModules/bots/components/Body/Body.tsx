@@ -189,8 +189,6 @@ const Body = () => {
                 offset: page === 1 ? offset : limit * (page - 1),
                 ordering: ordering
             }, access).then(res => {
-                console.log(res)
-                console.log(res?.bots_info)
                 setTotalCount(res?.bots_count)
                 setList(res?.bots_info)
             })
@@ -292,7 +290,7 @@ const Body = () => {
                                         list?.map((item, index) => (
                                             <TableRow
                                                 updateList={updateList} 
-                                                head={mock?.head} 
+                                                head={tableHead} 
                                                 bot={item} 
                                                 key={index}/>
                                         ))

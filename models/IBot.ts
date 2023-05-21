@@ -15,6 +15,5 @@ export interface IBot {
     stop_buy?: number,
     stop_datetime?: any,
     stop_loss?: number,
-    take_profit?: number
-
+    take_profit?: number,
 }
