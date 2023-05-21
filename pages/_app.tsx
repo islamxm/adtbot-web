@@ -1,4 +1,5 @@
 import 'swiper/css';
+import "swiper/css/bundle";
 import '@/styles/styles.scss';
 import type { AppProps } from 'next/app'
 import { useRouter, Router } from 'next/router';

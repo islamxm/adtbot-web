@@ -1,10 +1,14 @@
 import styles from './PromoSlider.module.scss';
 import Image from 'next/image';
-import {Swiper, SwiperSlide} from 'swiper/react';
-import { Pagination, Autoplay } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination, Autoplay, EffectFade } from 'swiper';
+import "swiper/css/effect-fade";
+
+
 import img1 from '@/public/assets/promo-img-1.png'
 import img2 from '@/public/assets/promo-img-2.png'
 import img3 from '@/public/assets/promo-img-3.png'
+
 import {Row, Col} from 'antd';
 
 
@@ -37,16 +41,11 @@ const PromoSlider = () => {
     return (
         <div className={styles.wrapper}>
             <Swiper 
-                modules={[Pagination, Autoplay]}
+                modules={[Autoplay, EffectFade]}
                 autoplay={{
                     delay: 4000
                 }}
-                speed={1000}
-                // pagination={{
-                //     el: pagRef?.current,
-                //     bulletActiveClass: styles.active,
-                //     bulletClass: styles.pag_item
-                // }}
+                effect='fade'
                 className={styles.slider}>
                 {
                     content && content.map((item, index) => (
