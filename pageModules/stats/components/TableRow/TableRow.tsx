@@ -11,7 +11,7 @@ import { Popover } from "antd";
 import exchangeBuyList from "@/helpers/exchangeBuyList";
 import exchangeMonitorList from "@/helpers/exchangeMonitorList";
 import moment from 'moment';
-
+import senseValue from '@/helpers/senseValue';
 import { useAppSelector } from "@/hooks/useTypesRedux";
 import ApiService from "@/service/apiService";
 
@@ -34,7 +34,7 @@ const switchPnl = (value?: string) => {
 
 
 const TableRow:FC<tableRowPropsTypes> = ({bot, head, updateList}) => {
-    const {tokens: {access}} = useAppSelector(s => s)
+    const {tokens: {access}, hideSensValue} = useAppSelector(s => s)
     const bodyRef = useRef<HTMLTableRowElement>(null);
     const [isOpen, setIsOpen] = useState<boolean>(false)
     const [height, setHeight] = useState<number>(0)
@@ -84,7 +84,7 @@ const TableRow:FC<tableRowPropsTypes> = ({bot, head, updateList}) => {
                         </div>
                     </div>
                 </td>
-                <td className={`table-row__item table-bodyrow__item`}>
+                <td className={`table-row__item table-bodyrow__item table-bodyrow__item--nonmain`}>
                     <div className="table-bodyrow__item_in">
                         <div className="table-bodyrow__item_icon">
                             <Image width={16} height={16} src={exchangeBuyList.find(i => i.value === bot?.exchange?.toString())?.icon} alt={''}/>
@@ -94,31 +94,31 @@ const TableRow:FC<tableRowPropsTypes> = ({bot, head, updateList}) => {
                         </div>
                     </div>
                 </td>
-                <td className={`table-row__item table-bodyrow__item`}>
+                <td className={`table-row__item table-bodyrow__item table-bodyrow__item--nonmain`}>
                     <div className="table-bodyrow__item_in">
                         <div className="table-bodyrow__item_label">
                             {bot?.pair}
                         </div>
                     </div>
                 </td>
-                <td className={`table-row__item table-bodyrow__item`}>
+                <td className={`table-row__item table-bodyrow__item table-bodyrow__item--nonmain`}>
                     <div className="table-bodyrow__item_in">
                         <div className="table-bodyrow__item_label">
-                            {bot?.budget_usdt}
+                            {senseValue(hideSensValue, bot?.budget_usdt)}
                         </div>
                     </div>
                 </td>
-                <td className={`table-row__item table-bodyrow__item`}>
+                <td className={`table-row__item table-bodyrow__item table-bodyrow__item--nonmain`}>
                     <div className="table-bodyrow__item_in">
                         <div className="table-bodyrow__item_label">
-                            {bot?.buy_price}
+                            {senseValue(hideSensValue, bot?.buy_price)}
                         </div>
                     </div>
                 </td>
-                <td className={`table-row__item table-bodyrow__item`}>
+                <td className={`table-row__item table-bodyrow__item table-bodyrow__item--nonmain`}>
                     <div className="table-bodyrow__item_in">
                         <div className="table-bodyrow__item_label">
-                            {bot?.sell_price}
+                            {senseValue(hideSensValue, bot?.sell_price)}
                         </div>
                     </div>
                 </td>
@@ -129,14 +129,14 @@ const TableRow:FC<tableRowPropsTypes> = ({bot, head, updateList}) => {
                         </div>
                     </div>
                 </td>
-                <td className={`table-row__item table-bodyrow__item`}>
+                <td className={`table-row__item table-bodyrow__item table-bodyrow__item--nonmain`}>
                     <div className="table-bodyrow__item_in">
                         <div className="table-bodyrow__item_label">
                             {moment(bot?.activation_datetime).format('YYYY-MM-DD hh:mm:ss')}
                         </div>
                     </div>
                 </td>
-                 <td className={`table-row__item table-bodyrow__item activation table-bodyrow__item--nonmain`}>
+                 <td className={`table-row__item table-bodyrow__item activation`}>
                     <div className="table-bodyrow__item_in">
                         <div className={'activation-label'}>{moment(bot?.stop_datetime).format('YYYY-MM-DD hh:mm:ss')}</div>
                         <div className="activation-action">
@@ -144,55 +144,77 @@ const TableRow:FC<tableRowPropsTypes> = ({bot, head, updateList}) => {
                                 <IconButton
                                     icon={<BsShare color="#545454" size={16}/>}
                                     />
-                                
                             </div>
                         </div>
                     </div>
                 </td>
             </tr>
 
-            {/* <tr  className='table-row table-dropdown'>
-                <td colSpan={list?.filter(i => i.main).length} className={'table-dropdown__body'}>
+            <tr  className='table-row table-dropdown'>
+                <td colSpan={2} className={'table-dropdown__body'}>
                     <div style={{height}} ref={bodyRef} className="table-dropdown__body_in">
                         <div className="table-dropdown__body_table">
-                            {
-                                list?.map((item,index) => {
-                                    if(!item?.main) {
-                                        return (
-                                            <div className="table-dropdown__body_table_item" key={index}>
-                                                <div className="table-dropdown__body_table_item_name">
-                                                    {head[index].label}
-                                                    {
-                                                        head[index]?.hint ? (
-                                                            <Popover
-                                                                content={
-                                                                    <Hint>
-                                                                        {head[index].hint}
-                                                                    </Hint>
-                                                                }
-                                                                >
-                                                                <button className="table-dropdown__body_table_item_name_hint">
-                                                                    <AiOutlineInfoCircle color="var(--yellow)"/> 
-                                                                </button>  
-                                                            </Popover>
-                                                        ) : null
-                                                    }
-                                                </div>
-                                                <div className="table-dropdown__body_table_item_value">
-                                                    {item?.label}
-                                                </div>
-                                            </div>
-                                        )
-                                    } else {
-                                        return null
-                                    }
-                                })
-                            }
+                            <div className="table-dropdown__body_table_item">
+                                <div className="table-dropdown__body_table_item_name">
+                                Покупка
+                                </div>
+                                <div className="table-dropdown__body_table_item_value">
+                                {exchangeBuyList.find(i => i.value === bot?.exchange?.toString())?.label}
+                                </div>
+                            </div>
+                            <div className="table-dropdown__body_table_item">
+                                <div className="table-dropdown__body_table_item_name">
+                                Пара
+                                </div>
+                                <div className="table-dropdown__body_table_item_value">
+                                {senseValue(hideSensValue, bot?.pair)}
+                                </div>
+                            </div>
+                            <div className="table-dropdown__body_table_item">
+                                <div className="table-dropdown__body_table_item_name">
+                                Сумма
+                                </div>
+                                <div className="table-dropdown__body_table_item_value">
+                                {senseValue(hideSensValue, bot?.budget_usdt)}
+                                </div>
+                            </div>
+                            <div className="table-dropdown__body_table_item">
+                                <div className="table-dropdown__body_table_item_name">
+                                Цена покупки
+                                </div>
+                                <div className="table-dropdown__body_table_item_value">
+                                {senseValue(hideSensValue, bot?.buy_price)}
+                                </div>
+                            </div>
+                            <div className="table-dropdown__body_table_item">
+                                <div className="table-dropdown__body_table_item_name">
+                                Цена продажи
+                                </div>
+                                <div className="table-dropdown__body_table_item_value">
+                                {senseValue(hideSensValue, bot?.sell_price)}
+                                </div>
+                            </div>
+                            <div className="table-dropdown__body_table_item">
+                                <div className="table-dropdown__body_table_item_name">
+                                Активация
+                                </div>
+                                <div className="table-dropdown__body_table_item_value">
+                                {moment(bot?.activation_datetime).format('YYYY-MM-DD hh:mm:ss')}
+                                </div>
+                            </div>
+                            <div className="table-dropdown__body_table_item">
+                                <div className="table-dropdown__body_table_item_name">
+                                Остановка
+                                </div>
+                                <div className="table-dropdown__body_table_item_value">
+                                {moment(bot?.stop_datetime).format('YYYY-MM-DD hh:mm:ss')}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </td>
             </tr> 
-             */}
+            
         </>
         
     )

@@ -16,7 +16,8 @@ import { getCookie } from 'typescript-cookie';
 import Button from '@/components/Button/Button';
 import {AiOutlinePlus} from 'react-icons/ai';
 import AddBotModal from '@/modals/AddBotModal/AddBotModal';
-
+import { useAppDispatch } from '@/hooks/useTypesRedux';
+import { updateSenseValue } from '@/store/actions';
 
 const service = new ApiService();
 
@@ -142,14 +143,18 @@ const switchTableSize = (value: any) => {
 
 
 const Body = () => {
-    const {tokens: {access}, lastCreatedBot} = useAppSelector(s => s)
+    const {tokens: {access}, lastCreatedBot, hideSensValue} = useAppSelector(s => s)
+    const dispatch = useAppDispatch()
 
     const [hidden, setHidden] = useState(false)
     const [tableSize, setTableSize] = useState('1')
     const [addBotModal, setAddBotModal] = useState(false)
 
     const openAddBotModal = () => setAddBotModal(true)
-    const closeAddBotModal = () => setAddBotModal(false)
+    const closeAddBotModal = () => {
+        setAddBotModal(false)
+        setEditData(null)
+    }
 
     const [list, setList] = useState<any[]>([])
 
@@ -162,6 +167,8 @@ const Body = () => {
     const [ordering, setOrdering] = useState(['monitor', 'exchange', 'budget_usdt', 'daily_volume', 'take_profit', 'stop_loss', 'stop_buy'])
 
     const [page, setPage] = useState(1)
+
+    const [editData, setEditData] = useState(null)
 
 
     useEffect(() => {
@@ -224,9 +231,16 @@ const Body = () => {
     }
 
 
+    const openEdit = (data: any) => {
+        setEditData(data)
+        openAddBotModal()
+    }
+
+
     return (
         <div className={styles.wrapper}>
             <AddBotModal
+                data={editData}
                 updateList={updateList}
                 open={addBotModal}
                 onCancel={closeAddBotModal}
@@ -272,8 +286,8 @@ const Body = () => {
                             </div>
                             <div className={styles.item}>
                                 <HsButton
-                                    onClick={setHidden}
-                                    isActive={hidden}
+                                    onClick={() => hideSensValue ? dispatch(updateSenseValue(false)) : dispatch(updateSenseValue(true))}
+                                    isActive={hideSensValue}
                                     />
                             </div>
                         </div>
@@ -289,6 +303,7 @@ const Body = () => {
                                     {   
                                         list?.map((item, index) => (
                                             <TableRow
+                                                onEdit={openEdit}
                                                 updateList={updateList} 
                                                 head={tableHead} 
                                                 bot={item} 

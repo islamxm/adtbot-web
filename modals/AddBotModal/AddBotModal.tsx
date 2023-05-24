@@ -38,7 +38,8 @@ const buyOpts = [
 const AddBotModal:FC<addBotModalPropsTypes> = ({
     open,
     onCancel,
-    updateList
+    updateList,
+    data
 }) => {
     const dispatch = useAppDispatch()
     const {tokens: {access}} = useAppSelector(s => s)
@@ -46,16 +47,35 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
     const [secondLoad, setSecondLoad] = useState(false)
 
 
-    const [monitor, setMonitor] = useState<number>(1)
-    const [exchange, setExchange] = useState<number>(1)
+    const [monitor, setMonitor] = useState<any>(1)
+    const [exchange, setExchange] = useState<any>(1)
     const [budget_usdt, setBudget_usdt] = useState<any>()
     const [take_profit, setTake_profit] = useState<any>()
     const [stop_loss, setStop_loss] = useState<any>()
     const [stop_buy, setStop_buy] = useState<any>()
-    const [enabled, setEnabled] = useState(true)
+    const [enabled, setEnabled] = useState<any>(true)
     const [daily_volume, setDaily_volume] = useState<any>()
 
-    const [code, setCode] = useState('')
+    const [bot_code, setBot_code] = useState<any>('')
+
+    const [id, setId] = useState<any>()
+
+
+    useEffect(() => {
+        if(data) {
+            setId(data?.bot_id)
+
+            setMonitor(data?.bot_info?.monitor)
+            setExchange(data?.bot_info?.exchange)
+            setBudget_usdt(data?.bot_info?.budget_usdt)
+            setTake_profit(data?.bot_info?.take_profit)
+            setStop_loss(data?.bot_info?.stop_loss)
+            setStop_buy(data?.bot_info?.stop_buy)
+            setEnabled(data?.bot_info?.enabled)
+            setDaily_volume(data?.bot_info?.daily_volume)
+            setBot_code(data?.bot_info?.bot_code)
+        }
+    }, [data])
 
 
     const closeHandle = () => {
@@ -70,7 +90,7 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
             setStop_buy('')
             setEnabled(true)
             setDaily_volume('')
-            setCode('')
+            setBot_code('')
         }
     }
     
@@ -123,18 +143,55 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
                 bot_code: ''
             }, access).then(res => {
                 if(res?.id) {
-                    notify('Бот создан и запущен', 'SUCCESS')
-                    closeHandle()
-                    dispatch(lastCreatedBot(res))
+                    // 
+                    service.enableBot(res.id, access).then(r => {
+                        if(r?.id) {
+                            notify('Бот создан и запущен', 'SUCCESS')
+                            dispatch(lastCreatedBot(res))
+                        } else {
+                            notify('Бот создался но не запустился', 'ERROR')
+                            dispatch(lastCreatedBot(res))
+                        }
+                    }).finally(() => {
+                        closeHandle()
+                        setFirstLoad(false)
+                    })
                 }
                 if(res?.detail === 'Bad user tariff!') {
                     notify('Ваш тариф не позволяет выполнить данное действие', 'ERROR')
                 }
-            }).finally(() => setFirstLoad(false))
+            })
         }
     }
 
 
+    const editBot = () => {
+        if(access && id) {
+            setFirstLoad(true)
+            service.editBot({
+                bot_id: id,
+                bot_info: {
+                    monitor,
+                    exchange,
+                    budget_usdt: Number(budget_usdt),
+                    take_profit: Number(take_profit),
+                    stop_loss: Number(stop_loss),
+                    stop_buy: Number(stop_buy),
+                    enabled,
+                    daily_volume: Number(daily_volume)
+                }
+            }, access).then(res => {
+                if(res?.id) {
+                    notify('Бот изменен', 'SUCCESS')
+                    closeHandle()
+                    dispatch(lastCreatedBot(res))
+                }
+                if(res?.detail) {
+                    notify('Произошла ошибка')
+                }
+            }).finally(() => setFirstLoad(false))
+        }
+    }
     
 
 
@@ -150,7 +207,7 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
                 <Col span={24}>
                     {/* body */}
                     <Row gutter={[15,15]}>
-                        <Col span={12}>
+                        <Col span={24} sm={12}>
                             <Row gutter={[20,20]}>
                                 <Col span={24}>
                                     <Select
@@ -193,7 +250,7 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
                                 </Col>
                             </Row>
                         </Col>
-                        <Col span={12}>
+                        <Col span={24} sm={12}>
                             <Row gutter={[20,20]}>
                                 <Col span={24}>
                                     <Select
@@ -231,23 +288,38 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
                 <Col span={24}>
                     {/* action */}
                     <div className={styles.action}>
-                        <div className={styles.item}>
-                            <Button
-                                load={firstLoad}
-                                text='Создать и запустить'
-                                onClick={createAndEnableBot}
-                                // disabled
-                                />
-                        </div>
-                        <div className={styles.item}>
-                            <Button
-                                onClick={createBot}
-                                load={secondLoad}
-                                text='Создать'
-                                variant={'simple'}
-                                // disabled
-                                />
-                        </div>
+                        {
+                            data ? (
+                                <div className={styles.item}>
+                                    <Button
+                                        load={firstLoad}
+                                        text='Сохранить'
+                                        onClick={editBot}
+                                        // disabled
+                                        />
+                                </div>
+                            ) : (
+                               <>
+                                    <div className={styles.item}>
+                                        <Button
+                                            load={firstLoad}
+                                            text='Создать и запустить'
+                                            onClick={createAndEnableBot}
+                                            // disabled
+                                            />
+                                    </div>
+                                    <div className={styles.item}>
+                                        <Button
+                                            onClick={createBot}
+                                            load={secondLoad}
+                                            text='Создать'
+                                            variant={'simple'}
+                                            // disabled
+                                            />
+                                    </div>
+                               </>
+                            )
+                        }
                     </div>
                 </Col>
             </Row>

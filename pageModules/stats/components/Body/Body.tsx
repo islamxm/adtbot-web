@@ -14,6 +14,9 @@ import 'dayjs/locale/ru';
 import {TbExternalLink} from 'react-icons/tb';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import ApiService from '@/service/apiService';
+import { useAppDispatch } from '@/hooks/useTypesRedux';
+import { updateSenseValue } from '@/store/actions';
+
 // import locale from 'antd/es/date-picker/locale/ru_RU';
 
 
@@ -121,7 +124,8 @@ const switchTableSize = (value: any) => {
 }
 
 const Body = () => {
-    const {tokens: {access}} = useAppSelector(s => s)
+    const dispatch = useAppDispatch()
+    const {tokens: {access}, hideSensValue} = useAppSelector(s => s)
     const [hidden, setHidden] = useState<boolean>(false);
     const [tableSize, setTableSize] = useState('1')
 
@@ -232,7 +236,10 @@ const Body = () => {
                                     />
                             </div>  
                             <div className={styles.item}>
-                                <HsButton isActive={hidden} onClick={setHidden}/>
+                                <HsButton
+                                    onClick={() => hideSensValue ? dispatch(updateSenseValue(false)) : dispatch(updateSenseValue(true))}
+                                    isActive={hideSensValue}
+                                    />
                             </div>
                         </div>
                     </div>

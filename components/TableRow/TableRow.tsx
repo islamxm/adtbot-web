@@ -14,9 +14,11 @@ import exchangeMonitorList from "@/helpers/exchangeMonitorList";
 import switchBotStatus from "@/helpers/switchBotStatus";
 import { useAppSelector } from "@/hooks/useTypesRedux";
 import ApiService from "@/service/apiService";
-import {BiTrash} from 'react-icons/bi';
+import {BiTrash, BiEditAlt} from 'react-icons/bi';
 import notify from "@/helpers/notify";
-
+import {IoPlayOutline, IoCloseCircleOutline} from 'react-icons/io5';
+import ConfirmModal from "@/modals/ConfirmModal/ConfirmModal";
+import senseValue from "@/helpers/senseValue";
 
 const service = new ApiService()
 
@@ -33,8 +35,8 @@ const switchPnl = (value?: string) => {
 }
 
 
-const TableRow:FC<tableRowPropsTypes> = ({bot, head, updateList}) => {
-    const {tokens: {access}} = useAppSelector(s => s)
+const TableRow:FC<tableRowPropsTypes> = ({bot, head, updateList, onEdit}) => {
+    const {tokens: {access}, hideSensValue} = useAppSelector(s => s)
     const bodyRef = useRef<HTMLTableRowElement>(null);
     const [isOpen, setIsOpen] = useState<boolean>(false)
     const [height, setHeight] = useState<number>(0)
@@ -44,6 +46,11 @@ const TableRow:FC<tableRowPropsTypes> = ({bot, head, updateList}) => {
     const [disableLoad, setDisableLoad] = useState(false)
 
     const {id} = bot || {}
+
+    const [deleteModal, setDeleteModal] = useState(false)
+    const [disableModal, setDisableModal] = useState(false)
+
+
 
     const toggleBody = () => setIsOpen(s => !s)
 
@@ -74,23 +81,6 @@ const TableRow:FC<tableRowPropsTypes> = ({bot, head, updateList}) => {
     }
 
 
-    const disableBot = () => {
-        if(access && id) {
-            setDisableLoad(true)
-            service.disableBot(id, access).then(res => {
-                if(res) {
-                    updateList && updateList()
-                    notify('Бот остановлен', 'SUCCESS')
-                } else {
-                    notify('Произоша ошибка', 'ERROR')
-                }
-            }).finally(() => setDisableLoad(false))
-        }
-    }
-
-    const editBot = () => {
-
-    }
 
     const deleteBot = () => {
         if(access && id) {
@@ -103,17 +93,37 @@ const TableRow:FC<tableRowPropsTypes> = ({bot, head, updateList}) => {
                 } else {
                     notify('Произошла ошибка', 'SUCCESS')
                 }
-            }).finally(() => setDeleteLoad(false))
+            }).finally(() => {
+                setDeleteLoad(false)
+                setDeleteModal(false)
+            })
         }
     }
 
+    const disableBot = () => {
+        if(access && id) {
+            setDisableLoad(true)
+            service.disableBot(id, access).then(res => {
+                if(res) {
+                    updateList && updateList()
+                    notify('Бот остановлен', 'SUCCESS')
+                } else {
+                    notify('Произоша ошибка', 'ERROR')
+                }
+            }).finally(() => {
+                setDisableLoad(false)
+                setDisableModal(false)
+            })
+        }
+    }
+    
 
 
     const switchStatusAction = (status: number) => {
         switch(status) {
             case 1:
                 return (
-                    <td className={`table-row__item table-bodyrow__item activation table-bodyrow__item--nonmain`}>
+                    <td className={`table-row__item table-bodyrow__item activation`}>
                         <div className="table-bodyrow__item_in">
                             <div className={'activation-label'}>Активен</div>
                             <div className="activation-action">
@@ -131,22 +141,16 @@ const TableRow:FC<tableRowPropsTypes> = ({bot, head, updateList}) => {
                 )
             case 2:
                 return (
-                    <td className={`table-row__item table-bodyrow__item activation table-bodyrow__item--nonmain`}>
+                    <td className={`table-row__item table-bodyrow__item activation`}>
                         <div className="table-bodyrow__item_in">
                         <div className={'activation-label'}>В ожидании</div>
                             <div className="activation-action">
                                 <div className="activation-action_item">
                                     <IconButton
+                                        onClick={() => setDisableModal(true)}
+                                        load={disableLoad}
                                         icon={<HiOutlineStopCircle color="var(--red)" size={16}/>}
                                         />
-                                </div>
-                                <div className="activation-action_item">
-                                    <IconButton
-                                        load={deleteLoad}
-                                        onClick={deleteBot}
-                                        icon={<BiTrash color="var(--red)" size={16}/>}
-                                        />
-                                    
                                 </div>
                             </div>
                         </div>
@@ -154,7 +158,7 @@ const TableRow:FC<tableRowPropsTypes> = ({bot, head, updateList}) => {
                 )
             case 3:
                 return (
-                    <td className={`table-row__item table-bodyrow__item activation table-bodyrow__item--nonmain`}>
+                    <td className={`table-row__item table-bodyrow__item activation`}>
                         <div className="table-bodyrow__item_in">
                         <div className={'activation-label'}>Остановлен</div>
                             <div className="activation-action">
@@ -162,17 +166,35 @@ const TableRow:FC<tableRowPropsTypes> = ({bot, head, updateList}) => {
                                     <IconButton
                                         onClick={enableBot}
                                         load={enableLoad}
-                                        icon={<HiOutlinePlay color="var(--green)" size={16}/>}
+                                        icon={<IoPlayOutline color="var(--green)" size={16}/>}
                                         />
-                                    
                                 </div>
                                 <div className="activation-action_item">
                                     <IconButton
                                         load={deleteLoad}
-                                        onClick={deleteBot}
-                                        icon={<BiTrash color="var(--red)" size={16}/>}
+                                        onClick={() => setDeleteModal(true)}
+                                        icon={<IoCloseCircleOutline color="#7F8184" size={16}/>}
                                         />
-                                    
+                                </div>
+                                <div className="activation-action_item">
+                                    <IconButton
+                                        onClick={() => {
+                                            onEdit && onEdit({
+                                                bot_id: bot?.id,
+                                                bot_info: {
+                                                    monitor: bot?.monitor,
+                                                    exchange: bot?.exchange,
+                                                    budget_usdt: bot?.budget_usdt,
+                                                    take_profit: bot?.take_profit,
+                                                    stop_loss: bot?.stop_loss,
+                                                    stop_buy: bot?.stop_buy,
+                                                    enabled: bot?.enabled,
+                                                    daily_volume: bot?.daily_volume
+                                                }
+                                            })
+                                        }}  
+                                        icon={<BiEditAlt color="#66AF99" size={16}/>}
+                                        />
                                 </div>
                                 {/* {
                                     item.share ? (
@@ -201,6 +223,20 @@ const TableRow:FC<tableRowPropsTypes> = ({bot, head, updateList}) => {
 
     return (
         <>
+        <ConfirmModal
+            open={deleteModal}
+            onConfirm={deleteBot}
+            load={deleteLoad}
+            onCancel={() => setDeleteModal(false)}
+            text="Данное действие приведет к удалению бота."
+            />
+        <ConfirmModal
+            open={disableModal}
+            onConfirm={disableBot}
+            load={disableLoad}
+            onCancel={() => setDisableModal(false)}
+            text="Данное действие приведет к остановке бота и ордера буду проданы в рынок"
+            />
             <tr className='table-row table-bodyrow'>
                 {/* {
                     list?.map((item, index) => {
@@ -285,7 +321,7 @@ const TableRow:FC<tableRowPropsTypes> = ({bot, head, updateList}) => {
                         </div>
                     </div>
                 </td>
-                <td className={`table-row__item table-bodyrow__item`}>
+                <td className={`table-row__item table-bodyrow__item table-bodyrow__item--nonmain`}>
                     <div className="table-bodyrow__item_in">
                         <div className="table-bodyrow__item_icon">
                             <Image width={16} height={16} src={exchangeBuyList.find(i => i.value === bot?.exchange?.toString())?.icon} alt={''}/>
@@ -295,59 +331,59 @@ const TableRow:FC<tableRowPropsTypes> = ({bot, head, updateList}) => {
                         </div>
                     </div>
                 </td>
-                <td className={`table-row__item table-bodyrow__item`}>
+                <td className={`table-row__item table-bodyrow__item table-bodyrow__item--nonmain`}>
                     <div className="table-bodyrow__item_in">
                         <div className="table-bodyrow__item_label">
                             {bot?.pair}
                         </div>
                     </div>
                 </td>
-                <td className={`table-row__item table-bodyrow__item`}>
+                <td className={`table-row__item table-bodyrow__item table-bodyrow__item--nonmain`}>
                     <div className="table-bodyrow__item_in">
                         <div className="table-bodyrow__item_label">
-                            {bot?.budget_usdt}
+                            {senseValue(hideSensValue, bot?.budget_usdt)}
                         </div>
                     </div>
                 </td>
-                <td className={`table-row__item table-bodyrow__item`}>
+                <td className={`table-row__item table-bodyrow__item table-bodyrow__item--nonmain`}>
                     <div className="table-bodyrow__item_in">
                         <div className="table-bodyrow__item_label">
-                            {bot?.daily_volume}
+                            {senseValue(hideSensValue, bot?.daily_volume)}
                         </div>
                     </div>
                 </td>
-                <td className={`table-row__item table-bodyrow__item`}>
+                <td className={`table-row__item table-bodyrow__item table-bodyrow__item--nonmain`}>
                     <div className="table-bodyrow__item_in">
                         <div className="table-bodyrow__item_label">
-                            {bot?.stop_buy}
+                            {senseValue(hideSensValue, bot?.stop_buy)}
                         </div>
                     </div>
                 </td>
-                <td className={`table-row__item table-bodyrow__item`}>
+                <td className={`table-row__item table-bodyrow__item table-bodyrow__item--nonmain`}>
                     <div className="table-bodyrow__item_in">
                         <div className="table-bodyrow__item_label">
-                            {bot?.take_profit}
+                            {senseValue(hideSensValue, bot?.take_profit)}
                         </div>
                     </div>
                 </td>
-                <td className={`table-row__item table-bodyrow__item`}>
+                <td className={`table-row__item table-bodyrow__item table-bodyrow__item--nonmain`}>
                     <div className="table-bodyrow__item_in">
                         <div className="table-bodyrow__item_label">
-                            {bot?.stop_loss}
+                            {senseValue(hideSensValue, bot?.stop_loss)}
                         </div>
                     </div>
                 </td>
-                <td className={`table-row__item table-bodyrow__item`}>
+                <td className={`table-row__item table-bodyrow__item table-bodyrow__item--nonmain`}>
                     <div className="table-bodyrow__item_in">
                         <div className="table-bodyrow__item_label">
-                            {bot?.buy_price}
+                            {senseValue(hideSensValue, bot?.buy_price)}
                         </div>
                     </div>
                 </td>
-                <td className={`table-row__item table-bodyrow__item`}>
+                <td className={`table-row__item table-bodyrow__item table-bodyrow__item--nonmain`}>
                     <div className="table-bodyrow__item_in">
                         <div className="table-bodyrow__item_label">
-                            {bot?.sell_price}
+                            {senseValue(hideSensValue, bot?.sell_price)}
                         </div>
                     </div>
                 </td>
@@ -374,48 +410,87 @@ const TableRow:FC<tableRowPropsTypes> = ({bot, head, updateList}) => {
                 </td>
             </tr>
 
-            {/* <tr  className='table-row table-dropdown'>
-                <td colSpan={list?.filter(i => i.main).length} className={'table-dropdown__body'}>
+            <tr  className='table-row table-dropdown'>
+                <td colSpan={2} className={'table-dropdown__body'}>
                     <div style={{height}} ref={bodyRef} className="table-dropdown__body_in">
                         <div className="table-dropdown__body_table">
-                            {
-                                list?.map((item,index) => {
-                                    if(!item?.main) {
-                                        return (
-                                            <div className="table-dropdown__body_table_item" key={index}>
-                                                <div className="table-dropdown__body_table_item_name">
-                                                    {head[index].label}
-                                                    {
-                                                        head[index]?.hint ? (
-                                                            <Popover
-                                                                content={
-                                                                    <Hint>
-                                                                        {head[index].hint}
-                                                                    </Hint>
-                                                                }
-                                                                >
-                                                                <button className="table-dropdown__body_table_item_name_hint">
-                                                                    <AiOutlineInfoCircle color="var(--yellow)"/> 
-                                                                </button>  
-                                                            </Popover>
-                                                        ) : null
-                                                    }
-                                                </div>
-                                                <div className="table-dropdown__body_table_item_value">
-                                                    {item?.label}
-                                                </div>
-                                            </div>
-                                        )
-                                    } else {
-                                        return null
-                                    }
-                                })
-                            }
+                            <div className="table-dropdown__body_table_item">
+                                <div className="table-dropdown__body_table_item_name">
+                                    Покупка
+                                </div>
+                                <div className="table-dropdown__body_table_item_value">
+                                    {exchangeBuyList.find(i => i.value === bot?.exchange?.toString())?.label}
+                                </div>
+                            </div>
+                            <div className="table-dropdown__body_table_item">
+                                <div className="table-dropdown__body_table_item_name">
+                                    Пара
+                                </div>
+                                <div className="table-dropdown__body_table_item_value">
+                                    {bot?.pair}
+                                </div>
+                            </div>
+                            <div className="table-dropdown__body_table_item">
+                                <div className="table-dropdown__body_table_item_name">
+                                    Сумма
+                                </div>
+                                <div className="table-dropdown__body_table_item_value">
+                                {senseValue(hideSensValue, bot?.budget_usdt)}
+                                </div>
+                            </div>
+                            <div className="table-dropdown__body_table_item">
+                                <div className="table-dropdown__body_table_item_name">
+                                    Объем
+                                </div>
+                                <div className="table-dropdown__body_table_item_value">
+                                    {senseValue(hideSensValue, bot?.daily_volume)}
+                                </div>
+                            </div>
+                            <div className="table-dropdown__body_table_item">
+                                <div className="table-dropdown__body_table_item_name">
+                                    Slippage
+                                </div>
+                                <div className="table-dropdown__body_table_item_value">
+                                {senseValue(hideSensValue, bot?.stop_buy)}
+                                </div>
+                            </div>
+                            <div className="table-dropdown__body_table_item">
+                                <div className="table-dropdown__body_table_item_name">
+                                TP
+                                </div>
+                                <div className="table-dropdown__body_table_item_value">
+                                {senseValue(hideSensValue, bot?.take_profit)}
+                                </div>
+                            </div>
+                            <div className="table-dropdown__body_table_item">
+                                <div className="table-dropdown__body_table_item_name">
+                                SL
+                                </div>
+                                <div className="table-dropdown__body_table_item_value">
+                                {senseValue(hideSensValue, bot?.stop_loss)}
+                                </div>
+                            </div>
+                            <div className="table-dropdown__body_table_item">
+                                <div className="table-dropdown__body_table_item_name">
+                                Buy
+                                </div>
+                                <div className="table-dropdown__body_table_item_value">
+                                {senseValue(hideSensValue, bot?.buy_price)}
+                                </div>
+                            </div>
+                            <div className="table-dropdown__body_table_item">
+                                <div className="table-dropdown__body_table_item_name">
+                                Sell
+                                </div>
+                                <div className="table-dropdown__body_table_item_value">
+                                    {senseValue(hideSensValue, bot?.sell_price)}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </td>
             </tr> 
-             */}
+            
         </>
         
     )

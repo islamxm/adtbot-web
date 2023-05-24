@@ -42,6 +42,7 @@ const endpoints = {
     announceStats: `${PATH}announce_stats/`,
     disableBot: `${PATH}disable_bot/`,
     deleteBot: `${PATH}delete_bot/`,
+    editBot: `${PATH}modify_bot/`,
 
 
     // tarif

@@ -5,7 +5,7 @@ export interface IBot {
     buy_price?: number,
     daily_volume?: number
     enabled?: boolean,
-    id: number,
+    id?: number,
     monitor?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10,
     exchange?: 1 | 2 | 3 | 4,
     pair?: any,

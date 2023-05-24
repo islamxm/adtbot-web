@@ -6,7 +6,7 @@ import Button from '@/components/Button/Button';
 
 const ConfirmModal:FC<confirmModalPropsTypes> = (props) => {
 
-    const {onCancel,text,onConfirm} = props
+    const {onCancel,text,onConfirm, load} = props
 
     const onClose = () => {
         onCancel && onCancel()
@@ -21,6 +21,7 @@ const ConfirmModal:FC<confirmModalPropsTypes> = (props) => {
                         <Button
                             text='Подтвердить'
                             onClick={() => onConfirm && onConfirm()}
+                            load={load}
                             variant={'blue'}
                             style={{width: '100%'}}
                             />

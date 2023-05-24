@@ -7,13 +7,13 @@ const switchBotStatus = ({
     stop_datetime?: null | string,
     activation_datetime?: string
 }) => {
-    if(enabled && stop_datetime === null && !activation_datetime) {
+    if(enabled && stop_datetime === null && activation_datetime) {
         return 1;
     }
     if(enabled && stop_datetime) {
         return 2;
     }
-    if(!enabled) {
+    if(enabled === false) {
         return 3;
     }
     return 1

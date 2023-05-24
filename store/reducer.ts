@@ -23,7 +23,8 @@ type IState = {
         user_own_referal: any
     },
     captcha: string,
-    lastCreatedBot: null | any
+    lastCreatedBot: null | any,
+    hideSensValue: boolean
 }  
 
 
@@ -35,7 +36,8 @@ const globalState: IState = {
     },
     captcha: '',
     userData: null,
-    lastCreatedBot: null
+    lastCreatedBot: null,
+    hideSensValue: false
 }
 
 const reducer = (state = globalState, action: any) => {
@@ -64,6 +66,11 @@ const reducer = (state = globalState, action: any) => {
             return {
                 ...state,
                 lastCreatedBot: action.data
+            }
+        case 'UPDATE_SENSE_VALUE':
+            return {
+                ...state,
+                hideSensValue: action.data
             }
         default:
             return state;
