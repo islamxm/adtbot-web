@@ -1,4 +1,4 @@
-export const BASE_DOMAIN = `https://developmentserver.space`;
+export const BASE_DOMAIN = `https://developmentsrv.space`;
 export const PATH = `${BASE_DOMAIN}/api/v1/`
 
 const endpoints = {
