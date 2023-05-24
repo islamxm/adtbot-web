@@ -125,9 +125,9 @@ const Body = () => {
     const [hidden, setHidden] = useState<boolean>(false);
     const [tableSize, setTableSize] = useState('1')
 
-    const [date, setDate] = useState<any>([dayjs(moment(Date.now()).format('DD/MM/YYYY'), dateFormat), dayjs(moment(Date.now()).format('DD/MM/YYYY'), dateFormat)])
+    const [date, setDate] = useState<any>([dayjs(dayjs().add(-30, 'd'), dateFormat), dayjs(dayjs(), dateFormat)])
 
-
+    
     const [list, setList] = useState<any[]>([])
     const [limit, setLimit] = useState(10)
     const [totalCount, setTotalCount] = useState(0)
