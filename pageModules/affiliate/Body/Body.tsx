@@ -4,9 +4,26 @@ import Input from '@/components/Input/Input';
 import Button from '@/components/Button/Button';
 import {TbCopy} from 'react-icons/tb';
 import copyValue from '@/helpers/copyValue';
+import ApiService from '@/service/apiService';
+import { useAppSelector } from '@/hooks/useTypesRedux';
+import { useEffect, useState } from 'react';
+
+
+const service = new ApiService()
 
 
 const Body = () => {
+    const {tokens: {access}} = useAppSelector(s => s)
+    const [users, setUsers] = useState<any[]>([])
+
+    useEffect(() => {
+        if(access) {
+            service.getReferalUsers(access).then(r => {
+                console.log(r)
+                setUsers(r)
+            })
+        }
+    }, [access])
 
 
     return (
@@ -63,18 +80,23 @@ const Body = () => {
                     <br/>
                     <br/>
                     <br/>
-                    Пользователи, зарегистрированные по реферальной ссылке:
-                    <br/>
-                    <br/>
-                    1. vlgg****lf  —  Активен
-                    <br/>
-                    2. vlgg****lf  —  Активен
-                    <br/>
-                    3. vlgg****lf  —  Активен
-                    <br/>
-                    4. vlgg****lf  —  Активен
-                    <br/>
-                    5. vlgg****lf  —  Активен
+                    {
+                        users?.length > 0 ? (
+                            <>
+                                Пользователи, зарегистрированные по реферальной ссылке:
+                                <br/>
+                                <br/>
+                                {
+                                    users?.map((i, index) => (
+                                        <>
+                                            {index + 1}. {i.username}  —  Активен
+                                            <br/>
+                                        </>
+                                    ))
+                                }
+                            </>
+                        ) : null
+                    }
                     </p>
 
                 </Col>

@@ -163,6 +163,11 @@ const Body = () => {
                 console.log(res)
                 setList(res?.announces)
                 setTotalCount(res?.announces_count)
+                setannounces_count(res?.announces_count)
+                setbinance_announces(res?.binance_announces)
+                setcoinbase_announces(res?.coinbase_announces)
+                sethuobi_announces(res?.huobi_announces)
+                setused_bots(res?.used_bots)
             })
 
         }
@@ -234,7 +239,7 @@ const Body = () => {
                 </div>
                 <div className="table-main custom-scroll-horizontal">
                     <table className="table-wrapper">
-                        <TableHead list={tableHead}/>
+                        <TableHead onSort={onTableSort} list={tableHead}/>
                         <tbody>
                             {
                                 list?.map((item, index) => (

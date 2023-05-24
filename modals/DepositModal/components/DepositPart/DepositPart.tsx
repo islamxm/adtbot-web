@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './DepositPart.module.scss';
 import Input from '@/components/Input/Input';
 import Button from '@/components/Button/Button';
@@ -27,6 +27,7 @@ const DepositPart = ({
     const [load, setLoad] = useState(false)
     const [value, setValue] = useState<string>('')
 
+
     const onSave = () => {
         if(value && access && target) {
             setLoad(true)
@@ -53,6 +54,19 @@ const DepositPart = ({
         }
     }
 
+    const typeSwitch = () => {
+        switch(type) {
+            case 1:
+                return 'USDT (TRC20)'
+            case 3:
+                return 'USDT (BEP20)'
+            case 2:
+                return 'USDT (ERC20)'
+            default:
+                return ''
+        }
+    }
+
 
     return (
         <div className={styles.wrapper}>
@@ -60,7 +74,10 @@ const DepositPart = ({
                 <Col span={24}>
                     <Row gutter={[15,15]}>
                         <Col span={24}>
-                            Адрес кошелька для пополнения баланса аккаунта платформы
+                            <div className={styles.title}>
+                                Адрес кошелька <span>{typeSwitch()}</span> для пополнения баланса аккаунта платформы
+                            </div>
+                          
                         </Col>
                         <Col span={24}>
                             {/* input */}
