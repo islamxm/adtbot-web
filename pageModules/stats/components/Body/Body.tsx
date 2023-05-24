@@ -136,10 +136,11 @@ const Body = () => {
 
     const [page, setPage] = useState(1)
 
-
-    // useEffect(() => {
-    //     updateList()
-    // }, [access])
+    const [announces_count, setannounces_count] = useState(0)
+    const [binance_announces, setbinance_announces] = useState(0)
+    const [coinbase_announces, setcoinbase_announces] = useState(0)
+    const [huobi_announces, sethuobi_announces] = useState(0)
+    const [used_bots, setused_bots] = useState(0) 
 
     useEffect(() => {
         if(tableSize) {
@@ -191,10 +192,6 @@ const Body = () => {
         }
     }
 
-
-    useEffect(() => {
-        console.log(Math.ceil(totalCount / limit))
-    }, [limit, totalCount])
 
 
     return (
@@ -257,13 +254,13 @@ const Body = () => {
                                 <Row gutter={[10,10]}>
                                     <Col span={12}>
                                         <div className={styles.info}>
-                                            <div className={styles.head}>Всего</div>
+                                            <div className={styles.head}>Всего: {announces_count}</div>
                                             <ul className={styles.body}>
-                                                <li className={styles.body_item}>Анонсы Binance: 1</li>
-                                                <li className={styles.body_item}>Анонсы Coinbase: 1</li>
-                                                <li className={styles.body_item}>Анонсы Huobi: 2</li>
-                                                <li className={styles.body_item}>Отработанные боты: 4</li>
-                                                <li className={styles.body_item}>PNL: 726 USDT</li>
+                                                <li className={styles.body_item}>Анонсы Binance: {binance_announces}</li>
+                                                <li className={styles.body_item}>Анонсы Coinbase: {coinbase_announces}</li>
+                                                <li className={styles.body_item}>Анонсы Huobi: {huobi_announces}</li>
+                                                <li className={styles.body_item}>Отработанные боты: {used_bots}</li>
+                                                {/* <li className={styles.body_item}>PNL: 726 USDT</li> */}
                                             </ul>
                                         </div>
                                     </Col>
