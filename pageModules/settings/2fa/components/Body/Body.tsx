@@ -11,7 +11,7 @@ const Body = () => {
 
 
     useEffect(() => {
-        userData && userData?.two_factor_enabled ? setDone(true) : setDone(false)
+        (userData && userData?.two_factor_enabled) ? setDone(true) : setDone(false)
     }, [userData])
 
     

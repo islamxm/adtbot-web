@@ -5,7 +5,9 @@ import Button from '@/components/Button/Button';
 import { useEffect, useState } from 'react';
 import StatusModal from '@/modals/StatusModal/StatusModal';
 import ApiService from '@/service/apiService';
-import { useAppSelector } from '@/hooks/useTypesRedux';
+import { useAppSelector, useAppDispatch } from '@/hooks/useTypesRedux';
+import notify from '@/helpers/notify';
+import { updateUserData } from '@/store/actions';
 
 const service = new ApiService()
 
@@ -15,11 +17,14 @@ const Enable = ({
 }: {
     setDone: (arg: any) => any
 }) => {
+    const dispatch = useAppDispatch()
     const {tokens: {access}} = useAppSelector(s => s)
     const [secret, setSecret] = useState('')
     const [qr, setQr] = useState('')
     const [code, setCode] = useState('');
     const [warnModal, setWarnModal] = useState(false)
+
+    const [load, setLoad] = useState(false)
 
     const closeWarnModal = () => setWarnModal(false);
 
@@ -36,6 +41,34 @@ const Enable = ({
         }
     },[access])
 
+
+    const checkCode = () => {
+        const stringCode = code.replace(/ /g,'')
+
+        if(stringCode?.length === 6 && access) {
+            setLoad(true)
+            service.check2FCode(stringCode, access).then(res => {
+                if(res === true) {
+                    service.set2FStatus(true, access).then(r => {
+                        if(r === true) {
+                            notify('Двухфакторная аутентификация включена', 'SUCCESS')
+                            setDone(true)
+
+                            service.getUserData(access).then(userData => {
+                                if(userData) {
+                                    dispatch(updateUserData(userData))
+                                }
+                            }).finally(() => setLoad(false))
+                        } else {
+                            notify('Произошла ошибка', 'SUCCESS')
+                        }
+                    }).finally(() => setLoad(false))
+                } else {
+                    notify('Неправильный код', 'ERROR')
+                }
+            }).finally(() => setLoad(false))
+        }
+    }
 
 
 
@@ -119,7 +152,8 @@ const Enable = ({
                         </div>
                         <div className={styles.btn}>
                             <Button
-                                onClick={() => setDone(true)}
+                                load={load}
+                                onClick={checkCode}
                                 disabled={code?.length !== 7}
                                 text='Проверить'
                                 style={{paddingLeft: 30, paddingRight: 30}}

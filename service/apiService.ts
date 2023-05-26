@@ -95,14 +95,15 @@ class ApiService {
     }
 
 
-    set2FStatus = async (token: TokenType) => {
+    set2FStatus = async (value: boolean, token: TokenType) => {
         try {
             let res = await fetch(endpoints.set2FStatus, {
                 method: 'POST',
                 headers: {
                     ...headers,
                     'Authorization': `Bearer ${token}`
-                }
+                },
+                body: JSON.stringify(value)
             }) 
             return await checkAuth(res)
         } catch(err) {
@@ -110,6 +111,23 @@ class ApiService {
         }
     }
 
+
+    check2FCode = async (code: string,token: TokenType) => {
+        try {
+            let res = await fetch(endpoints.check2FCode, {
+                method: 'POST',
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(code)
+            }) 
+
+            return await checkAuth(res)
+        } catch(err) {
+            console.log(err)
+        }
+    }
 
     editUserData = async (body: {
         email?: string,

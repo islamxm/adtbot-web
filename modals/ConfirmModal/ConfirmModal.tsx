@@ -14,7 +14,7 @@ const ConfirmModal:FC<confirmModalPropsTypes> = (props) => {
     
     return (
         <Modal {...props} className={`${styles.wrapper} modal`}>
-            <h2 className={`${styles.text} heading_4 bold`}>{text}</h2>
+            <h2 className={`${styles.text} heading_4`}>{text}</h2>
             <div className={styles.action}>
                 <Row gutter={[15,15]}>
                     <Col span={12}>
@@ -22,13 +22,13 @@ const ConfirmModal:FC<confirmModalPropsTypes> = (props) => {
                             text='Подтвердить'
                             onClick={() => onConfirm && onConfirm()}
                             load={load}
-                            variant={'blue'}
+                            // variant={'blue'}
                             style={{width: '100%'}}
                             />
                     </Col>
                     <Col span={12}>
                         <Button
-                            variant={'danger'}
+                            variant={'simple'}
                             text='Отмена'
                             onClick={onClose}
                             style={{width: '100%'}}

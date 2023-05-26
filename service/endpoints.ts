@@ -15,6 +15,8 @@ const endpoints = {
     get2FData: `${PATH}get_totp_data/`,
     set2FStatus: `${PATH}set_totp_enabled`,
 
+    check2FCode: `${PATH}is_right_totp`,
+
     //telegram_bot
     setTgKey: `${PATH}set_tg_key/`,
     getTgKey: `${PATH}get_tg_key/`,
@@ -51,10 +53,14 @@ const endpoints = {
 
     //payment
     deposit: `${PATH}pay_usdt_trc20/`,
+    getPaymentHistory: `${PATH}payment_history`,
 
 
     // referal
     getReferalUsers: `${PATH}get_referal_users/`
+
+
+    
 
 }
 
