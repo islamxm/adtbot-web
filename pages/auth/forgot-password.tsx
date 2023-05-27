@@ -57,7 +57,9 @@ const ResetPage = () => {
                     <Col span={12}>
                         <PromoSlider/>
                     </Col>
-                    <Col span={12}>
+                    <Col
+                        md={12}
+                        span={24}>
                         <AuthForm
                             title="Восстановление пароля"
                             >
@@ -96,7 +98,7 @@ const ResetPage = () => {
                                             <Col span={24}>
                                                 <Button
                                                     text="Отмена"
-                                                    variant="danger"
+                                                    variant={'simple'}
                                                     fill
                                                     onClick={() => Router.push('/auth/login')}
                                                     />

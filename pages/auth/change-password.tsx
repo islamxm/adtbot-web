@@ -54,7 +54,10 @@ const ResetPage = () => {
                     <Col span={12}>
                         <PromoSlider/>
                     </Col>
-                    <Col span={12}>
+                    <Col
+                        md={12}
+                        span={24}
+                        >
                         <AuthForm
                             title="Изменить пароль"
                             >

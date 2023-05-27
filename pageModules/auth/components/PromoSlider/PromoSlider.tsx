@@ -41,11 +41,11 @@ const PromoSlider = () => {
     return (
         <div className={styles.wrapper}>
             <Swiper 
-                modules={[Autoplay, EffectFade]}
+                modules={[Autoplay]}
                 autoplay={{
                     delay: 4000
                 }}
-                effect='fade'
+                // effect='fade'
                 className={styles.slider}>
                 {
                     content && content.map((item, index) => (

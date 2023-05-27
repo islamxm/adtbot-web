@@ -53,10 +53,6 @@ const SignupPage = () => {
     // }, [recapRef])
 
 
-    useEffect(() => {
-        console.log(router)
-        process?.browser && console.log()
-    }, [router])
 
     const onSubmit =  () => {
         if(process?.browser) {
