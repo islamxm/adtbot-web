@@ -42,7 +42,7 @@ const LoginPage = () => {
     const [saveMe, setSaveMe] = useState(true);
 
 
-
+    const [totp_token, setTotp_token] = useState('')
 
 
     const openPassResetModal = () => setPassResetModal(true)
@@ -66,13 +66,11 @@ const LoginPage = () => {
             username,
             password,
             scope,
-            totp_code,
         }).then(res => {
             console.log(res)
             
             if(res?.status === 200) {
                 res?.json().then(data => {
-                    console.log(data)
                     if(saveMe) {
                         Cookies.set('adtbot-console-access-token', data?.access_token) //access_token
                         Cookies.set('adtbot-console-refresh-token', data?.refresh_token) //refresh_token
@@ -98,10 +96,18 @@ const LoginPage = () => {
                     
                 })
             } else {
-                notify('Произошла ошибка, проверьте пожалуйста данные', 'ERROR')
                 res?.json().then(data => {
-                    console.log(data)
+                    if(data?.status === 20) {
+                        setTotp_token(data?.totp_verify_token)
+                        openTwoAuthModal()
+                    } else {
+                        notify('Произошла ошибка, проверьте пожалуйста данные', 'ERROR')
+                    }
                 })
+            } 
+            
+            if(res?.status === 20) {
+                openTwoAuthModal()
             }
         }).finally(() => {
             setLoad(false)
@@ -109,7 +115,11 @@ const LoginPage = () => {
     }
 
 
-   
+
+    const resetData = () => {
+        setTotp_token('')
+        closeTwoAuthModal()
+    }
 
 
     return (
@@ -125,10 +135,20 @@ const LoginPage = () => {
                 title={'Восстановление пароля'}
                 />
             <TwoAuthModal
+                token={totp_token}
                 open={twoAuthModal}
                 onCancel={closeTwoAuthModal}
                 width={455}
                 centered
+                saveMe={saveMe}
+                onResetData={resetData}
+                data={{
+                    captcha_token,
+                    grant_type,
+                    username,
+                    password,
+                    scope,
+                }}
                 />
             <Row 
                 className={styles.wrapper}

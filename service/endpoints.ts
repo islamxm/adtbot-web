@@ -11,6 +11,7 @@ const endpoints = {
     resetPassword: `${PATH}reset_password/`,
     getOAuth2Token: `${PATH}token/`,
     getUserData: `${PATH}get_personal_data/`,
+    verify2FToken: `${PATH}verify_totp_token/`,
 
     get2FData: `${PATH}get_totp_data/`,
     set2FStatus: `${PATH}set_totp_enabled`,

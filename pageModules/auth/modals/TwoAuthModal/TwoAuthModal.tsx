@@ -5,36 +5,104 @@ import {useState, useEffect} from 'react';
 import AuthCode from 'react-auth-code-input';
 import Button from '@/components/Button/Button';
 import Router from 'next/router';
+import ApiService from '@/service/apiService';
+import { Cookies } from 'typescript-cookie';
+import { useAppDispatch } from '@/hooks/useTypesRedux';
+import { updateTokens } from '@/store/actions';
+
+interface I extends ModalProps {
+    data: any,
+    token: string,
+    saveMe?: boolean
+    onLogin?: (...args: any[]) => any,
+    onResetData?: (...args: any[]) => any
+}
 
 
-const TwoAuthModal: React.FC<ModalProps> = ({
+const service = new ApiService()
+
+const TwoAuthModal: React.FC<I> = ({
     open,
     width,
     title,
     onCancel,
+
+    onResetData,
+
+    token,
+    data,
+    saveMe
+    // onLogin
 }) => {
+    const dispatch = useAppDispatch()
     const [status, setStatus] = useState<string>('')
     const [value, setValue] = useState<string>('')
+    const [load, setLoad] = useState(false)
     
 
-    useEffect(() => {
-        if(value?.length === 6 && value !== '000000') {
-            setStatus('success')
-        } 
-        if(value?.length === 6 && value === '000000') {
-            setStatus('error')
-        }
-        if(value?.length < 6) {
-            setStatus('')
-        }
+    // useEffect(() => {
+    //     if(value?.length === 6 && value !== '000000') {
+    //         setStatus('success')
+    //     } 
+    //     if(value?.length === 6 && value === '000000') {
+    //         setStatus('error')
+    //     }
+    //     if(value?.length < 6) {
+    //         setStatus('')
+    //     }
         
-    }, [value])
+    // }, [value])
 
+
+    const onLogin = () => {
+        if(value && data && token) {
+            service.verify2FToken({totp_code: value, totp_verify_token: token}).then(res => {
+                // console.log(res)
+                if(res?.status === 20) {
+                    setStatus('error')
+                }
+                if(res?.status === 1) {
+                    setValue('')
+                    onResetData && onResetData()
+                }
+                if(res?.access_token) {
+                    setStatus('success')
+                    if(saveMe) {
+                        Cookies.set('adtbot-console-access-token', data?.access_token) //access_token
+                        Cookies.set('adtbot-console-refresh-token', data?.refresh_token) //refresh_token
+                        dispatch(updateTokens({access: data?.access_token, refresh: data?.refresh_token}))
+                        if(data?.is_first_login === true) {
+                            Router.push('/')
+                        }
+                        if(data?.is_first_login === false) {
+                            Router.push('/account/bots')
+                        }
+                        
+                    } else {
+                        Cookies.remove('adtbot-console-access-token') //access_token
+                        Cookies.remove('adtbot-console-refresh-token') //refresh_token
+                        dispatch(updateTokens({access: data?.access_token, refresh: data?.refresh_token}))
+                        if(data?.is_first_login === true) {
+                            Router.push('/')
+                        }
+                        if(data?.is_first_login === false) {
+                            Router.push('/account/bots')
+                        }
+                    }
+
+                }
+
+            })
+        }
+    }
+
+
+    
 
     return (
         <Modal
             open={open}
-            onCancel={onCancel}
+            // onCancel={onCancel}
             title={title}
             width={width}
             className={`${styles.wrapper} modal`}
@@ -71,7 +139,8 @@ const TwoAuthModal: React.FC<ModalProps> = ({
                         <Button
                             text='Войти'
                             fill
-                            onClick={() => Router.push('/profile/bots')}
+                            disabled={value?.length !== 6}
+                            onClick={onLogin}
                             />
                     </Col>
                 </Row>

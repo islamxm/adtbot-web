@@ -40,7 +40,6 @@ class ApiService {
         username?: string,
         password?: string,
         scope?: string,
-        totp_code?: string,
         captcha_token?: string
     }) => {
         try {
@@ -50,6 +49,22 @@ class ApiService {
                 body: JSON.stringify(body),
             })
             return await res;
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+    verify2FToken = async (body: {
+        totp_verify_token: string,
+        totp_code: string
+    }) => {
+        try {
+            let res = await fetch(endpoints.verify2FToken, {
+                method: 'POST',
+                headers,
+                body: JSON.stringify(body)
+            })
+            return await res?.json()
         } catch(err) {
             console.log(err)
         }
