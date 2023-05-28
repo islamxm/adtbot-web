@@ -58,7 +58,7 @@ const TwoAuthModal: React.FC<I> = ({
     const onLogin = () => {
         if(value && data && token) {
             service.verify2FToken({totp_code: value, totp_verify_token: token}).then(res => {
-                // console.log(res)
+                console.log(res)
                 if(res?.status === 20) {
                     setStatus('error')
                 }
@@ -68,38 +68,28 @@ const TwoAuthModal: React.FC<I> = ({
                 }
                 if(res?.access_token) {
                     setStatus('success')
-
-                    service.getOAuth2Token(data).then(data => {
-                        if(data?.status === 200) {
-                            data?.json().then(r => {
-                                if(saveMe) {
-                                    Cookies.set('adtbot-console-access-token', r?.access_token) //access_token
-                                    Cookies.set('adtbot-console-refresh-token', r?.refresh_token) //refresh_token
-                                    dispatch(updateTokens({access: r?.access_token, refresh: r?.refresh_token}))
-                                    if(r?.is_first_login === true) {
-                                        Router.push('/')
-                                    }
-                                    if(r?.is_first_login === false) {
-                                        Router.push('/account/bots')
-                                    }
-                                    
-                                } else {
-                                    Cookies.remove('adtbot-console-access-token') //access_token
-                                    Cookies.remove('adtbot-console-refresh-token') //refresh_token
-                                    dispatch(updateTokens({access: r?.access_token, refresh: r?.refresh_token}))
-                                    if(r?.is_first_login === true) {
-                                        Router.push('/')
-                                    }
-                                    if(r?.is_first_login === false) {
-                                        Router.push('/account/bots')
-                                    }
-                                }
-                            })
-                        } else {
-                            notify('Произошла ошибка, проверьте пожалуйста данные', 'ERROR')
-                            onResetData && onResetData()
+                    if(saveMe) {
+                        Cookies.set('adtbot-console-access-token', res?.access_token) //access_token
+                        Cookies.set('adtbot-console-refresh-token', res?.refresh_token) //refresh_token
+                        dispatch(updateTokens({access: res?.access_token, refresh: res?.refresh_token}))
+                        if(res?.is_first_login === true) {
+                            Router.push('/')
                         }
-                    })
+                        if(res?.is_first_login === false) {
+                            Router.push('/account/bots')
+                        }
+                        
+                    } else {
+                        Cookies.remove('adtbot-console-access-token') //access_token
+                        Cookies.remove('adtbot-console-refresh-token') //refresh_token
+                        dispatch(updateTokens({access: res?.access_token, refresh: res?.refresh_token}))
+                        if(res?.is_first_login === true) {
+                            Router.push('/')
+                        }
+                        if(res?.is_first_login === false) {
+                            Router.push('/account/bots')
+                        }
+                    }
                     
 
                 }
