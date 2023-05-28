@@ -2,7 +2,7 @@ import styles from './Empty.module.scss';
 import Image from 'next/image';
 import img from '@/public/assets/bots-empty.svg';
 
-const Empty = () => {
+const Empty = ({text = 'Ботов не найдено'} : {text?: string}) => {
 
     return (
         <div className={styles.wrapper}>
@@ -14,7 +14,7 @@ const Empty = () => {
                     height={190}
                     />
             </div>
-            <div className={`${styles.label} heading_1`}>Ботов не найдено</div>
+            <div className={`${styles.label} heading_1`}>{text}</div>
         </div>
     )
 }

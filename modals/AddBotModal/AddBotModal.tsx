@@ -46,6 +46,14 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
     const [firstLoad, setFirstLoad] = useState(false)
     const [secondLoad, setSecondLoad] = useState(false)
 
+    //errors
+    const [budget_usdt_error, setBudget_usdt_error] = useState(false)
+    const [take_profit_error, setTake_profit_error] = useState(false)
+    const [stop_loss_error, setStop_loss_error] = useState(false)
+    const [stop_buy_error, setStop_buy_error] = useState(false)
+    const [daily_volume_error, setDaily_volume_error] = useState(false)
+
+
 
     const [monitor, setMonitor] = useState<any>(1)
     const [exchange, setExchange] = useState<any>(1)
@@ -55,6 +63,9 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
     const [stop_buy, setStop_buy] = useState<any>()
     const [enabled, setEnabled] = useState<any>(true)
     const [daily_volume, setDaily_volume] = useState<any>()
+
+
+
 
     const [bot_code, setBot_code] = useState<any>('')
 
@@ -96,34 +107,47 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
     
 
     const createBot = () => {
-        if(access) {
-            setSecondLoad(true)
-            service.createBot({
-                bot_info: {
-                    monitor,
-                    exchange,
-                    budget_usdt,
-                    take_profit,
-                    stop_loss,
-                    stop_buy,
-                    enabled: false,
-                    daily_volume
-                },
-                bot_code: ''
-            }, access).then(res => {
-                if(res?.id) {
-                    notify('Бот создан', 'SUCCESS')
-                    closeHandle()
-                    dispatch(lastCreatedBot(res))
-                    // updateList && updateList()
-                } 
-                if(res?.detail === 'Bad user tariff!') {
-                    notify('Ваш тариф не позволяет выполнить данное действие', 'ERROR')
-                }
-            }).finally(() => {
-                setSecondLoad(false)
-            })
+        if(monitor && exchange && budget_usdt && take_profit && stop_loss && stop_buy && daily_volume) {
+            if(access) {
+                setSecondLoad(true)
+                service.createBot({
+                    bot_info: {
+                        monitor,
+                        exchange,
+                        budget_usdt,
+                        take_profit,
+                        stop_loss,
+                        stop_buy,
+                        enabled: false,
+                        daily_volume
+                    },
+                    bot_code: ''
+                }, access).then(res => {
+                    console.log(res)
+                    if(res?.id) {
+                        notify('Бот создан', 'SUCCESS')
+                        closeHandle()
+                        dispatch(lastCreatedBot(res))
+                        // updateList && updateList()
+                    } 
+                    if(res?.detail === 'Bad user tariff!') {
+                        notify('Ваш тариф не позволяет выполнить данное действие', 'ERROR')
+                    }
+                }).finally(() => {
+                    setSecondLoad(false)
+                })
+            }
+        } else {
+            notify('Заполните все поля', 'ERROR')
+            !budget_usdt ? setBudget_usdt_error(true) : setBudget_usdt_error(false)
+            !take_profit ? setTake_profit_error(true) : setTake_profit_error(false)
+            !stop_loss ? setStop_loss_error(true) : setStop_loss_error(false)
+            !stop_buy ? setStop_buy_error(true) : setStop_buy_error(false)
+            !daily_volume ? setDaily_volume_error(true) : setDaily_volume_error(false)
         }
+
+        
+        
     }
 
     const createAndEnableBot = () => {
@@ -226,6 +250,8 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
                                         type={'number'}
                                         value={daily_volume}
                                         onChange={(e:React.ChangeEvent<HTMLInputElement>) => setDaily_volume(e.target.value)}
+                                        error={daily_volume_error}
+                                        onFocus={() => setDaily_volume_error(false)}
                                         />
                                 </Col>
                                 <Col span={24}>
@@ -236,6 +262,8 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
                                         value={take_profit}
                                         type={'number'}
                                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTake_profit(e.target.value)}
+                                        error={take_profit_error}
+                                        onFocus={() => setTake_profit_error(false)}
                                         />
                                 </Col>
                                 <Col span={24}>
@@ -246,6 +274,8 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
                                         type='number'
                                         value={budget_usdt}
                                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setBudget_usdt(e.target.value)}
+                                        error={budget_usdt_error}
+                                        onFocus={() => setBudget_usdt_error(false)}
                                         />
                                 </Col>
                             </Row>
@@ -269,6 +299,8 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
                                         type='number'
                                         value={stop_buy}
                                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setStop_buy(e.target.value)}
+                                        error={stop_buy_error}
+                                        onFocus={() => setStop_buy_error(false)}
                                         />
                                 </Col>
                                 <Col span={24}>
@@ -279,6 +311,8 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
                                         type='number'
                                         value={stop_loss}
                                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setStop_loss(e.target.value)}
+                                        error={stop_loss_error}
+                                        onFocus={() => setStop_loss_error(false)}
                                         />
                                 </Col>
                             </Row>

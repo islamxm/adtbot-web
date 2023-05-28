@@ -16,6 +16,7 @@ import { useAppSelector } from '@/hooks/useTypesRedux';
 import ApiService from '@/service/apiService';
 import { useAppDispatch } from '@/hooks/useTypesRedux';
 import { updateSenseValue } from '@/store/actions';
+import Empty from '@/pageModules/bots/components/Empty/Empty';
 
 // import locale from 'antd/es/date-picker/locale/ru_RU';
 
@@ -244,21 +245,26 @@ const Body = () => {
                         </div>
                     </div>
                 </div>
-                <div className="table-main custom-scroll-horizontal">
-                    <table className="table-wrapper">
-                        <TableHead onSort={onTableSort} list={tableHead}/>
-                        <tbody>
-                            {
-                                list?.map((item, index) => (
-                                    <TableRow 
-                                        head={tableHead} 
-                                        bot={item} 
-                                        key={index}/>
-                                ))
-                            }
-                        </tbody>
-                    </table>
-                </div>
+                {
+                    list?.length > 0 ? (
+                        <div className="table-main custom-scroll-horizontal">
+                            <table className="table-wrapper">
+                                <TableHead onSort={onTableSort} list={tableHead}/>
+                                <tbody>
+                                    {
+                                        list?.map((item, index) => (
+                                            <TableRow 
+                                                head={tableHead} 
+                                                bot={item} 
+                                                key={index}/>
+                                        ))
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    ) : <Empty text='Здесь будет отображаться статистика по всем вашим отработанным ботам'/>
+                }
+                
                 <div className="table-bottom">
                     <div className={styles.bottom}>
                         <Row gutter={[50, 50]}>

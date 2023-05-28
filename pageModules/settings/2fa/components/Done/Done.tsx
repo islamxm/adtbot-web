@@ -53,14 +53,14 @@ const Done = ({
 
     return (
         <div className={styles.wrapper}>
-            <StatusModal
+            {/* <StatusModal
                 width={460}
                 status={'success'}
                 title={'Двухфакторная аутентификация  включена'}
                 text={'2FA значительно повышает безопасность вашей учетной записи'}
                 open={successModal}
                 onCancel={closeSuccessModal}
-                />
+                /> */}
             <ConfirmModal
                 open={confirmModal}
                 load={load}
