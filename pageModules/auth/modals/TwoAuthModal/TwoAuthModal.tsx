@@ -9,6 +9,7 @@ import ApiService from '@/service/apiService';
 import { Cookies } from 'typescript-cookie';
 import { useAppDispatch } from '@/hooks/useTypesRedux';
 import { updateTokens } from '@/store/actions';
+import notify from '@/helpers/notify';
 
 interface I extends ModalProps {
     data: any,
@@ -67,28 +68,39 @@ const TwoAuthModal: React.FC<I> = ({
                 }
                 if(res?.access_token) {
                     setStatus('success')
-                    if(saveMe) {
-                        Cookies.set('adtbot-console-access-token', data?.access_token) //access_token
-                        Cookies.set('adtbot-console-refresh-token', data?.refresh_token) //refresh_token
-                        dispatch(updateTokens({access: data?.access_token, refresh: data?.refresh_token}))
-                        if(data?.is_first_login === true) {
-                            Router.push('/')
+
+                    service.getOAuth2Token(data).then(data => {
+                        if(data?.status === 200) {
+                            data?.json().then(r => {
+                                if(saveMe) {
+                                    Cookies.set('adtbot-console-access-token', r?.access_token) //access_token
+                                    Cookies.set('adtbot-console-refresh-token', r?.refresh_token) //refresh_token
+                                    dispatch(updateTokens({access: r?.access_token, refresh: r?.refresh_token}))
+                                    if(r?.is_first_login === true) {
+                                        Router.push('/')
+                                    }
+                                    if(r?.is_first_login === false) {
+                                        Router.push('/account/bots')
+                                    }
+                                    
+                                } else {
+                                    Cookies.remove('adtbot-console-access-token') //access_token
+                                    Cookies.remove('adtbot-console-refresh-token') //refresh_token
+                                    dispatch(updateTokens({access: r?.access_token, refresh: r?.refresh_token}))
+                                    if(r?.is_first_login === true) {
+                                        Router.push('/')
+                                    }
+                                    if(r?.is_first_login === false) {
+                                        Router.push('/account/bots')
+                                    }
+                                }
+                            })
+                        } else {
+                            notify('Произошла ошибка, проверьте пожалуйста данные', 'ERROR')
+                            onResetData && onResetData()
                         }
-                        if(data?.is_first_login === false) {
-                            Router.push('/account/bots')
-                        }
-                        
-                    } else {
-                        Cookies.remove('adtbot-console-access-token') //access_token
-                        Cookies.remove('adtbot-console-refresh-token') //refresh_token
-                        dispatch(updateTokens({access: data?.access_token, refresh: data?.refresh_token}))
-                        if(data?.is_first_login === true) {
-                            Router.push('/')
-                        }
-                        if(data?.is_first_login === false) {
-                            Router.push('/account/bots')
-                        }
-                    }
+                    })
+                    
 
                 }
 
