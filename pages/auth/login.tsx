@@ -12,6 +12,7 @@ import TwoAuthModal from "@/pageModules/auth/modals/TwoAuthModal/TwoAuthModal";
 import styles from './style.module.scss';
 import ApiService from "@/service/apiService";
 import ReCAPTCHA from "react-google-recaptcha";
+import Reaptcha from 'reaptcha';
 import React from 'react';
 import { Cookies } from "typescript-cookie";
 import { useAppDispatch, useAppSelector } from "@/hooks/useTypesRedux";
@@ -24,7 +25,7 @@ import backendErrorStatuses from "@/helpers/backendErrorStatuses";
 const service = new ApiService();
 
 const LoginPage = () => {
-    const recapRef = React.createRef<any>()
+    const [recapRef, setRecapRef] = useState<any>(null)
     const {query} = useRouter()
     const dispatch = useAppDispatch();
     const [passResetModal, setPassResetModal] = useState<boolean>(false)
@@ -101,9 +102,10 @@ const LoginPage = () => {
                         setTotp_token(data?.totp_verify_token)
                         openTwoAuthModal()
                     } else {
+
                         backendErrorStatuses(data?.status)
                         notify('Произошла ошибка, проверьте пожалуйста данные', 'ERROR')
-                        recapRef?.current && recapRef?.current?.reset()
+                        recapRef?.reset()
                     }
                 })
             } 
@@ -195,16 +197,17 @@ const LoginPage = () => {
                                 <Link href={'/auth/forgot-password'} className="def-link">Забыли пароль?</Link>
                             </Col>
                             <Col span={24}>
-                                <ReCAPTCHA
+                                <Reaptcha
                                     sitekey={'6Ld4-E4lAAAAANg8LEy8oig45CXsovYV9z5Wbxx6'}
                                     size={'normal'}
                                     className="custom-recap"
-                                    ref={recapRef}
-                                    onChange={e => {
+                                    ref={e => setRecapRef(e)}
+                                    onVerify={e => {
                                         if(e) {
                                             setcaptcha_token(e)
                                         }
                                     }}
+                                    onExpire={() => console.log('expired')}
                                     />
                             </Col>
                            
