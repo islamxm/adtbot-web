@@ -11,6 +11,7 @@ import Link from "next/link";
 import styles from './style.module.scss';
 import ApiService from "@/service/apiService";
 import ReCAPTCHA from "react-google-recaptcha";
+import Reaptcha from 'reaptcha';
 import React from "react";
 import {BsCheckLg} from 'react-icons/bs';
 import notify from "@/helpers/notify";
@@ -18,6 +19,7 @@ import Head from "next/head";
 import { useAppSelector, useAppDispatch } from "@/hooks/useTypesRedux";
 import { updateCaptcha } from "@/store/actions";
 import { useRouter } from "next/router";
+import backendErrorStatuses from "@/helpers/backendErrorStatuses";
 
 const service = new ApiService;
 
@@ -37,7 +39,7 @@ const SignupPage = () => {
     const [captcha_token, setcaptcha_token] = useState('')
     const [agree, setAgree] = useState(true)
     const [success, setSuccess] = useState(false)
-    const recapRef = React.createRef<any>()
+    const [recapRef, setRecapRef] = useState<any>(null)
 
 
   
@@ -67,9 +69,14 @@ const SignupPage = () => {
                 // referal_code: ''
             }
             service && service.register(body).then(res => {
-                console.log(res)
-                res?.status === 400 && notify('Произошла ошибка, проверьте пожалуйста данные', 'ERROR')
                 res?.status === 200 && setSuccess(true)
+                if(res?.status !== 200) {
+                    notify('Произошла ошибка, проверьте пожалуйста данные', 'ERROR')
+                    res?.json().then(r => {
+                        backendErrorStatuses(r?.status)
+                        recapRef?.reset()
+                    })
+                }
             }).finally(() => {
                 setLoad(false)
             })
@@ -171,17 +178,17 @@ const SignupPage = () => {
                                             />
                                     </Col>
                                     <Col span={24}>
-                                        <ReCAPTCHA
+                                        <Reaptcha
                                             sitekey={'6Ld4-E4lAAAAANg8LEy8oig45CXsovYV9z5Wbxx6'}
                                             size={'normal'}
                                             className="custom-recap"
-                                            ref={recapRef}
-                                            onChange={e => {
+                                            ref={e => setRecapRef(e)}
+                                            onVerify={e => {
                                                 if(e) {
-                                                    dispatch(updateCaptcha(e))
                                                     setcaptcha_token(e)
                                                 }
                                             }}
+                                            onExpire={() => console.log('expired')}
                                             />
                                     </Col>
                                     <Col span={24}>
