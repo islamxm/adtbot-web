@@ -18,7 +18,7 @@ const Done = ({
     
     const onSubmit = () => {
         if(access) {
-            service.setTgKey(null, access).then(res => {
+            service.removeTgKey(access).then(res => {
                 if(res?.status === 200) {
                     setDone(false)
                     notify('Телеграм-бот отключен', 'SUCCESS')

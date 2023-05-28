@@ -206,6 +206,22 @@ class ApiService {
         }
     }
 
+
+    removeTgKey = async (token: TokenType) => {
+        try {
+            let res = await fetch(endpoints.setTgKey, {
+                method: 'POST',
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                },
+                
+            })
+            return await res
+        } catch(err) {
+            console.log(err)
+        }
+    }
     
 
     setTgKey = async (text: any, token: TokenType) => {
