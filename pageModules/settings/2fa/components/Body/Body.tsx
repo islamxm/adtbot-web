@@ -7,7 +7,7 @@ import { useAppSelector } from "@/hooks/useTypesRedux";
 
 const Body = () => {
     const {userData} = useAppSelector(s => s)
-    const [done, setDone] = useState(false);
+    const [done, setDone] = useState<any>();
 
 
     useEffect(() => {
@@ -19,7 +19,10 @@ const Body = () => {
     return (
         <div className={styles.wrapper}>
             {
-                done ? <Done setDone={setDone}/> : <Enable setDone={setDone}/>
+                done === true && <Done setDone={setDone}/> 
+            }
+            {
+                done === false && <Enable setDone={setDone}/>
             }
         </div>
     )

@@ -208,25 +208,31 @@ class ApiService {
 
     
 
-    setTgKey = async (text: string) => {
+    setTgKey = async (text: any, token: TokenType) => {
         try {
-            let res = await fetch(endpoints.setTgKey + `?text=${text}`, {
+            let res = await fetch(endpoints.setTgKey, {
                 method: 'POST',
-                headers,
-                mode: 'no-cors'
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({text: text})
             })
-            return await checkAuth(res)
+            return await res
         } catch(err) {
             console.log(err)
         }
     }
 
-    getTgKey = async () => {
+    getTgKey = async (token: TokenType) => {
         try {
             let res = await fetch(endpoints.getTgKey, {
                 method: 'POST',
-                headers,
-                mode: 'no-cors'
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                },
+              
             })
             return await checkAuth(res)
         } catch(err) {

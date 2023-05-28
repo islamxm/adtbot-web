@@ -1,17 +1,38 @@
 import styles from './Body.module.scss';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Done from '../Done/Done';
 import Enable from '../Enable/Enable';
-const Body = () => {
+import { useAppSelector } from '@/hooks/useTypesRedux';
+import ApiService from '@/service/apiService';
 
-    const [done, setDone] = useState(false);
+const service = new ApiService()
+
+const Body = () => {
+    const {tokens: {access}} = useAppSelector(s => s)
+
+    const [done, setDone] = useState<any>();
     
+    useEffect(() => {
+        if(access) {
+            service.getTgKey(access).then(res => {
+                if(res) {
+                    setDone(true)
+                } else {
+                    setDone(false)
+                }
+            })
+        }
+    }, [access])
 
     return (
         <div className={styles.wrapper}>
             {
-                done ? <Done setDone={setDone}/> : <Enable setDone={setDone}/> 
+                done === true && <Done setDone={setDone}/>
             }
+            {
+                done === false && <Enable setDone={setDone}/> 
+            }
+
         </div>
     )
 }

@@ -19,7 +19,7 @@ import { updateTokens, updateCaptcha } from "@/store/actions";
 import Router, { useRouter } from "next/router";
 import notify from "@/helpers/notify";
 import Head from "next/head";
-
+import backendErrorStatuses from "@/helpers/backendErrorStatuses";
 
 const service = new ApiService();
 
@@ -101,14 +101,12 @@ const LoginPage = () => {
                         setTotp_token(data?.totp_verify_token)
                         openTwoAuthModal()
                     } else {
+                        backendErrorStatuses(data?.status)
                         notify('Произошла ошибка, проверьте пожалуйста данные', 'ERROR')
+                        recapRef?.current && recapRef?.current?.reset()
                     }
                 })
             } 
-            
-            if(res?.status === 20) {
-                openTwoAuthModal()
-            }
         }).finally(() => {
             setLoad(false)
         })

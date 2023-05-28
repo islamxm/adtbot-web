@@ -3,7 +3,8 @@ import ScBadge from '@/components/ScBadge/ScBadge';
 import StatusModal from '@/modals/StatusModal/StatusModal';
 import { useEffect, useState } from 'react';
 import ApiService from '@/service/apiService';
-
+import { useAppSelector } from '@/hooks/useTypesRedux';
+import notify from '@/helpers/notify';
 
 const service = new ApiService()
 
@@ -12,9 +13,21 @@ const Done = ({
 }: {
     setDone: (arg: any) => any
 }) => {
-    
+    const {tokens: {access}} = useAppSelector(s => s)
 
     
+    const onSubmit = () => {
+        if(access) {
+            service.setTgKey(null, access).then(res => {
+                if(res?.status === 200) {
+                    setDone(false)
+                    notify('Телеграм-бот отключен', 'SUCCESS')
+                } else {
+                    notify('Произошла ошибка', 'ERROR')
+                }
+            })
+        }
+    }
 
 
 
@@ -31,7 +44,7 @@ const Done = ({
             <ScBadge
                 label='Telegram бот подключен'
                 btnLabel='Отключить (не рекомендуется)'
-                onClick={() => setDone(false)}
+                onClick={onSubmit}
                 />
         </div>
     )
