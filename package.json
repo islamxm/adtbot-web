@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@apollo/client": "^3.7.14",
     "@next/font": "13.2.3",
     "@types/lodash": "^4.14.194",
     "@types/node": "18.14.6",
@@ -23,6 +24,7 @@
     "eslint": "8.35.0",
     "eslint-config-next": "13.2.3",
     "framer-motion": "^10.1.0",
+    "graphql": "^16.6.0",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
     "next": "13.2.3",

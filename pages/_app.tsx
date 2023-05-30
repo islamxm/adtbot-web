@@ -19,12 +19,18 @@ import store from '@/store/store';
 import PrivateRoute from '@/hoc/CheckAuth';
 import MainWrapper from '@/components/MainWrapper/MainWrapper';
 import Head from 'next/head';
-
+import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client';
+import endpoints from '@/service/endpoints';
 NProgress.configure({ showSpinner: false })
 Router.events.on('routeChangeStart', () => NProgress.start()); 
 Router.events.on('routeChangeComplete', () => NProgress.done()); 
 Router.events.on('routeChangeError', () => NProgress.done());
 
+
+const gqlClient = new ApolloClient({
+  uri: endpoints?.gql,
+  cache: new InMemoryCache()
+})
 
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -32,6 +38,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <Provider store={store}>
+      <ApolloProvider client={gqlClient}>
       <ConfigProvider locale={ruRu}>
         <Head>
           <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"/>
@@ -59,6 +66,8 @@ export default function App({ Component, pageProps }: AppProps) {
         
     
       </ConfigProvider>
+      </ApolloProvider>
+     
     </Provider>
     
     

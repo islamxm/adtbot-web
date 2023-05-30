@@ -18,6 +18,8 @@ import {AiOutlinePlus} from 'react-icons/ai';
 import AddBotModal from '@/modals/AddBotModal/AddBotModal';
 import { useAppDispatch } from '@/hooks/useTypesRedux';
 import { updateSenseValue } from '@/store/actions';
+import { gql, useApolloClient } from '@apollo/client';
+
 
 const service = new ApiService();
 
@@ -143,6 +145,7 @@ const switchTableSize = (value: any) => {
 
 
 const Body = () => {
+   
     const {tokens: {access}, lastCreatedBot, hideSensValue} = useAppSelector(s => s)
     const dispatch = useAppDispatch()
 
@@ -155,6 +158,8 @@ const Body = () => {
         setAddBotModal(false)
         setEditData(null)
     }
+
+   
 
     const [list, setList] = useState<any[]>([])
 
@@ -243,6 +248,10 @@ const Body = () => {
         setEditData(data)
         openAddBotModal()
     }
+
+
+
+
 
 
     return (

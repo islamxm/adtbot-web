@@ -2,6 +2,9 @@ export const BASE_DOMAIN = `https://developmentsrv.space`;
 export const PATH = `${BASE_DOMAIN}/api/v1/`
 
 const endpoints = {
+
+    gql: `${PATH}graphql`,
+
     //users
     register: `${PATH}register/`,
     verifyUser: `${PATH}verify_user/`,
