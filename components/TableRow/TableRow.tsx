@@ -125,7 +125,7 @@ const TableRow:FC<tableRowPropsTypes> = ({bot, head, updateList, onEdit}) => {
                 return (
                     <td className={`table-row__item table-bodyrow__item activation`}>
                         <div className="table-bodyrow__item_in">
-                            <div className={'activation-label'}>Активен</div>
+                            <div className={'activation-label'}>Активен {bot?.activation_datetime}</div>
                             <div className="activation-action">
                                 <div className="activation-action_item">
                                     <IconButton
@@ -147,6 +147,26 @@ const TableRow:FC<tableRowPropsTypes> = ({bot, head, updateList, onEdit}) => {
                             <div className="activation-action">
                                 <div className="activation-action_item">
                                     <IconButton
+                                        onClick={() => {
+                                            onEdit && onEdit({
+                                                bot_id: bot?.id,
+                                                bot_info: {
+                                                    monitor: bot?.monitor,
+                                                    exchange: bot?.exchange,
+                                                    budget_usdt: bot?.budget_usdt,
+                                                    take_profit: bot?.take_profit,
+                                                    stop_loss: bot?.stop_loss,
+                                                    stop_buy: bot?.stop_buy,
+                                                    enabled: bot?.enabled,
+                                                    daily_volume: bot?.daily_volume
+                                                }
+                                            })
+                                        }}  
+                                        icon={<BiEditAlt color="#66AF99" size={16}/>}
+                                        />
+                                </div>
+                                <div className="activation-action_item">
+                                    <IconButton
                                         onClick={() => setDisableModal(true)}
                                         load={disableLoad}
                                         icon={<HiOutlineStopCircle color="var(--red)" size={16}/>}
@@ -160,20 +180,13 @@ const TableRow:FC<tableRowPropsTypes> = ({bot, head, updateList, onEdit}) => {
                 return (
                     <td className={`table-row__item table-bodyrow__item activation`}>
                         <div className="table-bodyrow__item_in">
-                        <div className={'activation-label'}>Остановлен</div>
+                        <div className={'activation-label'}>Черновик</div>
                             <div className="activation-action">
                                 <div className="activation-action_item">
                                     <IconButton
                                         onClick={enableBot}
                                         load={enableLoad}
                                         icon={<IoPlayOutline color="var(--green)" size={16}/>}
-                                        />
-                                </div>
-                                <div className="activation-action_item">
-                                    <IconButton
-                                        load={deleteLoad}
-                                        onClick={() => setDeleteModal(true)}
-                                        icon={<IoCloseCircleOutline color="#7F8184" size={16}/>}
                                         />
                                 </div>
                                 <div className="activation-action_item">
@@ -196,6 +209,13 @@ const TableRow:FC<tableRowPropsTypes> = ({bot, head, updateList, onEdit}) => {
                                         icon={<BiEditAlt color="#66AF99" size={16}/>}
                                         />
                                 </div>
+                                <div className="activation-action_item">
+                                    <IconButton
+                                        load={deleteLoad}
+                                        onClick={() => setDeleteModal(true)}
+                                        icon={<IoCloseCircleOutline color="#7F8184" size={16}/>}
+                                        />
+                                </div>
                                 {/* {
                                     item.share ? (
                                         <div className="activation-action_item">
@@ -208,6 +228,23 @@ const TableRow:FC<tableRowPropsTypes> = ({bot, head, updateList, onEdit}) => {
                             </div>
                         </div>
                     </td>   
+                )
+            case 4: 
+                return (
+                    <td className={`table-row__item table-bodyrow__item activation`}>
+                        <div className="table-bodyrow__item_in">
+                        <div className={'activation-label'}>Остановлен</div>
+                            <div className="activation-action">
+                                <div className="activation-action_item">
+                                    <IconButton
+                                        load={deleteLoad}
+                                        onClick={() => setDeleteModal(true)}
+                                        icon={<IoCloseCircleOutline color="#7F8184" size={16}/>}
+                                        />
+                                </div>
+                            </div>
+                        </div>
+                    </td>
                 )
             default:
                 return (
