@@ -1,9 +1,10 @@
 import styles from './PmHistoryModal.module.scss';
 import {Modal, ModalFuncProps} from 'antd';
-import {FC, useRef} from 'react';
+import {FC, useEffect, useRef} from 'react';
 import Table from './components/Table/Table';
 import { itemPropsTypes } from './types';
-
+import ApiService from '@/service/apiService';
+import { useAppSelector } from '@/hooks/useTypesRedux';
 
 const historyList:itemPropsTypes[] = [
     {
@@ -73,11 +74,14 @@ const historyList:itemPropsTypes[] = [
     }
 ]
 
+const service = new ApiService()
+
 const PmHistoryModal:FC<ModalFuncProps> = ({
     onCancel,
     width = 650,
     open,
 }) => {
+    const {tokens: {access}} = useAppSelector(s => s)
     
 
 
@@ -87,6 +91,13 @@ const PmHistoryModal:FC<ModalFuncProps> = ({
         }
     }
 
+    useEffect(() => {
+        if(access) {
+            service.getPaymentHistory(access).then(res => {
+                console.log(res)
+            })
+        }
+    }, [access])
 
     return (
         <Modal

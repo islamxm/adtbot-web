@@ -164,7 +164,7 @@ const LoginPage = () => {
                     span={24}
                     md={12}>
                     <AuthForm
-                        title="Вход"
+                        title="И снова здравствуйте"
                         >
                         <Row gutter={[15,15]}>
                             <Col span={24}>
@@ -172,7 +172,7 @@ const LoginPage = () => {
                                     value={username}
                                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
                                     placeholder="example@mail.com"
-                                    label="E-mail"
+                                    label="Ваш E-mail"
                                     type="email"
                                     />
                             </Col>
@@ -181,8 +181,8 @@ const LoginPage = () => {
                                     value={password}
                                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
                                     type="password"
-                                    label="Пароль"
-                                    placeholder="Ваш пароль"
+                                    label="Ваш пароль"
+                                    placeholder="Пароль"
                                     />
                             </Col>
                             <Col span={24}>
@@ -222,7 +222,7 @@ const LoginPage = () => {
                             </Col>
                             <Col span={24}>
                                 <div style={{textAlign: 'center'}}>
-                                    У вас нет аккаунта? <Link className="def-link" href={'/auth/join'}>Создайте аккаунт</Link>
+                                    Нет аккаунта? <Link className="def-link" href={'/auth/join'}>Зарегистрироваться</Link>
                                 </div>
                             </Col>
                         </Row>

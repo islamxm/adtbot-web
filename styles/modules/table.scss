@@ -47,12 +47,7 @@
                         color: #9094A6;
                     }
 
-                    &_label.table-bodyrow__item_label-red {
-                        color: var(--red);
-                    }
-                    &_label.table-bodyrow__item_label-green {
-                        color: var(--green);
-                    }
+                   
 
                     &_action {
                         margin-left: 4px;
@@ -106,6 +101,12 @@
 
                     &_label {
 
+                    }
+                    &_label.table-bodyrow__item_label-red {
+                        color: var(--red);
+                    }
+                    &_label.table-bodyrow__item_label-green {
+                        color: var(--green) !important;
                     }
 
                     &_toggle {

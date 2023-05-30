@@ -32,16 +32,16 @@ const list: billingItemPropsTypes[] = [
             {
                 head: 'Мониторинг анонсов листингов на 1 бирже:',
                 ul: [
-                    {link: '/', label: 'Binance', icon: binance}
+                    {link: 'https://accounts.binance.com/register?ref=E8RCK6W5', label: 'Binance', icon: binance}
                 ]
             },
             {
                 head: 'Покупка на 4 биржах:',
                 ul: [
-                    {link: '/', label: 'Gate', icon: gate},
-                    {link: '/', label: 'MEXC', icon: mexc},
-                    {link: '/', label: 'KuCoin', icon: kucoin},
-                    {link: '/', label: 'Huobi', icon: huobi},
+                    {link: 'https://accounts.binance.com/register?ref=E8RCK6W5', label: 'Gate', icon: gate},
+                    {link: 'https://www.mexc.com/register?inviteCode=1XHiG', label: 'MEXC', icon: mexc},
+                    {link: 'https://www.kucoin.com/ucenter/signup?rcode=rP9MQ8L', label: 'KuCoin', icon: kucoin},
+                    {link: 'https://www.huobi.com/ru-ru/v/register/double-invite/?inviter_id=11345710&invite_code=uc2yb', label: 'Huobi', icon: huobi},
                 ]
             }
         ],
@@ -56,18 +56,18 @@ const list: billingItemPropsTypes[] = [
             {
                 head: 'Мониторинг анонсов листингов на 3 биржах:',
                 ul: [
-                    {link: '/', label: 'Binance', icon: binance},
-                    {link: '/', label: 'Coinbase', icon: coinbase},
-                    {link: '/', label: 'Huobi', icon: huobi},
+                    {link: 'https://accounts.binance.com/register?ref=E8RCK6W5', label: 'Binance', icon: binance},
+                    {link: 'https://coinbase.com/', label: 'Coinbase', icon: coinbase},
+                    {link: 'https://www.huobi.com/ru-ru/v/register/double-invite/?inviter_id=11345710&invite_code=uc2yb', label: 'Huobi', icon: huobi},
                 ]
             },
             {
                 head: 'Покупка на 4 биржах:',
                 ul: [
-                    {link: '/', label: 'Gate', icon: gate},
-                    {link: '/', label: 'MEXC', icon: mexc},
-                    {link: '/', label: 'KuCoin', icon: kucoin},
-                    {link: '/', label: 'Huobi', icon: huobi},
+                    {link: 'https://www.gate.io/signup/UwcWXFhY', label: 'Gate', icon: gate},
+                    {link: 'https://www.mexc.com/register?inviteCode=1XHiG', label: 'MEXC', icon: mexc},
+                    {link: 'https://www.kucoin.com/ucenter/signup?rcode=rP9MQ8L', label: 'KuCoin', icon: kucoin},
+                    {link: 'https://www.huobi.com/ru-ru/v/register/double-invite/?inviter_id=11345710&invite_code=uc2yb', label: 'Huobi', icon: huobi},
                 ]
             }
         ]
@@ -82,20 +82,20 @@ const list: billingItemPropsTypes[] = [
             {
                 head: 'Мониторинг анонсов листингов на 5 биржах:',
                 ul: [
-                    {link: '/', label: 'Binance', icon: binance},
-                    {link: '/', label: 'Coinbase', icon: coinbase},
-                    {link: '/', label: 'Huobi', icon: huobi},
-                    {link: '/', label: 'KuCoin', icon: kucoin},
-                    {link: '/', label: 'OKX', icon: okx},
+                    {link: 'https://accounts.binance.com/register?ref=E8RCK6W5', label: 'Binance', icon: binance},
+                    {link: 'https://coinbase.com/', label: 'Coinbase', icon: coinbase},
+                    {link: 'https://www.huobi.com/ru-ru/v/register/double-invite/?inviter_id=11345710&invite_code=uc2yb', label: 'Huobi', icon: huobi},
+                    {link: 'https://www.kucoin.com/ucenter/signup?rcode=rP9MQ8L', label: 'KuCoin', icon: kucoin},
+                    {link: 'https://www.okx.com/join/75982377', label: 'OKX', icon: okx},
                 ]
             },
             {
                 head: 'Покупка на 4 биржах:',
                 ul: [
-                    {link: '/', label: 'Gate', icon: gate},
-                    {link: '/', label: 'MEXC', icon: mexc},
-                    {link: '/', label: 'KuCoin', icon: kucoin},
-                    {link: '/', label: 'Huobi', icon: huobi},
+                    {link: 'https://www.mexc.com/register?inviteCode=1XHiG', label: 'Gate', icon: gate},
+                    {link: 'https://www.mexc.com/register?inviteCode=1XHiG', label: 'MEXC', icon: mexc},
+                    {link: 'https://www.kucoin.com/ucenter/signup?rcode=rP9MQ8L', label: 'KuCoin', icon: kucoin},
+                    {link: 'https://www.huobi.com/ru-ru/v/register/double-invite/?inviter_id=11345710&invite_code=uc2yb', label: 'Huobi', icon: huobi},
                 ]
             }
         ]
@@ -110,25 +110,25 @@ const list: billingItemPropsTypes[] = [
             {
                 head: 'Мониторинг анонсов листингов на 10 биржах:',
                 ul: [
-                    {link: '/', label: 'Binance', icon: binance},
-                    {link: '/', label: 'Coinbase', icon: coinbase},
-                    {link: '/', label: 'Huobi', icon: huobi},
-                    {link: '/', label: 'KuCoin', icon: kucoin},
-                    {link: '/', label: 'OKX', icon: okx},
-                    {link: '/', label: 'Kraken', icon: kraken},
-                    {link: '/', label: 'Bitstamp', icon: bitstamp},
-                    {link: '/', label: 'Bitfinex', icon: bitfinex},
-                    {link: '/', label: 'Bybit', icon: bybit},
-                    {link: '/', label: 'Upbit', icon: upbit},
+                    {link: 'https://accounts.binance.com/register?ref=E8RCK6W5', label: 'Binance', icon: binance},
+                    {link: 'https://coinbase.com/', label: 'Coinbase', icon: coinbase},
+                    {link: 'https://www.huobi.com/ru-ru/v/register/double-invite/?inviter_id=11345710&invite_code=uc2yb', label: 'Huobi', icon: huobi},
+                    {link: 'https://www.kucoin.com/ucenter/signup?rcode=rP9MQ8L', label: 'KuCoin', icon: kucoin},
+                    {link: 'https://www.okx.com/join/75982377', label: 'OKX', icon: okx},
+                    {link: 'https://www.kraken.com/', label: 'Kraken', icon: kraken},
+                    {link: 'https://www.bitstamp.net/', label: 'Bitstamp', icon: bitstamp},
+                    {link: 'https://www.bitfinex.com/sign-up?refcode=6Qbfayswv', label: 'Bitfinex', icon: bitfinex},
+                    {link: 'https://www.bybit.com/invite?ref=MYYWWP', label: 'Bybit', icon: bybit},
+                    {link: 'https://upbit.com/', label: 'Upbit', icon: upbit},
                 ]
             },
             {
                 head: 'Покупка на 4 биржах:',
                 ul: [
-                    {link: '/', label: 'Gate', icon: gate},
-                    {link: '/', label: 'MEXC', icon: mexc},
-                    {link: '/', label: 'KuCoin', icon: kucoin},
-                    {link: '/', label: 'Huobi', icon: huobi},
+                    {link: 'https://www.gate.io/signup/UwcWXFhY', label: 'Gate', icon: gate},
+                    {link: 'https://www.mexc.com/register?inviteCode=1XHiG', label: 'MEXC', icon: mexc},
+                    {link: 'https://www.kucoin.com/ucenter/signup?rcode=rP9MQ8L', label: 'KuCoin', icon: kucoin},
+                    {link: 'https://www.huobi.com/ru-ru/v/register/double-invite/?inviter_id=11345710&invite_code=uc2yb', label: 'Huobi', icon: huobi},
                 ]
             }
         ]

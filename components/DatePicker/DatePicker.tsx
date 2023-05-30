@@ -38,7 +38,8 @@ const DatePicker:FC<RangePickerProps> = (props) => {
                 presets={[
                     {label: 'Сегодня', value: [dayjs(), dayjs()]},
                     {label: 'Последние 14 дней', value: [dayjs().add(-14, 'd'), dayjs()]},
-                    {label: 'За месяц', value: [dayjs().add(-30, 'd'), dayjs()]}
+                    {label: 'За месяц', value: [dayjs().add(-30, 'd'), dayjs()]},
+                    {label: 'За все время', value: [dayjs().add(Date.now() * -1, 'ms'), dayjs()]}
                 ]}
                 {...props}
                 />

@@ -122,11 +122,11 @@ const SignupPage = () => {
                                 <div className={styles.icon}>
                                     <BsCheckLg size={40}/>
                                 </div>
-                                <h4 className={'heading_4'}>Регистрация прошла успешно, проверьте пожалуйста свою почту</h4>
+                                <h4 className={'heading_4'}>Регистрация прошла успешно!<br/> Проверьте, пожалуйста, вашу почту</h4>
                             </div>
                         ) : (
                             <AuthForm
-                                title="Зарегистрироваться"
+                                title="Добро пожаловать в ADTBot"
                                 >
                                 <Row gutter={[15,15]}>
                                     <Col span={24}>
@@ -139,16 +139,16 @@ const SignupPage = () => {
                                     </Col>
                                     <Col span={24}>
                                         <Input
-                                            placeholder="debra.holt@example.com"
-                                            label="Email"
+                                            placeholder="E-mail"
+                                            label="Ваш e-mail"
                                             value={email}
                                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
                                             />
                                     </Col>
                                     <Col span={24}>
                                         <Input
-                                            label="Пароль"
-                                            placeholder="Ваш пароль"
+                                            label="Придумайте пароль"
+                                            placeholder="Пароль"
                                             type={'password'}
                                             value={password}
                                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
@@ -156,8 +156,8 @@ const SignupPage = () => {
                                     </Col>
                                     <Col span={24}>
                                         <Input
-                                            label="Повторить пароль"
-                                            placeholder="Ваш пароль"
+                                            label="Повторите пароль"
+                                            placeholder="Пароль"
                                             type={"password"}
                                             errorText={'Пароли не совпадают'}
                                             error={repeatPassword && (repeatPassword !== password) ? true : false}
@@ -195,14 +195,14 @@ const SignupPage = () => {
                                         <Button
                                             load={load}
                                             disabled={username && email && captcha_token && password && (repeatPassword && (repeatPassword === password)) && agree ? false : true}
-                                            text="Зарегистрироваться"
+                                            text="Начать бесплатно"
                                             fill
                                             onClick={onSubmit}
                                             />
                                     </Col>
                                     <Col span={24}>
                                         <div style={{textAlign: 'center'}}>
-                                            У вас уже есть аккаунт? <Link className="def-link" href={'/auth/login'}>Авторизоваться</Link>
+                                            Уже есть аккаунт? <Link className="def-link" href={'/auth/login'}>Авторизоваться</Link>
                                         </div>
                                     </Col>
                                 

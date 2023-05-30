@@ -164,7 +164,15 @@ const Body = () => {
     const [bot_filter, setBot_filter] = useState<1 | 2 | 3 | 4>(1) //ALL = 1 ACTIVE = 2 WAITING = 3 STOPPED = 4
     const [limit, setLimit] = useState(0)
     const [offset, setOffset] = useState(0)
-    const [ordering, setOrdering] = useState(['monitor', 'exchange', 'budget_usdt', 'daily_volume', 'take_profit', 'stop_loss', 'stop_buy'])
+    const [ordering, setOrdering] = useState([
+        'monitor', 
+        'exchange', 
+        'budget_usdt', 
+        'daily_volume', 
+        'take_profit', 
+        'stop_loss', 
+        'stop_buy'
+    ])
 
     const [page, setPage] = useState(1)
 

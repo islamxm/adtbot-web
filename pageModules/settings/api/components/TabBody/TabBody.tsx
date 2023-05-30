@@ -11,7 +11,8 @@ interface I {
     values: IKey,
     setValues: (...args: any[]) => any,
     ips?: string[],
-    balance?: any
+    balance?: any,
+    partnerLink?: string
 }
 
 
@@ -20,7 +21,8 @@ const TabBody:FC<I> = ({
     values,
     setValues,
     balance,
-    ips
+    ips,
+    partnerLink
 }) => {
 
     return (
@@ -28,14 +30,14 @@ const TabBody:FC<I> = ({
             <Row gutter={[35,35]}>
 
                 <Col span={24}>
-                    Нет аккаунта на {testTitle}? <a className='def-link' href="#" target={'_blank'}>Зарегистрироваться</a>
+                    Нет аккаунта на {testTitle}? <a className='def-link' href={partnerLink} target={'_blank'}>Зарегистрироваться</a>
                 </Col>
 
                 
                 <Col span={24}>
                     <Row gutter={[20,20]}>
                         <Col span={24}>
-                            Подключите ваш аккаунт биржи Gate.io, заполнив соответствующие поля API ключей.<br/>
+                            Подключите ваш аккаунт биржи <a href={partnerLink} target='_blank'>{testTitle}</a>, заполнив соответствующие поля API ключей.<br/>
                             После ввода ключей нажмите кнопку “Сохранить”.
                         </Col>
                         <Col span={24}>
@@ -68,7 +70,7 @@ const TabBody:FC<I> = ({
                         <Col span={24}>
                             <Row gutter={[15,15]}>
                                 <Col span={24}>
-                                ВНИМАНИЕ! В целях безопасности, в настройках API ключа на Gate.io ограничьте доступ по IP адресам и разрешите использовать только следующие адреса:
+                                ВНИМАНИЕ! В целях безопасности, в настройках API ключа на <a href={partnerLink} target='_blank'>{testTitle}</a> ограничьте доступ по IP адресам и разрешите использовать только следующие адреса:
                                 </Col>
                                 <Col span={24}>
                                     <IpTable values={ips}/>

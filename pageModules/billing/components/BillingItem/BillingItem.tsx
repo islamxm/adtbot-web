@@ -32,7 +32,7 @@ const BillingItem:FC<billingItemPropsTypes> = ({
                     }
                     <Col span={24}>
                         <div className={styles.price}>
-                            <span>${price}</span> / месяц
+                            <span>₮{price}</span> / месяц
                         </div>
                     </Col>
                     <Col span={24}>

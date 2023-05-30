@@ -153,19 +153,23 @@ const Body = () => {
             setLimit(switchTableSize(tableSize))
         }
     }, [tableSize])
+
+
+    useEffect(() => {
+        console.log(date)
+    }, [date])
   
 
     const updateList = () => {
         if(access) {
             service.announceStats({
-                first_date: date[0]?.format('YYYY-MM-DD'),
-                second_date: date[1]?.format('YYYY-MM-DD'),
+                first_date: date !== null ? date[0]?.format('YYYY-MM-DD') : '',
+                second_date: date !== null ? date[1]?.format('YYYY-MM-DD') : '',
                 ordering,
                 limit: 10,
                 offset:  page === 1 ? offset : limit * (page - 1),
                 announce_source: 1
             }, access).then(res => {
-                console.log(res)
                 setList(res?.announces)
                 setTotalCount(res?.announces_count)
                 setannounces_count(res?.announces_count)
@@ -215,6 +219,7 @@ const Body = () => {
                                     placeholder={['Дата начала', 'Дата конца']}
                                     defaultValue={date}
                                     onChange={setDate}
+                                    
                                     />
                             </div>
                             {/* <div className={styles.item}>

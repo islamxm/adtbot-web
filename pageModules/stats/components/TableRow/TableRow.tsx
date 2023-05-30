@@ -111,21 +111,23 @@ const TableRow:FC<tableRowPropsTypes> = ({bot, head, updateList}) => {
                 <td className={`table-row__item table-bodyrow__item table-bodyrow__item--nonmain`}>
                     <div className="table-bodyrow__item_in">
                         <div className="table-bodyrow__item_label">
-                            {senseValue(hideSensValue, bot?.buy_price)}
+                            {bot?.buy_price}
                         </div>
                     </div>
                 </td>
                 <td className={`table-row__item table-bodyrow__item table-bodyrow__item--nonmain`}>
                     <div className="table-bodyrow__item_in">
                         <div className="table-bodyrow__item_label">
-                            {senseValue(hideSensValue, bot?.sell_price)}
+                            {bot?.sell_price}
                         </div>
                     </div>
                 </td>
                 <td className={`table-row__item table-bodyrow__item`}>
                     <div className="table-bodyrow__item_in">
-                        <div className={`table-bodyrow__item_label ${bot?.pnl < 0 ? 'table-bodyrow__item_label-red' : ''} ${bot?.pnl > 0 ? 'table-bodyrow__item_label-green' : ''}`}>
-                            {bot?.pnl}({bot?.pnl_percentage}%)
+                        <div className={`table-bodyrow__item_label ${Number(bot?.pnl_percentage) > 0 ? 'table-bodyrow__item_label-green' : ''}`}>
+                            {bot?.pnl} USDT {
+                                senseValue(hideSensValue, `${Number(bot?.pnl_percentage > 0) ? '+' : ''}${bot?.pnl_percentage}`)
+                            }%
                         </div>
                     </div>
                 </td>
@@ -167,7 +169,7 @@ const TableRow:FC<tableRowPropsTypes> = ({bot, head, updateList}) => {
                                 Пара
                                 </div>
                                 <div className="table-dropdown__body_table_item_value">
-                                {senseValue(hideSensValue, bot?.pair)}
+                                {bot?.pair}
                                 </div>
                             </div>
                             <div className="table-dropdown__body_table_item">
@@ -183,7 +185,7 @@ const TableRow:FC<tableRowPropsTypes> = ({bot, head, updateList}) => {
                                 Цена покупки
                                 </div>
                                 <div className="table-dropdown__body_table_item_value">
-                                {senseValue(hideSensValue, bot?.buy_price)}
+                                {bot?.buy_price}
                                 </div>
                             </div>
                             <div className="table-dropdown__body_table_item">
@@ -191,7 +193,7 @@ const TableRow:FC<tableRowPropsTypes> = ({bot, head, updateList}) => {
                                 Цена продажи
                                 </div>
                                 <div className="table-dropdown__body_table_item_value">
-                                {senseValue(hideSensValue, bot?.sell_price)}
+                                {bot?.sell_price}
                                 </div>
                             </div>
                             <div className="table-dropdown__body_table_item">

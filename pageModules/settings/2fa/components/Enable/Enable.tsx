@@ -8,6 +8,8 @@ import ApiService from '@/service/apiService';
 import { useAppSelector, useAppDispatch } from '@/hooks/useTypesRedux';
 import notify from '@/helpers/notify';
 import { updateUserData } from '@/store/actions';
+import copyValue from '@/helpers/copyValue';
+import { TbCopy } from 'react-icons/tb';
 
 const service = new ApiService()
 
@@ -94,7 +96,7 @@ const Enable = ({
                     После включения 2FA для доступа к учетной записи, кроме логина и пароля, вам понадобится динамический шестизначный код, генерируемый в приложении.
                     <br/>
                     <br/>
-                    Перед включением 2FA установите <a href="https://support.google.com/accounts/answer/1066447" target={'_blank'}>Google Authenticator</a> на устройство.
+                    Перед включением 2FA установите Google Authenticator на устройство.
                     </p>
                 </Col>
                 <Col span={24}>
@@ -126,10 +128,29 @@ const Enable = ({
                             В случае утери секретного ключа, получение доступа к учетной записи или отключение 2FA станет невозможен без обращения в техническую поддержку. Процесс может занять до 30 дней.
                             <br/>
                             <br/>
-                            Для активации 2FA отсканируйте QR-код или введите секретный ключ в <a href="https://support.google.com/accounts/answer/1066447" target={'_blank'}>Google Authenticator</a>.
+                            Для активации 2FA отсканируйте QR-код или введите секретный ключ в Google Authenticator.
                             <br/>
                             <br/>
-                            Секретный ключ: <span>{secret}</span>
+                            <div className={styles.field}>
+                                <div className={styles.input}>
+                                    <Input
+                                        placeholder='xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+                                        value={secret}
+                                        readOnly
+                                        />
+                                </div>
+                                <div className={styles.action}>
+                                    <Button
+                                        beforeIcon={<TbCopy/>}
+                                        onClick={() => {
+                                            copyValue({
+                                                value: secret,
+                                                notifyLabel: 'Секретный ключ скопирован'
+                                            })
+                                        }}
+                                        />
+                                </div>
+                            </div>
                             </p>
                         </div>
                     </div>

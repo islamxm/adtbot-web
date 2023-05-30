@@ -621,6 +621,22 @@ class ApiService {
             console.log(err)
         }
     }
+
+
+    getPaymentHistory = async (token: TokenType) => {
+        try {
+            let res = await fetch(endpoints.getPaymentHistory, {
+                method: 'POST',
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            return await checkAuth(res)
+        } catch(err) {
+            console.log(err)
+        }
+    }
 }
 
 export default ApiService;

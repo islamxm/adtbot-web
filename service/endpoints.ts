@@ -54,7 +54,7 @@ const endpoints = {
 
     //payment
     deposit: `${PATH}pay_usdt_trc20/`,
-    getPaymentHistory: `${PATH}payment_history`,
+    getPaymentHistory: `${PATH}payment_history/`,
 
 
     // referal

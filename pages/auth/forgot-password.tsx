@@ -61,14 +61,14 @@ const ResetPage = () => {
                         md={12}
                         span={24}>
                         <AuthForm
-                            title="Восстановление пароля"
+                            title="Забыли пароль?"
                             >
                             <Row gutter={[15,15]}>
                             <Col span={24}>
                                                 <Input
                                                     type="email"
-                                                    placeholder="example@.com"
-                                                    label="Ваш e-mail"
+                                                    placeholder="E-mail"
+                                                    label="Введите ваш e-mail"
                                                     value={email}
                                                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
                                                     />
@@ -88,7 +88,7 @@ const ResetPage = () => {
                                             </Col>
                                             <Col span={24}>
                                                 <Button
-                                                    text="Отправить"
+                                                    text="Восстановить пароль"
                                                     fill
                                                     disabled={email && captcha_token ? false : true}
                                                     onClick={onSubmit}

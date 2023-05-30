@@ -26,6 +26,20 @@
                 // width: 100%;
                 display: block;
             }
+
+            .field {
+                display: flex;
+                align-items: center;
+        
+                .input {
+                    max-width: 455px;
+                    width: 100%;
+                }
+        
+                .action {
+                    margin-left: 15px;
+                }
+            }
         }
     }
     .label {
