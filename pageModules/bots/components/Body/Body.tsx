@@ -18,8 +18,7 @@ import {AiOutlinePlus} from 'react-icons/ai';
 import AddBotModal from '@/modals/AddBotModal/AddBotModal';
 import { useAppDispatch } from '@/hooks/useTypesRedux';
 import { updateSenseValue } from '@/store/actions';
-import { gql, useApolloClient } from '@apollo/client';
-
+import { useSubscription, gql, useApolloClient } from '@apollo/client';
 
 const service = new ApiService();
 
@@ -144,12 +143,32 @@ const switchTableSize = (value: any) => {
 }
 
 
+const TEST_SUB = gql`
+  subscription OnPNLUpdate {
+    bot_info {
+      bot_id
+      pnl
+    }
+  }
+`;
+
+
 const Body = () => {
-   
+    const client = useApolloClient
+    const {data, error} = useSubscription(TEST_SUB, {
+        onError: (e) => {
+            console.log('ERROR IN SUBSCRIPTION')
+            console.log(e)
+        },
+        onData: (e) => {
+            console.log(e)
+        } 
+    })
     const {tokens: {access}, lastCreatedBot, hideSensValue} = useAppSelector(s => s)
     const dispatch = useAppDispatch()
+    
 
-    const [hidden, setHidden] = useState(false)
+
     const [tableSize, setTableSize] = useState('1')
     const [addBotModal, setAddBotModal] = useState(false)
 
@@ -159,6 +178,8 @@ const Body = () => {
         setEditData(null)
     }
 
+    
+   
    
 
     const [list, setList] = useState<any[]>([])
@@ -182,6 +203,12 @@ const Body = () => {
     const [page, setPage] = useState(1)
 
     const [editData, setEditData] = useState(null)
+
+
+
+    useEffect(() => {
+        console.log(data)
+    }, [data])
 
 
     useEffect(() => {
