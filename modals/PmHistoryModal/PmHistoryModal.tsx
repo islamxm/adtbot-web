@@ -1,6 +1,6 @@
 import styles from './PmHistoryModal.module.scss';
 import {Modal, ModalFuncProps} from 'antd';
-import {FC, useEffect, useRef} from 'react';
+import {FC, useEffect, useRef, useState} from 'react';
 import Table from './components/Table/Table';
 import { itemPropsTypes } from './types';
 import ApiService from '@/service/apiService';
@@ -82,7 +82,7 @@ const PmHistoryModal:FC<ModalFuncProps> = ({
     open,
 }) => {
     const {tokens: {access}} = useAppSelector(s => s)
-    
+    const [list,setList] = useState([])
 
 
     const closeHandle = () => {
@@ -95,6 +95,7 @@ const PmHistoryModal:FC<ModalFuncProps> = ({
         if(access) {
             service.getPaymentHistory(access).then(res => {
                 console.log(res)
+                
             })
         }
     }, [access])
@@ -108,7 +109,7 @@ const PmHistoryModal:FC<ModalFuncProps> = ({
             className={`${styles.wrapper} modal`}
             >
             <Table
-                list={historyList}
+                list={list}
                 />
         </Modal>
     )

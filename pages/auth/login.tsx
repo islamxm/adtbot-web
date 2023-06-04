@@ -73,6 +73,7 @@ const LoginPage = () => {
             if(res?.status === 200) {
                 res?.json().then(data => {
                     if(saveMe) {
+                        console.log(data)
                         Cookies.set('adtbot-console-access-token', data?.access_token) //access_token
                         Cookies.set('adtbot-console-refresh-token', data?.refresh_token) //refresh_token
                         dispatch(updateTokens({access: data?.access_token, refresh: data?.refresh_token}))
@@ -82,7 +83,6 @@ const LoginPage = () => {
                         if(data?.is_first_login === false) {
                             Router.push('/account/bots')
                         }
-                        
                     } else {
                         Cookies.remove('adtbot-console-access-token') //access_token
                         Cookies.remove('adtbot-console-refresh-token') //refresh_token
@@ -171,8 +171,8 @@ const LoginPage = () => {
                                 <Input
                                     value={username}
                                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
-                                    placeholder="example@mail.com"
-                                    label="Ваш E-mail"
+                                    placeholder="Email"
+                                    label="Ваш Email"
                                     type="email"
                                     />
                             </Col>

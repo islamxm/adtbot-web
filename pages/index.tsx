@@ -12,11 +12,12 @@ const HomePage = () => {
 
     const {is_first_login} = userData || {}
 
-    // useEffect(() => {
-    //     if(userData && typeof is_first_login !== 'undefined' && is_first_login === false) {
-    //         Router.push('/account/bots')
-    //     }
-    // }, [userData, is_first_login])
+
+    useEffect(() => {
+        if(typeof is_first_login === 'boolean' && is_first_login === false) {
+            Router.push('/account/bots')
+        }
+    }, [is_first_login])
 
 
     return (
@@ -27,8 +28,8 @@ const HomePage = () => {
             <ContentLayout
                 head=""
                 >
-                {/* {userData?.is_first_login ?   <Start/> : null}    */}
-                <Start/>
+                {userData?.is_first_login === true && <Start/>}   
+                
                 {/* <h1>Home</h1> */}
             </ContentLayout>
         </>

@@ -13,7 +13,7 @@ const service = new ApiService()
 
 
 const Body = () => {
-    const {tokens: {access}} = useAppSelector(s => s)
+    const {tokens: {access}, userData} = useAppSelector(s => s)
     const [users, setUsers] = useState<any[]>([])
 
     useEffect(() => {
@@ -39,16 +39,17 @@ const Body = () => {
                                 <div className={styles.input}>
                                     <Input
                                         placeholder='xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
-                                        value={'0x513ba2bFe3Bb352283E1BabA2E742E838ba63958'}
+                                        value={userData?.user_own_referal}
                                         readOnly
                                         />
                                 </div>
                                 <div className={styles.action}>
                                     <Button
+                                        disabled={!userData?.user_own_referal}
                                         beforeIcon={<TbCopy/>}
                                         onClick={() => {
                                             copyValue({
-                                                value: '0x513ba2bFe3Bb352283E1BabA2E742E838ba63958',
+                                                value: userData?.user_own_referal,
                                                 notifyLabel: 'Партнерская ссылка скопирована'
                                             })
                                         }}

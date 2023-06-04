@@ -132,15 +132,15 @@ const SignupPage = () => {
                                     <Col span={24}>
                                         <Input
                                             placeholder="Bessie Cooper"
-                                            label="Имя"
+                                            label="Ваше реальное имя"
                                             value={username}
                                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
                                             />
                                     </Col>
                                     <Col span={24}>
                                         <Input
-                                            placeholder="E-mail"
-                                            label="Ваш e-mail"
+                                            placeholder="Email"
+                                            label="Ваш Email"
                                             value={email}
                                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
                                             />

@@ -67,8 +67,8 @@ const ResetPage = () => {
                             <Col span={24}>
                                                 <Input
                                                     type="email"
-                                                    placeholder="E-mail"
-                                                    label="Введите ваш e-mail"
+                                                    placeholder="Email"
+                                                    label="Введите ваш Email"
                                                     value={email}
                                                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
                                                     />

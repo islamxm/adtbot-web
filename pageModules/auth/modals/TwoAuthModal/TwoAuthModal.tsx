@@ -133,7 +133,12 @@ const TwoAuthModal: React.FC<I> = ({
                             <AuthCode 
                                 containerClassName={`${styles.fields} ${status === 'error' ? styles.error : ''} ${status === 'success' ? styles.success : ''}`} 
                                 inputClassName={styles.input} 
-                                onChange={setValue} 
+                                onChange={(e) => {
+                                    setValue(e)
+                                    if(e.length === 6) {
+                                        onLogin()
+                                    }
+                                }} 
                                 allowedCharacters={'numeric'}/>
                         </div>
                     </Col>

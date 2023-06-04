@@ -155,15 +155,18 @@ const TEST_SUB = gql`
 
 const Body = () => {
     const client = useApolloClient
-    const {data, error} = useSubscription(TEST_SUB, {
-        onError: (e) => {
-            console.log('ERROR IN SUBSCRIPTION')
-            console.log(e)
-        },
-        onData: (e) => {
-            console.log(e)
-        } 
-    })
+    // const {data, error} = useSubscription(TEST_SUB, {
+    //     onSubscriptionComplete: () => {
+    //         console.log('SUBS COMPLETE')
+    //     },
+    //     onError: (e) => {
+    //         console.log('ERROR IN SUBSCRIPTION')
+    //         console.log(e)
+    //     },
+    //     onData: (e) => {
+    //         console.log(e)
+    //     } 
+    // })
     const {tokens: {access}, lastCreatedBot, hideSensValue} = useAppSelector(s => s)
     const dispatch = useAppDispatch()
     
@@ -206,9 +209,9 @@ const Body = () => {
 
 
 
-    useEffect(() => {
-        console.log(data)
-    }, [data])
+    // useEffect(() => {
+    //     console.log(data)
+    // }, [data])
 
 
     useEffect(() => {

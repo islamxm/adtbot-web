@@ -24,26 +24,29 @@ const PrivateRoute = ({
                 Cookies.remove('adtbot-console-access-token')
                 Cookies.remove('adtbot-console-refresh-token')
                 dispatch(updateTokens({access: null, refresh: null}))
-                
 
                 if(!router?.pathname?.includes('/auth')) {
                     router.replace('/auth/join')
                 } else {
                     return;
                 }
-
             } else {
                 setAuth(true)
                 if(router?.pathname?.includes('/auth')) {
-                    if(userData?.is_first_login === false) {
-                        router?.push('/account/bots')
-                    }
-                    if(userData?.is_first_login === true) {
-                        router?.push('/')
-                    }
-                } else {
-                    return;
-                }
+                    // if(userData?.is_first_login === false) {
+                    //     router?.push('/account/bots')
+                    // }
+                    // if(userData?.is_first_login === true) {
+                    //     console.log('first login', userData)
+                    //     router?.push('/')
+                    // }
+                    router.push('/')
+                } 
+                // if(router?.pathname === '/') {
+                //     if(userData?.is_first_login === false) {
+                //         router?.push('/account/bots')
+                //     }
+                // }
             }
         }
         

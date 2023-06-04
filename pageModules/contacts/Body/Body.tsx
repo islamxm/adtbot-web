@@ -21,13 +21,11 @@ const Body = () => {
 
     const addFeedback = useCallback(() => {
         if(access) {    
-            console.log(text)
             service.addFeedback(text, access).then(res => {
-                console.log(res)
-                if(!res?.detail) {
-                    notify('Фидбэк отправлен', 'SUCCESS')
-                }
                 if(res === true) {
+                    notify('Фидбэк отправлен', 'SUCCESS')
+                    
+                } else {
                     notify('Произошла ошибка', 'ERROR')
                 }
             }).catch(() => {
