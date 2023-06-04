@@ -67,6 +67,12 @@
         line-height: 15px;
     }
 
+    .main.icon {
+        input {
+            // padding-right: 30px;
+        }
+    }
+
     .main {
         position: relative;
 
@@ -74,6 +80,21 @@
             position: absolute;
             top: calc(50% - 14px);
             right: 10px;
+        }
+
+        .icon {
+            // border: 1px solid red;
+            // color: #E0E0E0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            // width: 30px;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 0 5px;
+            
         }
     }
 }

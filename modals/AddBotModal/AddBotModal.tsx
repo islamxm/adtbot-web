@@ -252,18 +252,20 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
                                         onChange={(e:React.ChangeEvent<HTMLInputElement>) => setDaily_volume(e.target.value)}
                                         error={daily_volume_error}
                                         onFocus={() => setDaily_volume_error(false)}
+                                        icon={'млн. USDT'}
                                         />
                                 </Col>
                                 <Col span={24}>
                                     <Input
                                         hint={'При увеличении цены на указанный процент, исполнится лимитный ордер на продажу'}
-                                        label='TP (%)'
+                                        label='Take Profit (%)'
                                         placeholder='2%'
                                         value={take_profit}
                                         type={'number'}
                                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTake_profit(e.target.value)}
                                         error={take_profit_error}
                                         onFocus={() => setTake_profit_error(false)}
+                                        icon={'%'}
                                         />
                                 </Col>
                                 <Col span={24}>
@@ -276,6 +278,7 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
                                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setBudget_usdt(e.target.value)}
                                         error={budget_usdt_error}
                                         onFocus={() => setBudget_usdt_error(false)}
+                                        icon='USDT'
                                         />
                                 </Col>
                             </Row>
@@ -301,18 +304,20 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
                                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setStop_buy(e.target.value)}
                                         error={stop_buy_error}
                                         onFocus={() => setStop_buy_error(false)}
+                                        icon={'%'}
                                         />
                                 </Col>
                                 <Col span={24}>
                                     <Input
                                         hint={'При снижении цены на указанный процент, исполнится лимитный ордер на продажу'}
-                                        label='SL'
+                                        label='Stop Loss'
                                         placeholder='3%'
                                         type='number'
                                         value={stop_loss}
                                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setStop_loss(e.target.value)}
                                         error={stop_loss_error}
                                         onFocus={() => setStop_loss_error(false)}
+                                        icon={'%'}
                                         />
                                 </Col>
                             </Row>

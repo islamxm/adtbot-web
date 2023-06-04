@@ -6,5 +6,6 @@ export interface inputPropsTypes extends React.HTMLProps<HTMLInputElement> {
     hint?: boolean | React.ReactNode | string,
     mask?: string,
     getUnmaskedValue?: boolean,
-    onChangeMask?: (...args: any[]) => void
+    onChangeMask?: (...args: any[]) => void,
+    icon?: React.ReactNode
 }

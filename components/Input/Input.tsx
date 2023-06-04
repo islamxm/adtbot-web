@@ -5,14 +5,14 @@ import Hint from '../Hint/Hint';
 import {AiOutlineInfoCircle} from 'react-icons/ai';
 import { IMaskInput } from 'react-imask';
 import InputMask from 'react-input-mask';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import IconButton from '../IconButton/IconButton';
 import {AiOutlineEye} from 'react-icons/ai';
 import {AiOutlineEyeInvisible} from 'react-icons/ai';
 
 
 const Input = (props: inputPropsTypes) => {
-
+    const iconRef = useRef<HTMLDivElement>(null)
     const [visible, setVisible] = useState(false)
 
     const {
@@ -25,7 +25,8 @@ const Input = (props: inputPropsTypes) => {
         mask,
         onChange,
         onChangeMask,
-        nodeLabel
+        nodeLabel,
+        icon
     } = props || {};
 
     
@@ -72,7 +73,7 @@ const Input = (props: inputPropsTypes) => {
                     </div>
                 ) : null
             }
-            <div className={styles.main}>
+            <div className={`${styles.main} ${icon ? styles.icon : ''}`}>
                 {
                     mask ? (
                         // <IMaskInput
@@ -95,6 +96,7 @@ const Input = (props: inputPropsTypes) => {
                                 maskChar={null}
                                 type={props?.type !== 'password' ? props?.type : (visible ? 'text' : 'password')}
                                 className={`${styles.input} ${props?.type === 'password' ? styles.password : ''}`}
+                                style={{paddingRight: iconRef?.current?.scrollWidth}}
                                 />
                             {
                                 props?.type === 'password' ? (
@@ -110,9 +112,11 @@ const Input = (props: inputPropsTypes) => {
                     ) : (
                         <>
                             <input
+                            
                                 className={`${styles.input} ${props?.type === 'password' ? styles.password : ''}`}
                                 {...props}            
                                 type={props?.type !== 'password' ? props?.type : (visible ? 'text' : 'password')}
+                                style={{paddingRight: iconRef?.current?.scrollWidth}}
                                 />
                             {
                                 props?.type === 'password' ? (
@@ -126,6 +130,10 @@ const Input = (props: inputPropsTypes) => {
                             }
                         </>
                     )
+                }
+
+                {
+                    icon && <div ref={iconRef} className={styles.icon}>{icon}</div>
                 }
                 
             </div>
