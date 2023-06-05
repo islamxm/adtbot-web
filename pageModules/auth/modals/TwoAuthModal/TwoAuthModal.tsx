@@ -135,8 +135,10 @@ const TwoAuthModal: React.FC<I> = ({
                                 inputClassName={styles.input} 
                                 onChange={(e) => {
                                     setValue(e)
+                                    console.log(e)
                                     if(e.length === 6) {
-                                        onLogin()
+                                        // onLogin()
+                                        console.log(e)
                                     }
                                 }} 
                                 allowedCharacters={'numeric'}/>
