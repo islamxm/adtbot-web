@@ -99,6 +99,12 @@ const TwoAuthModal: React.FC<I> = ({
     }
 
 
+    useEffect(() => {
+        if(value?.length === 6) {
+            onLogin()
+        }
+    }, [value])
+
     
 
     return (
@@ -133,14 +139,7 @@ const TwoAuthModal: React.FC<I> = ({
                             <AuthCode 
                                 containerClassName={`${styles.fields} ${status === 'error' ? styles.error : ''} ${status === 'success' ? styles.success : ''}`} 
                                 inputClassName={styles.input} 
-                                onChange={(e) => {
-                                    setValue(e)
-                                    console.log(e)
-                                    if(e.length === 6) {
-                                        // onLogin()
-                                        console.log(e)
-                                    }
-                                }} 
+                                onChange={setValue} 
                                 allowedCharacters={'numeric'}/>
                         </div>
                     </Col>
