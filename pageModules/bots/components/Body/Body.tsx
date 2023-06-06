@@ -19,6 +19,7 @@ import AddBotModal from '@/modals/AddBotModal/AddBotModal';
 import { useAppDispatch } from '@/hooks/useTypesRedux';
 import { updateSenseValue } from '@/store/actions';
 import { useSubscription, gql, useApolloClient } from '@apollo/client';
+import notify from '@/helpers/notify';
 
 const service = new ApiService();
 
@@ -143,33 +144,34 @@ const switchTableSize = (value: any) => {
 }
 
 
-const TEST_SUB = gql`
-  subscription OnPNLUpdate {
-    bot_info {
-      bot_id
-      pnl
-    }
-  }
-`;
+// const TEST_SUB = gql`
+//   subscription OnPNLUpdate {
+//     bot_info {
+//       bot_id
+//       pnl
+//     }
+//   }
+// `;
 
 
 const Body = () => {
-    const client = useApolloClient
-    const {data, error} = useSubscription(TEST_SUB, {
-        onSubscriptionComplete: () => {
-            console.log('SUBS COMPLETE')
-        },
-        onError: (e) => {
-            console.log('ERROR IN SUBSCRIPTION')
-            console.log(e)
-        },
-        onData: (e) => {
-            console.log(e)
-        } 
-    })
+    const [socket, setSocket] = useState<null | WebSocket>(null)
+    // const client = useApolloClient
+    // const {data, error} = useSubscription(TEST_SUB, {
+    //     onSubscriptionComplete: () => {
+    //         console.log('SUBS COMPLETE')
+    //     },
+    //     onError: (e) => {
+    //         console.log('ERROR IN SUBSCRIPTION')
+    //         console.log(e)
+    //     },
+    //     onData: (e) => {
+    //         console.log(e)
+    //     } 
+    // })
     const {tokens: {access}, lastCreatedBot, hideSensValue} = useAppSelector(s => s)
     const dispatch = useAppDispatch()
-    
+
 
 
     const [tableSize, setTableSize] = useState('1')
@@ -182,7 +184,28 @@ const Body = () => {
     }
 
     
-   
+
+    useEffect(() => {
+        const sk = new WebSocket('wss://developmentsrv.space/api/v1/websocket')
+        setSocket(sk)
+    }, [])
+
+
+    useEffect(() => {
+        if(socket) {
+            socket.onopen = (e) => {
+                console.log(e.target)
+                notify('Подключено установлено', 'SUCCESS')
+            }
+            socket.onmessage = (e) => {
+                console.log(e)
+            }
+            socket.onerror = (e) => {
+                console.log(e)
+                notify('Подключение прервано', 'ERROR')
+            }
+        }
+    }, [socket])
    
 
     const [list, setList] = useState<any[]>([])
