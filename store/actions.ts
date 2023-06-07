@@ -6,3 +6,4 @@ export const updateCaptcha = (captcha: string) => ({type: 'UPDATE_CAPTCHA', capt
 export const updateUserData = (data: IUser | null) => ({type: 'UPDATE_USER_DATA', data})
 export const lastCreatedBot = (data: any | null) => ({type: 'CREATED_BOT', data})
 export const updateSenseValue = (data:boolean) => ({type: 'UPDATE_SENSE_VALUE', data})
+export const updateSocket = (data: null | WebSocket) => ({type: 'UPDATE_SOCKET', data})

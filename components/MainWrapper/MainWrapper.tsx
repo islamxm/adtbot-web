@@ -7,7 +7,8 @@ import { ApolloClient, InMemoryCache, ApolloProvider, gql, useApolloClient } fro
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
 import { createClient } from 'graphql-ws';
 import { Cookies } from 'typescript-cookie';
-
+import { updateSocket } from '@/store/actions';
+import notify from '@/helpers/notify';
 const service = new ApiService()
 
 
@@ -34,9 +35,58 @@ const MainWrapper = ({
 }: {
     children?: React.ReactNode
 }) => {
-    
-    const {tokens: {access}} = useAppSelector(s => s)
+    const {tokens: {access}, socket} = useAppSelector(s => s)
     const dispatch = useAppDispatch()
+
+    const onSocketOpen = () => {
+        notify('Подключение установлено', 'SUCCESS')
+
+        if(socket && access) {
+            socket.send(JSON.stringify({token: access}))    
+        }
+    }
+
+    const onSocketError = () => {
+        notify('Подключение прервано', 'ERROR')
+    }
+
+    const onSocketClose = () => {
+        notify('Подключение прервано', 'ERROR')
+    }
+
+    // useEffect(() => {
+    //     if(access) {
+    //         const sl = new WebSocket('wss://developmentsrv.space/api/v1/websocket')
+    //         if(sl) {
+    //             sl.addEventListener('open', onSocketOpen)
+    //             sl.addEventListener('close', onSocketClose)
+    //             sl.addEventListener('error', onSocketError)
+    //         }
+    //     }
+    // }, [access])
+
+
+    useEffect(() => {
+        if(access) {
+            const sl = new WebSocket('wss://developmentsrv.space/api/v1/websocket')
+            dispatch(updateSocket(sl))
+        }
+    }, [access])
+
+
+    useEffect(() => {
+        if(socket) {
+            socket.addEventListener('open', onSocketOpen)
+            socket.addEventListener('close', onSocketClose)
+            socket.addEventListener('error', onSocketError)
+        }
+        return () => {
+            socket?.removeEventListener('open', onSocketOpen)
+            socket?.removeEventListener('close', onSocketClose)
+            socket?.removeEventListener('error', onSocketError)
+        }
+    }, [socket])
+
 
     useEffect(() => {
         if(access && dispatch) {

@@ -24,7 +24,8 @@ type IState = {
     },
     captcha: string,
     lastCreatedBot: null | any,
-    hideSensValue: boolean
+    hideSensValue: boolean,
+    socket: null | WebSocket
 }  
 
 
@@ -37,7 +38,8 @@ const globalState: IState = {
     captcha: '',
     userData: null,
     lastCreatedBot: null,
-    hideSensValue: false
+    hideSensValue: false,
+    socket: null
 }
 
 const reducer = (state = globalState, action: any) => {
@@ -71,6 +73,11 @@ const reducer = (state = globalState, action: any) => {
             return {
                 ...state,
                 hideSensValue: action.data
+            }
+        case 'UPDATE_SOCKET':
+            return {
+                ...state,
+                socket: action.data
             }
         default:
             return state;

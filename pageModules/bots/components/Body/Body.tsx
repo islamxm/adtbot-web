@@ -155,7 +155,6 @@ const switchTableSize = (value: any) => {
 
 
 const Body = () => {
-    const [socket, setSocket] = useState<null | WebSocket>(null)
     // const client = useApolloClient
     // const {data, error} = useSubscription(TEST_SUB, {
     //     onSubscriptionComplete: () => {
@@ -169,7 +168,7 @@ const Body = () => {
     //         console.log(e)
     //     } 
     // })
-    const {tokens: {access}, lastCreatedBot, hideSensValue} = useAppSelector(s => s)
+    const {tokens: {access}, lastCreatedBot, hideSensValue, socket} = useAppSelector(s => s)
     const dispatch = useAppDispatch()
 
 
@@ -185,27 +184,26 @@ const Body = () => {
 
     
 
-    useEffect(() => {
-        const sk = new WebSocket('wss://developmentsrv.space/api/v1/websocket')
-        setSocket(sk)
-    }, [])
 
+    // useEffect(() => {
+    //     if(socket) {
+    //         socket.onopen = (e) => {
+    //             notify('Подключено установлено', 'SUCCESS')
 
-    useEffect(() => {
-        if(socket) {
-            socket.onopen = (e) => {
-                console.log(e.target)
-                notify('Подключено установлено', 'SUCCESS')
-            }
-            socket.onmessage = (e) => {
-                console.log(e)
-            }
-            socket.onerror = (e) => {
-                console.log(e)
-                notify('Подключение прервано', 'ERROR')
-            }
-        }
-    }, [socket])
+    //             socket.send(JSON.stringify({token: access}))
+    //         }
+    //         socket.onmessage = (e) => {
+    //             console.log(JSON.parse(e.data))
+    //         }
+    //         socket.onclose = () => {
+    //             notify('Подключение прервано', 'ERROR')
+    //         }
+    //         socket.onerror = (e) => {
+    //             console.log(e)
+    //             notify('Подключение прервано', 'ERROR')
+    //         }
+    //     }
+    // }, [socket,access])
    
 
     const [list, setList] = useState<any[]>([])
@@ -232,9 +230,34 @@ const Body = () => {
 
 
 
-    // useEffect(() => {
-    //     console.log(data)
-    // }, [data])
+    useEffect(() => console.log(list), [list])
+
+    const onSocketMessage = (e:any) => {
+        const newData = JSON.parse(e.data)
+
+        setList(s => {
+            const m = s
+            const index = m.findIndex(i => i.id === newData?.bot_id)
+            if(index !== -1) {
+                const rm = m.splice(index, 1, {...list[index], pnl: newData?.pnl})
+
+                return [...m]
+            } else {
+                return s;
+            }
+            
+        })
+
+    }
+
+    useEffect(() => {
+        if(socket) {
+            socket.addEventListener('message', onSocketMessage)
+        }
+        return () => {
+            socket?.removeEventListener('message', onSocketMessage)
+        }
+    }, [socket])
 
 
     useEffect(() => {
