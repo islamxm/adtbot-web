@@ -90,7 +90,7 @@ const Enable = ({
                     Двухфакторная аутентификация (2FA) значительно повышает безопасность вашей учетной записи и защищает ее от доступа посторонних лиц.
                     <br/>
                     <br/>
-                    Реализация двухфакторной аутентификации обеспечивается посредством мобильного приложения <a href="https://support.google.com/accounts/answer/1066447" target={'_blank'}>Google Authenticator</a>, доступного для устройств на базе <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2" target={'_blank'}>Android</a> и <a href="https://apps.apple.com/ru/app/google-authenticator/id388497605" target={'_blank'}>IOS</a>.
+                    Реализация двухфакторной аутентификации обеспечивается посредством мобильного приложения <a className='def-link' href="https://support.google.com/accounts/answer/1066447" target={'_blank'}>Google Authenticator</a>, доступного для устройств на базе <a className='def-link' href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2" target={'_blank'}>Android</a> и <a className='def-link' href="https://apps.apple.com/ru/app/google-authenticator/id388497605" target={'_blank'}>IOS</a>.
                     <br/>
                     <br/>
                     После включения 2FA для доступа к учетной записи, кроме логина и пароля, вам понадобится динамический шестизначный код, генерируемый в приложении.

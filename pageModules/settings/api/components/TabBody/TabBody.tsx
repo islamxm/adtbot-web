@@ -37,7 +37,7 @@ const TabBody:FC<I> = ({
                 <Col span={24}>
                     <Row gutter={[20,20]}>
                         <Col span={24}>
-                            Подключите ваш аккаунт биржи <a href={partnerLink} target='_blank'>{testTitle}</a>, заполнив соответствующие поля API ключей.<br/>
+                            Подключите ваш аккаунт биржи <a className='def-link' href={partnerLink} target='_blank'>{testTitle}</a>, заполнив соответствующие поля API ключей.<br/>
                             После ввода ключей нажмите кнопку “Сохранить”.
                         </Col>
                         <Col span={24}>
@@ -70,7 +70,7 @@ const TabBody:FC<I> = ({
                         <Col span={24}>
                             <Row gutter={[15,15]}>
                                 <Col span={24}>
-                                ВНИМАНИЕ! В целях безопасности, в настройках API ключа на <a href={partnerLink} target='_blank'>{testTitle}</a> ограничьте доступ по IP адресам и разрешите использовать только следующие адреса:
+                                ВНИМАНИЕ! В целях безопасности, в настройках API ключа на <a className='def-link' href={partnerLink} target='_blank'>{testTitle}</a> ограничьте доступ по IP адресам и разрешите использовать только следующие адреса:
                                 </Col>
                                 <Col span={24}>
                                     <IpTable values={ips}/>

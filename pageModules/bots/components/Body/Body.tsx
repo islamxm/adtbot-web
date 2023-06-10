@@ -230,9 +230,10 @@ const Body = () => {
 
 
 
-    useEffect(() => console.log(list), [list])
 
     const onSocketMessage = (e:any) => {
+        console.log(e)
+
         const newData = JSON.parse(e.data)
 
         setList(s => {

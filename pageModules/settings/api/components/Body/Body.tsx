@@ -52,7 +52,7 @@ const Body:FC<I> = ({
                 values={gate} 
                 setValues={setGate} 
                 testTitle='Gate.io'
-                partnerLink='https://www.gate.io/signup/UwcWXFhY'
+                partnerLink='http://adtbot.com/gate'
                 />
         },
         {
@@ -64,7 +64,7 @@ const Body:FC<I> = ({
                 values={ku} 
                 setValues={setKu} 
                 testTitle='KuCoin'
-                partnerLink='https://www.kucoin.com/ucenter/signup?rcode=rP9MQ8L'
+                partnerLink='http://adtbot.com/kucoin'
                 />
         },
         {
@@ -76,7 +76,7 @@ const Body:FC<I> = ({
                 values={mexc} 
                 setValues={setMexc} 
                 testTitle='MEXC'
-                partnerLink='https://www.mexc.com/register?inviteCode=1XHiG'
+                partnerLink='http://adtbot.com/mexc'
                 />
         },
         {
@@ -88,7 +88,7 @@ const Body:FC<I> = ({
                 values={huobi} 
                 setValues={setHuobi} 
                 testTitle='Huobi'
-                partnerLink='https://www.huobi.com/ru-ru/v/register/double-invite/?inviter_id=11345710&invite_code=uc2yb'
+                partnerLink='http://adtbot.com/bybit'
                 />
         }
     ]

@@ -125,9 +125,10 @@ const TableRow:FC<tableRowPropsTypes> = ({bot, head, updateList}) => {
                 <td className={`table-row__item table-bodyrow__item`}>
                     <div className="table-bodyrow__item_in">
                         <div className={`table-bodyrow__item_label ${Number(bot?.pnl_percentage) > 0 ? 'table-bodyrow__item_label-green' : ''}`}>
-                            {bot?.pnl} USDT {
+                            {/* {bot?.pnl} USDT {
                                 senseValue(hideSensValue, `${Number(bot?.pnl_percentage > 0) ? '+' : ''}${bot?.pnl_percentage}`)
-                            }%
+                            }% */}
+                            {senseValue(hideSensValue, bot?.pnl)} USDT {Number(bot?.pnl_percentage > 0) ? '+' : ''}{bot?.pnl_percentage}%
                         </div>
                     </div>
                 </td>

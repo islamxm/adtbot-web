@@ -41,12 +41,18 @@ const PromoSlider = () => {
     return (
         <div className={styles.wrapper}>
             <Swiper 
-                modules={[Autoplay]}
+                modules={[Autoplay, Pagination]}
                 autoplay={{
                     delay: 4000
                 }}
-                // effect='fade'
-                className={styles.slider}>
+                className={styles.slider}
+                pagination={{
+                    el: '.promo-slider-pag',
+                    bulletActiveClass: 'active',
+                    clickable: true,
+                    bulletClass: 'promo-slider-pag_item'
+                }}
+                >
                 {
                     content && content.map((item, index) => (
                         <SwiperSlide 
@@ -84,7 +90,10 @@ const PromoSlider = () => {
                         </SwiperSlide>
                     ))
                 }
-                {/* <div className={styles.pag}></div> */}
+                <div className={styles.pag}>
+                    <div className={'promo-slider-pag'}></div>
+                </div>
+               
             </Swiper>
         </div>
     )

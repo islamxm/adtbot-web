@@ -18,7 +18,6 @@ import { useAppDispatch } from '@/hooks/useTypesRedux';
 import { updateSenseValue } from '@/store/actions';
 import Empty from '@/pageModules/bots/components/Empty/Empty';
 
-// import locale from 'antd/es/date-picker/locale/ru_RU';
 
 
 const tableHead = [
@@ -93,13 +92,7 @@ const tableHead = [
 const service = new ApiService()
 const dateFormat = 'DD/MM/YYYY';
 
-const periods = [
-    {value:'1', label: 'Сегодня'},
-    {value:'2', label: 'Последние 2 недели'},
-    {value:'3', label: 'Месяц'},
-    {value:'4', label: 'Полгода'},
-    {value:'5', label: 'Год'},
-]
+
 
 const tableSizes = [
     {value: '1', label: '10 строк'},
@@ -244,7 +237,7 @@ const Body = () => {
                             <div className={styles.item}>
                                 <HsButton
                                     onClick={() => hideSensValue ? dispatch(updateSenseValue(false)) : dispatch(updateSenseValue(true))}
-                                    isActive={hideSensValue}
+                                    isActive={!hideSensValue}
                                     />
                             </div>
                         </div>

@@ -32,16 +32,16 @@ const list: billingItemPropsTypes[] = [
             {
                 head: 'Мониторинг анонсов листингов на 1 бирже:',
                 ul: [
-                    {link: 'https://accounts.binance.com/register?ref=E8RCK6W5', label: 'Binance', icon: binance}
+                    {link: 'http://adtbot.com/binance', label: 'Binance', icon: binance}
                 ]
             },
             {
                 head: 'Покупка на 4 биржах:',
                 ul: [
-                    {link: 'https://accounts.binance.com/register?ref=E8RCK6W5', label: 'Gate', icon: gate},
-                    {link: 'https://www.mexc.com/register?inviteCode=1XHiG', label: 'MEXC', icon: mexc},
-                    {link: 'https://www.kucoin.com/ucenter/signup?rcode=rP9MQ8L', label: 'KuCoin', icon: kucoin},
-                    {link: 'https://www.huobi.com/ru-ru/v/register/double-invite/?inviter_id=11345710&invite_code=uc2yb', label: 'Huobi', icon: huobi},
+                    {link: 'http://adtbot.com/gate', label: 'Gate', icon: gate},
+                    {link: 'http://adtbot.com/mexc', label: 'MEXC', icon: mexc},
+                    {link: 'http://adtbot.com/kucoin', label: 'KuCoin', icon: kucoin},
+                    {link: 'http://adtbot.com/huobi', label: 'Huobi', icon: huobi},
                 ]
             }
         ],
@@ -51,23 +51,23 @@ const list: billingItemPropsTypes[] = [
         isTop: false,
         title: 'Standart',
         isCurrent: false,
-        price: 10,
+        price: 9.90,
         list: [
             {
                 head: 'Мониторинг анонсов листингов на 3 биржах:',
                 ul: [
-                    {link: 'https://accounts.binance.com/register?ref=E8RCK6W5', label: 'Binance', icon: binance},
+                    {link: 'http://adtbot.com/binance', label: 'Binance', icon: binance},
                     {link: 'https://coinbase.com/', label: 'Coinbase', icon: coinbase},
-                    {link: 'https://www.huobi.com/ru-ru/v/register/double-invite/?inviter_id=11345710&invite_code=uc2yb', label: 'Huobi', icon: huobi},
+                    {link: 'http://adtbot.com/kucoin', label: 'Huobi', icon: huobi},
                 ]
             },
             {
                 head: 'Покупка на 4 биржах:',
                 ul: [
-                    {link: 'https://www.gate.io/signup/UwcWXFhY', label: 'Gate', icon: gate},
-                    {link: 'https://www.mexc.com/register?inviteCode=1XHiG', label: 'MEXC', icon: mexc},
-                    {link: 'https://www.kucoin.com/ucenter/signup?rcode=rP9MQ8L', label: 'KuCoin', icon: kucoin},
-                    {link: 'https://www.huobi.com/ru-ru/v/register/double-invite/?inviter_id=11345710&invite_code=uc2yb', label: 'Huobi', icon: huobi},
+                    {link: 'http://adtbot.com/gate', label: 'Gate', icon: gate},
+                    {link: 'http://adtbot.com/mexc', label: 'MEXC', icon: mexc},
+                    {link: 'http://adtbot.com/kucoin', label: 'KuCoin', icon: kucoin},
+                    {link: 'http://adtbot.com/huobi', label: 'Huobi', icon: huobi},
                 ]
             }
         ]
@@ -77,25 +77,25 @@ const list: billingItemPropsTypes[] = [
         isTop: true,
         title: 'Pro',
         isCurrent: false,
-        price: 20,
+        price: 19.90,
         list: [
             {
                 head: 'Мониторинг анонсов листингов на 5 биржах:',
                 ul: [
-                    {link: 'https://accounts.binance.com/register?ref=E8RCK6W5', label: 'Binance', icon: binance},
+                    {link: 'http://adtbot.com/binance', label: 'Binance', icon: binance},
                     {link: 'https://coinbase.com/', label: 'Coinbase', icon: coinbase},
-                    {link: 'https://www.huobi.com/ru-ru/v/register/double-invite/?inviter_id=11345710&invite_code=uc2yb', label: 'Huobi', icon: huobi},
-                    {link: 'https://www.kucoin.com/ucenter/signup?rcode=rP9MQ8L', label: 'KuCoin', icon: kucoin},
-                    {link: 'https://www.okx.com/join/75982377', label: 'OKX', icon: okx},
+                    {link: 'http://adtbot.com/huobi', label: 'Huobi', icon: huobi},
+                    {link: 'http://adtbot.com/kucoin', label: 'KuCoin', icon: kucoin},
+                    {link: 'http://adtbot.com/okx', label: 'OKX', icon: okx},
                 ]
             },
             {
                 head: 'Покупка на 4 биржах:',
                 ul: [
-                    {link: 'https://www.mexc.com/register?inviteCode=1XHiG', label: 'Gate', icon: gate},
-                    {link: 'https://www.mexc.com/register?inviteCode=1XHiG', label: 'MEXC', icon: mexc},
-                    {link: 'https://www.kucoin.com/ucenter/signup?rcode=rP9MQ8L', label: 'KuCoin', icon: kucoin},
-                    {link: 'https://www.huobi.com/ru-ru/v/register/double-invite/?inviter_id=11345710&invite_code=uc2yb', label: 'Huobi', icon: huobi},
+                    {link: 'http://adtbot.com/gate', label: 'Gate', icon: gate},
+                    {link: 'http://adtbot.com/mexc', label: 'MEXC', icon: mexc},
+                    {link: 'http://adtbot.com/kucoin', label: 'KuCoin', icon: kucoin},
+                    {link: 'http://adtbot.com/huobi', label: 'Huobi', icon: huobi},
                 ]
             }
         ]
@@ -105,30 +105,30 @@ const list: billingItemPropsTypes[] = [
         isTop: false,
         title: 'Premium',
         isCurrent: false,
-        price: 30,
+        price: 29.90,
         list: [
             {
                 head: 'Мониторинг анонсов листингов на 10 биржах:',
                 ul: [
-                    {link: 'https://accounts.binance.com/register?ref=E8RCK6W5', label: 'Binance', icon: binance},
+                    {link: 'http://adtbot.com/binance', label: 'Binance', icon: binance},
                     {link: 'https://coinbase.com/', label: 'Coinbase', icon: coinbase},
-                    {link: 'https://www.huobi.com/ru-ru/v/register/double-invite/?inviter_id=11345710&invite_code=uc2yb', label: 'Huobi', icon: huobi},
-                    {link: 'https://www.kucoin.com/ucenter/signup?rcode=rP9MQ8L', label: 'KuCoin', icon: kucoin},
-                    {link: 'https://www.okx.com/join/75982377', label: 'OKX', icon: okx},
+                    {link: 'http://adtbot.com/huobi', label: 'Huobi', icon: huobi},
+                    {link: 'http://adtbot.com/kucoin', label: 'KuCoin', icon: kucoin},
+                    {link: 'http://adtbot.com/okx', label: 'OKX', icon: okx},
                     {link: 'https://www.kraken.com/', label: 'Kraken', icon: kraken},
                     {link: 'https://www.bitstamp.net/', label: 'Bitstamp', icon: bitstamp},
-                    {link: 'https://www.bitfinex.com/sign-up?refcode=6Qbfayswv', label: 'Bitfinex', icon: bitfinex},
-                    {link: 'https://www.bybit.com/invite?ref=MYYWWP', label: 'Bybit', icon: bybit},
+                    {link: 'http://adtbot.com/bitfinex', label: 'Bitfinex', icon: bitfinex},
+                    {link: 'http://adtbot.com/bybit', label: 'Bybit', icon: bybit},
                     {link: 'https://upbit.com/', label: 'Upbit', icon: upbit},
                 ]
             },
             {
                 head: 'Покупка на 4 биржах:',
                 ul: [
-                    {link: 'https://www.gate.io/signup/UwcWXFhY', label: 'Gate', icon: gate},
-                    {link: 'https://www.mexc.com/register?inviteCode=1XHiG', label: 'MEXC', icon: mexc},
-                    {link: 'https://www.kucoin.com/ucenter/signup?rcode=rP9MQ8L', label: 'KuCoin', icon: kucoin},
-                    {link: 'https://www.huobi.com/ru-ru/v/register/double-invite/?inviter_id=11345710&invite_code=uc2yb', label: 'Huobi', icon: huobi},
+                    {link: 'http://adtbot.com/gate', label: 'Gate', icon: gate},
+                    {link: 'http://adtbot.com/mexc', label: 'MEXC', icon: mexc},
+                    {link: 'http://adtbot.com/kucoin', label: 'KuCoin', icon: kucoin},
+                    {link: 'http://adtbot.com/huobi', label: 'Huobi', icon: huobi},
                 ]
             }
         ]

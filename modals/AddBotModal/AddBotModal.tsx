@@ -246,7 +246,7 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
                                     <Input
                                         hint={'Суточный объем монеты'}
                                         label='Объем (млн. USDT)'
-                                        placeholder='140 USDT'
+                                        // placeholder='140 USDT'
                                         type={'number'}
                                         value={daily_volume}
                                         onChange={(e:React.ChangeEvent<HTMLInputElement>) => setDaily_volume(e.target.value)}
@@ -259,7 +259,7 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
                                     <Input
                                         hint={'При увеличении цены на указанный процент, исполнится лимитный ордер на продажу'}
                                         label='Take Profit (%)'
-                                        placeholder='2%'
+                                        // placeholder='2%'
                                         value={take_profit}
                                         type={'number'}
                                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTake_profit(e.target.value)}
@@ -272,7 +272,7 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
                                     <Input
                                         hint={'Количество USDT, на которые будет совершена покупка монет'}
                                         label='Обьем (USDT)'
-                                        placeholder='150 USDT'
+                                        // placeholder='150 USDT'
                                         type='number'
                                         value={budget_usdt}
                                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setBudget_usdt(e.target.value)}
@@ -298,7 +298,7 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
                                     <Input
                                         hint={'Отклонение цены монеты от первой покупки, при котором бот прекращает покупку по маркету, если не выкуплено на всю сумму, указанную в поле “Сумма USDT”. Например, первая маркетная покупка произошла по цене 1, то при выставленном 10% в данном поле, последующие покупки при наличии выделенных средств прекращаются при достижении цены 1.1)'}
                                         label='Slippage'
-                                        placeholder='30%'
+                                        // placeholder='30%'
                                         type='number'
                                         value={stop_buy}
                                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setStop_buy(e.target.value)}
@@ -311,7 +311,7 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
                                     <Input
                                         hint={'При снижении цены на указанный процент, исполнится лимитный ордер на продажу'}
                                         label='Stop Loss'
-                                        placeholder='3%'
+                                        // placeholder='3%'
                                         type='number'
                                         value={stop_loss}
                                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setStop_loss(e.target.value)}
