@@ -77,6 +77,7 @@
                 &__item {
                     border-top: 1px solid #F4F4F4;
                     border-bottom: 1px solid #F4F4F4;   
+
                     &_in {
                         display: flex;
                         align-items: center;
@@ -126,7 +127,7 @@
                 &__item.activation {
 
                     .activation-label {
-
+                        width: 90px;
                     }
                     .activation-label.wait {
 

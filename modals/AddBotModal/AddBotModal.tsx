@@ -123,11 +123,11 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
                     },
                     bot_code: ''
                 }, access).then(res => {
-                    console.log(res)
                     if(res?.id) {
                         notify('Бот создан', 'SUCCESS')
                         closeHandle()
                         dispatch(lastCreatedBot(res))
+                        closeHandle()
                         // updateList && updateList()
                     } 
                     if(res?.detail === 'Bad user tariff!') {
@@ -168,22 +168,31 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
             }, access).then(res => {
                 if(res?.id) {
                     // 
-                    service.enableBot(res.id, access).then(r => {
-                        if(r?.id) {
-                            notify('Бот создан и запущен', 'SUCCESS')
-                            dispatch(lastCreatedBot(res))
-                        } else {
-                            notify('Бот создался но не запустился', 'ERROR')
-                            dispatch(lastCreatedBot(res))
-                        }
-                    }).finally(() => {
-                        closeHandle()
-                        setFirstLoad(false)
-                    })
+                    // service.enableBot(res.id, access).then(r => {
+                    //     console.log(r)
+                    //     if(r?.id) {
+                    //         notify('Бот создан и запущен', 'SUCCESS')
+                    //         dispatch(lastCreatedBot(res))
+                    //     } else {
+                    //         notify('Бот создался но не запустился', 'ERROR')
+                    //         dispatch(lastCreatedBot(res))
+                    //     }
+                    // }).finally(() => {
+                    //     closeHandle()
+                    //     setFirstLoad(false)
+                    // })
+                    dispatch(lastCreatedBot(res))
+                    notify('Бот создан и запущен', 'SUCCESS')
+                    closeHandle()
+                } else {
+                    notify('Произошла ошибка', 'ERROR')
                 }
                 if(res?.detail === 'Bad user tariff!') {
                     notify('Ваш тариф не позволяет выполнить данное действие', 'ERROR')
                 }
+            }).finally(() => {
+                setFirstLoad(false)
+
             })
         }
     }
@@ -209,9 +218,10 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
                     notify('Бот изменен', 'SUCCESS')
                     closeHandle()
                     dispatch(lastCreatedBot(res))
+                    closeHandle()
                 }
                 if(res?.detail) {
-                    notify('Произошла ошибка')
+                    notify('Произошла ошибка', 'ERROR')
                 }
             }).finally(() => setFirstLoad(false))
         }

@@ -2,77 +2,10 @@ import styles from './PmHistoryModal.module.scss';
 import {Modal, ModalFuncProps} from 'antd';
 import {FC, useEffect, useRef, useState} from 'react';
 import Table from './components/Table/Table';
-import { itemPropsTypes } from './types';
 import ApiService from '@/service/apiService';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 
-const historyList:itemPropsTypes[] = [
-    {
-        date: '20.09.2022 13:53:31',
-        change: '+135 USDT',
-        comment: 'Списание со счета хххххххххххххххх'
-    },
-    {
-        date: '20.09.2022 13:53:31',
-        change: '+135 USDT',
-        comment: 'Списание со счета хххххххххххххххх'
-    },
-    {
-        date: '20.09.2022 13:53:31',
-        change: '+135 USDT',
-        comment: 'Списание со счета хххххххххххххххх'
-    },
-    {
-        date: '20.09.2022 13:53:31',
-        change: '+135 USDT',
-        comment: 'Списание со счета хххххххххххххххх'
-    },
-    {
-        date: '20.09.2022 13:53:31',
-        change: '+135 USDT',
-        comment: 'Списание со счета хххххххххххххххх'
-    },
-    {
-        date: '20.09.2022 13:53:31',
-        change: '+135 USDT',
-        comment: 'Списание со счета хххххххххххххххх'
-    },
-    {
-        date: '20.09.2022 13:53:31',
-        change: '+135 USDT',
-        comment: 'Списание со счета хххххххххххххххх'
-    },
-    {
-        date: '20.09.2022 13:53:31',
-        change: '+135 USDT',
-        comment: 'Списание со счета хххххххххххххххх'
-    },
-    {
-        date: '20.09.2022 13:53:31',
-        change: '+135 USDT',
-        comment: 'Списание со счета хххххххххххххххх'
-    },
-    {
-        date: '20.09.2022 13:53:31',
-        change: '+135 USDT',
-        comment: 'Списание со счета хххххххххххххххх'
-    },
-    {
-        date: '20.09.2022 13:53:31',
-        change: '+135 USDT',
-        comment: 'Списание со счета хххххххххххххххх'
-    },
-    {
-        date: '20.09.2022 13:53:31',
-        change: '+135 USDT',
-        comment: 'Списание со счета хххххххххххххххх'
-    },
-    {
-        date: '20.09.2022 13:53:31',
-        change: '+135 USDT',
-        comment: 'Списание со счета хххххххххххххххх'
-    }
-]
+
 
 const service = new ApiService()
 
@@ -94,8 +27,7 @@ const PmHistoryModal:FC<ModalFuncProps> = ({
     useEffect(() => {
         if(access) {
             service.getPaymentHistory(access).then(res => {
-                console.log(res)
-                
+                setList(res)
             })
         }
     }, [access])

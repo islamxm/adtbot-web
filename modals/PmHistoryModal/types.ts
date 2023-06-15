@@ -1,5 +1,5 @@
 export type itemPropsTypes = {
-    date?: string,
-    change?: string,
-    comment?: string
+    reg_datetime?: string,
+    money?: string | number,
+    
 }

@@ -141,14 +141,14 @@ const TableRow:FC<tableRowPropsTypes> = ({bot, head, updateList}) => {
                 </td>
                  <td className={`table-row__item table-bodyrow__item activation`}>
                     <div className="table-bodyrow__item_in">
-                        <div className={'activation-label'}>{moment(bot?.stop_datetime).format('YYYY-MM-DD hh:mm:ss')}</div>
-                        <div className="activation-action">
+                        <div className={'activation-label'} style={{width: 'auto'}}>{moment(bot?.stop_datetime).format('YYYY-MM-DD hh:mm:ss')}</div>
+                        {/* <div className="activation-action">
                             <div className="activation-action_item">
                                 <IconButton
                                     icon={<BsShare color="#545454" size={16}/>}
                                     />
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </td>
             </tr>

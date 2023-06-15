@@ -22,7 +22,6 @@ const Balance = ({
                         <IoWalletOutline/>
                     )
                 }
-                
             </div>
             <div className={styles.body}>
                 <div className={styles.value}>{typeof value === 'number' && _.round(value, 2)} USDT</div>

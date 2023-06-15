@@ -4,10 +4,11 @@ import img from '@/public/assets/icons/tg-lg.svg';
 import Image from 'next/image';
 import {AiOutlinePlus} from 'react-icons/ai';
 
+
 const FixedAction = () => {
 
     return (
-        <div className={styles.wrapper}>
+        <a href='https://t.me/adtbot_support' target='_blank' className={styles.wrapper}>
              <div className={styles.item}>
                 <Button
                     rounded
@@ -27,7 +28,7 @@ const FixedAction = () => {
            
             
             
-        </div>
+        </a>
     )
 }
 

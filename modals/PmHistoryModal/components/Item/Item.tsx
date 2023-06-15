@@ -1,18 +1,17 @@
 import styles from './Item.module.scss';
 import {FC} from 'react';
 import { itemPropsTypes } from '../../types';
-
+import moment from 'moment';
 const Item:FC<itemPropsTypes> = ({
-    date,
-    change,
-    comment
+    reg_datetime,
+    money
 }) => {
 
     return (
         <tr className={styles.wrapper}>
-            <td className={styles.item}>{date}</td>
-            <td className={styles.item}>{change}</td>
-            <td className={styles.item}>{comment}</td>
+            <td className={styles.item}>{moment(reg_datetime).format('DD.MM.YYYY hh:mm:ss')}</td>
+            <td className={styles.item}>{`${money} USDT`}</td>
+            <td className={styles.item}>{'-'}</td>
         </tr>
     )
 }

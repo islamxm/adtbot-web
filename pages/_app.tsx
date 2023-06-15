@@ -60,6 +60,7 @@ export default function App({ Component, pageProps }: AppProps) {
                   <FixedAction/>
                 ) : null
               } */}
+              <FixedAction/>
             </MainWrapper>
             
           </PrivateRoute>
