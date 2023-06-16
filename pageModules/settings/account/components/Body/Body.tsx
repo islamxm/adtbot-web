@@ -60,6 +60,7 @@ const Body = (props: {
                     <Row gutter={[15,15]}>
                         <Col span={24}>
                             <Input
+                                readOnly
                                 type='email'
                                 label='Email'
                                 placeholder='debra.holt@example.com'
