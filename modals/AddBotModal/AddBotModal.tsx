@@ -231,15 +231,18 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
                     daily_volume: Number(daily_volume)
                 }
             }, access).then(res => {
-                if(res?.id) {
+                console.log(res)
+                if(res === true) {
                     notify('Бот изменен', 'SUCCESS')
                     closeHandle()
                     dispatch(lastCreatedBot(res))
                     closeHandle()
-                }
-                if(res?.detail) {
+                } else {
                     notify('Произошла ошибка', 'ERROR')
                 }
+                // if(res?.detail) {
+                //     notify('Произошла ошибка', 'ERROR')
+                // }
             }).finally(() => setFirstLoad(false))
 
             
