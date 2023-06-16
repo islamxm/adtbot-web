@@ -41,10 +41,11 @@ const PromoSlider = () => {
     return (
         <div className={styles.wrapper}>
             <Swiper 
-                modules={[Autoplay, Pagination]}
+                modules={[Autoplay, Pagination, EffectFade]}
                 autoplay={{
                     delay: 4000
                 }}
+                effect={'fade'}
                 className={styles.slider}
                 pagination={{
                     el: '.promo-slider-pag',

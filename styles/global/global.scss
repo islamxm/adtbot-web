@@ -123,3 +123,12 @@ main {
         opacity: 1;
     }
 }
+
+
+.swiper-slide {
+    opacity: 0 !important;
+}
+
+.swiper-slide.swiper-slide-active {
+    opacity: 1 !important;
+}
