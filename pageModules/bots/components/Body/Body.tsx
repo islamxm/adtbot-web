@@ -118,6 +118,7 @@ const statusOptions = [
     {value: '2', label: 'Активные'},
     {value: '3', label: 'В режиме ожидания'},
     {value: '4', label: 'Остановлен'},
+    {value: '5', label: 'Отключен'},
 ]
 const tableSizes = [
     {value: '1', label: '10 строк'},
