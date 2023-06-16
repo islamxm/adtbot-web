@@ -264,6 +264,7 @@ const Body = () => {
 
     useEffect(() => {
         if(lastCreatedBot && access) {
+            console.log('UPDATE BOT')
             updateList()
         }
     }, [lastCreatedBot, access])
@@ -382,7 +383,7 @@ const Body = () => {
                             <div className={styles.item}>
                                 <HsButton
                                     onClick={() => hideSensValue ? dispatch(updateSenseValue(false)) : dispatch(updateSenseValue(true))}
-                                    isActive={hideSensValue}
+                                    isActive={!hideSensValue}
                                     />
                             </div>
                         </div>

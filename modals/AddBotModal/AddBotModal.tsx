@@ -14,18 +14,18 @@ import notify from '@/helpers/notify';
 
 const service = new ApiService();
 
-const anonceOpts = [
-    {value: '1', label: 'Binance'},
-    {value: '2', label: 'Coinbase'},
-    {value: '3', label: 'Kraken'},
-    {value: '4', label: 'KuCoin'},
-    {value: '5', label: 'Bitstamp'},
-    {value: '6', label: 'Bitfinex'},
-    {value: '7', label: 'OKX'},
-    {value: '8', label: 'Bybit'},
-    {value: '9', label: 'Upbit'},
-    {value: '10', label: 'Huobi'},
-]
+// const anonceOpts = [
+//     {value: '1', label: 'Binance'},
+//     {value: '2', label: 'Coinbase'},
+//     {value: '3', label: 'Kraken'},
+//     {value: '4', label: 'KuCoin'},
+//     {value: '5', label: 'Bitstamp'},
+//     {value: '6', label: 'Bitfinex'},
+//     {value: '7', label: 'OKX'},
+//     {value: '8', label: 'Bybit'},
+//     {value: '9', label: 'Upbit'},
+//     {value: '10', label: 'Huobi'},
+// ]
 
 const buyOpts = [
     {value: '1', label: 'Gate.io'},
@@ -45,6 +45,8 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
     const {tokens: {access}} = useAppSelector(s => s)
     const [firstLoad, setFirstLoad] = useState(false)
     const [secondLoad, setSecondLoad] = useState(false)
+
+    const [anonces, setAnonces] = useState<{value: number, label: string}[]>([])
 
     //errors
     const [budget_usdt_error, setBudget_usdt_error] = useState(false)
@@ -87,6 +89,14 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
             setBot_code(data?.bot_info?.bot_code)
         }
     }, [data])
+
+    useEffect(() => {
+        if(access) {
+            service.getTarifExchanges(access).then(res => {
+                setAnonces(res?.map((i:any) => ({value: i.value.toString(), label: i.label})))
+            })
+        }
+    }, [access])
 
 
     const closeHandle = () => {
@@ -201,6 +211,13 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
     const editBot = () => {
         if(access && id) {
             setFirstLoad(true)
+
+            // service.disableBot(id, access).then(r => {
+            //     if(r === true) {
+                    
+            //     }
+            // }).finally(() => setFirstLoad(false))
+
             service.editBot({
                 bot_id: id,
                 bot_info: {
@@ -210,7 +227,7 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
                     take_profit: Number(take_profit),
                     stop_loss: Number(stop_loss),
                     stop_buy: Number(stop_buy),
-                    enabled,
+                    // enabled: true,
                     daily_volume: Number(daily_volume)
                 }
             }, access).then(res => {
@@ -224,6 +241,8 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
                     notify('Произошла ошибка', 'ERROR')
                 }
             }).finally(() => setFirstLoad(false))
+
+            
         }
     }
     
@@ -247,7 +266,7 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
                                     <Select
                                         hint={'Биржа, которую будет парсить бот на предмет выхода анонса листинга'}
                                         label={'Анонс'}
-                                        options={anonceOpts}
+                                        options={anonces}
                                         onSelect={e => setMonitor(Number(e))}
                                         value={monitor.toString()}
                                         />
@@ -255,7 +274,7 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
                                 <Col span={24}>
                                     <Input
                                         hint={'Суточный объем монеты'}
-                                        label='Объем (млн. USDT)'
+                                        label='Мин. суточный объем (млн. USDT)'
                                         // placeholder='140 USDT'
                                         type={'number'}
                                         value={daily_volume}

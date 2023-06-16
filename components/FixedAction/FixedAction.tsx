@@ -9,12 +9,12 @@ const FixedAction = () => {
 
     return (
         <a href='https://t.me/adtbot_support' target='_blank' className={styles.wrapper}>
-             <div className={styles.item}>
+             {/* <div className={styles.item}>
                 <Button
                     rounded
                     beforeIcon={<AiOutlinePlus/>}
                     />
-            </div>
+            </div> */}
             <div className={styles.item}>
                 <a className={styles.link} target={'_blank'}>
                     <Image

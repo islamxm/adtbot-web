@@ -41,6 +41,8 @@ const endpoints = {
     setHuobiAuthData: `${PATH}set_huobi_auth_data/`,
     getExchangeBalances: `${PATH}get_exchanges_balances/`,
 
+    getTarifExchanges: `${PATH}get_tariff_exchanges/`,
+
     //bots
     createBot: `${PATH}create_bot/`,
     enableBot: `${PATH}enable_bot/`,

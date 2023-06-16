@@ -26,6 +26,7 @@ const AccountPage = () => {
 
     useEffect(() => {
         if(userData) {
+            console.log(userData)
             setUsername(userData?.username)
             setEmail(userData?.email)
             setemail_notifications_enabled(userData?.email_notifications_enabled)

@@ -40,19 +40,15 @@ const SignupPage = () => {
     const [agree, setAgree] = useState(true)
     const [success, setSuccess] = useState(false)
     const [recapRef, setRecapRef] = useState<any>(null)
+    const [referal_code, setreferal_code] = useState('')
 
+    useEffect(() => {
+        if(router?.query?.referal_code && typeof router?.query?.referal_code === 'string') {
+            setreferal_code(router?.query?.referal_code)
+        }
+    }, [router])
+    
 
-  
-    // useEffect(() => {
-    //     if(recapRef) {
-    //         recapRef?.current?.getValue() ? setcaptcha_token(recapRef?.current?.getValue()) : recapRef?.current?.reset()
-    //     }
-
-
-    //     return () => {
-    //         recapRef?.current?.reset()
-    //     }
-    // }, [recapRef])
 
 
 
@@ -65,8 +61,8 @@ const SignupPage = () => {
                 email,
                 is_superuser: false,
                 captcha_token,
-                redirect_url: window.location.origin + '/auth/login?verify=1'
-                // referal_code: ''
+                redirect_url: window.location.origin + '/auth/login?verify=1',
+                referal_code
             }
             service && service.register(body).then(res => {
                 res?.status === 200 && setSuccess(true)

@@ -20,7 +20,7 @@ class ApiService {
         is_superuser: boolean,
         captcha_token?: string,
         redirect_url: string
-        // referal_code?: string
+        referal_code?: string
     }) => {
         try {
             let res = await fetch(endpoints.register, {
@@ -232,7 +232,7 @@ class ApiService {
                     ...headers,
                     'Authorization': `Bearer ${token}`
                 },
-                body: JSON.stringify({text: text})
+                body: JSON.stringify(text)
             })
             return await res
         } catch(err) {
@@ -626,6 +626,21 @@ class ApiService {
     getPaymentHistory = async (token: TokenType) => {
         try {
             let res = await fetch(endpoints.getPaymentHistory, {
+                method: 'POST',
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            return await checkAuth(res)
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+    getTarifExchanges = async (token: TokenType) => {
+        try {
+            let res = await fetch(endpoints.getTarifExchanges, {
                 method: 'POST',
                 headers: {
                     ...headers,
