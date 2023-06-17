@@ -45,7 +45,7 @@ const Body = () => {
                                 <div className={styles.input}>
                                     <Input
                                         placeholder={link}
-                                        value={userData?.user_own_referal}
+                                        value={link}
                                         readOnly
                                         />
                                 </div>
