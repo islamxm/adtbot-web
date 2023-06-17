@@ -10,14 +10,12 @@ import Button from "@/components/Button/Button";
 import Link from "next/link";
 import styles from './style.module.scss';
 import ApiService from "@/service/apiService";
-import ReCAPTCHA from "react-google-recaptcha";
 import Reaptcha from 'reaptcha';
 import React from "react";
 import {BsCheckLg} from 'react-icons/bs';
 import notify from "@/helpers/notify";
 import Head from "next/head";
 import { useAppSelector, useAppDispatch } from "@/hooks/useTypesRedux";
-import { updateCaptcha } from "@/store/actions";
 import { useRouter } from "next/router";
 import backendErrorStatuses from "@/helpers/backendErrorStatuses";
 
@@ -55,27 +53,51 @@ const SignupPage = () => {
     const onSubmit =  () => {
         if(process?.browser) {
             setLoad(true)
-            const body = {
-                username,
-                password,
-                email,
-                is_superuser: false,
-                captcha_token,
-                redirect_url: window.location.origin + '/auth/login?verify=1',
-                referal_code
-            }
-            service && service.register(body).then(res => {
-                res?.status === 200 && setSuccess(true)
-                if(res?.status !== 200) {
-                    notify('Произошла ошибка, проверьте пожалуйста данные', 'ERROR')
-                    res?.json().then(r => {
-                        backendErrorStatuses(r?.status)
-                        recapRef?.reset()
-                    })
+            if(referal_code) {
+                const body = {
+                    username,
+                    password,
+                    email,
+                    is_superuser: false,
+                    captcha_token,
+                    redirect_url: window.location.origin + '/auth/login?verify=1',
+                    referal_code
                 }
-            }).finally(() => {
-                setLoad(false)
-            })
+                service && service.register(body).then(res => {
+                    res?.status === 200 && setSuccess(true)
+                    if(res?.status !== 200) {
+                        notify('Произошла ошибка, проверьте пожалуйста данные', 'ERROR')
+                        res?.json().then(r => {
+                            backendErrorStatuses(r?.status)
+                            recapRef?.reset()
+                        })
+                    }
+                }).finally(() => {
+                    setLoad(false)
+                })
+            } else {
+                const body = {
+                    username,
+                    password,
+                    email,
+                    is_superuser: false,
+                    captcha_token,
+                    redirect_url: window.location.origin + '/auth/login?verify=1',
+                }
+                service && service.register(body).then(res => {
+                    res?.status === 200 && setSuccess(true)
+                    if(res?.status !== 200) {
+                        notify('Произошла ошибка, проверьте пожалуйста данные', 'ERROR')
+                        res?.json().then(r => {
+                            backendErrorStatuses(r?.status)
+                            recapRef?.reset()
+                        })
+                    }
+                }).finally(() => {
+                    setLoad(false)
+                })
+            }
+            
         }
         
     }

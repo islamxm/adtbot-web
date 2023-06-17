@@ -17,6 +17,7 @@ import ApiService from '@/service/apiService';
 import { useAppDispatch } from '@/hooks/useTypesRedux';
 import { updateSenseValue } from '@/store/actions';
 import Empty from '@/pageModules/bots/components/Empty/Empty';
+import Loader from '@/components/Loader/Loader';
 
 
 
@@ -122,6 +123,7 @@ const Body = () => {
     const {tokens: {access}, hideSensValue} = useAppSelector(s => s)
     const [hidden, setHidden] = useState<boolean>(false);
     const [tableSize, setTableSize] = useState('1')
+    const [load, setLoad] = useState(false);
 
     const [date, setDate] = useState<any>([dayjs(dayjs().add(-30, 'd'), dateFormat), dayjs(dayjs(), dateFormat)])
 
@@ -155,6 +157,7 @@ const Body = () => {
 
     const updateList = () => {
         if(access) {
+            setLoad(true)
             service.announceStats({
                 first_date: date !== null ? date[0]?.format('YYYY-MM-DD') : '',
                 second_date: date !== null ? date[1]?.format('YYYY-MM-DD') : '',
@@ -170,7 +173,7 @@ const Body = () => {
                 setcoinbase_announces(res?.coinbase_announces)
                 sethuobi_announces(res?.huobi_announces)
                 setused_bots(res?.used_bots)
-            })
+            }).finally(() => setLoad(false))
 
         }
     }
@@ -244,25 +247,30 @@ const Body = () => {
                     </div>
                 </div>
                 {
-                    list?.length > 0 ? (
+                    load || (load && list?.length === 0) ? (
                         <div className="table-main custom-scroll-horizontal">
-                            <table className="table-wrapper">
-                                <TableHead onSort={onTableSort} list={tableHead}/>
-                                <tbody>
-                                    {
-                                        list?.map((item, index) => (
-                                            <TableRow 
-                                                head={tableHead} 
-                                                bot={item} 
-                                                key={index}/>
-                                        ))
-                                    }
-                                </tbody>
-                            </table>
+                            <Loader/>
                         </div>
-                    ) : <Empty text='Здесь будет отображаться статистика по всем вашим отработанным ботам'/>
+                    ) : (
+                        list?.length > 0 ? (
+                            <div className="table-main custom-scroll-horizontal">
+                                <table className="table-wrapper">
+                                    <TableHead onSort={onTableSort} list={tableHead}/>
+                                    <tbody>
+                                        {
+                                            list?.map((item, index) => (
+                                                <TableRow 
+                                                    head={tableHead} 
+                                                    bot={item} 
+                                                    key={index}/>
+                                            ))
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        ) : <Empty text='Здесь будет отображаться статистика по всем вашим отработанным ботам'/>
+                    )
                 }
-                
                 <div className="table-bottom">
                     <div className={styles.bottom}>
                         <Row gutter={[50, 50]}>

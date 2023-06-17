@@ -193,7 +193,7 @@ class ApiService {
         }
     }
 
-    resetPassword = async (body: {code: string, password: string}) => {
+    resetPassword = async (body: {code: string, password: string, captcha_token: string}) => {
         try {
             let res = await fetch(endpoints.resetPassword, {
                 method: 'POST',
@@ -622,6 +622,21 @@ class ApiService {
         }
     }
 
+
+    getReferalLink = async (token: TokenType) => {
+        try {
+            let res = await fetch(endpoints.getReferalLink, {
+                method: 'POST',
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            return await checkAuth(res)
+        } catch(err) {
+            console.log(err)
+        }
+    }
 
     getPaymentHistory = async (token: TokenType) => {
         try {

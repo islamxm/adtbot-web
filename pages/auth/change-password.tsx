@@ -13,6 +13,7 @@ import { useAppSelector, useAppDispatch } from "@/hooks/useTypesRedux";
 import ApiService from "@/service/apiService";
 import Router from "next/router";
 import notify from "@/helpers/notify";
+import Reaptcha from 'reaptcha';
 
 const service = new ApiService()
 
@@ -22,14 +23,17 @@ const ResetPage = () => {
     const [code, setCode] = useState('')
     const [password, setPassword] = useState('')
     const [repeatPassword, setRepeatPassword] = useState('')
+    const [captcha_token, setcaptcha_token] = useState('')
     
+    const [recapRef, setRecapRef] = useState<any>(null)
 
     const onSubmit = () => {
         if(password) {
             setLoad(true)
             const body = {
                 code,
-                password
+                password,
+                captcha_token
             }
             service.resetPassword(body).then(res => {
                 if(res === true) {
@@ -38,6 +42,7 @@ const ResetPage = () => {
                 } else {
                     notify('Произошла ошибка', 'ERROR')
                 }
+                recapRef?.reset()
             }).finally(() => setLoad(false))
         }
 
@@ -89,8 +94,22 @@ const ResetPage = () => {
                                         />  
                                 </Col>
                                 <Col span={24}>
+                                    <Reaptcha
+                                        sitekey={'6Ld4-E4lAAAAANg8LEy8oig45CXsovYV9z5Wbxx6'}
+                                        size={'normal'}
+                                        className="custom-recap"
+                                        ref={e => setRecapRef(e)}
+                                        onVerify={e => {
+                                            if(e) {
+                                                setcaptcha_token(e)
+                                            }
+                                        }}
+                                        onExpire={() => console.log('expired')}
+                                        />
+                                </Col>
+                                <Col span={24}>
                                     <Button
-                                        disabled={(code && password && (password === repeatPassword)) ? false : true}
+                                        disabled={(code && password && captcha_token && (password === repeatPassword)) ? false : true}
                                         load={load}
                                         onClick={onSubmit}
                                         text="Сохранить"

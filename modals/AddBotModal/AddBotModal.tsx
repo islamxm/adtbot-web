@@ -76,6 +76,7 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
 
     useEffect(() => {
         if(data) {
+            console.log(data)
             setId(data?.bot_id)
 
             setMonitor(data?.bot_info?.monitor)
@@ -211,39 +212,60 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
     const editBot = () => {
         if(access && id) {
             setFirstLoad(true)
-
-            // service.disableBot(id, access).then(r => {
-            //     if(r === true) {
-                    
-            //     }
-            // }).finally(() => setFirstLoad(false))
-
-            service.editBot({
-                bot_id: id,
-                bot_info: {
-                    monitor,
-                    exchange,
-                    budget_usdt: Number(budget_usdt),
-                    take_profit: Number(take_profit),
-                    stop_loss: Number(stop_loss),
-                    stop_buy: Number(stop_buy),
-                    // enabled: true,
-                    daily_volume: Number(daily_volume)
-                }
-            }, access).then(res => {
-                console.log(res)
-                if(res === true) {
-                    notify('Бот изменен', 'SUCCESS')
-                    closeHandle()
-                    dispatch(lastCreatedBot(res))
-                    closeHandle()
-                } else {
-                    notify('Произошла ошибка', 'ERROR')
-                }
-                // if(res?.detail) {
-                //     notify('Произошла ошибка', 'ERROR')
-                // }
-            }).finally(() => setFirstLoad(false))
+            if(enabled) {
+                service.disableBot(id, access).then(res => {
+                    if(res === true) {
+                        service.editBot({
+                            bot_id: id,
+                            bot_info: {
+                                monitor,
+                                exchange,
+                                budget_usdt: Number(budget_usdt),
+                                take_profit: Number(take_profit),
+                                stop_loss: Number(stop_loss),
+                                stop_buy: Number(stop_buy),
+                                daily_volume: Number(daily_volume),
+                                enabled: true
+                            }
+                        }, access).then(r => {
+                            if(r?.id) {
+                                notify('Бот изменен', 'SUCCESS')
+                                notify('Бот запущен', 'SUCCESS')
+                                closeHandle()
+                                dispatch(lastCreatedBot(res))
+                                closeHandle()
+                            } else {
+                                notify('Произошла ошибка', 'ERROR')
+                            }
+                        }).finally(() => setFirstLoad(false))
+                    } else {
+                        console.log('error when disable bot')
+                    }
+                })
+            } else {
+                service.editBot({
+                    bot_id: id,
+                    bot_info: {
+                        monitor,
+                        exchange,
+                        budget_usdt: Number(budget_usdt),
+                        take_profit: Number(take_profit),
+                        stop_loss: Number(stop_loss),
+                        stop_buy: Number(stop_buy),
+                        daily_volume: Number(daily_volume)
+                    }
+                }, access).then(res => {
+                    if(res?.id) {
+                        notify('Бот изменен', 'SUCCESS')
+                        closeHandle()
+                        dispatch(lastCreatedBot(res))
+                        closeHandle()
+                    } else {
+                        notify('Произошла ошибка', 'ERROR')
+                    }
+                }).finally(() => setFirstLoad(false))
+            }
+            
 
             
         }
@@ -267,7 +289,7 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
                             <Row gutter={[20,20]}>
                                 <Col span={24}>
                                     <Select
-                                        hint={'Биржа, которую будет парсить бот на предмет выхода анонса листинга'}
+                                        hint={'Биржа, которую будет парсить бот на предмет выхода анонса листинга. В списке представлены биржи, соответствующие вашему тарифному плану.'}
                                         label={'Анонс'}
                                         options={anonces}
                                         onSelect={e => setMonitor(Number(e))}
@@ -364,7 +386,7 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
                                 <div className={styles.item}>
                                     <Button
                                         load={firstLoad}
-                                        text='Сохранить'
+                                        text={enabled ? 'Сохранить и перезапустить' : 'Сохранить'}
                                         onClick={editBot}
                                         // disabled
                                         />

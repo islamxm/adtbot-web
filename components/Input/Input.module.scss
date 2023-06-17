@@ -36,7 +36,7 @@
         font-size: 14px;
         line-height: 19px;
 
-        
+       
 
         &:focus {
             // box-shadow: 0 0 0 3px rgba(#72B7EF, .3);
@@ -47,7 +47,8 @@
         }
 
         &:read-only {
-            
+            pointer-events: none;
+            touch-action: none;
         }
 
         &:disabled {

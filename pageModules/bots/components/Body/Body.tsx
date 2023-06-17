@@ -20,6 +20,7 @@ import { useAppDispatch } from '@/hooks/useTypesRedux';
 import { updateSenseValue } from '@/store/actions';
 import { useSubscription, gql, useApolloClient } from '@apollo/client';
 import notify from '@/helpers/notify';
+import Loader from '@/components/Loader/Loader';
 
 const service = new ApiService();
 
@@ -176,6 +177,7 @@ const Body = () => {
 
     const [tableSize, setTableSize] = useState('1')
     const [addBotModal, setAddBotModal] = useState(false)
+    const [load, setLoad] = useState(false)
 
     const openAddBotModal = () => setAddBotModal(true)
     const closeAddBotModal = () => {
@@ -282,6 +284,7 @@ const Body = () => {
 
     const updateList = () => {
         if(access) {
+            setLoad(true)
             service.getBots({
                 bot_filter,
                 limit,
@@ -290,7 +293,7 @@ const Body = () => {
             }, access).then(res => {
                 setTotalCount(res?.bots_count)
                 setList(res?.bots_info)
-            })
+            }).finally(() => setLoad(false))
 
         }
     }
@@ -303,9 +306,7 @@ const Body = () => {
 
 
     const onTableSort = (item: string) => {
-        console.log(item)
         const find = ordering?.find(i => i === item)
-        console.log(find)
         if(find) {
             setOrdering(s => {
                 const m = s;
@@ -391,27 +392,33 @@ const Body = () => {
                     </div>
                 </div>
                 {
-                    list?.length > 0 ? (
-                        <div className="table-main custom-scroll-horizontal">
-                            <table className="table-wrapper">
-                                <TableHead onSort={onTableSort} list={tableHead}/>
-                                <tbody>
-                                    {   
-                                        list?.map((item, index) => (
-                                            <TableRow
-                                                onEdit={openEdit}
-                                                updateList={updateList} 
-                                                head={tableHead} 
-                                                bot={item} 
-                                                key={index}/>
-                                        ))
-                                    }
-                                </tbody>
-                            </table>
+                    load || (load && list?.length === 0) ? (
+                        <div className={'table-main custom-scroll-horizontal'}>
+                            <Loader/>
                         </div>
-                    ) : <Empty/>
+                    ) : (
+                        list?.length > 0 ? (
+                            <div className="table-main custom-scroll-horizontal">
+                                <table className="table-wrapper">
+                                    <TableHead onSort={onTableSort} list={tableHead}/>
+                                    <tbody>
+                                        {   
+                                            list?.map((item, index) => (
+                                                <TableRow
+                                                    onEdit={openEdit}
+                                                    updateList={updateList} 
+                                                    head={tableHead} 
+                                                    bot={item} 
+                                                    key={index}/>
+                                            ))
+                                        }
+                                    </tbody>
+                            
+                                </table>
+                            </div>
+                        ) : <Empty/>
+                    )
                 }
-                
                 {
                     totalCount > limit ? (
                         <div className="table-bottom">

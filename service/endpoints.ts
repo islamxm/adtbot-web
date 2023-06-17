@@ -63,7 +63,8 @@ const endpoints = {
 
 
     // referal
-    getReferalUsers: `${PATH}get_referal_users/`
+    getReferalUsers: `${PATH}get_referal_users/`,
+    getReferalLink: `${PATH}get_referal_link/`,
 
 
     

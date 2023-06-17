@@ -51,7 +51,7 @@ const list: billingItemPropsTypes[] = [
         isTop: false,
         title: 'Standart',
         isCurrent: false,
-        price: 9.90,
+        price: 9,
         list: [
             {
                 head: 'Мониторинг анонсов листингов на 3 биржах:',
@@ -77,7 +77,7 @@ const list: billingItemPropsTypes[] = [
         isTop: true,
         title: 'Pro',
         isCurrent: false,
-        price: 19.90,
+        price: 19,
         list: [
             {
                 head: 'Мониторинг анонсов листингов на 5 биржах:',
@@ -105,7 +105,7 @@ const list: billingItemPropsTypes[] = [
         isTop: false,
         title: 'Premium',
         isCurrent: false,
-        price: 29.90,
+        price: 29,
         list: [
             {
                 head: 'Мониторинг анонсов листингов на 10 биржах:',

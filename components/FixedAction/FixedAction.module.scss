@@ -8,27 +8,19 @@
     align-items: center;
 
     .item {
+        width: 76px;
+        height: 76px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
-        &:nth-child(1) {
-            margin-bottom: 10px;
-            display: none;
-        }
-
-        &:nth-child(2) {
-            width: 76px;
-            height: 76px;
+        img {
+            max-width: 76px;
+            max-height: 76px;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
             display: flex;
-            align-items: center;
-            justify-content: center;
-
-            img {
-                max-width: 76px;
-                max-height: 76px;
-                width: 100%;
-                height: 100%;
-                object-fit: contain;
-                display: flex;
-            }
         }
     }
 
@@ -40,11 +32,6 @@
         bottom: 30px;
         right: 30px;
 
-        .item {
-            &:nth-child(1) {
-                display: block;
-            }
-        }
     }
 }
 @media (max-width: 520px) {
