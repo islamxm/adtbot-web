@@ -35,7 +35,7 @@ const switchType:switchFuncType = (type) => {
 const notify = (text: string | React.ReactNode | number, type: notificationType = 'SUCCESS') => {
     toast(text, {
         icon: switchType(type).icon,
-        position: "bottom-right",
+        position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,

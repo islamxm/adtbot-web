@@ -288,13 +288,13 @@ const Body = () => {
                                             </ul>
                                         </div>
                                     </Col>
-                                    <Col span={12}>
+                                    {/* <Col span={12}>
                                         <div className={styles.action}>
                                             <div className={styles.item}>
                                                 <button className={styles.btn}> <span><TbExternalLink/></span> Экспорт</button>
                                             </div>
                                         </div>
-                                    </Col>
+                                    </Col> */}
                                 </Row>
                                 
                             </Col>
