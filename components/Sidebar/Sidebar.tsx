@@ -244,9 +244,11 @@ const Sidebar:FC<sidebarPropsTypes> = ({
                                         isActive={pathname === '/account/guide' || pathname?.includes('/account/guide')}
                                         size={20}/>
                                 }
+                                isButton
+                                onClick={() => window.open('https://adtbot.com/knowledge-base/')}
                                 label='База знаний'
                                 isActive={pathname === '/account/guide' || pathname?.includes('/account/guide')}
-                                link={'/account/guide'}
+                                // link={'/account/guide'}
                                 />
                             <SidebarItem  
                                 isParentHidden={isHidden}
