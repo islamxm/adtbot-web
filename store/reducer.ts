@@ -20,7 +20,10 @@ type IState = {
         reg_datetime: string,
         tariff_ends: any,
         user_login_count: number,
-        user_own_referal: any
+        user_own_referal: any,
+        days_before_lock?: any,
+        days_in_month?:any,
+        has_trial?:any
     },
     captcha: string,
     lastCreatedBot: null | any,

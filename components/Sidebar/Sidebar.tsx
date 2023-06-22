@@ -324,9 +324,7 @@ const Sidebar:FC<sidebarPropsTypes> = ({
                             !isHidden ? (
                                 <Col span={24} className={styles.balance}>
                                     <div className={styles.action_item}>
-                                        <Balance
-                                            value={userData?.money}
-                                            />
+                                        <Balance/>
                                     </div>
                                 </Col>
                             ) : null

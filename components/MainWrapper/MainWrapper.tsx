@@ -91,6 +91,7 @@ const MainWrapper = ({
     useEffect(() => {
         if(access && dispatch) {
             service.getUserData(access).then(res => {
+                console.log(res)
                 if(res) {
                     dispatch(updateUserData(res))
                 }

@@ -23,6 +23,7 @@ const PricingPage = () => {
         if(access) {
             setLoad(true)
             service.changeTarif(id, access).then(res => {
+                console.log(res)
                 if(res?.detail) {
                     setStatus({
                         status: 'error',

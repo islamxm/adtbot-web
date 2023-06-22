@@ -146,30 +146,7 @@ const switchTableSize = (value: any) => {
 }
 
 
-// const TEST_SUB = gql`
-//   subscription OnPNLUpdate {
-//     bot_info {
-//       bot_id
-//       pnl
-//     }
-//   }
-// `;
-
-
 const Body = () => {
-    // const client = useApolloClient
-    // const {data, error} = useSubscription(TEST_SUB, {
-    //     onSubscriptionComplete: () => {
-    //         console.log('SUBS COMPLETE')
-    //     },
-    //     onError: (e) => {
-    //         console.log('ERROR IN SUBSCRIPTION')
-    //         console.log(e)
-    //     },
-    //     onData: (e) => {
-    //         console.log(e)
-    //     } 
-    // })
     const {tokens: {access}, lastCreatedBot, hideSensValue, socket} = useAppSelector(s => s)
     const dispatch = useAppDispatch()
 
@@ -236,9 +213,7 @@ const Body = () => {
 
     const onSocketMessage = (e:any) => {
         console.log(e)
-
         const newData = JSON.parse(e.data)
-
         setList(s => {
             const m = s
             const index = m.findIndex(i => i.id === newData?.bot_id)
@@ -249,9 +224,7 @@ const Body = () => {
             } else {
                 return s;
             }
-            
         })
-
     }
 
     useEffect(() => {
@@ -294,7 +267,6 @@ const Body = () => {
                 setTotalCount(res?.bots_count)
                 setList(res?.bots_info)
             }).finally(() => setLoad(false))
-
         }
     }
 
