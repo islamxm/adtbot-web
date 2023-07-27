@@ -10,6 +10,9 @@ import { lastCreatedBot } from '@/store/actions';
 import { useAppSelector, useAppDispatch } from '@/hooks/useTypesRedux';
 import ApiService from '@/service/apiService';
 import notify from '@/helpers/notify';
+import IconButton from '@/components/IconButton/IconButton';
+import {FiInfo} from 'react-icons/fi';
+import Router from 'next/router';
 
 
 const service = new ApiService();
@@ -281,6 +284,12 @@ const AddBotModal:FC<addBotModalPropsTypes> = ({
             title="Создание бота"
             className={`${styles.wrapper} modal`}
             >
+            <div className={styles.info}>
+                <IconButton 
+                    onClick={() => window.open('/')}
+                    icon={<FiInfo size={22}/>}
+                    />
+            </div>
             <Row gutter={[25,25]}>
                 <Col span={24}>
                     {/* body */}
