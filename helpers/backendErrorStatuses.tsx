@@ -1,3 +1,4 @@
+import Link from "next/link";
 import notify from "./notify";
 
 
@@ -7,7 +8,7 @@ const backendErrorStatuses = (status: any) => {
         notify('Неизвестная ошибка', 'ERROR')
     }
     if(status === 2) {
-        notify('Пользователь не найден', 'ERROR')
+        notify(<div>Данного пользователя не существует. <Link className="def-link" href={'/'}>Зарегистрироваться</Link></div>, 'ERROR')
     }
     if(status === 3) {
         notify('Недостаточно данных','ERROR')

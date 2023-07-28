@@ -38,7 +38,7 @@ const notify = (text: string | React.ReactNode | number, type: notificationType 
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
-        closeOnClick: true,
+        closeOnClick: false,
         pauseOnHover: true,
         draggable: true,
         theme: "dark",
