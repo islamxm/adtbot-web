@@ -25,7 +25,7 @@ const PrivateRoute = ({
                 Cookies.remove('adtbot-console-refresh-token')
                 dispatch(updateTokens({access: null, refresh: null}))
 
-                if(!router?.pathname?.includes('/auth')) {
+                if(!router?.pathname?.includes('/auth') && !router?.pathname?.includes('/auth/login')) {
                     router.replace('/auth/join')
                 } else {
                     return;
@@ -56,7 +56,7 @@ const PrivateRoute = ({
     return auth ? (
         children
     ) : (
-        router?.pathname?.includes('/auth')  ? (
+        router?.pathname?.includes('/auth') || router?.pathname?.includes('/auth/login')  ? (
             children    
         ) : (
             null

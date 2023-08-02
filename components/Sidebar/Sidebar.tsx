@@ -97,9 +97,7 @@ const Sidebar:FC<sidebarPropsTypes> = ({
         replace('/auth/login')
     }
 
-    useEffect(() => {
-        console.log(userData)
-    }, [userData])
+  
 
     return (
         <div className={`${styles.sidebar} ${isHidden ? styles.hidden : ''} ${isMenuOpen ? styles.open : ''}`}>

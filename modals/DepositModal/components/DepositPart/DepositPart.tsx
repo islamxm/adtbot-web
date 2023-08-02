@@ -151,7 +151,7 @@ const DepositPart = ({
                         </div>
                         <div className={styles.ex}>
                             <div className={styles.item}>
-                                <Link className='def-link' href='#'>Не знаете как оплатить?</Link>
+                                <a target='_blank' className='def-link' href='https://adtbot.com/knowledge-base/article/how-to-pay-the-rate'>Не знаете как оплатить?</a>
                             </div>
                         </div>
                     </div>

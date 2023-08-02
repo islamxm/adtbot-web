@@ -199,7 +199,7 @@ const LoginPage = () => {
                             </Col>
                             <Col span={24}>
                                 <Reaptcha
-                                    sitekey={'6Ld4-E4lAAAAANg8LEy8oig45CXsovYV9z5Wbxx6'}
+                                    sitekey={'6Lc3HDcnAAAAAClnzGiSkhZ3xfY-FPTzBhjzH8pK'}
                                     size={'normal'}
                                     className="custom-recap"
                                     ref={e => setRecapRef(e)}

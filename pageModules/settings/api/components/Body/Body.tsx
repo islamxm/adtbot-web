@@ -88,7 +88,7 @@ const Body:FC<I> = ({
                 values={huobi} 
                 setValues={setHuobi} 
                 testTitle='Huobi'
-                partnerLink='http://adtbot.com/bybit'
+                partnerLink='http://adtbot.com/huobi'
                 />
         }
     ]

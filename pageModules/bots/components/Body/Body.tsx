@@ -116,7 +116,7 @@ const tableHead = [
 
 const statusOptions = [
     {value: '1', label: 'Все'},
-    {value: '2', label: 'Активные'},
+    {value: '2', label: 'Активный'},
     {value: '3', label: 'В режиме ожидания'},
     {value: '4', label: 'Остановлен'},
     {value: '5', label: 'Отключен'},

@@ -23,16 +23,17 @@ import senseValue from "@/helpers/senseValue";
 const service = new ApiService()
 
 
-const switchPnl = (value?: string) => {
-    switch(value) {
-        case '+':
-            return 'profit'
-        case '-':
-            return 'loss'
-        default:
-            return ''
-    }
-}
+// const switchPnl = (value?: string) => {
+//     switch(value) {
+//         case '+':
+//             return 'profit'
+//         case '-':
+//             return 'loss'
+//         default:
+//             return ''
+//     }
+// }
+
 
 
 const TableRow:FC<tableRowPropsTypes> = ({bot, head, updateList, onEdit}) => {
@@ -49,7 +50,7 @@ const TableRow:FC<tableRowPropsTypes> = ({bot, head, updateList, onEdit}) => {
 
     const [deleteModal, setDeleteModal] = useState(false)
     const [disableModal, setDisableModal] = useState(false)
-
+    const [stopActiveModal, setStopActiveModal] = useState<boolean>(false)
 
 
     const toggleBody = () => setIsOpen(s => !s)
@@ -115,6 +116,11 @@ const TableRow:FC<tableRowPropsTypes> = ({bot, head, updateList, onEdit}) => {
             })
         }
     }
+
+    const disableActiveBot = () => {
+        setStopActiveModal(true)
+        
+    }
     
 
 
@@ -128,7 +134,8 @@ const TableRow:FC<tableRowPropsTypes> = ({bot, head, updateList, onEdit}) => {
                             <div className="activation-action">
                                 <div className="activation-action_item">
                                     <IconButton
-                                        onClick={disableBot}
+                                        // onClick={disableBot}
+                                        onClick={disableActiveBot}
                                         load={disableLoad}
                                         icon={<HiOutlineStopCircle color="var(--red)" size={16}/>}
                                         />
@@ -271,6 +278,13 @@ const TableRow:FC<tableRowPropsTypes> = ({bot, head, updateList, onEdit}) => {
             load={disableLoad}
             onCancel={() => setDisableModal(false)}
             text="Данное действие приведет к остановке бота и ордера буду проданы в рынок"
+            />
+        <ConfirmModal
+            open={stopActiveModal}
+            onCancel={() => setStopActiveModal(false)}
+            load={disableLoad}
+            text="Данное действие приведет к остановке бота и ордера будут проданы в рынок"
+            onConfirm={disableBot}
             />
             <tr className='table-row table-bodyrow'>
                 {/* {
@@ -425,7 +439,25 @@ const TableRow:FC<tableRowPropsTypes> = ({bot, head, updateList, onEdit}) => {
                 <td className={`table-row__item table-bodyrow__item`}>
                     <div className="table-bodyrow__item_in">
                         <div className={`table-bodyrow__item_label ${Number(bot?.pnl_percentage) > 0 ? 'table-bodyrow__item_label-green' : ''}`}>
-                            {senseValue(hideSensValue, bot?.pnl)} USDT {Number(bot?.pnl_percentage > 0) ? '+' : ''}{bot?.pnl_percentage}%
+                            {
+                                (senseValue(hideSensValue, bot?.pnl) !== undefined && Number(bot?.pnl_percentage) !== undefined && (
+                                    switchBotStatus({
+                                        enabled: bot?.enabled,
+                                        stop_datetime: bot?.stop_datetime,
+                                        activation_datetime: bot?.activation_datetime
+                                    }) === 1 ||
+                                    switchBotStatus({
+                                        enabled: bot?.enabled,
+                                        stop_datetime: bot?.stop_datetime,
+                                        activation_datetime: bot?.activation_datetime
+                                    }) === 4
+                                )) && (
+                                    <>
+                                        {senseValue(hideSensValue, bot?.pnl)} USDT {Number(bot?.pnl_percentage > 0) ? '+' : ''}{bot?.pnl_percentage}%
+                                    </>   
+                                )
+                            }
+                            
                         </div>
                     </div>
                 </td>

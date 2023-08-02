@@ -280,10 +280,18 @@ const Body = () => {
                                         <div className={styles.info}>
                                             <div className={styles.head}>Всего: {announces_count}</div>
                                             <ul className={styles.body}>
-                                                <li className={styles.body_item}>Анонсы Binance: {binance_announces}</li>
-                                                <li className={styles.body_item}>Анонсы Coinbase: {coinbase_announces}</li>
-                                                <li className={styles.body_item}>Анонсы Huobi: {huobi_announces}</li>
-                                                <li className={styles.body_item}>Отработанные боты: {used_bots}</li>
+                                                {
+                                                    binance_announces != 0 && <li className={styles.body_item}>Анонсы Binance: {binance_announces}</li>
+                                                }
+                                                {
+                                                    coinbase_announces != 0 && <li className={styles.body_item}>Анонсы Coinbase: {coinbase_announces}</li>
+                                                }
+                                                {
+                                                    huobi_announces != 0 && <li className={styles.body_item}>Анонсы Huobi: {huobi_announces}</li>
+                                                }
+                                                {
+                                                    used_bots != 0 && <li className={styles.body_item}>Отработанные боты: {used_bots}</li>
+                                                }
                                                 {/* <li className={styles.body_item}>PNL: 726 USDT</li> */}
                                             </ul>
                                         </div>
