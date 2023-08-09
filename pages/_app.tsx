@@ -19,11 +19,8 @@ import store from '@/store/store';
 import PrivateRoute from '@/hoc/CheckAuth';
 import MainWrapper from '@/components/MainWrapper/MainWrapper';
 import Head from 'next/head';
-import { Cookies } from 'typescript-cookie';
 
 
-
-import endpoints from '@/service/endpoints';
 NProgress.configure({ showSpinner: false })
 Router.events.on('routeChangeStart', () => NProgress.start()); 
 Router.events.on('routeChangeComplete', () => NProgress.done()); 

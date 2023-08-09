@@ -95,7 +95,7 @@ const ResetPage = () => {
                                 </Col>
                                 <Col span={24}>
                                     <Reaptcha
-                                        sitekey={'6Lcd7sMmAAAAAF5SF2oStEyid2Tsq'}
+                                        sitekey={'6Ld4-E4lAAAAANg8LEy8oig45CXsovYV9z5Wbxx6'}
                                         size={'normal'}
                                         className="custom-recap"
                                         ref={e => setRecapRef(e)}
