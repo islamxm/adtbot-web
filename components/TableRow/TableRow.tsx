@@ -19,6 +19,10 @@ import notify from "@/helpers/notify";
 import {IoPlayOutline, IoCloseCircleOutline} from 'react-icons/io5';
 import ConfirmModal from "@/modals/ConfirmModal/ConfirmModal";
 import senseValue from "@/helpers/senseValue";
+import IconEdit from "@/icons/IconEdit";
+import IconClose from "@/icons/IconClose";
+import IconStop from "@/icons/IconStop";
+import IconPlay from "@/icons/IconPlay";
 
 const service = new ApiService()
 
@@ -41,7 +45,7 @@ const TableRow:FC<tableRowPropsTypes> = ({bot, head, updateList, onEdit}) => {
     const bodyRef = useRef<HTMLTableRowElement>(null);
     const [isOpen, setIsOpen] = useState<boolean>(false)
     const [height, setHeight] = useState<number>(0)
-
+    
     const [enableLoad, setEnableLoad] = useState(false)
     const [deleteLoad, setDeleteLoad] = useState(false)
     const [disableLoad, setDisableLoad] = useState(false)
@@ -137,7 +141,7 @@ const TableRow:FC<tableRowPropsTypes> = ({bot, head, updateList, onEdit}) => {
                                         // onClick={disableBot}
                                         onClick={disableActiveBot}
                                         load={disableLoad}
-                                        icon={<HiOutlineStopCircle color="var(--red)" size={16}/>}
+                                        icon={<IconStop color="var(--red)" size={16}/>}
                                         />
                                 </div>
                             </div>
@@ -167,14 +171,14 @@ const TableRow:FC<tableRowPropsTypes> = ({bot, head, updateList, onEdit}) => {
                                                 }
                                             })
                                         }}  
-                                        icon={<BiEditAlt color="#66AF99" size={16}/>}
+                                        icon={<IconEdit color="#66AF99" size={16}/>}
                                         />
                                 </div>
                                 <div className="activation-action_item">
                                     <IconButton
                                         onClick={() => setDisableModal(true)}
                                         load={disableLoad}
-                                        icon={<HiOutlineStopCircle color="var(--red)" size={16}/>}
+                                        icon={<IconClose color="var(--red)" size={16}/>}
                                         />
                                 </div>
                             </div>
@@ -191,7 +195,7 @@ const TableRow:FC<tableRowPropsTypes> = ({bot, head, updateList, onEdit}) => {
                                     <IconButton
                                         onClick={enableBot}
                                         load={enableLoad}
-                                        icon={<IoPlayOutline color="var(--green)" size={16}/>}
+                                        icon={<IconPlay color="var(--green)" size={16}/>}
                                         />
                                 </div>
                                 <div className="activation-action_item">
@@ -211,7 +215,7 @@ const TableRow:FC<tableRowPropsTypes> = ({bot, head, updateList, onEdit}) => {
                                                 }
                                             })
                                         }}  
-                                        icon={<BiEditAlt color="#66AF99" size={16}/>}
+                                        icon={<IconEdit color="#66AF99" size={16}/>}
                                         />
                                 </div>
                                 <div className="activation-action_item">
