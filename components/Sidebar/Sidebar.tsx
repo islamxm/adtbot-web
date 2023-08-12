@@ -328,7 +328,7 @@ const Sidebar:FC<sidebarPropsTypes> = ({
                             ) : null
                         }
                         
-                        <Col span={24} className={styles.deposit}>
+                        {/* <Col span={24} className={styles.deposit}>
                             <div className={styles.action_item}>
                                 <Button
                                     style={{minWidth: 45, minHeight: 45}}
@@ -341,19 +341,7 @@ const Sidebar:FC<sidebarPropsTypes> = ({
                                     />
                             </div>
                         </Col>
-                        {/* <Col span={24} className={styles.history}>
-                            <div className={styles.action_item}>
-                                <Button
-                                    beforeIcon={<AiOutlineHistory/>}
-                                    onClick={openHistModal}
-                                    style={{minWidth: 45, minHeight: 45}}
-                                    text={isHidden ? '' : 'История'}
-                                    variant={'default'}
-                                    fill={!isHidden}
-                                    rounded={isHidden}
-                                    />
-                            </div>
-                        </Col> */}
+                       
                         <Col span={24} className={styles.addbot}>
                             <div className={styles.action_item}>
                                 <Button
@@ -366,7 +354,7 @@ const Sidebar:FC<sidebarPropsTypes> = ({
                                     fill={!isHidden}
                                     />
                             </div>
-                        </Col>
+                        </Col> */}
                     </Row>
                     </Col>
                     

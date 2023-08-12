@@ -1,5 +1,5 @@
 export const BASE_DOMAIN = `https://adtbot.com`;
-export const BASE_WS_DOMAIN = `wss:`
+export const BASE_WS_DOMAIN = `wss://adtbot.com/api/v1/websocket`
 export const TEST_DOMAIN = ''
 
 
@@ -71,10 +71,6 @@ const endpoints = {
     // referal
     getReferalUsers: `${PATH}get_referal_users/`,
     getReferalLink: `${PATH}get_referal_link/`,
-
-
-    
-
 }
 
 export default endpoints;

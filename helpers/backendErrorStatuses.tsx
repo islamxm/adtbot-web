@@ -8,7 +8,7 @@ const backendErrorStatuses = (status: any) => {
         notify('Неизвестная ошибка', 'ERROR')
     }
     if(status === 2) {
-        notify(<div>Данного пользователя не существует. <Link className="def-link" href={'/'}>Зарегистрироваться</Link></div>, 'ERROR')
+        notify(<div>Данного пользователя не существует. <Link className="def-link" href={'/auth/join'}>Зарегистрироваться</Link></div>, 'ERROR')
     }
     if(status === 3) {
         notify('Недостаточно данных','ERROR')
@@ -50,7 +50,7 @@ const backendErrorStatuses = (status: any) => {
         notify('Неправильный реферальный код','ERROR')
     }
     if(status === 16) {
-        notify('Пользователь уже зарегистрирован', 'ERROR')
+        notify(<div>Пользователь уже зарегистрирован. <Link className="def-link" href={'/auth/login'}>Авторизоваться</Link> или <Link className="def-link" href={'/auth/forgot-password'}>Восстановить пароль</Link></div>, 'ERROR')
     }
     if(status === 17) {
         notify('Не удалось отправить e-mail', 'ERROR')

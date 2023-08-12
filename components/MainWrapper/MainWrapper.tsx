@@ -72,7 +72,7 @@ const MainWrapper = ({
     useEffect(() => {
         if(access) {
             //BASE_WS_DOMAIN
-            const sl = new WebSocket('wss://developmentsrv.space/api/v1/websocket')
+            const sl = new WebSocket(BASE_WS_DOMAIN)
             dispatch(updateSocket(sl))
         }
     }, [access])
