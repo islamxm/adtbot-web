@@ -35,7 +35,8 @@ type IState = {
 const globalState: IState = {
     isMenuOpen: false,
     tokens: {
-        access: process?.browser && Cookies.get('adtbot-console-access-token') ? Cookies.get('adtbot-console-access-token') : null,
+        // access: process?.browser && Cookies.get('adtbot-console-access-token') ? Cookies.get('adtbot-console-access-token') : null,
+        access: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMSIsImV4cCI6MTY5MjI4MDc5OX0.-imBlW6mKE9q-fFN-NuWh_XBzJ37o-STeZVl5eiCuFc',
         refresh: process?.browser &&  Cookies.get('adtbot-console-refresh-token') ? Cookies.get('adtbot-console-refresh-token') : null
     },
     captcha: '',

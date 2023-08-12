@@ -18,6 +18,7 @@ const PrivateRoute = ({
     const dispatch = useAppDispatch()
 
     useEffect(() => {
+        console.log(access)
         if(router) {
             if(!access || (typeof router?.query?.unauthorized === 'string' &&  router?.query?.unauthorized === '1') || (!access || (typeof router?.query?.unauthorized === 'string' &&  router?.query?.unauthorized === '1'))) {
 

@@ -5,7 +5,7 @@ import chartImg from '@/public/assets/chart.png';
 import Image from 'next/image';
 import { Row, Col } from 'antd';
 
-const Ex = () => {
+const Ex = ({children}: {children?: React.ReactNode}) => {
     const bodyRef = useRef<HTMLDivElement>(null)
     const [isOpen, setIsOpen] = useState(false)
     const [height, setHeight] = useState(0)
@@ -36,7 +36,7 @@ const Ex = () => {
             </div>
             <div className={styles.body} ref={bodyRef} style={{height: height}}>
                 <div className={styles.in}>
-                    <Row gutter={[20,20]}>
+                    {/* <Row gutter={[20,20]}>
                         <Col span={24}>
                             Подключите ваш аккаунт биржи Gate.io, заполнив соответствующие поля API ключей. <br/>
                             После ввода ключей нажмите кнопку “Сохранить”.
@@ -50,7 +50,8 @@ const Ex = () => {
                                 height={315}
                                 />
                         </Col>
-                    </Row>
+                    </Row> */}
+                    {children}
                 </div>
             </div>
         </div>

@@ -12,7 +12,8 @@ interface I {
     setValues: (...args: any[]) => any,
     ips?: string[],
     balance?: any,
-    partnerLink?: string
+    partnerLink?: string,
+    descr?: React.ReactNode
 }
 
 
@@ -22,7 +23,8 @@ const TabBody:FC<I> = ({
     setValues,
     balance,
     ips,
-    partnerLink
+    partnerLink,
+    descr
 }) => {
 
     return (
@@ -93,7 +95,9 @@ const TabBody:FC<I> = ({
 
 
                 <Col span={24}>
-                    <Ex/>
+                    <Ex>
+                        {descr}
+                    </Ex>
                 </Col>
 
             </Row>

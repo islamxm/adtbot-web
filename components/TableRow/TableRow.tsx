@@ -27,16 +27,7 @@ import IconPlay from "@/icons/IconPlay";
 const service = new ApiService()
 
 
-// const switchPnl = (value?: string) => {
-//     switch(value) {
-//         case '+':
-//             return 'profit'
-//         case '-':
-//             return 'loss'
-//         default:
-//             return ''
-//     }
-// }
+
 
 
 

@@ -9,6 +9,9 @@ import { createClient } from 'graphql-ws';
 import { Cookies } from 'typescript-cookie';
 import { updateSocket } from '@/store/actions';
 import notify from '@/helpers/notify';
+import Router from 'next/router';
+import { BASE_WS_DOMAIN } from '@/service/endpoints';
+
 const service = new ApiService()
 
 
@@ -68,6 +71,7 @@ const MainWrapper = ({
 
     useEffect(() => {
         if(access) {
+            //BASE_WS_DOMAIN
             const sl = new WebSocket('wss://developmentsrv.space/api/v1/websocket')
             dispatch(updateSocket(sl))
         }
@@ -91,9 +95,10 @@ const MainWrapper = ({
     useEffect(() => {
         if(access && dispatch) {
             service.getUserData(access).then(res => {
-                console.log(res)
-                if(res) {
+                if(res && res?.is_demo_account === false) {
                     dispatch(updateUserData(res))
+                } else {
+                    Router.push('/auth/login')
                 }
             })
         }

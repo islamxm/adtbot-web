@@ -1,8 +1,14 @@
 export const BASE_DOMAIN = `https://adtbot.com`;
+export const BASE_WS_DOMAIN = `wss:`
+export const TEST_DOMAIN = ''
+
+
+
 export const PATH = `${BASE_DOMAIN}/api/v1/`
 
-const endpoints = {
 
+
+const endpoints = {
     gql: `${PATH}graphql`,
 
     //users
