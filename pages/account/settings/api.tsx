@@ -70,11 +70,14 @@ const ApiPage = () => {
                         res.forEach(i => {
                             if(i?.status === 200) {
                                 i?.json().then((r:any) => {
-                                    notify('', 'SUCCESS')
+                                    notify('Успешно', 'SUCCESS')
+                                    service.getExchangeBalances(access).then(res => {
+                                        setBalance(res)
+                                    })
                                 })
                             } else {
                                 i?.json().then((r:any) => {
-                                    notify('', 'ERROR')
+                                    notify('Произошла ошибка', 'ERROR')
                                 })
                             }
                         })
