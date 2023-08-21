@@ -99,7 +99,7 @@ const MainWrapper = ({
         if(access) {
             service.getUserData(access).then(res => {
                 console.log(res)
-                if(res && res?.is_demo_account === true) {
+                if(res && res?.is_demo_account === false) {
                     dispatch(updateUserData(res))
                 } else {
                     dispatch(updateTokens({access: null, refresh: null}))

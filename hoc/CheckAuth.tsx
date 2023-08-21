@@ -33,6 +33,7 @@ const PrivateRoute = ({
             } else {
                 setAuth(true)
                 if(router?.pathname?.includes('/auth')) {
+                    
                     // if(userData?.is_first_login === false) {
                     //     router?.push('/account/bots')
                     // }
