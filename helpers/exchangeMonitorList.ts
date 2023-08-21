@@ -13,15 +13,15 @@ import huobi from '@/public/assets/icons/huobi.svg';
 
 const exchangeMonitorList = [
     {value: '1', label: 'Binance', icon: binance},
-    {value: '2', label: 'Coinbase', icon: coinbase},
-    {value: '3', label: 'Kraken', icon: kraken},
-    {value: '4', label: 'KuCoin', icon: kucoin},
-    {value: '5', label: 'Bitstamp', icon: bitstamp},
-    {value: '6', label: 'Bitfinex', icon: bitfinex},
-    {value: '7', label: 'OKX', icon: okx},
-    {value: '8', label: 'Bybit', icon: bybit},
-    {value: '9', label: 'Upbit', icon: upbit},
-    {value: '10', label: 'Huobi', icon: huobi},
+    {value: '5', label: 'Coinbase', icon: coinbase},
+    {value: '7', label: 'Kraken', icon: kraken},
+    {value: '8', label: 'KuCoin', icon: kucoin},
+    {value: '3', label: 'Bitstamp', icon: bitstamp},
+    {value: '2', label: 'Bitfinex', icon: bitfinex},
+    {value: '9', label: 'OKX', icon: okx},
+    {value: '4', label: 'Bybit', icon: bybit},
+    {value: '10', label: 'Upbit', icon: upbit},
+    {value: '6', label: 'Huobi', icon: huobi},
 ]
 
 export default exchangeMonitorList;

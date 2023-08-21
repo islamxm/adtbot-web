@@ -27,10 +27,6 @@ import IconPlay from "@/icons/IconPlay";
 const service = new ApiService()
 
 
-
-
-
-
 const TableRow:FC<tableRowPropsTypes> = ({bot, head, updateList, onEdit}) => {
     const {tokens: {access}, hideSensValue} = useAppSelector(s => s)
     const bodyRef = useRef<HTMLTableRowElement>(null);
