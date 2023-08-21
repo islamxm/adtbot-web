@@ -147,7 +147,7 @@ const switchTableSize = (value: any) => {
 
 
 const Body = () => {
-    const {tokens: {access}, lastCreatedBot, hideSensValue, socket} = useAppSelector(s => s)
+    const {tokens: {access}, lastCreatedBot, hideSensValue, socket, userData} = useAppSelector(s => s)
     const dispatch = useAppDispatch()
 
 
@@ -316,9 +316,9 @@ const Body = () => {
                 />
             <StopBotModal/>
             <DeleteBotModal/>
-
-
-
+            {
+                (userData?.has_trial === false && userData?.money === 0) && <WarnPanel/>
+            }
             <div className={styles.action}>
                 <Button
                     onClick={openAddBotModal} 
@@ -326,8 +326,6 @@ const Body = () => {
                     style={{paddingLeft: 30, paddingRight: 30}} 
                     text='Создать бот'/>
             </div>
-
-
             <div className='table'>
                 <div className="table-top">
                     <div className={styles.top}>

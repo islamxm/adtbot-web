@@ -7,8 +7,9 @@ import { ApolloClient, InMemoryCache, ApolloProvider, gql, useApolloClient } fro
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
 import { createClient } from 'graphql-ws';
 import { Cookies } from 'typescript-cookie';
-import { updateSocket } from '@/store/actions';
+import { updateSocket, updateTokens } from '@/store/actions';
 import notify from '@/helpers/notify';
+
 import Router from 'next/router';
 import { BASE_WS_DOMAIN } from '@/service/endpoints';
 
@@ -92,18 +93,35 @@ const MainWrapper = ({
     }, [socket])
 
 
-    useEffect(() => {
-        if(access && dispatch) {
+
+
+    const getUserData = () => {
+        if(access) {
             service.getUserData(access).then(res => {
-                if(res && res?.is_demo_account === false) {
+                console.log(res)
+                if(res && res?.is_demo_account === true) {
                     dispatch(updateUserData(res))
                 } else {
-                    Router.push('/auth/login')
+                    dispatch(updateTokens({access: null, refresh: null}))
+                    dispatch(updateUserData(null))
+                    Router.replace('/auth/login')
+                    
                 }
             })
         }
-    }, [access, dispatch])
+        
+    }
 
+    useEffect(() => {
+        let interval: any;
+        if(access) {
+            getUserData()
+            interval = setInterval(getUserData, 3600000)
+        }
+        return () => {
+            clearInterval(interval)
+        }
+    }, [access])
 
 
     return (

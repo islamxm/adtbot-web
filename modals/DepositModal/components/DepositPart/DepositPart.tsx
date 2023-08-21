@@ -87,17 +87,20 @@ const DepositPart = ({
                                         readOnly
                                         placeholder='xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
                                         value={target}
-                                      
                                         />
                                 </div>
                                 <div className={styles.action}>
-                                    <Button
-                                        beforeIcon={<TbCopy/>}
-                                        onClick={() => copyValue({
-                                            value: '0x513ba2bFe3Bb352283E1BabA2E742E838ba63958',
-                                            notifyLabel: 'Адрес кошелька скопирован'
-                                        })}
-                                        />
+                                    {
+                                        target && (
+                                            <Button
+                                                beforeIcon={<TbCopy/>}
+                                                onClick={() => copyValue({
+                                                    value: target,
+                                                    notifyLabel: 'Адрес кошелька скопирован'
+                                                })}
+                                                />
+                                        )
+                                    }
                                 </div>
                             </div>
                         </Col>
