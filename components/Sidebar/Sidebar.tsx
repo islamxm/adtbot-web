@@ -358,8 +358,6 @@ const Sidebar:FC<sidebarPropsTypes> = ({
                     </Row>
                     </Col>
                     
-                    
-                    
                 </div>
             </div>
         </div>

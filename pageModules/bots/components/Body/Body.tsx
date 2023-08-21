@@ -316,9 +316,6 @@ const Body = () => {
                 />
             <StopBotModal/>
             <DeleteBotModal/>
-            {
-                (userData?.has_trial === false && userData?.money === 0) && <WarnPanel/>
-            }
             <div className={styles.action}>
                 <Button
                     onClick={openAddBotModal} 
