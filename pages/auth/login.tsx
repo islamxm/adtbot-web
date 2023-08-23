@@ -212,7 +212,6 @@ const LoginPage = () => {
                                     onExpire={() => console.log('expired')}
                                     />
                             </Col>
-                           
                             <Col span={24}>
                                 <Button
                                     load={load}
