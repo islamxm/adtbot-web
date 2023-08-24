@@ -28,7 +28,7 @@ const Balance = () => {
                 }
             </div>
             <div className={styles.body}>
-                <div className={styles.value}>{userData?.money} / {userData?.money === 0 ? '∞' : userData?.days_before_lock} дней</div>
+                <div className={styles.value}>{userData?.money} / {userData?.money === 0 || userData?.tariff === 1 ? '∞' : userData?.days_before_lock} дней</div>
                 <div className={styles.label}>Ваш баланс</div>
             </div>
         </Link>
